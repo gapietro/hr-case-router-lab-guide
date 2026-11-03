@@ -1,0 +1,169 @@
+# Design decisions, already made
+
+The technical decisions for this lab, made before you design so the build
+has nothing left to ask. The PRD and the customer's answers hold the business
+decisions; this file holds the rest. Your LLD and design record take each one
+as decided. Anything it doesn't cover, Claude recommends and you confirm.
+
+`<SCOPE>` is your app's scope, from `now.config.json`.
+
+## Names
+
+Use these names exactly, so every step of the guide can point at them.
+
+| Thing | Name |
+|---|---|
+| The on switch | System property `<SCOPE>.enabled`. It installs `false`. |
+| The routing rules | Table `<SCOPE>_routing_rule` |
+| The run log | Table `<SCOPE>_run_log`, one row per run: only the case, the run's state, its times and its execution plan, because the row is the run's target record (P12). Everything else about the run in table `<SCOPE>_run_detail`, one row per run, and each override in table `<SCOPE>_run_override` |
+| The weekly numbers | Table `<SCOPE>_weekly_numbers`, one row per week |
+| The confidence threshold | System property `<SCOPE>.confidence_threshold`, `0.7` |
+| The caps | System properties `<SCOPE>.runs_per_hour`, `10`, and `<SCOPE>.runs_per_day`, `100` |
+| How long a run may take | System property `<SCOPE>.run_timeout_seconds`, `300` |
+| The article | Knowledge article "HR routing guidance", in knowledge base "Lab HR routing" |
+| The agentic workflow | "HR case router", with one AI agent, "HR case router agent" |
+| The agent's tools | `read_case`, `apply_route` and `leave_note` |
+| The dispatcher | Scheduled job "HR case router dispatcher"; on the instance, its scheduled trigger (`sys_trigger`) has the same name |
+| The run's execution plan | Field `execution_plan` on the log row, a reference to `sn_aia_execution_plan` |
+| The button | UI action "Reroute" |
+| The roles | `<SCOPE>.user` and `<SCOPE>.routing_admin` |
+| The run-as user | `hr.router`, made by your instructor's setup, never by the app |
+
+## How a run starts
+
+| Question | Decision |
+|---|---|
+| Who starts a run | Two parts, never a platform trigger. The app's start function decides and queues: it is called from an async business rule after insert on `sn_hr_core_case`, which also fires for its child HR tables, and from the Reroute UI action. The dispatcher, a scheduled job in the app, starts queued runs one at a time. The workflow has no `triggerConfig`. AI agent triggers were tried on Australia Patch 5: every run they started failed after its first tool. |
+| What the start function does, in order | 1. For Reroute only: the caller must have `<SCOPE>.user`. 2. `<SCOPE>.enabled` must be `true`. 3. The case's current HR service must have an active routing rule. 4. That rule must not have "Never send to AI" ticked. 5. The case has no run in state `queued`, `running` or `applying` whose clock started less than `<SCOPE>.run_timeout_seconds` ago. An older one on the case is first set `timed_out`, in a conditional update, with a work note; the dispatcher cleans up after it. 6. The caps must allow a run, and exactly one version of the article is published. 7. It writes the run's log row, state `queued`, with the time the clock started (the case's creation, or the Reroute click), and its detail row, with the case's service and group now and who started the run. The start function makes no AI call and starts nothing. |
+| What a refusal leaves | Steps 2, 3 and 5 refuse silently: a log row in state `skipped`, no work note, not counted as a run. Steps 4 and 6 leave a work note saying why (the service never goes to AI; the routing cap was reached; the article isn't published once) and a log row in state `refused`, not counted toward the caps. |
+| The dispatcher | A scheduled job, every minute, with Run as `hr.router` (its fixed sys_id, below). Each run of it, in order: 1. The timeout check, below. 2. If a row is `running` or `applying`, it stops: one run at a time. 3. If `hr.router` has an open conversation, it starts nothing (P14): rows wait, and time out with a work note saying a conversation must be closed. It closes any `hr.router` interaction still in progress itself. 4. It takes the oldest `queued` row. If less than 120 seconds of the row's `<SCOPE>.run_timeout_seconds` is left, it sets it `timed_out` with a work note instead: no AI call, so a run is never cut off half way. 5. It claims the row, `queued` to `running`, in one conditional update, recording when it started. 6. It starts the workflow for that row, below, and records the response's `executionPlanId` on the row. One row per tick: at most one start a minute, and none while a run is running. |
+| How it starts the workflow | `new sn_aia.AiAgentRuntimeUtil().startAiAgentConversation(request)`, which is public, with: `usecaseId`, the workflow; `objective`, naming the run's log-row id; `targetTable` and `targetRecordId`, **the run's log row, never the case**; `conversationUser`, `gs.getUserID()`, which is `hr.router` inside the dispatcher; and `conversationChannel`, the "AI Agent Background" channel, found by name. With the case as the target, the platform copies the whole case into the prompt before any tool runs. Without `conversationUser`, a start with a target fails with `ER0004`. A response whose `status` isn't success, an exception, no `executionPlanId`, or no "AI Agent Background" channel: the log row's state is `start_failed`, with the reason and a work note. It counts toward the caps. Seen working on Australia Patch 5; the build's first live check proves it on your instance. |
+| A start the platform parks | On this channel the start only queues a message for the platform's conversation engine: `status` is success and `conversationId` is always empty, even when the run goes well. So the dispatcher never reads `conversationId`. It proves a start from the execution plan whose sys_id the response returned, recorded on the row: a good start has a conversation within seconds. The timeout check, below, catches a parked one. On Australia Patch 5 a start parked while the same user's previous run was still live, and while dead runs had left conversations and interactions open. Which of the two parks it isn't known. So: one run at a time, and no start while `hr.router` has an open conversation. |
+| Who a run runs as | `hr.router`. The dispatcher's session is `hr.router`, and it passes itself as `conversationUser`, so it, not whoever created the case or clicked Reroute, must pass the workflow's and agent's access, and the tools run as it. No run-as setting on the workflow or the agent. Your instructor's setup makes `hr.router` with a fixed sys_id, the md5 of `sys_user:hr.router`, as it does the lab groups, so the source can name it. The first live check proves the tools run as `hr.router`. |
+| The timeout check | The dispatcher's first step, every minute. Each change is a conditional update with a work note saying the router didn't finish and the case stays where it is, and the reason. `queued` past `<SCOPE>.run_timeout_seconds` from the clock's start: `timed_out`, no AI call. `running` with no execution plan, or with a plan still `ready` and no conversation, 60 seconds after it started: `start_failed`. `running` whose plan has ended (completed, terminated or failed) with no tool having finished the row: `failed`. `running` past the timeout: `timed_out`. `applying` past the timeout: `failed`, and the note says a move may be half done, so check the case. Then, for every row that has left `running` or `applying` while its plan is still `ready` or `in_progress`: it sets the plan `terminated` and closes the run's `interaction` (`closed_complete`, not active); the app may write both. It can't close a conversation (`sys_cs_conversation` allows no update from other scopes), so step 3 holds every start until a runbook step closes it with the background script `files/close-router-conversations.js`. If the dispatcher stops, rows wait in `queued` with no note until it runs again: an accepted risk, and the runbook checks the dispatcher's scheduled trigger runs. |
+| The run states | Final from the start function: `skipped`, `refused`. `queued` goes to `running` (the dispatcher) or `timed_out` (the dispatcher, or step 5). `running` goes to `applying` (`apply_route`'s claim), `left` (`leave_note`), or `start_failed`, `failed` or `timed_out` (the timeout check, or step 5 for `timed_out`). `applying` goes to `routed` (moved, or already in the right place), `stopped` (a check failed; the detail row names it), `transfer_unchecked_group`, or `failed` (the timeout check). Every writer changes a row only from the state it expects, in one conditional update, and does nothing if it lost. So a row leaves each state once, and a timeout can't land between `apply_route`'s checks and its move. |
+| The loop guard | The insert rule runs only when `transferred_from` is empty. Transfer Case sets `transferred_from` on the new case before inserting it, so a move the agent makes never starts another run. A case a person transferred isn't routed either: they chose its service. An accepted narrowing of "every new HR case". |
+| Reroute's condition | The case is active and has no `transferred_to`. |
+| ServiceNow's own "Predict service and transfer HR Cases" workflow | Not used, and left inactive. It predicts a service only, has none of capability 4's checks, and always transfers. Your research should find it, and your design record says why it isn't used. |
+
+## The agent and its tools
+
+| Question | Decision |
+|---|---|
+| The workflow and agent | Defined in the app's source with `AiAgenticWorkflow` and `AiAgent`, on the provider and model your instance has for AI agents. `executionMode: 'autopilot'`: nobody is asked anything during a run. |
+| What the agent does | Calls `read_case` once, decides one HR service and group from the case text and the article, then calls `apply_route` once with its proposal and its confidence, however low. It calls `leave_note` only when it has no proposal at all. It is never told the threshold: the code decides. Nothing else. |
+| The tools | Script tools. Each takes the run's log-row id as `run_id`, never a case sys_id: the tool finds the case from the run's own log row. |
+| `read_case` | Returns the case's short description and description, the published article's text, and the active routing rules' services and groups. Never the case's current service or table: the PRD says those fields can't be trusted. Read only. A case whose short description and description both come back empty is an error, never empty text: the first read of an HR table from the app can come back empty with no error (P8). |
+| `apply_route` | Inputs `run_id`, `service`, `group`, `reason`, `confidence`. The only tool that changes a case. It matches `service` and `group`, trimmed and ignoring case, against the active routing-rule rows only. It refuses, with a note, a case that is no longer active, has `transferred_to` set, or whose service or group changed since the run started. Then it runs capability 4's checks itself, and writes the proposal, the check results and the before values to the detail row, before any move. All pass: it makes the move, re-reads the case, logs the service and group the case really has, adds the work note, and sets the row `routed`. Any fail: no move, a work note naming the check, the row set `stopped`, and the detail row says which. It returns what it did. |
+| A proposal that is the case's current service and group | No write. The work note says the case is already in the right place. Counted as routed. |
+| The move's work note | The reason, the confidence, and the service and group before the move, so a fulfiller can put it back. After a transfer, it goes on the new case. |
+| `leave_note` | Inputs `run_id`, `reason`. Adds the work note and sets the row `left`, with no move. |
+| One action per run | `apply_route` and `leave_note` refuse a run whose log row isn't `running`. The first call moves it on, so the agent can't try group after group until one passes. |
+| A run that takes too long | `apply_route` and `leave_note` refuse a run that isn't `running`, or whose clock started more than `<SCOPE>.run_timeout_seconds` ago, judged by time and not only by state. They change nothing; the timeout check leaves the note. |
+| Case text | Data, never instructions: the agent's instructions say to ignore any instructions inside it. Case text that steers the agent to another group the rules allow is an accepted risk, visible in the log; capability 4's checks still decide. |
+| The confidence | The agent's own estimate, so case text can raise it: an accepted risk. The threshold stops a low one, not a forged high one. |
+
+## Moving a case
+
+| Question | Decision |
+|---|---|
+| Same service | `apply_route` sets the assignment group. If the case's Assigned to isn't a member of the new group, it clears Assigned to. |
+| New service | `apply_route` calls `sn_hr_core.hr_TransferCase.performSelectedTransfer` with the method named exactly, `ReclassifyCaseTransfer`, never the instance's default. It inserts a new HR case on the new service's HR table, keeps the case number on it, and cancels the old one with `transferred_to` set. From code on Australia Patch 5; your research confirms it on your instance. The transfer method isn't available: no move, a work note saying why. |
+| The group after a transfer | The new service's own setup may set a group. `apply_route` reads the new case and sets the checked group if they differ, clearing Assigned to as above. If that second write fails, the log row's state is `transfer_unchecked_group`, with the group the case really has, and the work note says the group wasn't checked. |
+| Which HR table capability 4 checks | For the case's own service, the case's HR table. For a new service, that service's HR table. |
+| What the log keeps for a move | The service and group before and after, and for a transfer both cases' sys_ids, so a move can be put back. |
+| Putting a move back | By hand, from the log: change the group back, or transfer the case back. The app has no undo button in release 1. |
+| An override | An update rule on `sn_hr_core_case`: on a case with a completed move, a change of assignment group or HR service, or `transferred_to` being set, by anyone but `hr.router` and `system`, writes one override row. For a transferred case, it watches the new case. |
+| What else runs after a move, such as assignment rules, flows, SLAs and queues | Allowed: the move changes the case the same way a person would. Out of scope for this record. |
+| Restricted HR services | A "Never send to AI" box on the routing rule. A case whose current service has no active routing rule, or one with that box ticked, is refused at the start: no AI call. A proposal of a service with that box ticked fails capability 4's checks. |
+| Where the group descriptions live | In the routing guidance article. The app reads the one published version of "HR routing guidance" in "Lab HR routing", and logs that version. None, or more than one: the start function refuses the run with a note, before any AI call. |
+| The "Reroute" button | A form button (UI action) on the classic HR case form, for `<SCOPE>.user`, on an active case with no `transferred_to`. It runs steps 1 to 7 and shows their result: "Routing queued" (the work note appears when the run ends, usually within two minutes), "A run is already in progress", "Routing is off", or the refusal's reason. |
+| How a hand-picked group gets its warning | An onChange client script on the classic form's assignment group asks the server, which uses the same access check as `apply_route`. A group without read and write access gets a field warning. It warns; it doesn't block. Changes from lists are out of scope for this record. |
+| The routing rules table | Fields: HR service, assignment group, order (lowest first), active, "Never send to AI". Audited, so every change keeps who made it and when. `<SCOPE>.routing_admin` can create, read and write rows; nobody deletes them, they deactivate. |
+| The language of case text | English, as in the demo data. Other languages are out of scope for this record. |
+| Build order | The first story builds the whole path, thin: the insert rule, the start function, the dispatcher with its timeout check, the workflow, the agent, `read_case` and `leave_note` only. The agent's note states the service and group it would have chosen. Moves come in later stories: the group first, then transfer. |
+| What's built on the day | Release 1 is everything in this file except the override rule; the day builds as much of it as the batch reaches, and After the workshop finishes it. Not on the day at all: the override rule: the update rule on `sn_hr_core_case` that writes override rows. The override table and its access are built on the day. The move's work note still records the service and group before it, so a move can be put back on the day. Until the rule exists, the weekly numbers show overridden as "not tracked", never 0. The rule ships before `<SCOPE>.enabled` is set `true` in production, and capability 7's override acceptance is checked then, not at INSTALL or DEMO. |
+| Seed data, as code in `src/` | Exactly one demo HR service routed to `Lab HR Team`, and one routed to `Lab Locked Out`: the two HR services with the most open demo cases on your instance (`now-sdk query`). The groups are found by name on your instance, with the same query, and referenced by their real sys_ids: never make one up. Not there? Stop: the instance isn't prepared, so tell your instructor. The knowledge base "Lab HR routing" and its published article "HR routing guidance": for each of those two services, what it covers, which group handles it, and one line starting "Example request:". The properties above. No role grants and no users. |
+| Configuration documented | `README.md` lists every property, role and user the app needs, with its purpose. |
+
+## Roles and access
+
+| Question | Decision |
+|---|---|
+| The app's roles | `<SCOPE>.user` for HR fulfillers, and `<SCOPE>.routing_admin` for the HR systems owner. The app's seed grants neither: you give `hr.demo` `<SCOPE>.user` yourself, after the first install. |
+| Who runs the agent | `hr.router`, a user your instructor's setup makes with `sn_hr_core.case_writer`, `now_assist_panel_user` and membership of `Lab HR Team`. Without `now_assist_panel_user` the platform treats it as no AI user. Never admin, and never the fulfiller who clicked Reroute. Your instructor's dry run proves these are enough for the dispatcher's writes to the execution plan and the interaction. |
+| How wide `hr.router` is | Much wider than a single AI call: it reads and changes any HR case it can open. Accepted, because only the app's dispatcher starts runs, and `apply_route` is the only tool that writes. Whether HR's security policies hide some cases from it is checked live. |
+| Nothing else runs as `hr.router` | No test run in AI Agent Studio, no impersonation and no other job as `hr.router`, during the lab or after. A conversation left open by any of them parks every later start (above). |
+| Who can run the workflow and agent | `hr.router` and admins. |
+| What the server code reads, and as whom | The start function reads the case and the routing rules with the app's own read access (`GlideRecord`, read only), as whoever created the case or clicked Reroute. The dispatcher and the tools run as `hr.router`. |
+| Access across scopes | The app declares in its source the access it needs outside its scope: read on the HR case tables, the HR security policies, the HR services, `kb_knowledge`, `sys_cs_channel`, `sn_aia_usecase` and `sys_cs_conversation`; read and write on `sn_aia_execution_plan` and `interaction`, for the timeout check; write on the HR case's assignment group, assigned to and work notes; and execute on `sn_hr_core.hr_TransferCase` and `sn_aia.AiAgentRuntimeUtil`. Some HR tables restrict callers: the first time the app touches one, that one call is refused or comes back empty, and the instance allows it from then on. |
+| Masking personal data | Now Assist's data privacy masking, as your instance has it set up. Whether it masks what agent tools return to the AI is unverified: checked live. If it doesn't, the build goes on, because the demo case text holds no personal data, and the runbook names it a production blocker. Confirming masking in production is the customer's call: out of scope for this record. |
+| Client data written into the text of a case whose service isn't restricted | It goes to the AI, masked as above: an accepted risk. The restricted list works per HR service, not per sentence. |
+| Who can read the run log, its detail rows and its overrides | `<SCOPE>.routing_admin` and admins. Fulfillers can't: they see the work notes. |
+| Changing or deleting a log, detail or override row | No role has write or delete access to these tables. Only the app's code writes them: it writes each row once, moves a run row through its states as above, adds to a detail row as the run goes, and deletes none. Admins and background scripts can still reach them: an accepted risk. A row goes when its HR case is deleted, so rows are kept as long as their case. |
+| What counts as a group having access to an HR table | Active HR security policies on that table, with no condition, that give the group read and give it write. A policy with any condition counts as no access, so the check may refuse a group that could work the case, but never passes one that can't: an accepted limit. |
+| The LLM provider and model | Whatever your instance uses for AI agents. Production's choice is the customer's: out of scope for this record. |
+
+## Failures
+
+| Question | Decision |
+|---|---|
+| Reroute by someone without `<SCOPE>.user` | Refused, with no log row. |
+| A cap is reached | No run, and a work note saying the routing cap was reached. Logged as refused; refused runs don't count toward the caps. |
+| The workflow can't be started, or the platform parks the start | The log row's state is `start_failed`, with a work note. It counts toward the caps. |
+| `hr.router` has an open conversation | The dispatcher starts nothing; rows time out in the queue with a note saying so. The runbook's step closes it. |
+| The dispatcher stops, or the instance's scheduler runs late | Rows wait in `queued` with no note; when it runs again, the timeout check times out any past `<SCOPE>.run_timeout_seconds`, with a work note, and no AI call. An instance's scheduler can run minutes late. |
+| Group access can't be checked | The move fails capability 4's check. |
+| Anything else a run needs can't be read, such as the case, the routing rules, the service's HR table or the article | No move, and a work note with the reason. |
+| The threshold or timeout property isn't a valid number | No move, and a work note with the reason. |
+| The log row can't be written | No run starts: nothing changes a case without its log row. |
+| The weekly numbers | A scheduled job early each Monday writes one row of last week's numbers to `<SCOPE>_weekly_numbers`. If it fails, its row is missing and the job's log says why; it can be run again by hand for any week. |
+
+## Caps and retention
+
+| Question | Decision |
+|---|---|
+| The caps | `<SCOPE>.runs_per_hour`, 10 runs in the last 60 minutes, and `<SCOPE>.runs_per_day`, 100 runs since midnight in the instance's time zone, for the whole instance, as the customer answered. Counted from the log: every run that was queued counts, failures and timeouts too. Cases created at the same moment can pass a cap by a run or two: an accepted risk. |
+| What the weekly numbers count | From the log, for the week: runs started; routed (moves and "already in the right place"); left with a note; overridden; moves stopped by each check. The share routed: routed over new HR cases created that week with no `transferred_from`. Cases assigned to a group that can't open them: open HR cases, when the job runs, whose group fails the access check. |
+| The confidence threshold | 0.7 or higher passes, in `<SCOPE>.confidence_threshold`. |
+| How long a run may take | 300 seconds from the clock's start, waiting in the queue included, in `<SCOPE>.run_timeout_seconds`. A dispatcher-started run with two tool calls took 36 to 68 seconds on Australia Patch 5. The dispatcher starts at most one a minute and none while a run is running, so cases that arrive together wait: the fourth of four waits about four minutes, and a row with under 120 seconds left is timed out in the queue, not started. An accepted risk at the caps' volumes. |
+| Production volumes, the success baselines and retention | The customer's call: out of scope for this record, never `OPEN`. |
+| What day the week starts | Monday. |
+| How the weekly numbers are delivered | A list or report filtered to the week. No email, no dashboard. |
+
+## Platform rules
+
+What the instance does that unit tests with fakes can't see. Each comes from a real failure: P1 to P3, P5, P7
+and P8 broke real builds, and P12 to P15 were seen on Australia Patch 5.
+P4, P6, P9, P10 and P11 are new for agents: the live checks prove them.
+`src/platform-rules.test.ts` comes from the lab and checks P1 to P5, P12
+and P13 on every `npm test`: never edit it, rename it or skip it; if it fails,
+change the code. P6 to P11, P14 and P15 are checked live.
+
+| Rule | Why |
+|---|---|
+| P1. A client UI action sets `isUi11Compatible: true` and `isUi16Compatible: true`. | Without the first, the classic form never shows the button. |
+| P2. A server module imports another by its file name with `.ts`: `'./limits.ts'`, never `'./limits'`. | The instance stores modules under their `.ts` names: without it, the module fails to load. |
+| P3. No `GlideDateTime.setTimeZone`, `gs.print` or `gs.log`. For the instance's day, use `GlideScheduleDateTime.convertTimeZone`; to log, `gs.info`. | Scoped apps may not call them: the call throws. |
+| P4. Each tool's input names and the keys its script reads are the same lower-case string: `run_id`, `service`, `group`, `reason`, `confidence`. | A key that matches no input arrives empty. |
+| P5. Server code reads each HR table with its own GlideRecord, never through a dot-walk into it. | The HR tables restrict callers: dot-walked fields come back empty. |
+| P6. The live check proves the agent saw each case: on the `Lab HR Team` case, the work note's reason quotes that case's own "Example request:" line; on the `Lab Locked Out` case, whose short description is its own service's "Example request:" line, the case doesn't move and the note names the access check. | A run can finish with a plausible note while the tools read the wrong case. |
+| P7. After every install, set `<SCOPE>.enabled` back to `true`. | Every install puts the property's default back. |
+| P8. The first runs after an install may each fail once per HR table and operation the app touches, as a refusal or as fields that come back empty. Run again. | Access across scopes, above. A first read of a case can return empty text with no error. |
+| P9. The workflow, the agent, every tool and every scheduled job are set active in the source, and checked active after install. After install, check the dispatcher has its scheduled trigger (`sys_trigger`); if not, open the job and save it once. | The SDK defaults some `active` flags to false: an inactive workflow starts nothing, with no error. An installed job sometimes gets no trigger until it is saved. |
+| P10. Every run is proved from its own log row, the case's work notes and its execution plan, never from "it said it worked" or from the start's response. | An agent can say it moved a case it never moved, and a start that never runs still answers success. |
+| P11. An install puts the seed records back as they are in the source: the routing rules and the article. Edit them on the instance only for a test you then undo; change them for good in the source. | The seed is lab data. A production release ships without it. |
+| P12. The run's target record is the app's log row, never the case, and the log row holds nothing the AI mustn't see: no case text, no service or group, no person. Your instructor's dry run checks the logged AI request for it. | With the case as the target, the platform puts the whole case, personal data included, into the prompt before any tool runs. |
+| P13. A start with a target passes `conversationUser`. | Without it: `ER0004 "Error fetching run as user"`. |
+| P14. One live conversation for `hr.router` at a time, and none left open. If the dispatcher reports an open conversation, close `hr.router`'s open conversations and interactions with the background script `files/close-router-conversations.js`. | On Australia Patch 5, starts parked (success, and the run never begins) while the user had a live run, and while dead runs had left conversations and interactions open. A finished run closed its own; a failed one didn't. |
+| P15. At the first live check, the plan's creator and the work note's author are `hr.router`. Your instructor's dry run also checks the system log has no "User is not active or not valid AI user" line. | If `hr.router` isn't a valid AI user, the platform silently falls back to the session user, which inside the dispatcher is also `hr.router`, so the note's author alone can't show it. |
+
+## Tests and gates
+
+| Question | Decision |
+|---|---|
+| Where tests run | Locally, with no instance, in Vitest, through `npm test`. Never ATF. Tests sit next to the code under `src/`, as `*.test.ts`, with the lab's `src/platform-rules.test.ts`. Unit tests call the tool scripts and the start function with fakes; only live checks run the agent. Checks only the platform can prove are done by hand, as `hr.demo`. |
+| MERGE | Every change reviewed. `now-sdk build` and `npm test` exit 0; lint isn't a criterion. No change that edits, renames or skips `src/platform-rules.test.ts`, or leaves it out of `npm test`, is ever merged. Every design term, boundary and accepted risk is named in a test file: a unit test, a named live check under INSTALL, or an `it.todo` naming the term and why it needs no code, or that it is built after the workshop. |
+| INSTALL | Installs cleanly on your instance; one warm-up run per HR table the app touches takes P8's first refusals; then `hr.router` has no open conversation (P14), or the background script `files/close-router-conversations.js` closes it; then the live checks for what this release builds pass, as `hr.demo`, not an admin. Rule P6 is one of them. |
+| DEMO | Live, as `hr.demo`: a new case on the `Lab HR Team` service is routed with a work note quoting its article line; the `Lab Locked Out` case stays where it is, with a note naming the check; Reroute starts a run. |
+| HANDOFF | Someone else diagnoses a failure from the runbook alone. |

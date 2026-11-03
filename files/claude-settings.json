@@ -1,0 +1,50 @@
+{
+  "disableClaudeAiConnectors": true,
+  "syncClaudeAiPlugins": false,
+  "syncClaudeAiSkills": false,
+  "autoMemoryEnabled": false,
+  "skillOverrides": { "claude-api": "off" },
+  "permissions": {
+    "defaultMode": "auto",
+    "deny": [
+      "WebSearch",
+      "WebFetch",
+      "Bash(now-sdk auth:*)",
+      "Bash(npx @servicenow/sdk auth:*)",
+      "Bash(npx now-sdk auth:*)",
+      "Read(~/projects/hr-case-router-notes/**)",
+      "Read(~/projects/hr-case-router-lab-guide/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/gh/**)",
+      "Read(~/.npmrc)",
+      "Read(~/.netrc)",
+      "Edit(**/platform-rules.test.ts)",
+      "Write(**/platform-rules.test.ts)"
+    ],
+    "ask": [
+      "Bash(now-sdk install:*)",
+      "Bash(npx now-sdk install:*)",
+      "Bash(npx @servicenow/sdk install:*)",
+      "Bash(now-sdk deploy:*)",
+      "Bash(npx now-sdk deploy:*)",
+      "Bash(npx @servicenow/sdk deploy:*)",
+      "Bash(now-sdk exec:*)",
+      "Bash(npx now-sdk exec:*)",
+      "Bash(npx @servicenow/sdk exec:*)",
+      "Bash(now-sdk execute:*)",
+      "Bash(npx now-sdk execute:*)",
+      "Bash(npx @servicenow/sdk execute:*)",
+      "Bash(now-sdk run:*)",
+      "Bash(npx now-sdk run:*)",
+      "Bash(npx @servicenow/sdk run:*)",
+      "Bash(now-sdk move:*)",
+      "Bash(npx now-sdk move:*)",
+      "Bash(npx @servicenow/sdk move:*)",
+      "Bash(now-sdk cicd:*)",
+      "Bash(npx now-sdk cicd:*)",
+      "Bash(npx @servicenow/sdk cicd:*)",
+      "Bash(npm run deploy:*)"
+    ]
+  }
+}

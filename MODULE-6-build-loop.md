@@ -1,0 +1,589 @@
+# Module 6 — The build loop
+
+*⏱ 30 min · 12:55, the batch runs over lunch, then 60 min · 14:15*
+<!-- DRY RUN: time. Part 3's waits (warm-up, then about two minutes a run) are
+estimates: does 60 min from 14:15 hold? -->
+
+Build one story by hand, let Claude build more over lunch, then try the app
+live. **The idea:** the checks on a run and a move are plain code on plain
+data, with ServiceNow a thin layer outside, so their tests need no instance.
+**The catch:** a plausible work note can come from the wrong case: does the
+live check prove the agent read this one?
+
+<details><summary>ℹ️ Why are we doing this?</summary>
+
+- **In real work:** every story is built the same way: tests first, seen
+  failing, then code until they pass, then a review.
+- **Why it matters:** a test you never saw fail proves nothing, and the
+  builder is the worst judge of their own code, Claude included.
+- **Your mindset:** Claude types; tests and reviews decide. Read the evidence,
+  not Claude's summary of it.
+
+</details>
+
+## Part 1 — Your first story, by hand
+
+### 1. Open the session
+
+⌨️ **Terminal**, in the Claude window, after `/exit` if Claude is open:
+
+```
+cd ~/projects/hr-case-router/app && claude
+```
+
+🤖 **Claude:**
+
+```
+Read BACKLOG.md and SESSION-NOTE.md, and check them against the open
+issues. Tell me the top three items by gate distance, one line each.
+```
+
+✅ Three lines. The top one is the thin path: a new case's run, end to end,
+whose agent only leaves a note naming the service and group it would choose.
+
+<details><summary>🛟 It says the files are only on docs/plan</summary>
+
+Module 5's plan was never shipped. ⌨️ **Terminal**, in your window:
+
+```
+git switch docs/plan
+```
+
+🤖 **Claude:** paste the ship-it prompt from [step 5](#5-ship-it), and type
+`go`. It closes no issue: the plan isn't a story. When it's merged, type
+`/clear` and start this step again.
+
+</details>
+
+### 2. 🔮 Guess, then take the top story
+
+Guess three test cases for the top story, one of them unusual. Step 3
+compares.
+
+🤖 **Claude:** paste this, whatever the top story is, type `go` after it,
+and press **Enter**:
+
+```
+Take the top one. Restate it in five bullets, then build it tests first,
+without waiting for me:
+- on a new branch from main, never on main;
+- add Vitest and the "test" script if they're missing;
+- start each test's name with the design term it proves, like "C<n>: a
+  run's target is its log row, never the case", using the term's real
+  number from docs/DESIGN-HRCaseRouter.md; if the story proves no term,
+  say so and name the tests after the story.
+Run them, show me them failing, and stop before any implementation.
+```
+
+<details><summary>🛟 It says the top story is a ruling, not code</summary>
+
+`<n>` is the story's number, from step 1. 🤖 **Claude:** type `/clear`,
+then `/prove-it:design-challenge amend docs/DESIGN-HRCaseRouter.md`. When
+it asks what changed, paste this:
+
+```
+Story #<n> is a ruling. Rule its term. For each question, give me 3 or 4
+numbered answers, your recommended one first.
+```
+
+Reply with a number, usually `1`. At the read-back, type `Confirmed.`
+alone. When it asks your name and role, type them, such as
+`Sam Lee, developer`. Then paste this, then the ship-it prompt from
+[step 5](#5-ship-it), then `go`:
+
+```
+Commit only docs/DESIGN-HRCaseRouter.md, on a new branch docs/ruling,
+for a pull request that closes #<n>.
+```
+
+When it's merged, type `/clear` and start again from step 1.
+
+</details>
+
+### 3. Check the failing tests
+
+⌨️ **Terminal**, in your window:
+
+```
+git branch --show-current
+```
+
+✅ It prints a new branch, never `main`.
+
+<details><summary>🛟 It prints main</summary>
+
+🤖 **Claude:** type this:
+
+```
+Never work on main. Create a new branch for this story first.
+```
+
+</details>
+
+✅ The tests ran and **failed**. Read the five bullets against your design,
+then compare the tests with your three guesses.
+
+<details><summary>🛟 A bullet or a test is wrong</summary>
+
+🤖 **Claude:** type `Not right: ` and what's wrong, then `Fix the tests to
+match, and show me them failing again.`
+
+</details>
+
+### 4. Make them pass, and check the shape
+
+🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
+
+```
+Make them pass with the least code that does it, then run npm test and
+now-sdk build. Tell me in one line which file holds a plain-code check, or
+"none in this story". Stop before ship it.
+```
+
+✅ In Claude's output, `npm test` passes and `now-sdk build` ends with no
+errors.
+
+<details><summary>🛟 A test fails or the build has errors</summary>
+
+🤖 **Claude:** type `Fix it, then run npm test and now-sdk build again.`
+
+</details>
+
+✏️ **Editor:** if it names a file, open it. ✅ Any check function in it has
+no `GlideRecord`, `gs.` or `current.`. If it says "none in this story", the
+checks come in a later story: move on.
+
+### 5. Ship it
+
+🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
+
+```
+ship it. Review the diff without checking it out. Fix real findings in
+the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
+BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
+register issue instead. There's no CI: merge once now-sdk build passes,
+and npm test too once there's a test script. Then switch to main and
+pull, and give me the pull request link and one line per finding: fixed,
+filed, or not a problem and why.
+```
+
+It pushes, opens a pull request, runs `/code-review`, fixes, and merges:
+a few minutes.
+
+✅ Read every finding line. The ones marked **fixed** are this step's catch:
+code Claude was sure of, and the review found wrong.
+
+🌐 **Browser:** open the pull request link. ✅ It shows **Merged**. In its
+description, click the issue number after **Closes**. ✅ The issue shows
+**Closed**.
+
+<details><summary>🛟 It stops and asks you something anyway</summary>
+
+🤖 **Claude:** type this:
+
+```
+Take your recommendation, file it as a register issue if it's about the design, and finish ship it.
+```
+
+</details>
+
+<details><summary>🛟 It isn't merged: a test or the build failed</summary>
+
+🤖 **Claude:** type `Fix it once, then finish ship it.` If it fails again,
+tell your instructor.
+
+</details>
+
+<details><summary>🛟 There's no Closes line, or the issue is still open</summary>
+
+🤖 **Claude:** type this, with the story's number from step 1 for `<n>`:
+
+```
+Close issue #<n>, citing the pull request that built it.
+```
+
+</details>
+
+🤖 **Claude:** type `/clear`.
+
+## Part 2 — The batch, over lunch (start at 13:25)
+
+### 6. Start the batch
+
+Still on step 4 or 5 at 13:25? Finish ship it first, then type `/clear`.
+
+Leave the laptop open and plugged in. ⌨️ **Terminal**, in your window, on a
+Mac:
+
+```
+caffeinate -i
+```
+
+🤖 **Claude:** paste this, type `go` after it, and press **Enter**. On a Pro
+plan, type `Use one sub-agent at a time.` at the end, before `go`.
+Sub-agents are helpers Claude starts; a git worktree is a separate working
+copy, in its own folder.
+
+```
+Run the build loop with sub-agents through the open stories, until a new
+HR case is moved to a group by apply_route after its checks, or left
+with a work note naming the check, and Reroute queues a run, with the
+seed data in src/, all merged; or until no story is left that you can
+build. Build first the stories others depend on, across gates. I'm at
+lunch: ask me nothing until the end, and never start a design change.
+If the design record doesn't cover something, build what's closest to it
+and file it as a register issue. docs/DECISIONS.md overrides the now-sdk
+plugin's guide: don't ask its questions, and skip its install step and
+the steps after it. Seed records, properties, roles, the workflow, the agent
+and its tools in src/ are code, not instance work. Skip a story that needs
+instance work (now-sdk install, background scripts, or writing live
+records; now-sdk explain, now-sdk query --auth lab-pdi and now-sdk build
+are fine), a design change or a business decision. Build a story that
+depends on a skipped one if its code can still be written and tested;
+otherwise skip it too. You only plan, delegate, merge and report. Per
+story: one sub-agent, in its own git worktree and branch; a five-bullet
+restatement in the pull request, not confirmed with me; tests first in
+Vitest through npm test, named "C<n>: …", with an it.todo naming any
+term that needs no code; the failing run saved; code until the whole
+suite passes and now-sdk build is clean; no new npm packages besides
+Vitest. The sub-agent pushes, opens the pull request with "Closes
+#<story>", both runs and every /code-review finding, fixes findings
+once, and stops: it never merges. File findings about the design record
+as register issues; never stop a merge for them. Parallel only without
+shared files. You merge one at a time, after updating from main and
+re-testing. Never merge red or skip /code-review. Three failures on one
+step stop that story, its pull request left open. If a command is
+denied, don't retry it: note it in the table and go on. Never run
+now-sdk install or now-sdk auth. Apart from register issues, don't
+create, close or relabel issues by hand. Leave this checkout on main.
+End with a table (story, pull request, failing/passing counts, findings
+and actions, outcome and why, skipped ones too) and the next gate's live
+count of open stories.
+```
+
+Stay until a failing test run appears, or it stops with its table. Then
+lock the screen (**Ctrl+Cmd+Q**): the batch keeps running.
+
+### 7. Read the evidence, from 14:15
+
+🌐 **Browser:** in your repo's **Pull requests** tab, click **Closed**, and
+open two merged ones: `apply_route`'s and Reroute's. ✅ Each has five
+bullets, a failing run then a passing run, and its review findings, each
+marked fixed, filed or not a problem. Between them, the bullets say that
+only `apply_route` changes a case, that it runs every check itself, and
+that Reroute only queues a run.
+
+<details><summary>🛟 One has no failing run, or no findings</summary>
+
+🤖 **Claude:** type this:
+
+```
+Run /code-review on each pull request from the batch that has no failing
+run or no findings.
+```
+
+</details>
+
+By 14:30 the batch ends with its table. ✅ It shows these merged:
+`apply_route` with its checks and the group move, Reroute, and the seed
+data. Skipped stories and register issues are expected: they get their
+turn after the workshop.
+
+<details><summary>🛟 No table yet</summary>
+
+- **Claude is still working** (it shows `esc to interrupt`): let it finish.
+- **It stopped, or closed:** if closed, ⌨️ in the Claude window, run
+  `cd ~/projects/hr-case-router/app && claude --continue`. Then 🤖 type
+  `Carry on with the batch.`
+- **Still stuck:** 🤖 type `/clear`, paste this, then the
+  [step 6](#6-start-the-batch) prompt (on a Pro plan, with its extra line),
+  then `go`:
+
+  ```
+  Resume a batch that stopped. Merged pull requests are done. Finish the
+  batch's open pull requests first, and don't retry a story that stopped
+  after three failures. Then carry on with this:
+  ```
+
+</details>
+
+<details><summary>🛟 At 14:30, one of those three isn't merged</summary>
+
+Tell your instructor. They give you their finished build and its scope.
+Install it **instead of** your own app at step 8, with the commands they
+give you: never both, or two routers run on every case. In steps 9 to 11,
+use that scope wherever the steps say `<SCOPE>`.
+
+</details>
+
+⌨️ **Terminal**, in your window: **Ctrl+C** stops `caffeinate`. Then:
+
+```
+git switch main && git pull && npm install && npm test
+```
+
+✅ Vitest's `Tests` line shows `passed`, and no `failed`.
+
+## Part 3 — Install and try it live (by 14:30)
+
+### 8. Build and install
+
+⌨️ **Terminal**, in your window:
+
+```
+git switch main && git pull && git status --short
+now-sdk build && now-sdk install --auth lab-pdi
+```
+
+✅ Status prints nothing, the build says `Build completed successfully`, and
+the install ends with a link to your app.
+
+<details><summary>🛟 It says 401, or times out</summary>
+
+Your instance is asleep. Ask your instructor to wake it, then run the same
+two lines again.
+
+</details>
+
+<details><summary>🛟 It says fetch failed, or certificate</summary>
+
+That's your company network, not the instance. Tell your instructor.
+
+</details>
+
+<details><summary>🛟 Any other error</summary>
+
+🤖 **Claude:** paste the error, then this, then `go`:
+
+```
+Tell me this error's cause in plain words. Change nothing.
+```
+
+Then tell your instructor what it says.
+
+</details>
+
+### 9. Switch it on
+
+An admin does these by hand, so nothing goes live or gets a role unseen.
+`<SCOPE>` is the `scope` line in `app/now.config.json`, such as
+`x_123456_hcr_ga`.
+
+1. 🌐 **Browser**, as admin, the on switch:
+   - Open `sys_properties.list`.
+   - Filter **Name** by `<SCOPE>.enabled`, and open it.
+   - Set **Value** to `true`, and click **Update**.
+
+   ✅ The list shows `<SCOPE>.enabled` with **Value** `true`.
+
+<details><summary>🛟 It's read-only, with a banner about another application</summary>
+
+Click the banner's link to switch to your app, set **Value**, and click
+**Update**. Then switch back to **Global** with the application picker (the
+globe, top right).
+
+</details>
+
+2. 🌐 **Browser**, as admin, `hr.demo`'s role:
+   - Click **All**, type `User Administration`, and click **Users**.
+   - Open `hr.demo`.
+   - In its **Roles** tab, click **Edit...**.
+   - Move `<SCOPE>.user` from the left list to the right, and click
+     **Save**.
+
+   ✅ The **Roles** tab lists `<SCOPE>.user`. It takes effect the next time
+   you impersonate `hr.demo`.
+
+3. 🌐 **Browser**, as admin, the dispatcher's trigger: open
+   `sys_trigger.list`, and filter **Name** by `HR case router dispatcher`.
+
+   ✅ One row: the job runs every minute.
+
+<details><summary>🛟 No row</summary>
+
+An installed job sometimes gets no trigger until it's saved. Open
+`sysauto_script.list`, open the job, and click **Update** once. Then
+filter `sys_trigger.list` again.
+
+</details>
+
+After every install, do sub-steps 1 and 3 again: an install turns the
+switch off, and can leave the job without a trigger. The role stays.
+
+### 10. Warm it up
+
+The first runs after an install can each fail once per HR table (DECISIONS,
+P8). Two warm-up cases take those failures.
+<!-- DRY RUN: time. Two runs, one a minute: about three minutes. -->
+
+🌐 **Browser**, as admin:
+
+1. Open `<SCOPE>_routing_rule.list`.
+
+   ✅ Two active rows, one routed to `Lab HR Team` and one to
+   `Lab Locked Out`. Note each row's **HR service**.
+2. Open `kb_knowledge.list`. In the **Short description** search box, type
+   `HR routing guidance` and press **Enter**. Open the top row: its
+   **Number** shows **(empty)**.
+
+   ✅ **Workflow** is **Published**. Scroll inside the article body: it has
+   one "Example request:" line for each of those HR services. Copy both.
+
+🌐 **Browser**, impersonate `hr.demo`: click your avatar (top right), then
+**Impersonate user**. Type `hr.demo`, pick **HR Demo**, and click
+**Impersonate user**. Close any welcome pop-up.
+
+3. For each of the two services, open `sn_hr_core_case.do?sys_id=-1`. Set
+   **HR service** to it and **Short description** to its "Example
+   request:" line, and click **Submit**.
+   <!-- DRY RUN: how does hr.demo create an HR case in the classic UI: which
+   fields are mandatory (Opened for, Subject person), and does the form switch
+   to the service's HR table? -->
+
+   ✅ Within about three minutes, each case has a work note by
+   `hr.router`, whatever it says. Reload a case to see it.
+
+<details><summary>🛟 No note after three minutes</summary>
+
+End impersonation. As admin, in this order, then as `hr.demo` click
+**Reroute** on the case and wait two minutes: 1. in `sys_properties.list`,
+set `<SCOPE>.enabled` to `true`; 2. no dispatcher row in `sys_trigger.list`?
+open the job in `sysauto_script.list` and click **Update**; 3. ⌨️ run
+`pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`,
+then in `sys.scripts.do` pick **global**, paste, and click **Run script**.
+Reroute says a run is already in progress? Wait for the note saying the
+router didn't finish, five minutes from creation, then click it again.
+
+</details>
+
+4. End impersonation. When both notes are there, close any conversation
+   the warm-up left open (DECISIONS, P14). ⌨️ **Terminal**, your window:
+
+   ```
+   pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js
+   ```
+
+   🌐 **Browser**, as admin: type `sys.scripts.do` in the filter navigator
+   and press **Enter**. Set the scope picker above the script to
+   **global**, paste, and click **Run script**.
+
+   ✅ It prints `Closed <n> open conversation(s) of hr.router` and `Closed <n>
+   in-progress interaction(s) of hr.router`, with any count, 0 included.
+
+### 11. Watch it route, as `hr.demo`
+
+The agent reads the case and the article; `apply_route` checks its choice
+before anything moves. One case the checks pass, one they stop. Nothing is
+instant: the dispatcher starts a run a minute, and a run takes about one.
+
+🌐 **Browser**, impersonate `hr.demo` again (your avatar, then
+**Impersonate user**, and pick **HR Demo**).
+
+1. Open `sn_hr_core_case.do?sys_id=-1`. Set **HR service** to the service
+   you noted for `Lab HR Team`, and **Short description** to its "Example
+   request:" line. Click **Submit**.
+2. Do the same for the `Lab Locked Out` service.
+3. Wait about two minutes, then open the first case.
+   <!-- DRY RUN: time. And which group does a new case start in? If it's
+   already Lab HR Team, the note says it's in the right place. -->
+
+   ✅ **Assignment group** is `Lab HR Team`. The newest work note, by
+   `hr.router`, gives a reason quoting this case's own "Example request:"
+   line, a confidence, and the group before: proof the agent read this
+   case.
+4. Open the second case, a minute or two later.
+
+   ✅ **Assignment group** hasn't changed. The newest work note, by
+   `hr.router`, names the access check: `Lab Locked Out` can't open this
+   HR table, and the code stopped the move.
+
+<details><summary>🛟 The note says the case text was empty</summary>
+
+A first read of an HR table can come back empty (DECISIONS, P8). On the
+case, click **Reroute**. ✅ It says **Routing queued**. Wait about two
+minutes, and reload.
+<!-- DRY RUN: the note's exact words for read_case's empty-text error. -->
+
+</details>
+
+<details><summary>🛟 It moved the Lab Locked Out case, or the reason doesn't fit the case</summary>
+
+That's a real defect. A move on the `Lab Locked Out` case, or a reason
+that quotes words that aren't in this case's article line, means the
+checks or the agent never saw this case (DECISIONS, P6). 🤖 **Claude:**
+paste this, then `go`:
+
+```
+File a GitHub issue in plain words: <what you saw, such as "it moved
+the Lab Locked Out case">, labelled for the gate it holds up. Show me
+first; file after I say yes. No code.
+```
+
+Reply `yes`. Then paste this, with the issue's number for `<n>`, then `go`:
+
+```
+Take issue #<n>. Restate it in five bullets, then build it tests first,
+without waiting for me: on a new branch from main; tests in Vitest
+through npm test, named after the design term they prove; show them
+failing, then make them pass, and run now-sdk build. Then ship it: fix
+real findings once, file design findings as register issues, merge when
+npm test and now-sdk build pass, and give me one line per finding.
+```
+
+When it's merged, ⌨️ **Terminal**, in your window:
+
+```
+git switch main && git pull && git status --short
+now-sdk build && now-sdk install --auth lab-pdi
+```
+
+🌐 **Browser**, as admin, do step 9's sub-steps 1 and 3, and step 10,
+again. Then create the two cases again, as `hr.demo`.
+
+</details>
+
+🌐 **Browser**, end impersonation: your avatar, then **End
+impersonation**. As admin:
+
+5. Open `<SCOPE>_run_log.list`, newest first.
+
+   ✅ The two cases' rows show **State** `routed` and `stopped`.
+6. Open the `routed` row's **Execution plan** field. Only look: never
+   start a test run in AI Agent Studio.
+
+   ✅ **State** `completed`, created by `hr.router`. The plan, the log row
+   and the note prove a run, never the agent's word (DECISIONS, P10).
+
+### 12. Log it
+
+🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
+
+```
+Log this module's catches: real problems the process found, in this
+session or this module's pull requests, that got fixed or changed a
+decision. Read ~/projects/hr-case-router/catches.md first and skip any
+line already there. One line each, as "6 | <what caught it> | <what, and
+what was done>", where what caught it is one of prd, consult, research,
+design, guard, test, review, partner, grade, drill. Show me the lines,
+and when I reply keep, append them to
+~/projects/hr-case-router/catches.md.
+```
+
+Look for a `review` line per fixed review finding, step 5's too, and a
+`test` line per defect step 11 found. Reply `keep`, or say what to change.
+
+⌨️ **Terminal**, in your window:
+
+```
+tail -n 5 ~/projects/hr-case-router/catches.md
+```
+
+✅ It shows the lines you kept.
+
+## You now have
+
+- The thin path, `apply_route` with its checks and the group move, Reroute
+  and the seed data, merged, installed and switched on.
+- The agent routing a new case live, as `hr.demo`, proved from its note,
+  its log row and its execution plan.
+- This module's catches in `catches.md`.
