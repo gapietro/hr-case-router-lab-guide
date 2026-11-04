@@ -112,8 +112,9 @@ Settle these at the kick-off. The prompts and commands below use them.
    ✅ The list shows `[<alias>]`, and no `[lab-pdi]`.
 5. ⌨️ `gh auth status`. ✅ The active account can create repos in `<org>`.
    If not: `gh auth switch --user <that account>`.
-6. In `LAB.html`, click **Values**, then **Clear my values**, so the steps
-   you reuse show placeholders for section 7's swaps.
+6. In `LAB.html`, open **Your values** (the setup chip, top right), click
+   **Clear my values** at the bottom of the panel, and confirm, so the
+   steps you reuse show placeholders for section 7's swaps.
 7. Run Module 0 step 11, from `~/projects/<app>`. Then Module 0 steps 13
    to 19, with section 7's swaps. Skip step 12: your scope is `<SCOPE>`.
    In step 18, if your instances use your company's own domain, add it:
@@ -126,7 +127,7 @@ Settle these at the kick-off. The prompts and commands below use them.
 
 ### When Claude asks permission
 
-The README's rules hold, with your names: **1. Yes** for files in
+The README's permission table holds, with your names: **Yes** for files in
 `~/projects/<app>` and `~/projects/<app>-prd-review`, and for
 `now-sdk query --auth <alias>` on configuration tables. **No** for a query
 of records about people, for `now-sdk auth`, for `now-sdk install` except

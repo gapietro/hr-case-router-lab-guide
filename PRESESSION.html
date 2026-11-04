@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Agentic Build Lab · Pre-session</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>
+/* One fixed look by design (blueprint navy + paper slides), the kickoff deck's, painted explicitly so it
+   reads the same on any host theme. No web fonts: the deck opens offline, from the pack, with system fonts. */
+:root{
+  color-scheme:light;
+  --ink:#13263A;        /* dark slides, text on light */
+  --ink-2:#1C3654;      /* dark gradient end */
+  --paper:#F4F6F5;      /* light slides */
+  --card:#FFFFFF;
+  --line:#D3DCDF;
+  --muted:#56677A;
+  --accent:#F08A24;     /* safety orange: fills, and text on dark */
+  --accent-text:#A9520A;/* orange text on light */
+  --blue:#8FC1E3;       /* blueprint line on dark */
+  --on-dark:#FFFFFF;
+  --on-dark-muted:rgba(255,255,255,.68);
+  --display:'Archivo','Avenir Next Condensed','Arial Narrow',Arial,sans-serif;
+  --sans:'Source Sans 3','Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  --u:1cqw;             /* type unit: tracks deck width; fixed px on narrow screens */
+}
+html,body{margin:0;padding:0;height:100%;background:var(--ink);color:var(--on-dark);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+body{overflow:hidden}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Stage: 16:9 letterboxed */
+.stage{position:fixed;inset:0;display:grid;place-items:center;background:var(--ink)}
+.deck{width:min(100vw,177.78vh);height:min(56.25vw,100vh);position:relative;container-type:inline-size;overflow:hidden;background:var(--ink)}
+.slide{position:absolute;inset:0;padding:5.5cqh 6.5cqw 7cqh;display:none;flex-direction:column;gap:calc(var(--u)*1.6)}
+.slide.is-active{display:flex}
+.slide--dark{background:linear-gradient(140deg,var(--ink),var(--ink-2));color:var(--on-dark)}
+.slide--light{background:var(--paper);color:var(--ink)}
+
+/* Type: sized to read on a shared screen */
+.eyebrow{font-family:var(--mono);font-size:calc(var(--u)*1.05);letter-spacing:.12em;text-transform:uppercase;margin:0}
+.slide--dark .eyebrow{color:var(--accent)}
+.slide--light .eyebrow{color:var(--accent-text)}
+h1,h2{font-family:var(--display);font-weight:800;line-height:1.02;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:calc(var(--u)*5)}
+h2{font-size:calc(var(--u)*3)}
+.hl{color:var(--accent)}
+.sub{font-family:var(--sans);font-weight:400;font-size:calc(var(--u)*1.75);line-height:1.35;margin:0;max-width:62ch;text-wrap:balance}
+p,li{font-size:calc(var(--u)*1.5);line-height:1.45;font-weight:400;margin:0}
+.slide--dark p,.slide--dark li{color:var(--on-dark)}
+strong{font-weight:700}
+ul,ol{margin:0;padding-left:calc(var(--u)*1.6);display:flex;flex-direction:column;gap:calc(var(--u)*.6)}
+.small{font-size:calc(var(--u)*1.2);opacity:.85}
+code,kbd{font-family:var(--mono);font-size:.9em}
+.slide--dark code,.slide--dark kbd{color:var(--blue)}
+kbd{font-weight:500}
+
+/* Layout */
+.head{display:flex;flex-direction:column;gap:calc(var(--u)*.8)}
+.body{flex:1;min-height:0;display:flex;flex-direction:column;gap:calc(var(--u)*1.3)}
+.cols{display:grid;gap:calc(var(--u)*1.6);align-items:start}
+.cols-2{grid-template-columns:1fr 1fr}
+.cols-3{grid-template-columns:1fr 1fr 1fr}
+.cols-32{grid-template-columns:3fr 2fr}
+.cols-23{grid-template-columns:2fr 3fr}
+.stretch{align-items:stretch}
+.col{display:flex;flex-direction:column;gap:calc(var(--u)*1.2)}
+
+/* Cards */
+.card{border-radius:10px;padding:calc(var(--u)*1.2) calc(var(--u)*1.4);display:flex;flex-direction:column;gap:calc(var(--u)*.5)}
+.slide--light .card{background:var(--card);border:1px solid var(--line)}
+.slide--dark .card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14)}
+.card p,.card li{font-size:calc(var(--u)*1.4)}
+.k{font-family:var(--mono);font-size:calc(var(--u)*1.05);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.slide--light .k{color:var(--accent-text)}
+.slide--dark .k{color:var(--accent)}
+.card--accent{border-color:var(--accent)!important;border-width:2px!important}
+
+/* Tables */
+table{border-collapse:collapse;width:100%;font-size:calc(var(--u)*1.4);line-height:1.38}
+th,td{text-align:left;padding:calc(var(--u)*.55) calc(var(--u)*.6);vertical-align:top}
+thead th{font-family:var(--mono);font-size:calc(var(--u)*.85);letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.slide--light td,.slide--light th{border-bottom:1px solid var(--line);color:var(--ink)}
+.slide--light thead th{color:var(--muted)}
+.slide--dark td,.slide--dark th{border-bottom:1px solid rgba(255,255,255,.14);color:var(--on-dark)}
+tbody th{font-weight:700}
+td code{font-size:calc(var(--u)*1)}
+table.day{font-size:calc(var(--u)*1.2)}
+table.day td:first-child{font-family:var(--mono);font-size:.88em;white-space:nowrap}
+table.perm{font-size:calc(var(--u)*1.2)}
+table.perm td:nth-child(2){font-weight:700;width:22%}
+table.keys td:first-child{font-weight:700;width:24%}
+
+/* Slide parts */
+ol.rules{gap:calc(var(--u)*1)}
+ol.rules li{font-size:calc(var(--u)*1.6);line-height:1.45}
+ul.words{columns:2;column-gap:calc(var(--u)*2.4);display:block}
+ul.words li{break-inside:avoid;margin-bottom:calc(var(--u)*.7);font-size:calc(var(--u)*1.4)}
+.slide--dark p.hl{color:var(--accent)}
+.card p.logline{font-size:calc(var(--u)*1.05);overflow-wrap:anywhere}
+.bigline{font-family:var(--display);font-weight:800;font-size:calc(var(--u)*2.2);line-height:1.15}
+.say{font-family:var(--display);font-weight:700;font-size:calc(var(--u)*1.7);line-height:1.25}
+.slide--light .say{color:var(--accent-text)}
+/* A link or date the lab author fills in before the session */
+.todo{font-family:var(--mono);font-size:.82em;padding:0 .35em;border:2px dashed var(--accent);border-radius:4px;white-space:nowrap}
+.slide--light .todo{color:var(--accent-text)}
+.slide--dark .todo{color:var(--accent)}
+
+/* Chrome */
+.chrome{position:absolute;left:0;right:0;bottom:0;height:calc(var(--u)*2.6);display:flex;align-items:center;justify-content:space-between;padding:0 6.5cqw;font-family:var(--mono);font-size:calc(var(--u)*.82);letter-spacing:.08em;text-transform:uppercase;pointer-events:none;color:var(--on-dark-muted)}
+.chrome.on-light{color:var(--muted)}
+.progress{position:absolute;left:0;bottom:0;height:calc(var(--u)*.3);background:var(--accent);width:0;transition:width .25s ease}
+.notes{position:absolute;left:0;right:0;bottom:0;max-height:40%;overflow:auto;background:rgba(19,38,58,.97);color:var(--on-dark);border-top:2px solid var(--accent);padding:calc(var(--u)*1.1) 6.5cqw;font-size:calc(var(--u)*1.15);line-height:1.5;display:none}
+.notes.is-open{display:block}
+.notes .k{display:block;margin-bottom:calc(var(--u)*.4);color:var(--accent)}
+.help{position:absolute;top:calc(var(--u)*1.1);right:calc(var(--u)*1.5);font-family:var(--mono);font-size:calc(var(--u)*.78);letter-spacing:.08em;text-transform:uppercase;color:var(--on-dark-muted)}
+.help.on-light{color:var(--muted)}
+aside.speaker{display:none}
+.next{font-family:var(--mono);font-size:calc(var(--u)*.88);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;margin-top:auto}
+.slide--dark .next{color:var(--on-dark-muted)}
+.slide *:focus-visible,.notes:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+@media (prefers-reduced-motion:reduce){.progress{transition:none}}
+
+/* Narrow screens: slides become one scrolling page with fixed type */
+@media (max-width:760px){
+  :root{--u:10.5px}
+  body{overflow:auto;height:auto}
+  html{height:auto}
+  .stage{position:static;display:block;place-items:normal}
+  .deck{width:100%;height:auto;container-type:normal;overflow:visible}
+  .slide{position:relative;display:flex!important;inset:auto;padding:32px 16px 36px;gap:16px}
+  .cols-2,.cols-3,.cols-32,.cols-23{grid-template-columns:1fr}
+  h1{font-size:34px} h2{font-size:26px}
+  .sub{font-size:18px} p,li,.card p,.card li,ol.rules li,ul.words li{font-size:15px}
+  ul.words{columns:1}
+  .k{font-size:11px} .eyebrow{font-size:11px} .bigline{font-size:22px} .say{font-size:18px}
+  table,table.day,table.perm{font-size:14px} thead th{font-size:11px}
+  .todo{white-space:normal}
+  .slide *{min-width:0}
+  .chrome,.notes,.help,.progress{display:none!important}
+}
+
+@media print{
+  @page{size:297mm 167mm;margin:0}
+  html,body{overflow:visible;height:auto;background:#fff}
+  .stage{position:static;display:block}
+  .deck{width:297mm;height:auto;overflow:visible;container-type:inline-size;margin:0}
+  .deck .slide{display:flex!important;position:relative;width:297mm;height:167mm;page-break-after:always;break-after:page}
+  .chrome,.notes,.help,.progress{display:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage"></div>
+
+<!-- ===================== SLIDES (source) ===================== -->
+<template id="slides">
+
+<!-- This deck is a participant handout: it ships in the participant pack, and N shows the presenter
+     notes to anyone. Write every note as if the room can read it. Every fact on a slide is in the
+     README or Module 0, and data-* quotes stay word for word. Check with: python3 tests/check-presession.py
+     Placeholders the lab author fills before the session are spans marked data-todo: replace the
+     whole span, tags included, with a link, such as <a href="https://example.com/form">the anonymous form</a>.
+     The pack refuses any span left. -->
+
+<!-- 1 Welcome, and the anonymous poll · 0:00–0:05 -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head"><p class="eyebrow">Agentic Build Lab · Pre-session · 60 minutes</p></div>
+  <div class="body" style="justify-content:center">
+    <h1>Everyone here is new to <span class="hl">something.</span></h1>
+    <p class="sub">A week before the lab day: how the day runs, the terminal, where you act, the rules and their reasons, the words, and your pre-work.</p>
+    <div class="cols cols-2 stretch">
+      <div class="card">
+        <p class="k">Anonymous poll</p>
+        <p>How comfortable are you with a terminal? With Claude Code? With git?</p>
+        <p>We show the spread, never who answered.</p>
+      </div>
+      <div class="card">
+        <p class="k">Ask anything, any time</p>
+        <p>Type <code>?</code> in the chat, or use the anonymous form: <span class="todo" data-todo>TO FILL: anonymous form link</span></p>
+        <p>We read questions out as "Someone asked…", never with a name.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Start the recording, with captions on. Welcome. The lab day asks a lot at once, and nobody should meet a terminal, a rule or a new word for the first time at 09:00 on the day: that's why this session exists. Each presenter names one thing in the lab they had to look up themselves. Then launch the anonymous poll: three questions, each from "never used it" to "use it every day". Show the results and read out the spread, never names: "Some of us use a terminal every day, some never have. Both are fine here." The method is new to every one of us, seniors included. After each part, pause for 30 seconds: "Anything unclear so far? Type a question mark in the chat, or use the anonymous form." Never ask for hands.</aside>
+</section>
+
+<!-- 2 The day · 0:05–0:10 -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">The day</p>
+    <h2>Eight modules on the day. Each one leaves you with something.</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-2">
+      <table class="day" data-day>
+        <thead><tr><th style="width:27%">When</th><th style="width:33%">Module</th><th>You leave with</th></tr></thead>
+        <tbody>
+          <tr><td>08:50 · 10 min</td><td>Kickoff</td><td>The customer, the use case, and how the day runs</td></tr>
+          <tr><td>09:00 · 40 min</td><td>1 · Inputs to PRD</td><td>An accepted PRD</td></tr>
+          <tr><td>09:40 · 30 min</td><td>2 · Consult</td><td><code>CONSULT.md</code>: what to build, and how</td></tr>
+          <tr><td>10:10 · 75 min</td><td>3 · Research and LLD</td><td>A low-level design</td></tr>
+          <tr><td>11:25 · 10 min</td><td>Break</td><td></td></tr>
+          <tr><td>11:35 · 55 min</td><td>4 · Design challenge</td><td>A design record</td></tr>
+          <tr><td>12:30 · 25 min</td><td>5 · Check and plan</td><td>A plan on GitHub</td></tr>
+        </tbody>
+      </table>
+      <table class="day" data-day>
+        <thead><tr><th style="width:27%">When</th><th style="width:33%">Module</th><th>You leave with</th></tr></thead>
+        <tbody>
+          <tr><td>12:55 · 30 min</td><td>6 · Build loop</td><td>Your first story, merged</td></tr>
+          <tr><td>13:25 · lunch</td><td>6, continued</td><td>Claude builds the next stories while you eat</td></tr>
+          <tr><td>14:15 · 60 min</td><td>6, continued</td><td>The app installed, and the AI agent working live</td></tr>
+          <tr><td>15:15 · 10 min</td><td>Break</td><td></td></tr>
+          <tr><td>15:25 · 40 min</td><td>8 · Grade</td><td><code>GRADE.md</code>, a preview</td></tr>
+          <tr><td>16:05 · 15 min</td><td>9 · Debrief</td><td>Your count of catches</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="next">Next: how the day runs</p>
+  <aside class="speaker">This is the README's table, as it is in the guide. Walk it top to bottom in a minute: reading and deciding in the morning, building from 12:55, and at 14:15 the app installed with its AI agent working live. Module 7, Break it, comes after the workshop. The times are a plan, not a promise. Before all of this comes Module 0, the pre-work: the last part of this session walks through it.</aside>
+</section>
+
+<!-- 3 How the day runs -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">How the day runs</p>
+    <h2>The AI types. <span class="hl">People and checks decide.</span></h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-2 stretch">
+      <div class="card card--accent">
+        <p class="k">The method</p>
+        <p data-quote="README">Claude Code writes the code. You make the decisions, and checks decide whether work may go on.</p>
+        <p data-quote="README">Modules 1 to 8 each have one <strong>catch</strong>, a moment where the process stops a mistake. Those moments are the lesson.</p>
+      </div>
+      <div class="card">
+        <p class="k">Log it</p>
+        <p data-quote="README">You write no notes. At the end of each module, a <strong>Log it</strong> prompt has Claude draft that module's catches, one line each. Reply <code>keep</code>, or say what to change:</p>
+        <p class="logline"><code>&lt;module&gt; | &lt;what caught it&gt; | &lt;what it caught, and what was done&gt;</code></p>
+      </div>
+      <div class="card">
+        <p class="k">Behind?</p>
+        <p data-quote="README">The buffer, 16:20–17:00, is for catching up. Behind? Ask your instructor for a checkpoint to start the next module from.</p>
+      </div>
+      <div class="card">
+        <p class="k">Alone, then with a partner</p>
+        <p data-quote="README">You work alone on the day. Your partner joins you after the workshop, to attack your app and to test your runbook.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">One line on the method: the AI types; people and checks decide. Nobody is expected to write code. Catches: don't hunt for them, and don't invent them. Follow what really happens, and Log it drafts the lines for you. Falling behind is expected on a day like this: a checkpoint is the normal fix, not a failure, and it keeps you learning the method.</aside>
+</section>
+
+<!-- 4 Three ways to use Claude · 0:10–0:15 -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Three ways to use Claude</p>
+    <h2>Three ways to use Claude. The lab uses one.</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-3 stretch">
+      <div class="card">
+        <p class="k">Chat · claude.ai</p>
+        <p>Talks with you. It can't see or change the files on your computer.</p>
+        <p class="small">Handy on the side: to ask how to install a tool.</p>
+      </div>
+      <div class="card">
+        <p class="k">The desktop app's Code tab</p>
+        <p>Works in a folder you pick, with buttons.</p>
+        <p class="small">Being checked for this lab. For now, use the terminal.</p>
+      </div>
+      <div class="card card--accent">
+        <p class="k">Claude Code in a terminal · The lab</p>
+        <p>Works in the folder you start it in: it reads files and runs commands there.</p>
+        <p class="small" data-quote="README">This guide is written for Claude Code in a terminal window.</p>
+      </div>
+    </div>
+    <p class="say">Not sure which you've used? That's what this slide is for.</p>
+  </div>
+  <aside class="speaker">Ask nobody to say which one they use. Many people think the desktop app's chat is Claude Code: it isn't, but its Code tab is. The Code tab is being checked against every step of the guide; until the guide shows the Code-tab way, use Claude Code in a terminal. Chat stays useful on the side: Module 0 suggests asking Claude at claude.ai to walk you through an install.</aside>
+</section>
+
+<!-- 5 The terminal, Mac and Windows -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">The terminal</p>
+    <h2>Type a command, press Enter, read what it prints</h2>
+  </div>
+  <div class="body">
+    <table class="keys">
+      <thead><tr><th></th><th>Mac · Terminal</th><th>Windows · Git Bash (being tested)</th></tr></thead>
+      <tbody>
+        <tr><td>Open it</td><td><kbd>Cmd+Space</kbd>, type <code>Terminal</code>, press <kbd>Enter</kbd></td><td>Press the <kbd>Windows</kbd> key, type <code>Terminal</code>, press <kbd>Enter</kbd> (after setting Git Bash as Windows Terminal's default profile)</td></tr>
+        <tr><td>Paste a command</td><td><kbd>Cmd+V</kbd></td><td><kbd>Ctrl+V</kbd></td></tr>
+        <tr><td>A second one</td><td><kbd>Cmd+N</kbd>: a second window</td><td><kbd>Ctrl+Shift+T</kbd>: a new tab</td></tr>
+      </tbody>
+    </table>
+    <div class="cols cols-2 stretch">
+      <div class="card">
+        <p class="k">Why two</p>
+        <p data-quote="README">While Claude runs in a Terminal window, that window is Claude's.</p>
+        <p>Your own commands go in the second one.</p>
+      </div>
+      <div class="card">
+        <p class="k">Windows: being tested</p>
+        <p>The guide says Windows (WSL) by arrangement, for now. Git Bash, shown here, is being tested. Check with your instructor before Module 0.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">A terminal is a window where you type a command and the computer prints an answer. The line where you type is the prompt: it ends in % on a Mac and $ in Git Bash. You can't click to move the cursor in it; use the arrow keys. On Windows the lab plans to use Git Bash, which comes with Git for Windows, opened in Windows Terminal. Ctrl+V to paste and Ctrl+Shift+T for a new tab are Windows Terminal's documented keys. Not yet tested on Windows for this lab: that Windows Terminal opens Git Bash once it's set as the default profile, the Windows install steps, and Claude Code's keys there. Say so plainly if anything on the Windows screen differs. Why two: while Claude runs, its window is Claude's, so your own commands go in the second one.</aside>
+</section>
+
+<!-- 6 The live demo · 0:15–0:27 -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">Live · Mac and Windows, side by side</p>
+    <h2>Watch it once, slowly</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-32">
+      <ol>
+        <li>Open a terminal.</li>
+        <li>Run <code>node --version</code>. This machine is set up so it fails.</li>
+        <li>Run <code>git --version</code>. It prints a version.</li>
+        <li>Open a second one.</li>
+        <li>In an empty <code>practice</code> folder, start <code>claude</code>. Ask it to run <code>mkdir notes</code>.</li>
+        <li>A permission prompt: answer <strong>No</strong>, ask what it was for, then <strong>Yes</strong>. Read the ⏺ and ⎿ lines.</li>
+        <li>Type <code>/exit</code> to close Claude.</li>
+      </ol>
+      <div class="card card--accent">
+        <p class="k">command not found</p>
+        <p>The tool isn't installed yet. Module 0 step 4 installs it.</p>
+        <p>Nothing is broken, and it isn't your fault.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Both presenters share screens, Mac and Windows, each in a throwaway practice folder (mkdir practice, then cd practice), on an account without the lab settings, so Claude asks the way it does out of the box. Before step 2, say: "I've set this machine up so the next command fails, to show you what it looks like." When it fails, say in plain words: "command not found means this computer doesn't have that tool yet. It's nothing you did wrong. Module 0 step 4 installs it. If it still says this just after installing, the 🛟 box under that step says to open a new terminal window and check again." Show that box in the guide. At the prompt, read the command out loud. Choose No first and ask Claude what it was for: not sure? No, then ask. Then ask again, and choose Yes. Point at the line starting with ⏺, the command, and the lines under it starting with ⎿, its output: that's what you trust, not Claude's summary. On the Windows screen, say which steps looked different. The Windows path is still being tested, so say so if anything differs from the slide.</aside>
+</section>
+
+<!-- 7 Where you act · 0:27–0:32 -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Where you act</p>
+    <h2>Every action starts with a label</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-2">
+      <table data-labels>
+        <thead><tr><th style="width:30%">Label</th><th>What you do</th></tr></thead>
+        <tbody>
+          <tr><td>🤖 <strong>Claude</strong></td><td>Type it into Claude Code</td></tr>
+          <tr><td>⌨️ <strong>Terminal</strong></td><td>Type it into a normal terminal, never into Claude</td></tr>
+          <tr><td>✏️ <strong>Editor</strong></td><td>Open or change the file yourself, in VS Code</td></tr>
+          <tr><td>🌐 <strong>Browser</strong></td><td>Use GitHub, or your instance as admin unless a step says to impersonate <code>hr.demo</code></td></tr>
+          <tr><td>✅ <strong>Check</strong></td><td>What you should see</td></tr>
+        </tbody>
+      </table>
+      <div class="col">
+        <div class="card">
+          <p class="k">Sending to Claude</p>
+          <p data-quote="README"><strong>Sending:</strong> paste a 🤖 box, type <code>go</code> after it, press <strong>Enter</strong>.</p>
+          <p data-quote="README">A line starting with <code>/</code>, and one-word replies such as <code>yes</code>, <code>keep</code>, <code>approve</code>, <code>apply</code> and <code>ship it</code> (alone), are typed on their own, with no <code>go</code>.</p>
+        </div>
+        <div class="card card--accent">
+          <p class="k">Reading what happened</p>
+          <p data-quote="README">When Claude runs a command, Claude Code shows it on a line starting with ⏺, and its output under it, on lines starting with ⎿. Read that output, not Claude's summary.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Read the label before you act. A 🤖 box goes into Claude, with go typed after it. A ⌨️ box never goes into Claude: it goes into your own terminal. The ⏺ and ⎿ lines are what you just saw in the demo. Under some checks there's a closed 🛟 box: it's normal, expected help, there for the moment what you see is different.</aside>
+</section>
+
+<!-- 8 Rules 1 to 3 · 0:32–0:40 -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">Rules for the whole lab · 1 to 3</p>
+    <h2>Six rules, each with its reason</h2>
+  </div>
+  <div class="body">
+    <ol class="rules" data-rules>
+      <li><strong>Never paste this guide into Claude.</strong> Only the text in 🤖 boxes goes in. <em>Why:</em> if Claude sees the checks, it can write to pass them, and they stop being checks.</li>
+      <li><strong>Passwords stay out of Claude.</strong> Type them only into your own terminal or your browser. Claude never runs <code>now-sdk auth</code>, the command that asks for your instance's password. <em>Why:</em> everything typed into Claude goes to the model and stays in the conversation's history.</li>
+      <li><strong>You decide when your instance changes.</strong> You install the app yourself. The only install Claude runs is the grade's, to <code>lab-pdi</code>, and it asks you first. <em>Why:</em> an install changes a live system, so a person decides when, as in real work.</li>
+    </ol>
+  </div>
+  <aside class="speaker">Read each reason out: a rule people understand is one they keep under time pressure. If people keep one rule, it's the first: the checks only work if Claude can't see them. Rule 2 is about history: anything typed into Claude stays in the conversation, so passwords go only into your own terminal or your browser.</aside>
+</section>
+
+<!-- 9 Rules 4 to 6 -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">Rules for the whole lab · 4 to 6</p>
+    <h2>Six rules, each with its reason</h2>
+  </div>
+  <div class="body">
+    <ol class="rules" start="4" data-rules>
+      <li><strong>Never use a production instance.</strong> <em>Why:</em> the agent you build moves HR cases and writes notes on them; on production, those are real people's cases.</li>
+      <li><strong>Trust what a command prints</strong>, not what Claude says about it. <em>Why:</em> Claude's summary is a likely answer and can be wrong; the output is evidence you can check, or run again.</li>
+      <li><strong>Follow what really happens.</strong> Don't re-run a prompt to get a nicer answer. Write down what happened, and carry on. <em>Why:</em> Claude can answer differently each time, and re-running until it looks right hides the mistakes the lab is built to catch.</li>
+    </ol>
+  </div>
+  <aside class="speaker">Rule 5 is the ⏺ and ⎿ habit from the demo. Rule 6: if a step really went wrong, don't re-run it; ask your instructor for a checkpoint. Before you move on, launch the three-question anonymous poll from the next slide, so people answer before they see the answers.</aside>
+</section>
+
+<!-- 10 Permission prompts: the anonymous quiz -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">When Claude asks permission · Anonymous quiz</p>
+    <h2>Read the command, then answer</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-23">
+      <div class="col">
+        <div class="card">
+          <p class="k">Yes or No?</p>
+          <ol>
+            <li>In Module 6, Claude asks to run <code>now-sdk install --auth lab-pdi</code>.</li>
+            <li>The grade asks to run <code>now-sdk install --auth lab-pdi</code>.</li>
+            <li>Claude asks to run a command you don't recognise.</li>
+          </ol>
+        </div>
+        <p class="small" data-quote="README">In auto mode, the lab's default, Claude rarely asks: it blocks risky commands instead, showing <code>Denied by auto mode classifier</code>.</p>
+      </div>
+      <div class="col">
+        <table class="perm" data-permissions>
+          <thead><tr><th>The command</th><th>Answer</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><code>now-sdk install</code>, <code>deploy</code>, <code>exec</code>, <code>execute</code>, <code>run</code>, <code>move</code> or <code>cicd</code>, in any form, or <code>npm run deploy</code></td><td>No</td><td>They change your instance, and you decide when (rule 3)</td></tr>
+            <tr><td>The grade asks to run <code>now-sdk install --auth lab-pdi</code> (Module 8, and the grades after the workshop)</td><td>Yes, for that command only</td><td>The one install Claude runs, after asking</td></tr>
+            <tr><td>Anything else, or you're not sure</td><td>No, then ask Claude what it was for</td><td>A No costs a minute; a wrong Yes may not undo</td></tr>
+          </tbody>
+        </table>
+        <p data-quote="README">The only install Claude runs is the grade's, to <code>lab-pdi</code>, and it asks you first.</p>
+        <p data-quote="README"><strong>Never choose "Yes, and don't ask again".</strong> The asking is the check.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">The poll is already running from the last slide. Show the spread, then the answers, and discuss the answers, never who gave them. One: No. You install yourself, in your own terminal (rule 3). Two: Yes, for that command only. The grade's install is the one exception to the install row: it's the one install Claude runs, and it asks first. Three: No, then ask Claude what it was for. A No costs a minute. These are three rows of the README's table, "When Claude asks permission": on the day, when Claude does ask, find the command there.</aside>
+</section>
+
+<!-- 11 The words · 0:40–0:44 -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Words you'll meet</p>
+    <h2>Eight words, and what they mean in this lab</h2>
+  </div>
+  <div class="body">
+    <ul class="words" data-words>
+      <li><strong>Repo:</strong> a folder whose history git keeps. Your app's repo is <code>~/projects/hr-case-router/app</code>.</li>
+      <li><strong>Commit:</strong> one saved snapshot in a repo's history.</li>
+      <li><strong>Branch:</strong> a separate line of commits. <code>main</code> changes only through pull requests.</li>
+      <li><strong>Pull request:</strong> a request on GitHub to merge a branch into <code>main</code>. It's reviewed first.</li>
+      <li><strong>Story:</strong> one small piece of work, filed as a GitHub issue.</li>
+      <li><strong>Gate:</strong> a milestone that stories hold up: MERGE, INSTALL, DEMO, HANDOFF.</li>
+      <li><strong>Design term:</strong> one numbered rule in your design record, such as <code>C3</code>. Every test names the term it proves.</li>
+      <li><strong>Catch:</strong> a real problem the process found <strong>and that got fixed</strong>, or that changed a decision. A check firing on something you planted to test it isn't a catch.</li>
+    </ul>
+    <p class="small" data-quote="README">Claude writes the code and runs git; you read and decide.</p>
+  </div>
+  <aside class="speaker">You'll meet these words; nobody needs to know them today. One picture for the first four: your app's repo is a folder on your computer, and git keeps its history. Each commit is a snapshot in that history. Claude works on a branch, then opens a pull request, and the branch joins main only once the pull request is reviewed. Story, gate and design term arrive in Modules 4 to 6, and each module explains them when they do.</aside>
+</section>
+
+<!-- 12 The bar · 0:44–0:47 -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">What you should be able to do</p>
+    <h2>Before the day, you should be able to:</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-32">
+      <ol data-bar>
+        <li>Log in to a ServiceNow instance as admin, open a list such as the HR cases, and impersonate a user when you're given the menu path.</li>
+        <li>Open a terminal, paste a command into it, run it, and read what it prints.</li>
+        <li>Start Claude Code, send it a message, and answer when it asks permission to run a command.</li>
+        <li>Say in a sentence what a repo, a commit and a pull request are.</li>
+        <li>Install software on your computer, or get it installed in time.</li>
+      </ol>
+      <div class="col">
+        <div class="card card--accent">
+          <p data-quote="README"><strong>New to any of these?</strong> That's normal: most people are new to at least one.</p>
+        </div>
+        <div class="card">
+          <p><strong>Unsure? Start at Explain more:</strong> click <strong>Detail</strong>, top right of the guide. Help boxes open, and the guide's words are explained where you first meet them. You can change it at any time.</p>
+        </div>
+        <div class="card">
+          <p data-quote="README">You don't need to write code, know git's commands, or have used the ServiceNow SDK.</p>
+        </div>
+        <div class="card">
+          <p data-quote="README">Under some checks there's a closed 🛟 box. Open it only if what you see is different. ℹ️ boxes say why, if you want to know.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Items 2 and 3 are what the demo just showed. The last slide lists four ways to practise them this week. Any item still a "not yet"? That's what the week is for: the bench clinic, and a private message to your instructor. Nobody else needs to know. Now open the guide's link and show its top bar live. The chip at the top right holds the setup: your computer, and where you run Claude Code. Beside it, click Detail and choose Explain more: help boxes open, and the guide's words are explained where you first meet them. Unsure? Start at Explain more. It never resets your answers or loses your place. Going the other way is fine too: Just the steps hides the newcomer help, and keeps every check and fix. Nobody needs to know you switched. Then the rest of the bar, one move each. Search: type could not resolve and choose the result: it opens that fix in Module 0 step 5. Bookmarks: click the bookmark beside a step's title, and it's in the list. Stuck?: it opens the fixes for the step on your screen, and a message to copy for your instructor, never for Claude. Back in the chip, Copy my setup carries your answers between the link and your downloaded copy.</aside>
+</section>
+
+<!-- 13 Your pre-work · 0:47–0:53 -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Your pre-work · Module 0</p>
+    <h2>About 2 hours, at least two days before</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-3">
+      <div class="card">
+        <p class="k">Six parts</p>
+        <ol data-parts>
+          <li>Your instance</li>
+          <li>Your tools</li>
+          <li>The kit and a clean bench</li>
+          <li>Your app's repo</li>
+          <li>Your repo's rules, and GitHub</li>
+          <li>Before the day</li>
+        </ol>
+      </div>
+      <div class="col">
+        <div class="card">
+          <p class="k">Your instructor gives you</p>
+          <p>Your instance, with admin on it.</p>
+        </div>
+        <div class="card">
+          <p class="k">You bring</p>
+          <ul>
+            <li data-quote="README">A Claude plan that includes Claude Code</li>
+            <li data-quote="README">A GitHub account</li>
+          </ul>
+        </div>
+        <div class="card card--accent">
+          <p class="k">Send your instructor</p>
+          <p>Your GitHub user name.</p>
+        </div>
+      </div>
+      <div class="card">
+        <p class="k">When you're done, you have</p>
+        <ul data-ready>
+          <li>An instance set up for the lab, and <code>hr.demo</code> to impersonate.</li>
+          <li>The tools, signed in, with the lab settings, the kit <code>v0.1.4</code> and the SDK plugin.</li>
+          <li><code>~/projects/hr-case-router</code>, holding only <code>app/</code>, an empty <code>brief/</code> and an empty <code>catches.md</code>.</li>
+          <li>In <code>app/</code>: the allow list (<code>.gitignore</code>: <code>ls -a</code> shows it), the guard, an SDK project that builds and its <code>CLAUDE.md</code>, in two commits, pushed to your private <code>hr-case-router</code> repo on GitHub.</li>
+          <li>The inputs, read, and your guess at what the PRD needs.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Open the hosted guide and show where it starts: the README, then Module 0. Walk the six parts in order, at a glance; don't do them now. Your instructor gives you your instance. You bring a Claude plan that includes Claude Code, and a GitHub account: the README's "What you need" has the details. Send your instructor your GitHub user name, and accept their invite to the guide. The 🛟 boxes are normal, expected help. "Tell your instructor" is the right move, not a failure. When you're done, check the "You now have" list at the end of Module 0, at least two days before the workshop.</aside>
+</section>
+
+<!-- 14 Questions, and this week · 0:53–1:00 -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">Questions · Then this week</p>
+    <h2>Questions first. <span class="hl">Then try it this week.</span></h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-2 stretch">
+      <div class="card card--accent">
+        <p class="k">Try it this week</p>
+        <ol>
+          <li>Open a terminal and run <code>git --version</code>.</li>
+          <li>Open a second one.</li>
+          <li>Start <code>claude</code> in an empty practice folder. Ask it to run <code>mkdir notes</code>. Answer one prompt No and one Yes. Try it before Module 0 step 6. After that, Claude starts in auto mode and rarely asks: that's expected.</li>
+          <li>Type <code>/exit</code>.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <p class="k">Yours to keep</p>
+        <ul>
+          <li>The guide: <span class="todo" data-todo>TO FILL: hosted guide link</span></li>
+          <li>This deck: <code>PRESESSION.html</code>, in the guide's folder</li>
+          <li>The recording, with chapters: <span class="todo" data-todo>TO FILL: recording link</span></li>
+          <li>Anonymous questions, until two days before the workshop: <span class="todo" data-todo>TO FILL: anonymous form link</span></li>
+          <li>Bench clinic, 30 minutes, drop in: <span class="todo" data-todo>TO FILL: bench clinic date and link</span></li>
+          <li>Module 0 done: at least two days before the workshop</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Anonymous questions first. The presenter who isn't answering reads them out, as "Someone asked…", or "Three of you asked…" when several came in. Then the open floor. Close with the help that stays open all week: the anonymous form, the bench clinic, and a private message to your instructor. Everything here is also in the follow-up email, within the hour. Thank everyone, then stop the recording.</aside>
+</section>
+
+</template>
+
+<div class="chrome" id="chrome"><span>Agentic Build Lab · Pre-session</span><span id="counter"></span></div>
+<div class="progress" id="progress"></div>
+<div class="help" id="help">← → navigate · N notes · P print</div>
+<div class="notes" id="notes" role="region" aria-label="Presenter notes"><span class="k">Presenter notes</span><div id="notesBody"></div></div>
+<div class="sr-only" id="status" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var deck=document.createElement('div');deck.className='deck';
+  var tpl=document.getElementById('slides');
+  deck.appendChild(tpl.content.cloneNode(true));
+  var chrome=document.getElementById('chrome'),progress=document.getElementById('progress'),help=document.getElementById('help'),notes=document.getElementById('notes'),notesBody=document.getElementById('notesBody'),counter=document.getElementById('counter'),status=document.getElementById('status');
+  deck.appendChild(chrome);deck.appendChild(progress);deck.appendChild(help);deck.appendChild(notes);
+  stage.appendChild(deck);
+
+  var slides=Array.prototype.slice.call(deck.querySelectorAll('.slide'));
+  var n=slides.length,i=0,notesOpen=false;
+  var narrow=window.matchMedia('(max-width:760px)');
+  function fromHash(){var m=location.hash.match(/#\/?(\d+)/);if(m){var k=parseInt(m[1],10)-1;if(k>=0&&k<n)return k;}return 0;}
+  function show(k){
+    i=Math.max(0,Math.min(n-1,k));
+    slides.forEach(function(s,j){s.classList.toggle('is-active',j===i);});
+    var light=slides[i].dataset.chrome==='light';
+    chrome.classList.toggle('on-light',light);help.classList.toggle('on-light',light);
+    counter.textContent=(i+1)+' / '+n;
+    progress.style.width=((i+1)/n*100)+'%';
+    var a=slides[i].querySelector('aside.speaker');
+    notesBody.textContent=a?a.textContent:'';
+    var h=slides[i].querySelector('h1,h2');
+    status.textContent='Slide '+(i+1)+' of '+n+': '+(h?h.textContent.replace(/\s+/g,' ').trim():'');
+    try{history.replaceState(null,'','#/'+(i+1));}catch(e){}
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey||narrow.matches)return;
+    switch(e.key){
+      case 'ArrowRight':case 'ArrowDown':case ' ':case 'PageDown':e.preventDefault();show(i+1);break;
+      case 'ArrowLeft':case 'ArrowUp':case 'PageUp':e.preventDefault();show(i-1);break;
+      case 'Home':e.preventDefault();show(0);break;
+      case 'End':e.preventDefault();show(n-1);break;
+      case 'n':case 'N':notesOpen=!notesOpen;notes.classList.toggle('is-open',notesOpen);break;
+      case 'p':case 'P':window.print();break;
+    }
+  });
+  deck.addEventListener('click',function(e){
+    if(narrow.matches||e.target.closest('a,button,.notes'))return;
+    var r=deck.getBoundingClientRect();
+    show(e.clientX-r.left<r.width*0.25?i-1:i+1);
+  });
+  window.addEventListener('hashchange',function(){show(fromHash());});
+  show(fromHash());
+})();
+</script>
+
+</body>
+</html>

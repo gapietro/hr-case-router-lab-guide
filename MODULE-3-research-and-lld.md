@@ -69,7 +69,8 @@ finds nothing yet: mark it couldn't check, never contradicted. Change
 nothing on the instance and write no file.
 ```
 
-If it asks permission for `now-sdk query --auth lab-pdi`, choose **1**.
+If it asks permission for `now-sdk query --auth lab-pdi`, choose **Yes**
+(not "Yes, and don't ask again").
 Any other alias, or `now-sdk auth`: **No**.
 
 ✅ Under each fact, a ⏺ line runs `query` on the table the fact is about,

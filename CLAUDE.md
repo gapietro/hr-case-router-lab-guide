@@ -13,6 +13,8 @@ can't route, the case stays where it is, with a note.
 - `files/` holds the inputs the modules copy into your app's repo: the PRD,
   `DECISIONS.md`, the customer's answers, `inputs/`, the platform-rules test
   and the lab's Claude Code settings. The modules tell you when to copy each.
+- `PRESESSION.html` is the pre-session's deck, from a week before the day.
+  Open it in a browser: the arrow keys move, and **N** shows the notes.
 - `AFTER-THE-WORKSHOP.md` finishes the app after the day. `OWN-PRD.md` and
   `PROMOTE.md` are optional tracks.
 

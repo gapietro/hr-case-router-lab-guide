@@ -220,7 +220,7 @@ bullets, a failing run then a passing run, and its review findings. In its
 description, click the issue number after **Closes**. ✅ The issue shows
 **Closed**.
 
-<details><summary>🛟 It stops early, asks you something, or Claude closes</summary>
+<details data-help="nosplit"><summary>🛟 It stops early, asks you something, or Claude closes</summary>
 
 - **It asks you something:** 🤖 type this:
 

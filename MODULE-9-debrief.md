@@ -158,6 +158,38 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
    above `Active account: true` not your lab one? Switch back to it:
    `gh auth switch --user <that account>`. Does it say you weren't logged
    in to any GitHub hosts? Sign the lab account out: `gh auth logout`.
+5. Put back how git signed in to GitHub. Module 0's `gh auth setup-git`
+   changed it for every repo on this computer:
+
+   ```
+   cd ~/projects/hr-case-router-notes
+   for h in https://github.com https://gist.github.com; do
+     git config --global --unset-all "credential.$h.helper"
+   done
+   grep -E '^credential\.https://(gist\.)?github\.com\.helper( |$)' git-credentials-before-lab.txt |
+     while read -r k v; do git config --global --add "$k" "$v"; done
+   git config --global --get-regexp '^credential\.' | diff - git-credentials-before-lab.txt && echo same
+   ```
+
+   ✅ It prints `same`.
+
+   <details><summary>🛟 It says No such file or directory</summary>
+
+   Module 0 didn't save how git signed in, so git now signs in to GitHub
+   the way it does for every site: the Keychain on a Mac, Credential
+   Manager on Windows. Used something else for GitHub before the lab?
+   Add it back: `git config --global --add credential.https://github.com.helper <it>`.
+
+   </details>
+
+   <details><summary>🛟 It prints lines starting with &lt; or &gt;</summary>
+
+   Those lines are what differs from before the lab. Same lines in another
+   order, or a `credential` setting you changed yourself during the lab?
+   That's fine. It says `could not lock config file`? Close VS Code and run
+   the block again: running it twice is safe.
+
+   </details>
 
 ### 8. Remove the plugins and the SDK login
 

@@ -17,6 +17,7 @@
       "Read(~/.ssh/**)",
       "Read(~/.aws/**)",
       "Read(~/.config/gh/**)",
+      "Read(~/AppData/Roaming/GitHub CLI/**)",
       "Read(~/.npmrc)",
       "Read(~/.netrc)",
       "Edit(**/platform-rules.test.ts)",
