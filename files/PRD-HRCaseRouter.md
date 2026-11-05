@@ -4,7 +4,7 @@ Nov 2, 2026 · ServiceNow AI Foundry
 
 Release 1 routes new HR cases by itself. An AI agent reads what a case says and a routing guidance article the customer maintains, and moves the case to the HR service and assignment group that should work it. Routing rules the customer maintains check every move before it's made. A case the agent can't route with confidence stays where it is, with a note saying why. Incidents follow in release 2.
 
-*Draft 2, prepared by ServiceNow AI Foundry from the Oct 20 onsite workshop, the customer's front-door doc (Draft v2, Oct 16) and the customer's change request of Nov 2. Draft 1 proposed a suggestion from one Now Assist skill call. The customer asked instead for an agent that routes. For review and acceptance by the customer. The shared mailbox has its own PRD.*
+*Draft 2, prepared by ServiceNow AI Foundry from the Oct 20 onsite workshop, the customer's front-door doc (Draft v2, Oct 16) and ServiceNow AI Foundry's draft change request of Nov 2, written from the customer's Nov 2 message. Draft 1 proposed a suggestion from one Now Assist skill call. The customer asked instead for an agent that routes. For review and acceptance by the customer. The shared mailbox has its own PRD.*
 
 ## 1. Problem
 
