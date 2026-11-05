@@ -124,7 +124,7 @@ opens more help or less, at any time.
 <div data-show="os:mac surface:terminal">
 
 **On Mac, in the terminal:** While Claude runs in a Terminal window, that
-window is Claude's. For ⌨️ steps, use a second window, **your window**:
+window is Claude's. For ⌨️ **Terminal** steps, use a second window, **your window**:
 press **Cmd+N**.
 
 </div>
@@ -132,14 +132,14 @@ press **Cmd+N**.
 <div data-show="os:win surface:terminal">
 
 **On Windows, in the terminal:** while Claude runs in a Git Bash tab, that
-tab is Claude's. For ⌨️ steps, use a second Git Bash tab, **your window**:
+tab is Claude's. For ⌨️ **Terminal** steps, use a second Git Bash tab, **your window**:
 press **Ctrl+Shift+T** in Windows Terminal.
 
 </div>
 
 <div data-show="os:mac surface:desktop">
 
-**On Mac, in the Code tab:** Claude runs in the desktop app. For ⌨️ steps,
+**On Mac, in the Code tab:** Claude runs in the desktop app. For ⌨️ **Terminal** steps,
 **your window** is a window of the Terminal app. Don't use the Code tab's own
 terminal pane: whether Claude can read what you type there isn't checked
 yet, and passwords must stay out of Claude.
@@ -148,7 +148,7 @@ yet, and passwords must stay out of Claude.
 
 <div data-show="os:win surface:desktop">
 
-**On Windows, in the Code tab:** Claude runs in the desktop app. For ⌨️
+**On Windows, in the Code tab:** Claude runs in the desktop app. For ⌨️ **Terminal**
 steps, **your window** is a Git Bash tab in Windows Terminal. Don't use the
 Code tab's own terminal pane: whether Claude can read what you type there
 isn't checked yet, and passwords must stay out of Claude.
