@@ -1070,6 +1070,30 @@ grep -c '"hooks"' ~/.claude/settings.json
 git config --get core.hooksPath
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router`: Goes into your workspace, so the checks
+   see what Claude sees when it starts there.
+2. `claude plugin list`: Lists the plugins Claude Code has installed, and
+   whether each is enabled. A plugin adds skills, commands or hooks to every
+   session, so an extra one changes how Claude behaves in the lab.
+3. `claude mcp list`: Lists the MCP servers Claude can use: tools outside
+   Claude Code, such as a connection to another app or service.
+4. `ls -d …`: Looks for your own instruction files and folders: a
+   `CLAUDE.md` in your home folder, in `projects` or in `~/.claude`, and your
+   own skills, agents and commands. Claude reads these in every session.
+   `-d` lists each one by name, not what's inside it. `No such file or
+   directory` means it isn't there, which is what you want.
+5. `grep -c '"hooks"' …`: Counts how often `"hooks"` appears in Claude
+   Code's settings file. Hooks are commands Claude runs by itself at set
+   moments. `0` means you have none.
+6. `git config --get core.hooksPath`: Prints the folder git takes its commit
+   hooks from, if one is set for every repo on your computer. Nothing printed
+   means each repo uses its own hooks, so your repo's guard (steps 13 and 14)
+   will run.
+
+</details>
+
 ✅ The only enabled plugins are `prove-it@prove-it`, with `Version: 0.1.4`,
 and `servicenow-sdk@claude-plugins-official`, at any version.
 `claude mcp list` says `No MCP servers configured`. `ls` prints only
