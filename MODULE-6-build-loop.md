@@ -386,6 +386,19 @@ git switch main && git pull && git status --short
 now-sdk build && now-sdk install --auth lab-pdi
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `git switch main && git pull && git status --short`: Switches to `main`,
+   downloads what's been merged into it on GitHub, then lists every file
+   that's changed but not committed. `&&` runs each command only if the one
+   before it worked. Nothing listed means your folder holds exactly what's on
+   `main`.
+2. `now-sdk build && now-sdk install --auth lab-pdi`: Builds your app from its
+   source, then installs it on your instance, with the SDK sign-in you saved
+   as `lab-pdi`. `&&` installs only if the build worked.
+
+</details>
+
 ✅ Status prints nothing, the build says `Build completed successfully`, and
 the install ends with a link to your app.
 
@@ -606,6 +619,19 @@ When it's merged, ⌨️ **Terminal**, in your window:
 git switch main && git pull && git status --short
 now-sdk build && now-sdk install --auth lab-pdi
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `git switch main && git pull && git status --short`: Switches to `main`,
+   downloads what's been merged into it on GitHub, then lists every file
+   that's changed but not committed. `&&` runs each command only if the one
+   before it worked. Nothing listed means your folder holds exactly what's on
+   `main`.
+2. `now-sdk build && now-sdk install --auth lab-pdi`: Builds your app from its
+   source, then installs it on your instance, with the SDK sign-in you saved
+   as `lab-pdi`. `&&` installs only if the build worked.
+
+</details>
 
 🌐 **Browser**, as admin, do step 9's sub-steps 1 and 3, and step 10,
 again. Then create the two cases again, as `hr.demo`.

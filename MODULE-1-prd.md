@@ -26,6 +26,19 @@ git -C ~/projects/hr-case-router-lab-guide pull
 git -C ~/projects/hr-case-router-lab-guide log -1 --format='%cd %s' --date=short
 ```
 
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git -C ~/projects/hr-case-router-lab-guide pull`: Downloads the newest
+   version of this guide from GitHub into its folder,
+   `hr-case-router-lab-guide`. `-C` runs git as if you were inside that
+   folder, so you don't have to go there first.
+2. `git -C ~/projects/hr-case-router-lab-guide log -1 --format='%cd %s' --date=short`:
+   Prints the date and subject of the guide's newest saved change, its newest
+   commit, so you can check you have today's version. `-1` shows only the
+   newest one.
+
+</details>
+
 ✅ The last line, a date and a subject, matches what your instructor shows
 on the screen. If `LAB.html` is open, reload it.
 
@@ -49,6 +62,23 @@ cp -n inputs/USE-CASE.md inputs/WORKSHOP-NOTES.md inputs/CHANGE-REQUEST.md PRD-H
 cd ~/projects/hr-case-router-prd-review && claude
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `mkdir -p ~/projects/hr-case-router-prd-review`: Makes a folder of its own
+   for the PRD review, `hr-case-router-prd-review`, inside `projects`. `-p`
+   doesn't complain if the folder is already there.
+2. `cd ~/projects/hr-case-router-lab-guide/files`: Goes into this guide's
+   `files` folder, which holds the three inputs and the draft PRD.
+3. `cp -n inputs/USE-CASE.md … ~/projects/hr-case-router-prd-review/`: Copies
+   the three input files and the draft PRD into the review folder, so Claude
+   works on its own copies and never reads this guide. `-n` never overwrites a
+   copy that's already there, so running the line again keeps any changes.
+4. `cd ~/projects/hr-case-router-prd-review && claude`: Goes into the review
+   folder and starts Claude Code there, so it works on those four files. `&&`
+   starts Claude only if the `cd` worked.
+
+</details>
+
 </div>
 
 <div data-show="surface:desktop">
@@ -60,6 +90,20 @@ mkdir -p ~/projects/hr-case-router-prd-review
 cd ~/projects/hr-case-router-lab-guide/files
 cp -n inputs/USE-CASE.md inputs/WORKSHOP-NOTES.md inputs/CHANGE-REQUEST.md PRD-HRCaseRouter.md ~/projects/hr-case-router-prd-review/
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `mkdir -p ~/projects/hr-case-router-prd-review`: Makes a folder of its own
+   for the PRD review, `hr-case-router-prd-review`, inside `projects`. `-p`
+   doesn't complain if the folder is already there.
+2. `cd ~/projects/hr-case-router-lab-guide/files`: Goes into this guide's
+   `files` folder, which holds the three inputs and the draft PRD.
+3. `cp -n inputs/USE-CASE.md … ~/projects/hr-case-router-prd-review/`: Copies
+   the three input files and the draft PRD into the review folder, so Claude
+   works on its own copies and never reads this guide. `-n` never overwrites a
+   copy that's already there, so running the line again keeps any changes.
+
+</details>
 
 Then 🤖 start a new session
 (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
@@ -187,6 +231,18 @@ type `/exit` alone.</span> ⌨️ **Terminal**, in your window:
 ls ~/projects/hr-case-router/brief
 grep -c -e 'is an open decision' -e 'Draft 2' ~/projects/hr-case-router/brief/PRD-HRCaseRouter.md
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `ls ~/projects/hr-case-router/brief`: Lists what's in your workspace's
+   `brief` folder, to show Claude copied the accepted PRD there. The later
+   modules build from that copy.
+2. `grep -c -e 'is an open decision' -e 'Draft 2' …`: Counts the lines of that
+   copy that still say "is an open decision" or "Draft 2". Each `-e` gives
+   `grep` one phrase to look for. `0` means every answer went in, and the PRD
+   no longer says it's a draft.
+
+</details>
 
 ✅ It prints `PRD-HRCaseRouter.md`, then `0`.
 

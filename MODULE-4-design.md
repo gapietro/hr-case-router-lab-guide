@@ -29,6 +29,15 @@ cd ~/projects/hr-case-router
 claude
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router`: Goes into your workspace, where the
+   accepted PRD and your LLD are, so the design challenge can read them.
+2. `claude`: Starts Claude Code in the folder you're in. This window is now
+   the Claude window.
+
+</details>
+
 </div>
 
 <div data-show="surface:desktop">

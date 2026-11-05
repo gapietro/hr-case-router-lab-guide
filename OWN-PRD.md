@@ -84,6 +84,20 @@ Settle these at the kick-off. The prompts and commands below use them.
    mkdir -p ~/projects/<app>/brief
    touch ~/projects/<app>/catches.md ~/projects/<app>/LOG.md
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `mkdir -p ~/projects/<app>/brief`: Makes your app's workspace, `<app>`
+      inside `projects`, and a `brief` folder in it, where your PRD goes. `-p`
+      makes any folder that's missing on the way, and doesn't complain if
+      they're already there.
+   2. `touch ~/projects/<app>/catches.md …`: Makes two empty files in your
+      workspace: `catches.md`, where Claude logs each catch, and `LOG.md`, for
+      your values. If a file is already there, `touch` leaves what's in it
+      alone.
+
+   </details>
+
    ✏️ **Editor:** write your values in `LOG.md`. The Log it prompts add
    your catches to `catches.md`.
 2. Close Claude everywhere first:
@@ -98,6 +112,20 @@ Settle these at the kick-off. The prompts and commands below use them.
    git -C ~/projects/hr-case-router-lab-guide pull
    node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `git -C ~/projects/hr-case-router-lab-guide pull`: Downloads the newest
+      version of this guide from GitHub into its folder,
+      `hr-case-router-lab-guide`. `-C` runs git as if you were inside that
+      folder, so you don't have to go there first.
+   2. `node …/merge-claude-settings.mjs`: Runs the lab's settings script. It
+      adds the lab's settings to Claude Code's settings file and keeps your
+      own. Running it again never overwrites the backup of your settings it
+      made the first time.
+
+   </details>
+
    ✅ It prints `Lab settings in place.`
 3. ⌨️ Did Module 9 step 8? Install the kit and the SDK plugin again
    (Module 0 step 8):
@@ -106,6 +134,24 @@ Settle these at the kick-off. The prompts and commands below use them.
    claude plugin install prove-it@prove-it
    claude plugin install servicenow-sdk@claude-plugins-official
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `claude plugin marketplace add …`: Adds the kit's GitHub repo, at its
+      version `v0.1.4` (the part after `#`), as a plugin marketplace: a list
+      of plugins Claude Code can install.
+   2. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
+      `prove-it`, from the marketplace you just added. The name after `@` is
+      the marketplace's, and it's `prove-it` too. Claude Code then has it in
+      every folder.
+   3. `claude plugin install servicenow-sdk@claude-plugins-official`: Installs
+      ServiceNow's SDK plugin from `claude-plugins-official`, Anthropic's own
+      plugin marketplace. It teaches Claude to look things up in the SDK's
+      docs and to read records on your instance; those lookups never change
+      anything.
+
+   </details>
+
    ✅ None of the three prints an error. Skipped Module 9 step 8? Remove
    the workshop's login, so nothing reaches the lab instance by mistake:
    `now-sdk auth --delete lab-pdi`
@@ -115,6 +161,21 @@ Settle these at the kick-off. The prompts and commands below use them.
    now-sdk auth --add https://<instance>.service-now.com --type basic --alias <alias>
    now-sdk auth --list
    ```
+
+   <details data-detail="extra" data-topic="servicenow"><summary>ℹ️ What each line does</summary>
+
+   1. `now-sdk auth --add … --type basic --alias <alias>`: Saves a sign-in to
+      your development instance on your computer, under the name `<alias>`.
+      `basic` means it signs in with a user name and password, which it asks
+      you for. Every `now-sdk` command for your app names `<alias>`, so it
+      always reaches this instance. You run it yourself: the lab's settings
+      never let Claude run `now-sdk auth`, so your password never passes
+      through Claude.
+   2. `now-sdk auth --list`: Lists the sign-ins the SDK has saved, so you can
+      see `<alias>` is there, with your instance's address and the user name.
+
+   </details>
+
    ✅ The list shows `[<alias>]`, and no `[lab-pdi]`.
 5. ⌨️ `gh auth status`. ✅ The active account can create repos in `<org>`.
    If not: `gh auth switch --user <that account>`.
@@ -342,6 +403,19 @@ settled for your app: never copy the workshop's.
   cd ~/projects/<app> && mkdir -p inputs
   cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/
   ```
+
+  <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+  1. `cd ~/projects/<app> && mkdir -p inputs`: Goes into your workspace, and
+     makes an `inputs` folder there for your technical documents. `-p` doesn't
+     complain if it's already there.
+  2. `cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/`: Copies the
+     lab's LLD template into your workspace's `docs` folder: Claude drafts
+     your LLD from it. `..` is the folder above your workspace, `projects`,
+     where your copy of this guide is.
+
+  </details>
+
   ✏️ Copy your technical documents into `~/projects/<app>/inputs/`, as
   Markdown. Then <span data-show="surface:terminal">**In the terminal:** ⌨️
   `claude`.</span> <span data-show="surface:desktop">**In the Code tab:**
@@ -459,6 +533,18 @@ for g in merge install demo handoff; do
   echo "$g: $(gh issue list --state open --label "gate:$g" --limit 5000 --json labels --jq '[.[] | select(all(.labels[]; .name != "register"))] | length')"
 done
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `for g in merge install demo handoff; do`: Repeats the next line once for
+   each gate, in order, with `$g` standing for the gate's name.
+2. `echo "$g: …`: Counts the open issues labelled for that gate, such as
+   `gate:merge`, leaving out any also labelled `register`, and prints the
+   gate's name and the count, such as `merge: 3`. `--limit 5000` counts them
+   all, not only the first 30.
+3. `done`: Ends the part that repeats.
+
+</details>
 
 ✅ The next gate is the first count not at 0, whatever `BACKLOG.md` says.
 Nothing closes milestones for you. **The count is the truth.**

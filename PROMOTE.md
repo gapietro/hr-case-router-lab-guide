@@ -121,6 +121,28 @@ what was graded:
    git push origin v1.0.0
    git diff --stat <the commit GRADE.md says it graded> v1.0.0
    ```
+
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `git switch main && git pull && git status --short`: Switches to `main`,
+      downloads what's been merged into it on GitHub, then lists every file
+      that's changed but not committed. `&&` runs each command only if the one
+      before it worked. Nothing listed means your folder holds exactly what's
+      on `main`.
+   2. `git tag -a v1.0.0 -m "Slice 1: <what a user can now do>"`: Tags the
+      newest commit on `main`, the one that holds the grade, as version
+      `v1.0.0`: a fixed name for exactly this code. `-a` stores your message
+      with the tag: replace `<what a user can now do>` with what this slice
+      lets a user do.
+   3. `git push origin v1.0.0`: Sends the tag to GitHub, so test and
+      production can install exactly the code that was graded.
+   4. `git diff --stat <the commit GRADE.md says it graded> v1.0.0`: Lists the
+      files that differ between the commit the grade looked at and the tagged
+      one. Only the grade's own files should differ, so the tagged code is the
+      code that was graded.
+
+   </details>
+
    ✅ Status prints nothing, and the diff lists only `GRADE.md`,
    `.gitignore` and `BACKLOG.md`.
 

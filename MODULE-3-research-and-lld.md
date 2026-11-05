@@ -36,6 +36,26 @@ cp ../hr-case-router-lab-guide/files/DECISIONS.md docs/
 claude
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router && mkdir -p inputs docs`: Goes into your
+   workspace, then makes two folders in it, `inputs` and `docs`. `&&` runs the
+   second command only if the first worked.
+2. `cp ../hr-case-router-lab-guide/files/inputs/TECH-NOTES.md inputs/`: Copies
+   the customer's technical notes on their HR case setup into `inputs`, so
+   Claude reads its own copy, never this guide. `..` means the folder above,
+   `projects`.
+3. `cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/`: Copies the
+   template for the low-level design (LLD) into `docs`. You fill it in with
+   Claude later in this module.
+4. `cp ../hr-case-router-lab-guide/files/DECISIONS.md docs/`: Copies the lab's
+   technical decisions, already made, into `docs`, so Claude's design follows
+   them.
+5. `claude`: Starts Claude Code in the folder you're in. This window is now
+   the Claude window.
+
+</details>
+
 </div>
 
 <div data-show="surface:desktop">
@@ -48,6 +68,24 @@ cp ../hr-case-router-lab-guide/files/inputs/TECH-NOTES.md inputs/
 cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/
 cp ../hr-case-router-lab-guide/files/DECISIONS.md docs/
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router && mkdir -p inputs docs`: Goes into your
+   workspace, then makes two folders in it, `inputs` and `docs`. `&&` runs the
+   second command only if the first worked.
+2. `cp ../hr-case-router-lab-guide/files/inputs/TECH-NOTES.md inputs/`: Copies
+   the customer's technical notes on their HR case setup into `inputs`, so
+   Claude reads its own copy, never this guide. `..` means the folder above,
+   `projects`.
+3. `cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/`: Copies the
+   template for the low-level design (LLD) into `docs`. You fill it in with
+   Claude later in this module.
+4. `cp ../hr-case-router-lab-guide/files/DECISIONS.md docs/`: Copies the lab's
+   technical decisions, already made, into `docs`, so Claude's design follows
+   them.
+
+</details>
 
 Then 🤖 start a new session
 (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).

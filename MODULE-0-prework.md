@@ -542,6 +542,17 @@ administrator rights.
   source ~/.zshrc
   ```
 
+  <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+  1. `echo 'export PATH=… >> ~/.zshrc`: Adds one line to the end of
+     `.zshrc`, the settings file Terminal reads each time a window opens.
+     That line tells Terminal to look for tools in `.local/bin` in your home
+     folder too: that's where Claude Code's installer puts `claude`.
+  2. `source ~/.zshrc`: Reads that settings file again in this window, so it
+     picks up the new line now. Every new window reads it by itself.
+
+  </details>
+
 - **EACCES or "permission denied" from npm:** run the `npm install` line
   again with `sudo` in front, and type your Mac's password; nothing shows
   as you type. Then run `sudo chown -R $(id -u):$(id -g) ~/.npm`, so npm's
@@ -568,6 +579,19 @@ administrator rights.
   $currentPath = [Environment]::GetEnvironmentVariable('PATH', 'User')
   [Environment]::SetEnvironmentVariable('PATH', "$currentPath;$env:USERPROFILE\.local\bin", 'User')
   ```
+
+  <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+  1. `$currentPath = [Environment]::GetEnvironmentVariable(…)`: Reads your
+     PATH, the list of folders Windows searches for tools, and
+     keeps a copy of it as `$currentPath` for the next line. `'User'` means
+     your own list, not the one for every account on the computer.
+  2. `[Environment]::SetEnvironmentVariable('PATH', …, 'User')`: Saves your
+     PATH again, with one folder added at the end: `.local\bin` in your user
+     folder, where Claude Code's installer puts `claude`. Only windows you
+     open after this see the change, which is why you open a new one.
+
+  </details>
 
 - **irm: command not found:** you're in Git Bash. Open PowerShell, as
   above, and paste the line again.
@@ -804,6 +828,16 @@ cd ~
 claude
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~`: Goes into your home folder (`~` means your home folder). Claude
+   Code works in the folder you start it in, and this first start only signs
+   you in and checks the lab's settings, so your home folder will do.
+2. `claude`: Starts Claude Code in this window. The first time, it walks you
+   through signing in to your Claude account in the browser.
+
+</details>
+
 Follow the screens. Choose your **Claude account with subscription** (or
 **Anthropic Console account** if you pay per use) and sign in in the browser.
 When it asks if you trust this folder, pick **Yes** with the arrow keys. A
@@ -881,6 +915,17 @@ Type `/exit`, then put the settings back and start again:
 node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 claude
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `node …/merge-claude-settings.mjs`: Runs the lab's settings script again.
+   It puts the lab's settings back into Claude Code's settings file, with
+   the one that starts Claude in auto mode, and takes out any setting that
+   switches auto mode off. Your other settings stay, and your backup from
+   the first run is never overwritten.
+2. `claude`: Starts Claude Code again, so it reads the settings file afresh.
+
+</details>
 
 Still manual? Your organisation turned auto mode off. Claude will just ask
 more often. Tell your instructor.
@@ -962,6 +1007,19 @@ now-sdk auth --add https://dev123456.service-now.com --type basic --alias lab-pd
 now-sdk auth --list
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `now-sdk auth --add … --type basic --alias lab-pdi`: Saves a sign-in to
+   your instance on your computer, under the name `lab-pdi` that every
+   `now-sdk` command in the lab uses. `basic` means it signs in with a user
+   name and password, which it asks you for. You run it yourself: the lab's
+   settings never let Claude run `now-sdk auth`, so your password never
+   passes through Claude.
+2. `now-sdk auth --list`: Lists the sign-ins the SDK has saved, so you can
+   see `lab-pdi` is there, with your instance's address and the user name.
+
+</details>
+
 When asked, type the user name `admin`, then your admin password. Nothing
 shows while you type it.
 
@@ -1018,6 +1076,18 @@ Add it, then run the last line again:
 claude plugin marketplace add anthropics/claude-plugins-official
 claude plugin install servicenow-sdk@claude-plugins-official
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `claude plugin marketplace add anthropics/claude-plugins-official`: Adds
+   Anthropic's own plugin marketplace, from its GitHub repo, to Claude Code.
+   Most installs already have it; yours didn't, so the SDK plugin's install
+   couldn't find it.
+2. `claude plugin install servicenow-sdk@claude-plugins-official`: Installs
+   ServiceNow's SDK plugin from the marketplace you just added: the same
+   line that failed before.
+
+</details>
 
 </details>
 
@@ -1110,6 +1180,25 @@ cd ~/projects/hr-case-router-notes
 [ -e mcp-before-lab.json ] || (umask 077; node -p 'JSON.stringify(require(require("os").homedir()+"/.claude.json").mcpServers||{},null,2)' > mcp-before-lab.json)
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router-notes`: Goes into your lab notes folder, so
+   the two files the next lines write land there, where Module 9 looks for
+   them.
+2. `[ -e plugins-before-lab.txt ] || claude plugin list > …`: Writes the
+   list of your plugins, and which are enabled, into
+   `plugins-before-lab.txt`, so Module 9 knows which to switch back on. The
+   `[ -e … ] ||` part means "only if that file isn't there yet", so running
+   it again never overwrites your record of how things were before.
+3. `[ -e mcp-before-lab.json ] || (umask 077; node -p … > …)`: Copies your
+   MCP servers' settings out of Claude Code's own file,
+   `~/.claude.json`, into `mcp-before-lab.json`, so Module 9 can add them
+   back after you remove them. `umask 077` makes the new file readable only
+   by you, because a server's settings can hold a key. The `[ -e … ] ||`
+   part works as in line 2.
+
+</details>
+
 Then switch each off, by the name listed: `claude plugin disable <name>`,
 or `claude mcp remove <name>` for a server (a `plugin:…` one goes with its
 plugin). Won't go, or you never added it? It's your organisation's: leave
@@ -1124,6 +1213,20 @@ claude plugin marketplace remove prove-it
 claude plugin marketplace add 'gapietro/prove-it-kit#v0.1.4'
 claude plugin install prove-it@prove-it
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `claude plugin marketplace remove prove-it`: Removes the kit's
+   marketplace, the one that points at another version of the kit, so the
+   next line can add the right one.
+2. `claude plugin marketplace add 'gapietro/prove-it-kit#v0.1.4'`: Adds the
+   kit's marketplace again, pinned to version `v0.1.4` (the part after
+   `#`): the version this guide is written for.
+3. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
+   `prove-it`, from that marketplace, so Claude Code has `v0.1.4` in every
+   folder.
+
+</details>
 
 </details>
 
@@ -1170,6 +1273,21 @@ mkdir -p ~/projects/hr-case-router/app
 cd ~/projects/hr-case-router/app
 now-sdk init --appName "HR Case Router" --packageName hr-case-router --scopeName <SCOPE> --template typescript.basic --auth lab-pdi
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `mkdir -p ~/projects/hr-case-router/app`: Makes the `app` folder inside
+   your workspace: your app's code, and later its repo, live there. `-p`
+   doesn't complain if it's already there.
+2. `cd ~/projects/hr-case-router/app`: Goes into that folder, because
+   `now-sdk init` makes the app in the folder you're in.
+3. `now-sdk init --appName "HR Case Router" … --auth lab-pdi`: Makes the
+   starting files of a new ServiceNow app in this folder, from the SDK's
+   basic TypeScript template. It names the app `HR Case Router`, gives it
+   your scope, and reaches your instance through the `lab-pdi` sign-in,
+   which is why the instance must be awake.
+
+</details>
 
 ✅ It ends with `Application created successfully.`
 
@@ -1279,6 +1397,22 @@ git add .gitignore README.md
 git commit -m "chore: initial scaffold"
 ```
 
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `head -1 .gitignore`: Prints the first line of `.gitignore`, so you can
+   see it's the kit's allow list: git ignores every file it doesn't name.
+2. `echo 'FAKE_TOKEN=do-not-use-0000' >> README.md`: Adds a fake secret to
+   the end of `README.md`: a line shaped like a token, to tempt the guard.
+   `>>` adds to the file; it doesn't replace what's there.
+3. `git add .gitignore README.md`: Stages the two files: marks them to go
+   into the next commit.
+4. `git commit -m "chore: initial scaffold"`: Tries to save the staged files
+   as your repo's first commit. Before git makes it, the guard, git's
+   pre-commit hook, reads every line being added, and should refuse the
+   commit because of the token.
+
+</details>
+
 ✅ The first line printed is `# Allowlist .gitignore (prove-it). Nothing is tracked unless admitted below.` The commit is **blocked**, with a line
 starting `BLOCKED: README.md has`. The REVOKE lines under it are expected:
 the token is fake.
@@ -1294,6 +1428,20 @@ git update-ref -d HEAD
 cp ~/projects/prove-it-kit/hooks/pre-commit-guard.sh .git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git update-ref -d HEAD`: Undoes the commit that went through. It's the
+   repo's only commit, so the repo goes back to having none, and your files,
+   and what's staged, stay as they are.
+2. `cp …/pre-commit-guard.sh .git/hooks/pre-commit`: Copies the kit's guard
+   to where git looks for a pre-commit hook: a script git runs before every
+   commit in this repo, and that can refuse it.
+3. `chmod +x .git/hooks/pre-commit`: Marks the guard as a program you can
+   run. git skips a hook that isn't marked that way, so the guard would
+   never run.
+
+</details>
 
 Run the four lines above again. Blocked now? That's a real catch: log it
 with the line below. Still not? Push nothing, and tell your instructor.
@@ -1313,6 +1461,20 @@ echo "# HR Case Router" > README.md
 git add README.md
 git commit -m "chore: initial scaffold"
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `echo "# HR Case Router" > README.md`: Writes `README.md` again as the
+   single line `# HR Case Router`, which takes the fake token out. `>`
+   replaces everything that was in the file.
+2. `git add README.md`: Stages the clean `README.md` again, so the commit
+   takes this version, not the one with the token. `.gitignore` is still
+   staged from the try that was blocked.
+3. `git commit -m "chore: initial scaffold"`: Saves the two files as your
+   repo's first commit, on `main`. The guard checks it again, and this time
+   finds nothing to stop.
+
+</details>
 
 ✅ Git prints `[main (root-commit) …] chore: initial scaffold`. Done this
 before? Then `git log --oneline` shows that one commit: go on.
@@ -1421,6 +1583,25 @@ git add -n .
 grep -n -i 'service-now' CLAUDE.md
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router/app`: Goes into your app's folder, so the
+   lines below work on your app's repo.
+2. `mkdir -p .prove-it && echo … > .prove-it/patterns`: Makes a `.prove-it`
+   folder and writes your instance's name into its `patterns` file. The
+   guard then blocks any commit that adds a line naming your instance. The
+   allow list doesn't name `.prove-it`, so that file itself is never
+   committed.
+3. `git add -n .`: Lists every file git would stage from this folder,
+   without staging any. It shows exactly which files the allow list lets
+   in.
+4. `grep -n -i 'service-now' CLAUDE.md`: Looks for `service-now`, in upper
+   or lower case, in `CLAUDE.md`, and prints each line that has it, with its
+   line number. Nothing printed means `CLAUDE.md` holds no instance
+   address.
+
+</details>
+
 ✅ `git add` lists nothing but `.gitignore`, `CLAUDE.md`, `now.config.json`,
 `package.json`, `package-lock.json`, `tsconfig.json`, `now.dev.mjs`,
 `now.prebuild.mjs`, `.eslintrc` and files under `src/`. `grep` prints
@@ -1468,6 +1649,18 @@ Run git add . and commit on main as "chore: SDK project and CLAUDE.md".
 cd ~/projects/hr-case-router/app
 gh repo create hr-case-router --private --source . --remote=origin --push
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router/app`: Goes into your app's folder, the repo
+   you're about to put on GitHub.
+2. `gh repo create hr-case-router --private … --push`: Makes a new private
+   repo, `hr-case-router`, on your GitHub account, from
+   the folder you're in (`.`). It saves the repo's address in your local
+   repo as `origin`, git's name for the place you push to, and pushes your
+   two commits there.
+
+</details>
 
 ✅ 🌐 The address `gh` prints opens your repo, marked **Private**. That was
 the last commit straight to `main`.

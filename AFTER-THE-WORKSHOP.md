@@ -35,6 +35,19 @@ Then ⌨️ **Terminal**, in your window:
    node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
    ```
 
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `git -C ~/projects/hr-case-router-lab-guide pull`: Downloads the newest
+      version of this guide from GitHub into its folder,
+      `hr-case-router-lab-guide`. `-C` runs git as if you were inside that
+      folder, so you don't have to go there first.
+   2. `node …/merge-claude-settings.mjs`: Runs the lab's settings script. It
+      adds the lab's settings to Claude Code's settings file and keeps your
+      own. Running it again never overwrites the backup of your settings it
+      made the first time.
+
+   </details>
+
    ✅ It prints `Lab settings in place.`
 2. GitHub: run `gh auth status`. ✅ The account above `Active account: true`
    is the one you used for the lab. If not, switch to it:
@@ -51,6 +64,31 @@ Then ⌨️ **Terminal**, in your window:
    now-sdk auth --list
    ```
 
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `claude plugin marketplace add …`: Adds the kit's GitHub repo, at its
+      version `v0.1.4` (the part after `#`), as a plugin marketplace: a list
+      of plugins Claude Code can install.
+   2. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
+      `prove-it`, from the marketplace you just added. The name after `@` is
+      the marketplace's, and it's `prove-it` too. Claude Code then has it in
+      every folder.
+   3. `claude plugin install servicenow-sdk@claude-plugins-official`: Installs
+      ServiceNow's SDK plugin from `claude-plugins-official`, Anthropic's own
+      plugin marketplace. It teaches Claude to look things up in the SDK's
+      docs and to read records on your instance; those lookups never change
+      anything.
+   4. `now-sdk auth --add … --type basic --alias lab-pdi`: Saves a sign-in to
+      your instance on your computer, under the name `lab-pdi`. `basic` means
+      it signs in with a user name and password, which it asks you for. Every
+      `now-sdk` command in the lab names `lab-pdi`, so it always reaches this
+      instance. You run it yourself: the lab's settings never let Claude run
+      `now-sdk auth`, so your password never passes through Claude.
+   5. `now-sdk auth --list`: Lists the sign-ins the SDK has saved, so you can
+      see `lab-pdi` is there, with your instance's address and the user name.
+
+   </details>
+
    ✅ The list shows `[lab-pdi]`.
 4. Check nothing else is loaded, as Module 0 did:
 
@@ -62,6 +100,30 @@ Then ⌨️ **Terminal**, in your window:
    grep -c '"hooks"' ~/.claude/settings.json
    git config --get core.hooksPath
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router`: Goes into your workspace, so the checks
+      see what Claude sees when it starts there.
+   2. `claude plugin list`: Lists the plugins Claude Code has installed, and
+      whether each is enabled. A plugin adds skills, commands or hooks to
+      every session, so an extra one changes how Claude behaves in the lab.
+   3. `claude mcp list`: Lists the MCP servers Claude can use: tools outside
+      Claude Code, such as a connection to another app or service.
+   4. `ls -d …`: Looks for your own instruction files and folders: a
+      `CLAUDE.md` in your home folder, in `projects` or in `~/.claude`, and
+      your own skills, agents and commands. Claude reads these in every
+      session. `-d` lists each one by name, not what's inside it. `No such
+      file or directory` means it isn't there, which is what you want.
+   5. `grep -c '"hooks"' …`: Counts how often `"hooks"` appears in Claude
+      Code's settings file. Hooks are commands Claude runs by itself at set
+      moments. `0` means you have none.
+   6. `git config --get core.hooksPath`: Prints the folder git takes its
+      commit hooks from, if one is set for every repo on your computer.
+      Nothing printed means each repo uses its own hooks, so your repo's guard
+      will run.
+
+   </details>
 
    ✅ The only enabled plugins are `prove-it@prove-it`, with
    `Version: 0.1.4`, and `servicenow-sdk@claude-plugins-official`, at any
@@ -145,6 +207,18 @@ cd ~/projects/hr-case-router/app
 gh issue list --state open --limit 5000 --json number,title,body --jq '.[] | select(.body | contains("prove-it:key=grade.merge.")) | "#\(.number) \(.title)"'
 ```
 
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router/app`: Goes into your app's folder, so the
+   lines below work on your app's repo.
+2. `gh issue list --state open --limit 5000 …`: Lists the open issues the
+   MERGE preview grade filed, one line each, as `#` and the number, then the
+   title. `--limit 5000` lists them all, not only the first 30, and `--jq`
+   keeps only the issues whose text holds that grade's marker,
+   `prove-it:key=grade.merge.`.
+
+</details>
+
 Close each one it lists, then run the list again. ✅ It prints nothing.
 
 ```
@@ -185,6 +259,18 @@ for g in merge install demo handoff; do
   echo "$g: $(gh issue list --state open --label "gate:$g" --limit 5000 --json labels --jq '[.[] | select(all(.labels[]; .name != "register"))] | length')"
 done
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `for g in merge install demo handoff; do`: Repeats the next line once for
+   each gate, in order, with `$g` standing for the gate's name.
+2. `echo "$g: …`: Counts the open issues labelled for that gate, such as
+   `gate:merge`, leaving out any also labelled `register`, and prints the
+   gate's name and the count, such as `merge: 3`. `--limit 5000` counts them
+   all, not only the first 30.
+3. `done`: Ends the part that repeats.
+
+</details>
 
 ✅ The next gate is the first count not at 0, whatever `BACKLOG.md` says.
 `merge`, `install` and `demo` all at 0? Go to Part 2, unless a Part 4 step
@@ -328,6 +414,19 @@ it first: two apps would seed two copies of the article.
 git switch main && git pull && git status --short
 now-sdk build && now-sdk install --auth lab-pdi
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git switch main && git pull && git status --short`: Switches to `main`,
+   downloads what's been merged into it on GitHub, then lists every file
+   that's changed but not committed. `&&` runs each command only if the one
+   before it worked. Nothing listed means your folder holds exactly what's on
+   `main`.
+2. `now-sdk build && now-sdk install --auth lab-pdi`: Builds your app from its
+   source, then installs it on your instance, with the SDK sign-in you saved
+   as `lab-pdi`. `&&` installs only if the build worked.
+
+</details>
 
 ✅ Status prints nothing, the build says `Build completed successfully`, and
 the install ends with a link to your app.
@@ -544,6 +643,17 @@ case.
    gh issue list --state open --label "gate:install"
    gh issue list --state open --label "gate:demo"
    ```
+
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `gh issue list --state open --label "gate:install"`: Lists your app's
+      open stories for the INSTALL gate: the ones a check on your instance
+      proves.
+   2. `gh issue list --state open --label "gate:demo"`: Lists the open stories
+      for the DEMO gate: the ones proved by watching the app work live.
+
+   </details>
+
 2. For each one, read its **Done when** (`gh issue view <n>`). Did step 5
    just prove it? ⌨️ Close it, filling in the date, the user, what you saw,
    and `partner`, or `builder as PM` if you worked alone:
@@ -641,6 +751,18 @@ Repeat steps 2 to 6 until `merge`, `install` and `demo` print 0.
    git branch --show-current
    git status --short
    ```
+
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `cat ~/projects/hr-case-router/LOG.md`: Prints your log file, where
+      Claude just wrote the name of each test that got through, under "Got
+      through".
+   2. `git branch --show-current`: Prints the branch your app's repo is on, to
+      show Claude switched back to `main` after running the tests.
+   3. `git status --short`: Lists every file that's changed but not committed.
+      Nothing listed means Claude changed nothing in your app.
+
+   </details>
 
    ✅ The names of the tests that got through, or the heading alone; then
    `main`, and no files listed. Nothing got through? Go to step 3.
@@ -882,6 +1004,18 @@ Once `merge`, `install` and `demo` print 0. Guess the score first.
    git switch main && git pull && git status --short
    ```
 
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router/app`: Goes into your app's folder, so the
+      lines below work on your app's repo.
+   2. `git switch main && git pull && git status --short`: Switches to `main`,
+      downloads what's been merged into it on GitHub, then lists every file
+      that's changed but not committed. `&&` runs each command only if the one
+      before it worked. Nothing listed means your folder holds exactly what's
+      on `main`.
+
+   </details>
+
    ✅ It prints nothing.
 2. 🤖 **Claude**, in a fresh session, with no session open: type this,
    alone. Don't explain the app to it: it reads the repo cold.
@@ -990,6 +1124,18 @@ tell your instructor.
    git diff .gitignore
    ```
 
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `grep -c VERIFY RUNBOOK.md`: Counts the lines of the runbook that still
+      hold `VERIFY`, the handoff's mark for something it couldn't check.
+      Claude just replaced each one with a real screen, so none should be
+      left.
+   2. `git diff .gitignore`: Shows what the handoff changed in `.gitignore`,
+      your repo's allow list: git tracks only the files it admits. The handoff
+      should add two lines, which admit `RUNBOOK.md` and `HANDOFF.md`.
+
+   </details>
+
    ✅ `grep` prints `0`, and the diff adds only `+!/RUNBOOK.md` and
    `+!/HANDOFF.md`.
 4. 🤖 **Claude:** paste this, then `go`:
@@ -1070,6 +1216,18 @@ No partner? Plant it yourself, and write `builder`: it's a weaker drill.
    cd ~/projects/hr-case-router/app && git switch main && git pull
    CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 claude
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router/app && git switch main && git pull`: Goes
+      into your app's repo, moves it to `main`, and downloads what's been
+      merged on GitHub, so Claude reads the runbook as it was merged. `&&`
+      runs each command only if the one before it worked.
+   2. `CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 claude`: Starts Claude with its
+      memory of earlier sessions off, for this run only. It then diagnoses
+      from the runbook alone, as someone new to the app would.
+
+   </details>
 
    </div>
 
@@ -1210,6 +1368,17 @@ Only on READY.
    git log -1 --format=%h -- RUNBOOK.md
    gh issue list --state open --label "gate:handoff"
    ```
+
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `git log -1 --format=%h -- RUNBOOK.md`: Prints the short code, or hash,
+      of the last commit that changed the runbook: the frozen runbook the
+      drill used. It's the `<hash>` in the comment you close each story with.
+   2. `gh issue list --state open --label "gate:handoff"`: Lists the open
+      stories for the HANDOFF gate: the ones the drill and the verdict prove.
+
+   </details>
+
 2. For each story whose **Done when** your evidence meets
    (`gh issue view <n>`), close it. `<hash>` is what the first line
    printed. Write `Partner-planted` if your partner planted the drill, or

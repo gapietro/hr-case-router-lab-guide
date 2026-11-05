@@ -30,6 +30,18 @@ cd ~/projects/hr-case-router/app
 git switch main && git pull && git status --short
 ```
 
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `cd ~/projects/hr-case-router/app`: Goes into your app's repo, the `app`
+   folder in your workspace.
+2. `git switch main && git pull && git status --short`: Switches to `main`,
+   downloads what's been merged into it on GitHub, then lists every file
+   that's changed but not committed. `&&` runs each command only if the one
+   before it worked. Nothing listed means your folder holds exactly what's on
+   `main`.
+
+</details>
+
 ✅ `git status --short` prints nothing.
 
 <details><summary>🛟 It lists GRADE.md, .gitignore or BACKLOG.md</summary>
@@ -40,6 +52,16 @@ A grade was cut short. Put those back:
 git restore .gitignore BACKLOG.md
 rm -f GRADE.md
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git restore .gitignore BACKLOG.md`: Puts `.gitignore` and `BACKLOG.md`
+   back as they were at your last commit, dropping what the cut-short grade
+   changed in them.
+2. `rm -f GRADE.md`: Deletes the unfinished `GRADE.md`. `-f` means no
+   complaint if it's already gone.
+
+</details>
 
 Then run `git status --short` again.
 
@@ -55,6 +77,21 @@ git add -A
 git commit -m "chore: leftovers"
 git switch main
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git switch -c chore/leftovers`: Makes a new branch, `chore/leftovers`, and
+   switches to it. The changed files come with you, so they never land on
+   `main`.
+2. `git add -A`: Marks every change git lists, new files included, to go into
+   the next commit.
+3. `git commit -m "chore: leftovers"`: Saves those changes as one commit on
+   `chore/leftovers`, with the message after `-m`. Your repo's guard checks it
+   for secrets first.
+4. `git switch main`: Switches back to `main`, which now has none of the
+   leftovers, so the grade starts from a clean `main`.
+
+</details>
 
 Then run `git status --short` again.
 

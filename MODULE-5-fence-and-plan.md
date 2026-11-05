@@ -32,6 +32,19 @@ the plan's review find something real?
    claude
    ```
 
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router/app`: Goes into your app's repo, the `app`
+      folder in your workspace.
+   2. `cp ../../hr-case-router-lab-guide/files/platform-rules.test.ts src/`:
+      Copies the lab's platform-rules test into your app's `src` folder.
+      `../..` goes up two folders, to `projects`. The test checks rules P1 to
+      P5, P12 and P13 each time `npm test` runs, and nobody edits it.
+   3. `claude`: Starts Claude Code in the folder you're in. This window is now
+      the Claude window.
+
+   </details>
+
    </div>
 
    <div data-show="surface:desktop">
@@ -42,6 +55,17 @@ the plan's review find something real?
    cd ~/projects/hr-case-router/app
    cp ../../hr-case-router-lab-guide/files/platform-rules.test.ts src/
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router/app`: Goes into your app's repo, the `app`
+      folder in your workspace.
+   2. `cp ../../hr-case-router-lab-guide/files/platform-rules.test.ts src/`:
+      Copies the lab's platform-rules test into your app's `src` folder.
+      `../..` goes up two folders, to `projects`. The test checks rules P1 to
+      P5, P12 and P13 each time `npm test` runs, and nobody edits it.
+
+   </details>
 
    Then 🤖 start a new session
    (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
@@ -92,6 +116,23 @@ the plan's review find something real?
    grep -nE 'OPEN|VERIFY' docs/DESIGN-HRCaseRouter.md
    grep -n -i 'service-now' docs/*.md
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router/app`: Goes into your app's repo, the `app`
+      folder in your workspace.
+   2. `git diff --stat main HEAD`: Lists the files that differ between `main`
+      and the branch you're on, `docs/plan`, with how many lines each changed.
+      You expect four: the three design files and the platform-rules test.
+   3. `grep -nE 'OPEN|VERIFY' docs/DESIGN-HRCaseRouter.md`: Prints each line
+      of your design record that still says OPEN or VERIFY, with its line
+      number: a question nobody has settled yet. `-E` lets `|` mean "or".
+   4. `grep -n -i 'service-now' docs/*.md`: Prints each line of the files in
+      `docs` that names a `service-now` address, such as your instance's. The
+      repo's guard treats your instance's name as a secret, so it stays out of
+      the repo. `-i` matches upper and lower case.
+
+   </details>
 
 ✅ Claude answers three yeses. The last line of `git diff` starts
 `4 files changed`, and both `grep` lines print nothing.
@@ -195,6 +236,21 @@ git diff .gitignore
 gh issue list --state open --label "gate:merge" --limit 5000 --json labels --jq '[.[] | select(all(.labels[]; .name != "register"))] | length'
 head -5 BACKLOG.md
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git diff .gitignore`: Shows what the plan changed in `.gitignore`, your
+   repo's allow list: git tracks only the files it admits. The plan should add
+   one line, which admits `BACKLOG.md`.
+2. `gh issue list --state open --label "gate:merge" …`: Counts the open GitHub
+   issues that hold up the MERGE gate, leaving out register issues, which
+   block no gate. `--json` and `--jq` pick out each issue's labels and count
+   the issues without `register`; `--limit 5000` makes sure none is missed.
+3. `head -5 BACKLOG.md`: Prints the first five lines of `BACKLOG.md`, the
+   plan's list of your stories. The number after **Blockers:** should be the
+   same count.
+
+</details>
 
 ✅ The diff adds just `+!/BACKLOG.md`. The number `gh` prints matches the
 one after **Blockers:** in the last line. That's your first honest count,

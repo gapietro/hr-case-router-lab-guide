@@ -90,6 +90,18 @@ git switch -C test/break-access
 git branch -f main origin/main
 ```
 
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git switch -C test/break-access`: Makes the branch `test/break-access`
+   where you are now, so it holds the test commits Claude made on `main`, and
+   switches to it. `-C` resets the branch to here if it already exists.
+2. `git branch -f main origin/main`: Moves `main` back to where it is on
+   GitHub, before those commits: `origin/main` is git's record of GitHub's
+   `main`, and `-f` lets git move a branch that already exists. The commits
+   stay on `test/break-access`.
+
+</details>
+
 </details>
 
 ### 3. Compare with yours

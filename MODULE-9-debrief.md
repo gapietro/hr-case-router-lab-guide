@@ -24,6 +24,19 @@ grep -c '|' ~/projects/hr-case-router/catches.md
 grep '|' ~/projects/hr-case-router/catches.md | cut -d'|' -f2 | tr -d ' ' | sort | uniq -c
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `grep -c '|' ~/projects/hr-case-router/catches.md`: Counts the lines in
+   `catches.md` that hold a `|`. Each catch is one such line, so this is your
+   total.
+2. `grep '|' … | cut -d'|' -f2 | tr -d ' ' | sort | uniq -c`: Takes the same
+   lines and keeps only what caught each one, the part between the first and
+   second `|`, such as `design`. It then removes the spaces, sorts them, and
+   counts each kind. Each `|` between two commands passes what the first
+   prints to the next.
+
+</details>
+
 ✅ Your total, then a count per kind, such as `3 design`.
 
 ### 2. Add yours to the room's board
@@ -136,6 +149,22 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --resto
 node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
 ```
 
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `git -C ~/projects/hr-case-router-lab-guide pull`: Downloads the newest
+   version of this guide from GitHub into its folder,
+   `hr-case-router-lab-guide`. `-C` runs git as if you were inside that
+   folder, so you don't have to go there first.
+2. `node …/merge-claude-settings.mjs --restore`: Runs the lab's settings
+   script to put your own Claude Code settings back: your backup exactly, or,
+   if you had no settings file before the lab, yours without the lab's
+   settings.
+3. `node …/merge-claude-settings.mjs --check`: Runs the same script to check,
+   changing nothing, whether the lab's settings are in place. Now you want
+   them gone.
+
+</details>
+
 ✅ The last command says `Lab settings NOT in place:`. That's what you want.
 
 ### 7. Switch back on what Module 0 switched off
@@ -151,6 +180,23 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
      [ -e "$f.off" ] && [ ! -e "$f" ] && mv "$f.off" "$f"
    done
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `for f in ~/CLAUDE.md … \`: Starts a loop over your own instruction
+      files and folders, the ones Claude reads in every session. The `\` at
+      the end carries the list on to the next line.
+   2. `~/.claude/skills ~/.claude/agents ~/.claude/commands; do`: Ends the
+      list with your own skills, agents and commands folders. `do` starts what
+      runs for each one, which the loop calls `$f`.
+   3. `[ -e "$f.off" ] && [ ! -e "$f" ] && mv "$f.off" "$f"`: Renames the
+      `.off` copy back to its own name, but only if the `.off` one is there
+      and nothing has taken the name since. Anything you never switched off is
+      left alone.
+   4. `done`: Ends the loop.
+
+   </details>
+
 2. Each plugin `plugins-before-lab.txt` shows `✔ enabled`:
    `claude plugin enable <name>`, with its line after `❯` as `<name>`.
 3. Only if `mcp-before-lab.json` is there, add its servers back:
@@ -163,6 +209,29 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
        "--scope", "user", n, JSON.stringify(c)], { stdio: "inherit" })'
    claude mcp list
    ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router-notes`: Goes into your notes folder,
+      `hr-case-router-notes`, where Module 0 saved how things were before the
+      lab. Claude never reads it.
+   2. `node -e '`: Runs the next three lines as a small Node.js script. The
+      `'` here and the one at the end of the script's last line wrap it.
+   3. `for (const [n, c] of Object.entries(require("./mcp-before-lab.json")))`:
+      Reads `mcp-before-lab.json`, the MCP servers you had before the lab, and
+      goes through them one by one: `n` is a server's name and `c` its
+      settings.
+   4. `require("child_process").execFileSync("claude", ["mcp", "add-json",`:
+      Runs `claude mcp add-json` for each server, which adds a server to
+      Claude Code from its settings.
+   5. `"--scope", "user", n, JSON.stringify(c)], { stdio: "inherit" })'`: Ends
+      that command: `--scope user` adds the server in every folder, as it was
+      before, under its name and with its settings. `stdio: "inherit"` shows
+      you what `claude` prints.
+   6. `claude mcp list`: Lists the MCP servers Claude Code can use now, so you
+      can see yours are back.
+
+   </details>
 
    ✅ It lists your servers again.
 4. `cat ~/projects/hr-case-router-notes/gh-before-lab.txt`. Is the account
@@ -181,6 +250,30 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
      while read -r k v; do git config --global --add "$k" "$v"; done
    git config --global --get-regexp '^credential\.' | diff - git-credentials-before-lab.txt && echo same
    ```
+
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router-notes`: Goes into your notes folder,
+      `hr-case-router-notes`, where Module 0 saved how things were before the
+      lab. Claude never reads it.
+   2. `for h in …; do`: Starts a loop over GitHub's two web addresses, GitHub
+      itself and its gists: Module 0's `gh auth setup-git` set how git signs
+      in to both.
+   3. `git config --global --unset-all "credential.$h.helper"`: Removes every
+      sign-in helper git has for that address, `gh` included, from the
+      settings for every repo on this computer.
+   4. `done`: Ends the loop.
+   5. `grep -E '^credential\.… git-credentials-before-lab.txt |`: Picks out,
+      from the file Module 0 saved, the sign-in helpers git had for GitHub
+      before the lab. The `|` at the end passes them to the next line.
+   6. `while read -r k v; do git config --global --add "$k" "$v"; done`: Adds
+      each of those helpers back, one at a time: `k` is the setting's name and
+      `v` its value.
+   7. `git config --global --get-regexp '^credential\.' | diff - … && echo same`:
+      Compares how git signs in now with the saved file. `diff` prints each
+      line that differs; when none does, `echo same` prints `same`.
+
+   </details>
 
    ✅ It prints `same`.
 
@@ -215,6 +308,22 @@ now-sdk auth --delete lab-pdi
 rm -f ~/projects/hr-case-router-notes/mcp-before-lab.json
 claude plugin list
 ```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `claude plugin uninstall prove-it@prove-it`: Uninstalls the lab's kit, the
+   `prove-it` plugin, from Claude Code.
+2. `claude plugin marketplace remove prove-it`: Removes the kit's marketplace:
+   the list of plugins Claude Code installed the kit from.
+3. `now-sdk auth --delete lab-pdi`: Deletes the SDK's saved sign-in to your
+   lab instance, `lab-pdi`, from this computer.
+4. `rm -f ~/projects/hr-case-router-notes/mcp-before-lab.json`: Deletes the
+   copy of your MCP server settings that Module 0 saved, as it can hold keys.
+   `-f` means no complaint if the file isn't there.
+5. `claude plugin list`: Lists the plugins Claude Code still has, so you can
+   see the kit is gone.
+
+</details>
 
 ✅ The list no longer shows `prove-it@prove-it`.
 
