@@ -31,11 +31,16 @@ agent from code, in the background; a user to run as, `hr.router`, with
 the roles an AI user needs; tools that really run as that user; and a run
 aimed at the app's log row, so the case never lands in the prompt.
 
+Two more are about the HR case table: whether its assignment rules fill
+an empty group, and whether the app may stop lists changing the group.
+
 Claude states each one confidently. It counts only when rows on your
-instance show it, and two, the tools' user and the log row, only a run can
-show: "couldn't check" is the honest mark for now. Research should also
-find ServiceNow's own "Predict service and transfer HR Cases" workflow. It
-stays off: it always transfers, with none of the checks.
+instance show it. Four only a run or the install can show: the tools'
+user, the log row, an assignment rule filling an empty group, and the
+app's list rule. "Couldn't check" is the honest mark for those for now.
+Research should also find ServiceNow's own "Predict service and transfer
+HR Cases" workflow. It stays off: it always transfers, with none of the
+checks.
 
 </details>
 
@@ -121,10 +126,12 @@ proves" or "From code on Australia Patch 5". For each, say how sure you are and 
 records only. Design nothing, run nothing, write no file.
 ```
 
-✅ Six facts: Transfer Case (`ReclassifyCaseTransfer`), the start in the
-background (`AiAgentRuntimeUtil`), the tools as `hr.router`, its roles,
-P12, and ServiceNow's "Predict service and transfer HR Cases" workflow,
-inactive and not used: your design record says why. Compare with your guess.
+✅ Eight facts: Transfer Case (`ReclassifyCaseTransfer`); the start in the
+background (`AiAgentRuntimeUtil`); the tools as `hr.router`; its roles;
+P12; the assignment rules for an empty group; the `list_edit` rule on the
+assignment group; and ServiceNow's "Predict service and transfer HR Cases"
+workflow, inactive and not used: your design record says why. Compare with
+your guess.
 
 ### 2. Have Claude check them on your instance
 
@@ -210,6 +217,10 @@ Look it up by hand and tell Claude, such as
 - `hr.router`: `sys_user.list`, open it, and read its **Roles** and
   **Groups** tabs.
 - HR services and their groups: `sn_hr_core_service.list`.
+- Assignment rules: `sysrule_assignment.list`, **Table** starting
+  `sn_hr`.
+- List-edit rules: `sys_security_acl.list`, **Name** starting
+  `sn_hr_core_case`, **Operation** `list_edit`.
 <!-- DRY RUN: confirm the AiAgentRuntimeUtil line; which lists show the
 Predict workflow and the ReclassifyCaseTransfer method? -->
 

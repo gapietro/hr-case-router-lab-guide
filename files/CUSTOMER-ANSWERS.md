@@ -25,6 +25,7 @@ From the customer's HRSD product manager, after reviewing your PRD.
 | Incidents, Virtual Agent, and machine learning on past tickets | Not in release 1: keep them under Out of scope. Incidents come next, once HR has proved out. |
 | A triage queue, a misroute reason, an alert for a case with no owner, or offering only groups with access | Not needed for this version. A case the agent can't route keeps its note, and the warning before save is enough for release 1. |
 | A case a fulfiller transfers by hand | Not routed again: the fulfiller chose its service, and a run would undo their move. |
+| A transferred case whose new group fails the checks | It keeps the group its new service gave it, with a work note naming it, and a person picks the group. Accepted. |
 | Changing a run log entry | No role can change or delete an entry. An admin running a background script still could: accepted, our admins are trusted. |
 | What an agent run reads | As well as the case's short description, description, HR service and group and the article, the routing rules and the HR security policies that capability 4's checks need. Accepted. |
 | A case created while the router is stopped | It waits, and is routed or gets its note when the router runs again. |

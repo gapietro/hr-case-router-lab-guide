@@ -541,14 +541,19 @@ request:" lines.
    `Lab HR Team` service, in `Lab HR Team`, with `hr.router`'s note. As
    admin, ✅ the run log has one row for C: the transfer started no run.
    The old case's **Transferred to** opens the new one.
-5. **A restricted service.** As `owner.demo`, open
+5. **A restricted service, and one with no rule.** As `owner.demo`, open
    `<SCOPE>_routing_rule.list`, open the `Lab HR Team` row, tick **Never
    send to AI**, and click **Update**. On case A, click **Reroute**. ✅ It
    says the service never goes to AI. A has a new work note saying so, and
    its **Assignment group** hasn't changed. As `owner.demo`, untick it. As
    admin, open the row, right-click its header bar, and choose
    **History** > **List**. ✅ Both changes to **Never send to AI**, each by
-   `owner.demo`, with its time.
+   `owner.demo`, with its time. As `hr.demo`, create case D on any other
+   HR service, one not in the routing rules. ✅ D has a work note saying
+   its HR service has no active routing rule, so the router left it where
+   it is, and its **Assignment group** hasn't changed. No note? Click
+   **Reroute** on D once. As admin, ✅ D's row in `<SCOPE>_run_log.list`
+   is `refused`.
    <!-- DRY RUN: does History > List show the rule's audit? Can owner.demo
    see it without admin? -->
 6. **Below the threshold.** As admin, set `<SCOPE>.confidence_threshold`
@@ -560,21 +565,25 @@ request:" lines.
    routing guidance**, click **Checkout**, add one word, and click
    **Publish**. Note its **Version**. On case A, click **Reroute**. As
    `owner.demo`, ✅ the newest `<SCOPE>_run_detail.list` row shows that
-   version, and `hr.demo` as who started the run. As admin, restore it:
-   **Checkout**, remove the word, **Publish**.
+   version, `hr.demo` as who started the run, and `reroute` as what
+   started it. As admin, restore it: **Checkout**, remove the word,
+   **Publish**.
 8. **The caps.** As admin, set `<SCOPE>.runs_per_hour` to `1`. On case A,
    click **Reroute**. ✅ It says the routing cap was reached: this hour's
    runs count. A has a new work note saying so, and its **Assignment
    group** hasn't changed. As admin, set it back to `10`.
 9. **A hand-picked group.** On case A, set **Assignment group** to
    `Lab Locked Out`. ✅ A warning, before it saves. Don't save it: reload
-   the page.
+   the page. Open `sn_hr_core_case.list`. Double-click A's **Short
+   description** cell, press **Esc**, then double-click its **Assignment
+   group** cell. ✅ Its Short description cell opens; its Assignment group
+   cell doesn't: the group changes only on the form, with its warning.
 10. **Overrides.** On C's new case, set **Assignment group** to any other
     group, and click **Update**. As admin, open
     `<SCOPE>_run_override.list`. ✅ Rows by `hr.demo` for A (checks 3 and
     6) and C's new case; none by `hr.router`. In
     `<SCOPE>_run_detail.list`, ✅ A's first run shows its service and group
-    from before the move.
+    from before the move, and `new_case` as what started it.
     <!-- DRY RUN: name the override and detail columns once they exist;
     DECISIONS doesn't fix them. -->
 11. **The log.** As `owner.demo`, open `<SCOPE>_run_log.list`. ✅ A row
@@ -584,12 +593,11 @@ request:" lines.
     `How do I run the weekly numbers job by hand for this week? Change
     nothing.` Run it as admin. As `owner.demo`, open
     `<SCOPE>_weekly_numbers.list`. ✅ This week's row has runs started,
-    counting today's; routed; left with a note; overridden, a number, never
-    `not tracked`; moves stopped by each check; the share routed; and cases
-    assigned to a group that can't open them.
-    <!-- DRY RUN: can the job be run by hand for the current week? Can
-    owner.demo read _weekly_numbers? DECISIONS' access row doesn't name
-    it. -->
+    counting today's; routed; transferred, group unchecked; left with a
+    note; overridden, a number, never `not tracked`; moves stopped by each
+    check; the share routed; and cases assigned to a group that can't open
+    them.
+    <!-- DRY RUN: can the job be run by hand for the current week? -->
 
 Then end impersonation.
 
