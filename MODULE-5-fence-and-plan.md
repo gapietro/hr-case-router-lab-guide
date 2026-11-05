@@ -19,6 +19,15 @@ the plan's review find something real?
 
 ### 1. Bring the design in, and check it's ready
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Until now your design files lived in the workspace. The build works from your
+app's repo, so they move into it on a branch, with the lab's platform-rules
+test. A last check then makes sure the record can be built as written, with
+nothing left open, before it becomes a plan.
+
+</details>
+
 1. Bring in the lab's platform-rules test (P1-P5, P12, P13), the second
    line, and start Claude in your app:
 
@@ -86,6 +95,16 @@ the plan's review find something real?
    that commit succeeds, delete the three originals.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude makes a branch, docs/plan, copies the design record, the LLD and
+   `DECISIONS.md` unchanged into the repo's `docs` folder, and commits them
+   with the platform-rules test. It deletes the workspace originals only after
+   the commit succeeds, so nothing is lost if the commit is refused, and the
+   repo copy becomes the only live one.
+
+   </details>
+
    <details><summary>🛟 It says BLOCKED: … look like a secret</summary>
 
    The files name your instance, and the guard stopped the commit.
@@ -97,6 +116,15 @@ the plan's review find something real?
    commit again, and delete the three originals only after it succeeds.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude swaps your instance's host name in the `docs` files for the
+   placeholder INSTANCE_HOST, so the repo's guard no longer sees a secret.
+   Then it commits again, and deletes the originals only once that commit
+   succeeds.
+
+   </details>
+
    </details>
 
 3. 🤖 **Claude:**
@@ -107,6 +135,16 @@ the plan's review find something real?
    written; no term needs a ruling before code can be written; no term
    number clashes with an id in docs/LLD-HRCaseRouter.md.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude reads the design record and answers yes or no to three readiness
+   checks: every gate in §7 can pass as written, no term needs a ruling before
+   code, and no term number clashes with an id in the LLD. It changes nothing.
+   A no found here is fixed with a signed amendment before the plan is
+   drafted.
+
+   </details>
 
 4. ⌨️ **Terminal**, in your window:
 
@@ -147,6 +185,14 @@ dev123456.service-now.com, with the text INSTANCE_HOST. Commit only
 those files on docs/plan.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude swaps your instance's host name in the `docs` files for the placeholder
+INSTANCE_HOST, and commits only those files on docs/plan. The repo's guard
+treats your instance's name as a secret, so it stays out of the repo.
+
+</details>
+
 Then run sub-step 4 again.
 
 </details>
@@ -163,6 +209,16 @@ says OPEN or VERIFY. For each problem, give me 3 or 4 numbered answers,
 your recommended one first.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+This tells the design challenge, in amend mode, what to change: each no from
+the readiness check, and anything marked OPEN or VERIFY. For each problem
+Claude offers 3 or 4 numbered answers, its recommendation first, then reads
+the changed terms back for you. Your confirmation signs the amendment, as it
+signed the record.
+
+</details>
+
 Reply with a number, usually `1`. At the read-back, type `Confirmed.`
 alone. When it asks your name and role, type them, such as
 `Sam Lee, developer`. Then type
@@ -172,6 +228,15 @@ sub-steps 3 and 4 again.
 </details>
 
 ### 2. Preview the plan, and answer five questions
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The build plan turns your design's terms and gates into GitHub stories, but
+shows a preview first and files nothing. Your five answers are a check that
+can really fail: a story nobody can check, or a term no story tests, is caught
+here, before it becomes work.
+
+</details>
 
 🤖 **Claude:** type this, alone:
 
@@ -223,6 +288,16 @@ alone. When it asks your name and role, type them, such as
 
 ### 3. File the plan, and take your first count
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Approving lets the kit file the stories, milestones and labels on GitHub; a
+dry run first shows how many writes that means without making any. The kit
+also writes `BACKLOG.md`, a snapshot of your stories with the next gate's
+blocker count at the top. Checking that count against GitHub's own list shows
+the two agree before you rely on it.
+
+</details>
+
 🤖 **Claude:** type `approve`. When it asks "Dry run first (recommended),
 or apply now?", type `Dry run first.`, which files nothing; read the count
 of writes; then type `apply`.
@@ -258,6 +333,14 @@ and the lab's only progress number.
 
 ### 4. Close the session, and ship the plan
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Every change reaches `main` through a pull request. Shipping the plan now
+rehearses the loop each story will use: commit, pull request, review, merge,
+with a note of where you stopped.
+
+</details>
+
 1. 🤖 **Claude:**
 
    ```
@@ -266,6 +349,14 @@ and the lab's only progress number.
    commit .gitignore, BACKLOG.md and SESSION-NOTE.md as "docs: backlog and
    first session note".
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude writes down where the work stands in SESSION-NOTE.md, so a fresh
+   session, or you after a break, can pick up exactly here. It then commits
+   the note with `.gitignore` and `BACKLOG.md` on docs/plan.
+
+   </details>
 
 2. 🤖 **Claude:** paste this, type `go` after it, and press **Enter**. A
    register issue is a watch-list issue that blocks no gate.
@@ -279,6 +370,15 @@ and the lab's only progress number.
    pull, and give me the pull request link and one line per finding: fixed,
    filed, or not a problem and why.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude pushes your branch, opens a pull request, reviews its own diff
+   without checking it out, fixes real findings once and files the rest, then
+   merges when the build and tests pass. You get the pull request link and one
+   line per finding.
+
+   </details>
 
    It pushes, opens a pull request, runs `/code-review`, and merges, in a
    few minutes.
@@ -313,6 +413,14 @@ tell your instructor.
 
 ### 5. Log it
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Claude reviews the plan's pull request before it merges. Logging only what
+that review really found, and what got fixed, keeps the record Module 9 counts
+honest.
+
+</details>
+
 🤖 **Claude:**
 
 ```
@@ -325,6 +433,14 @@ design, guard, test, review, partner, grade, drill. Show me the lines,
 and when I reply keep, append them to
 ~/projects/hr-case-router/catches.md.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts this module's catches as one line each, in the catch log's
+format, from what happened in this session. You read them and reply `keep`, or
+say what to change. Module 9 counts them.
+
+</details>
 
 Confirm a `review` line for each real finding on the plan's pull request
 that got fixed, then reply `keep`.

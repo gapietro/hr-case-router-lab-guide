@@ -18,6 +18,14 @@ Nothing gets built: the consult advises how to build each capability.
 
 ### 1. 🔮 Guess first
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A guess made before you read the advice gives you something to measure it
+against. Where the consult and your instinct differ is exactly where to look
+hardest when you review it.
+
+</details>
+
 Which capabilities need AI? What may the agent change? Keep your guess
 in your head: step 5 checks it.
 
@@ -37,6 +45,15 @@ decides.
 </details>
 
 ### 2. Start the consult
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The consult is a kit skill: it reads your accepted PRD in `brief` and advises
+how to build each capability, with its cost and how ready it is. It first
+restates the brief in a few bullets and stops, so you can correct its
+understanding before it writes anything.
+
+</details>
 
 <div data-show="surface:terminal">
 
@@ -93,6 +110,15 @@ folder…** under the prompt box. Press **Ctrl+O** until the view is
 
 ### 3. Answer its questions, then confirm
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your answers set the ground rules for the advice: the size of the release, the
+platform, the three ways to build something, and a rule to flag what it hasn't
+checked rather than guess. Confirming tells the consult its restatement of the
+brief is right; until then it writes nothing.
+
+</details>
+
 Don't type `confirmed` yet. 🤖 **Claude:** paste this, for all its questions:
 
 ```
@@ -103,10 +129,29 @@ Anything only the customer can answer, record as an open decision; never
 guess. Yes, raise any other open decisions you find.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+This answers all the consult's questions in one message: one release, built on
+AI Agent Studio, and three ways to build each capability, an agent, a tool or
+plain code. It tells Claude to run no commands, to mark anything it hasn't
+checked VERIFY, and to record anything only the customer can answer as an open
+decision, never a guess. Claude replies with its restatement of the brief, for
+you to check against the PRD.
+
+</details>
+
 It restates the brief. Read each bullet against the PRD; if one's wrong,
 tell it which and why. Then type `confirmed` alone.
 
 ### 4. Let it run
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The consult now works on its own and writes its advice to `CONSULT.md`.
+Listing the workspace when it's done shows it kept to its job: advice only, no
+code and no design.
+
+</details>
 
 It runs for several minutes and writes only `CONSULT.md`. Don't run the
 `/prove-it:design-challenge` it suggests: research comes first. If that
@@ -138,6 +183,15 @@ your instructor.
 
 ### 5. Read it like a reviewer
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+`CONSULT.md` is advice, and you're the one who'll have to defend it to the
+customer. Reading it row by row is where you spot a choice you disagree with,
+or a requirement that can't start yet. Its VERIFY marks become your research
+list in the next module.
+
+</details>
+
 ✏️ **Editor:** open `hr-case-router/CONSULT.md`. Don't change it.
 
 ✅ A row per capability: agent (AI that plans its steps), tool or plain
@@ -149,6 +203,14 @@ not **ready**. Compare with your guess.
 
 ### 6. Push back
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Every change to an HR case needs one clear owner, so it can be tested and
+traced later. Asking for each write's owner by name makes the consult commit
+to one, whatever it said the first time.
+
+</details>
+
 🤖 **Claude:** ask this, whatever the consult said:
 
 ```
@@ -157,10 +219,28 @@ never writes; a deterministic tool or plain code does. If that changes
 your advice, update CONSULT.md and show me the change.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude names, for each write to a case in the Data and ownership section, the
+tool or plain code that owns it, so the agent owns none. If that changes its
+advice, it updates `CONSULT.md` and shows you exactly what changed. The lab
+asks this every time: a write must be predictable and testable, which plain
+code is and an agent isn't.
+
+</details>
+
 ✅ Each write to a case has a tool or plain code as its owner, and it
 shows any change to `CONSULT.md`.
 
 ### 7. Log it
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A catch here is a gap in the PRD that the consult brought to light and that
+changed a decision. Logging it now, while you remember it, adds to the record
+Module 9 counts.
+
+</details>
 
 🤖 **Claude:**
 
@@ -174,6 +254,14 @@ design, guard, test, review, partner, grade, drill. Show me the lines,
 and when I reply keep, append them to
 ~/projects/hr-case-router/catches.md.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts this module's catches as one line each, in the catch log's
+format, from what happened in this session. You read them and reply `keep`, or
+say what to change. Module 9 counts them.
+
+</details>
 
 Keep a line for each gap in the PRD the consult found, before step 6 or
 after it. Your own answers and corrections aren't catches. Then reply

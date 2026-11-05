@@ -19,6 +19,13 @@ that you didn't?
 
 ### 1. 🔮 Guess the grade
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Guessing first shows how far your own view of the build is from a stranger's.
+You compare the two once `GRADE.md` is written.
+
+</details>
+
 Guess first: the score out of 100, and the one weakness it will find.
 
 <details><summary>🔮 The answer, once you've guessed</summary>
@@ -37,6 +44,14 @@ can cite.
 </details>
 
 ### 2. Start from a clean main
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The grade judges what's in your repo, so leftover files would be graded too,
+or get in its way. A clean, up-to-date `main` means it scores exactly what's
+merged.
+
+</details>
 
 ⌨️ **Terminal**, in your window:
 
@@ -114,6 +129,15 @@ Then run `git status --short` again.
 
 ### 3. Run the grade, in a fresh session
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A fresh session has never seen your app, like a new owner. The grade runs the
+build, the tests and a secrets scan itself, and scores a fixed rubric of 18
+rows, so the score rests on what it ran, not on what anyone says. `merge`
+names the milestone it grades: the MERGE gate.
+
+</details>
+
 <div data-show="surface:terminal">
 
 **In the terminal:** ⌨️ in the Claude window, after `/exit` if Claude is
@@ -148,6 +172,14 @@ Don't explain the app to it: it reads the repo cold. If it says
 
 ### 4. Answer its questions
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The grade asks before it touches your instance, and installs only to the alias
+you name, so it never reaches the wrong one. Naming `lab-pdi` lets it prove
+the install itself; with no alias, that row is unverified.
+
+</details>
+
 - **"Which alias should I install to?"** Reply `lab-pdi`. Using your
   instructor's finished build since 14:30? Reply `no alias` instead, so
   your instance keeps one app: the install is then **unverified**.
@@ -173,6 +205,14 @@ An earlier grade left it. 🤖 **Claude:** type
 </details>
 
 ### 5. Read it like a stranger would
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The reasons matter more than the score: the unverified rows and the caps show
+what a new owner couldn't check, or would trip over. Reading them tells you
+what's left before someone else could own this app.
+
+</details>
 
 ✏️ **Editor:** in `GRADE.md`, compare the score and the main weakness with
 your guess. Then read each **unverified** row under **Rubric**, and each row
@@ -212,6 +252,14 @@ test. Note what differs, for the debrief. Step 6 files whatever it found.
 
 ### 6. File its findings
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A finding that isn't filed gets forgotten. Filing puts each one on the board,
+as a story with a gate or as a register issue, and rewrites `BACKLOG.md` to
+match. The dry run shows what would be written before anything is.
+
+</details>
+
 1. 🤖 **Claude:** it shows its findings as proposed stories, then stops.
    Lint isn't a criterion here, and gate-clear passes once the rest close,
    so type this:
@@ -228,6 +276,13 @@ test. Note what differs, for the debrief. Step 6 files whatever it found.
    ✅ Below the header, the only line starting with `+` is `+!/GRADE.md`.
 
 ### 7. Merge the grade
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The grade goes to `main` through a pull request and a review, like any change,
+so the next person to open the repo sees the score and what limits it.
+
+</details>
 
 1. 🤖 **Claude:**
 
@@ -246,6 +301,15 @@ test. Note what differs, for the debrief. Step 6 files whatever it found.
    pull, and give me the pull request link and one line per finding: fixed,
    filed, or not a problem and why.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude pushes your branch, opens a pull request, reviews its own
+   diff without checking it out, fixes real findings once and files the rest,
+   then merges when the build and tests pass. You get the pull request link
+   and one line per finding.
+
+   </details>
 
 🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
 ⌨️ **Terminal**, in your window: `git status --short` ✅ prints nothing.

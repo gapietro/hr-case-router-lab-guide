@@ -20,6 +20,16 @@ apply another?
 
 ### 1. Start the challenge
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The design challenge is a kit skill. It questions your design one question at
+a time, then writes the agreed design record: the contract the build plan and
+every later check rely on. Pointing it at your PRD, LLD and decisions means it
+asks only what those files leave open, instead of having you retype the
+design.
+
+</details>
+
 <div data-show="surface:terminal">
 
 **In the terminal:** ⌨️ start Claude in your workspace:
@@ -72,7 +82,27 @@ question to confirm it. Then gates. Nothing is OPEN: anything waiting on
 the customer is out of scope for this record.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+This confirms the feature name, HRCaseRouter, and tells the challenge your
+design is already written down: the PRD, your LLD and `DECISIONS.md`. For each
+question, Claude offers 3 or 4 numbered answers drawn from those files, with
+their own answer first; if none answers it, it says so and puts its
+recommendation first. On failure, security, cost and boundaries it asks only
+what your files leave open, then moves on to gates, and anything still waiting
+on the customer stays out of this record.
+
+</details>
+
 ### 2. Answer each question
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Each answer you pick becomes a rule in the signed design, so it should come
+from your files, not a fresh idea. Picking your files' own answer keeps the
+design record and the LLD saying the same thing.
+
+</details>
 
 🤖 When it asks you to describe your design, paste this:
 
@@ -108,6 +138,15 @@ Ask me about each topic or question you skipped, one at a time, first.
 
 ### 3. Check the read-back
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The read-back is the exact list of terms the record will hold, each a numbered
+rule a test or a person can check. A decision missing here is missing from the
+contract, so this is the moment to make the list complete. Nothing is written
+until you agree to a list.
+
+</details>
+
 It lists every term and asks `Confirm these N terms, or correct any.`
 Whatever it lists, 🤖 paste this:
 
@@ -122,6 +161,17 @@ apply_route changes a case; every table the app writes has one owner.
 Replace any weaker term that says the same. Nothing in the record says
 OPEN or VERIFY. Read the terms back again.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+This asks Claude to add a term for each decision in `DECISIONS.md` it left
+out, and to cover the seed data, the run states, the build order, the
+out-of-scope rows as boundaries, capability 4's checks, and one owner for each
+table the app writes. It replaces weaker terms that say the same thing and
+leaves nothing marked OPEN or VERIFY. Then it reads the whole list back again,
+so you check the new version before anything is written.
+
+</details>
 
 ✅ ✏️ Check the new read-back against
 `hr-case-router/docs/DECISIONS.md`, open in VS Code:
@@ -148,11 +198,28 @@ or MISSING. Add a term for each MISSING row, then read the terms back
 again.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude lists each row of `DECISIONS.md`, from How a run starts to Caps and
+retention, beside the number of the term that covers it, or MISSING. It adds a
+term for every MISSING row and reads the whole list back, so you can see at a
+glance that nothing was dropped.
+
+</details>
+
 Still wrong after that? Tell your instructor.
 
 </details>
 
 ### 4. Confirm
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your confirmation is the signature: Claude writes the record with exactly the
+terms you agreed, and puts your name on its approval. From then on, changing a
+term needs a written, signed amendment.
+
+</details>
 
 🤖 **Claude:** At the read-back, type `Confirmed.` alone. When it asks your
 name and role, type them, such as `Sam Lee, developer`.
@@ -164,6 +231,13 @@ It may then offer `/prove-it:build-plan`, or moving the record into the
 repo. Not yet: that's Module 5.
 
 ### 5. Log it
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Logging the design's catches now records what questioning it was worth, before
+any code exists. Module 9 counts them.
+
+</details>
 
 🤖 **Claude:**
 
@@ -177,6 +251,14 @@ design, guard, test, review, partner, grade, drill. Show me the lines,
 and when I reply keep, append them to
 ~/projects/hr-case-router/catches.md.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts this module's catches as one line each, in the catch log's
+format, from what happened in this session. You read them and reply `keep`, or
+say what to change. Module 9 counts them.
+
+</details>
 
 Confirm a `design` line for each question none of your files answered, or
 where your LLD and DECISIONS disagreed, with the term it added. Terms you

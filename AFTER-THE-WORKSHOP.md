@@ -178,6 +178,16 @@ Then ⌨️ **Terminal**, in your window:
 
 ### 1. Review the LLD
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The LLD is the technical plan Claude drafted from your research, before the
+design challenge. The build follows the signed design record, not the LLD, so
+this check finds any place the two now disagree before more code is built on
+it. A gap caught here costs a design change; caught after the build, it costs
+rework too.
+
+</details>
+
 ✏️ **Editor:** open `hr-case-router/app/docs/LLD-HRCaseRouter.md`, and
 check:
 
@@ -198,6 +208,16 @@ it, carry on: the design record wins. If it doesn't, change the design in
 the LLD.
 
 ### 2. Rule the register, then find the next gate
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+While it built, Claude filed a register issue each time the design record
+didn't settle something, instead of stopping to ask you. Only you can rule on
+those: a design change, a close with a reason, or a note for a later release.
+The gate count then shows where the work really stands, so the next batch aims
+at the right gate.
+
+</details>
 
 ⌨️ **Terminal**, in your window: first, list what Module 8's preview grade
 filed. The DEMO grade files again anything that still fails.
@@ -278,6 +298,17 @@ sent you here: then do steps 3 to 6, and go back to that step.
 
 ### 3. Build with sub-agents
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+This is the day's build loop, run until every story that code alone can build
+is done, the override rule included. A sub-agent is a helper Claude starts for
+one job: each builds one story in its own git worktree, a separate copy of the
+repo, so stories don't trip over each other. Claude merges them one at a time,
+re-testing each, and your checks afterwards make sure every merge left its
+proof: a failing run, a passing run and a review.
+
+</details>
+
 🤖 **Claude**, in a fresh session: paste the session open, then `go`.
 ✅ Three lines.
 
@@ -320,6 +351,19 @@ request, failing/passing counts, findings and actions, outcome and why,
 skipped ones too) and the next gate's live count of open stories.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude plans the open stories, the override rule included, and hands each to a
+sub-agent that builds it tests first on its own branch, opens a pull request
+with its five bullets, both test runs and its review findings, then stops.
+Claude merges those pull requests one at a time, re-testing on top of main
+each time, and skips any story that needs instance work, a design change or a
+business decision. A story that fails three times is left open, and the batch
+goes on. It asks you nothing until no story code alone can build is left, then
+shows a table of every story and the next gate's count of open stories.
+
+</details>
+
 ✅ It ends with its table. 🌐 **Browser:** in your repo's **Pull requests**
 tab, click **Closed**, and open each one it merged. ✅ Each has five
 bullets, a failing run then a passing run, and its review findings. In its
@@ -348,6 +392,15 @@ description, click the issue number after **Closes**. ✅ The issue shows
   batch's open pull requests first, and don't retry a story that stopped
   after three failures. Then carry on with this:
   ```
+
+  <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+  Claude treats merged pull requests as done, finishes the batch's open ones
+  first, and leaves alone any story that already stopped after three failures.
+  The batch prompt you paste after it then carries on with the stories that
+  are left. You get the same table at the end as a batch that never stopped.
+
+  </details>
 
 </details>
 
@@ -404,6 +457,17 @@ File each gap as a story, labelled for the gate it holds up.
 </details>
 
 ### 4. Build and install
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Until now the code was tested only on your computer; installing puts it on
+your instance, where the platform runs it for real. An install also resets
+things quietly: the on switch goes back to off, the dispatcher can come up
+without its schedule, and the seed article can come back as a second copy. The
+checks after it catch each of those, and the warm-up cases take the first-run
+failures, so the live checks start clean.
+
+</details>
 
 Installed your instructor's finished build on the day? Ask them to remove
 it first: two apps would seed two copies of the article.
@@ -502,6 +566,16 @@ table (P8).
    paste, and click **Run script**. ✅ It prints `Closed` lines, any number.
 
 ### 5. Check it live
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Unit tests prove your code; only the instance proves the platform's part: who
+can see and change what, the schedule, and the agent's own choices. Each check
+is done as an ordinary HR fulfiller, not an admin, because an admin skips the
+access rules a real user meets. Every result is read from the case, its work
+notes and the run log, never from what the agent says it did.
+
+</details>
 
 You act as `hr.demo` unless a line says otherwise. Do checks 1 to 3 with
 your partner watching: that's the DEMO gate's demo. Working alone? You
@@ -644,6 +718,15 @@ the Lab Locked Out case">, labelled for the gate it holds up. Show me
 first; file after I say yes. No code.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts a GitHub issue that describes the defect in plain words,
+labelled for the gate it holds up, and shows it to you before filing. It
+writes no code. Filing it first puts the defect on the board, so its fix goes
+through the same tests and review as any story.
+
+</details>
+
 Reply `yes`. Then paste this, with the issue's number for `<n>`, then `go`:
 
 ```
@@ -655,12 +738,33 @@ real findings once, file design findings as register issues, merge when
 npm test and now-sdk build pass, and give me one line per finding.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude restates the issue in five bullets, then fixes it the way you built
+your first story: tests first on a new branch, seen failing, then code until
+they pass and the build is clean. Then it ships it: a review, real findings
+fixed, design findings filed as register issues, and a merge once the tests
+and the build pass. You get one line per finding, and the fix is on `main`,
+ready to install.
+
+</details>
+
 When it's merged, install again (step 4), and do the check again on a new
 case.
 
 </details>
 
 ### 6. Close what's proved, then the session
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A story closes only on evidence, and the closing comment records who saw what,
+when, and who watched, so a grade can trust it. Logging catches keeps a
+running record of what the method found that tests alone missed. The session
+note, merged to main, lets a fresh session, or you after a break, pick up
+exactly where you stopped.
+
+</details>
 
 1. ⌨️ **Terminal**, in your window: list the stories a live check proves:
 
@@ -703,6 +807,14 @@ case.
    ~/projects/hr-case-router/catches.md.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude drafts this module's catches as one line each, in the catch log's
+   format, from what happened in this session. You read them and reply `keep`,
+   or say what to change. They go in your catch log.
+
+   </details>
+
    Reply `keep`, or say what to change. ⌨️ In your window:
 
    ```
@@ -718,6 +830,13 @@ case.
    SESSION-NOTE.md, on a new branch docs/session-note.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude writes down where the work stands in SESSION-NOTE.md, so a fresh
+   session, or you after a break, can pick up exactly here.
+
+   </details>
+
    ✏️ **Editor:** read `app/SESSION-NOTE.md`. Anything it calls proven that
    you haven't seen live? Tell Claude to correct it.
 5. 🤖 **Claude:** paste this, then `go`:
@@ -731,6 +850,15 @@ case.
    pull, and give me the pull request link and one line per finding: fixed,
    filed, or not a problem and why.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude pushes your branch, opens a pull request, reviews its own
+   diff without checking it out, fixes real findings once and files the rest,
+   then merges when the build and tests pass. You get the pull request link
+   and one line per finding.
+
+   </details>
 
    🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
    ⌨️ **Terminal**, in your window: `git status --short` ✅ prints nothing.
@@ -759,6 +887,15 @@ Repeat steps 2 to 6 until `merge`, `install` and `demo` print 0.
 
 ### 1. Run Module 7, and list what got through
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+In Module 7, a fresh reviewer wrote tests that try to break the one rule that
+must hold, without reading how you built it. A test of theirs that fails on
+main is an attack that got through: your own tests missed it. Writing the
+names in LOG.md gives you a list to fix, one at a time.
+
+</details>
+
 1. Haven't done [Module 7](MODULE-7-break-it.md) yet? Do it now: it leaves
    a fresh reviewer's tests on the branch `test/break-access`.
 2. 🤖 **Claude**, in a fresh session: paste this, then `go`:
@@ -769,6 +906,16 @@ Repeat steps 2 to 6 until `merge`, `install` and `demo` print 0.
    ~/projects/hr-case-router/LOG.md. Then switch back to main. Change
    nothing else.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude runs the reviewer's tests from Module 7 against your app and writes
+   the name of each failing test under Got through in LOG.md. Then it switches
+   back to main and changes nothing else. Each name is an attack your own
+   tests missed.
+
+   </details>
+
 3. ⌨️ **Terminal**, in your window:
 
    ```
@@ -794,6 +941,16 @@ Repeat steps 2 to 6 until `merge`, `install` and `demo` print 0.
 
 ### 2. Fix what got through
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Each attack that got through becomes an issue first, so the fix has a record
+and a gate. The fix is built tests first: the test that failed now passes and
+stays in the suite, so the same hole can't quietly open again. A fix that
+changes what the app should do goes through the design first, because the
+design record is what the code and the grade are checked against.
+
+</details>
+
 Once for each name in `LOG.md`, and for each attack that gets through in
 step 3:
 
@@ -809,6 +966,16 @@ step 3:
    copying that test. Show me first; file after I say yes. No code.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude drafts a GitHub issue that describes what got through in plain
+   words, labelled for the gate it holds up, and shows it to you before
+   filing. If it's one of the reviewer's tests, the issue says the fix starts
+   from a copy of it. It writes no code. Filing it first puts the defect on
+   the board, so its fix goes through the same tests and review as any story.
+
+   </details>
+
    Reply `yes`.
 3. 🤖 **Claude:** paste this, with the issue's number for `<n>`, then
    `go`:
@@ -822,12 +989,32 @@ step 3:
    npm test and now-sdk build pass, and give me one line per finding.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude restates the issue in five bullets, then fixes it the way you built
+   your first story: tests first on a new branch, seen failing, then code
+   until they pass and the build is clean. Then it ships it: a review, real
+   findings fixed, design findings filed as register issues, and a merge once
+   the tests and the build pass. You get one line per finding, and the fix is
+   on `main`, ready to install.
+
+   </details>
+
    ✅ You see its test fail, then the whole suite pass. It gives you the
    pull request link, merged, and one line per finding.
 4. Install it and check it live: Part 1, steps 4 and 5, for what the fix
    changed.
 
 ### 3. Swap seats
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your tests only try what you and the reviewer thought of. A person who didn't
+build the app attacks it the way a real user might, and you do the same for
+theirs. Whatever gets through is a catch, fixed the same way as the reviewer's
+tests.
+
+</details>
 
 1. Your partner, at your computer, impersonating `hr.demo`, tries to break
    Module 7's rule, then ends the impersonation. **Don't help.**
@@ -871,6 +1058,14 @@ step 3:
    ~/projects/hr-case-router/catches.md.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude drafts this module's catches as one line each, in the catch log's
+   format, from what happened in this session. You read them and reply `keep`,
+   or say what to change. They go in your catch log.
+
+   </details>
+
    Reply `keep`, or say what to change. ⌨️ In your window:
 
    ```
@@ -882,6 +1077,16 @@ step 3:
 ## Part 3 — Change the design, when a fix needs it
 
 ### 1. Amend the design
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The design record is the contract the build and the grades follow, so a fix
+that changes what the app should do starts there, never in code. The amend
+asks what changed and why, reads every added or changed term back to you, and
+writes them only once you confirm. Each change gets a signed row in the drift
+log, so anyone can see why the record moved.
+
+</details>
 
 1. ⌨️ **Terminal**, in your window:
 
@@ -904,6 +1109,15 @@ step 3:
    <one line: the term that lets it happen, or what no term covers>.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   This is your answer when the amend asks what changed and why: the gap, and
+   the term that lets it happen or the fact that no term covers it. Claude
+   then proposes the new or changed terms and reads them back to you before
+   writing anything.
+
+   </details>
+
    Any other question: answer in one line, or type `yes` to take its
    recommendation.
 4. At the read-back, type `Confirmed.` alone. When it asks your name and
@@ -920,6 +1134,15 @@ whole list back again.
 row for each added or changed term, signed with your name.
 
 ### 2. File the new stories
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The plan turns each new or changed term into a story on GitHub, with its gate
+and a done-when you can check. Reusing the existing keys stops it filing a
+second copy of stories already on the board. The dry run lists every write
+before anything is filed.
+
+</details>
 
 1. 🤖 **Claude:** type `/clear`. Then paste this, then `go`:
 
@@ -958,6 +1181,15 @@ then do the dry run again.
 
 ### 3. Merge it, then build it
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The amended record is merged first, so every story built after it follows the
+same contract. Each new story is then built tests first and installed like any
+other. If a register issue started the change, closing it records that the
+design now rules on it.
+
+</details>
+
 1. 🤖 **Claude:** paste this, with a few words for `<what it's for>`, such
    as `service-change`, then `go`:
 
@@ -972,6 +1204,15 @@ then do the dry run again.
    pull, and give me the pull request link and one line per finding: fixed,
    filed, or not a problem and why.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude commits the amended design record and BACKLOG.md on a new branch,
+   opens a pull request, reviews its own diff without checking it out, fixes
+   real findings once and files the rest, then merges when the build and tests
+   pass. You get the pull request link and one line per finding.
+
+   </details>
 
    🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
 
@@ -1005,6 +1246,17 @@ tell your instructor.
    npm test and now-sdk build pass, and give me one line per finding.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude restates the story in five bullets, then builds it the way you built
+   your first story: tests first on a new branch, seen failing, then code
+   until they pass and the build is clean. Then it ships it: a review, real
+   findings fixed, design findings filed as register issues, and a merge once
+   the tests and the build pass. You get one line per finding, and the fix is
+   on `main`, ready to install.
+
+   </details>
+
    ✅ You see its tests fail, then pass. The pull request is merged.
 3. Install it and check it live: Part 1, steps 4 and 5.
 4. Came from a register issue? ⌨️ Close it:
@@ -1019,6 +1271,16 @@ tell your instructor.
 ## Part 4 — Grade and hand over
 
 ### 1. 🔮 Grade at DEMO
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A grade is a cold read: a fresh session scores the repo against a fixed rubric
+of 18 criteria, runs the build, the tests and the install itself, and shows
+its evidence for each. This one counts as the DEMO milestone's grade, because
+the milestone is reached. Whatever it finds comes back as proposed stories, so
+every finding becomes work on the board.
+
+</details>
 
 Once `merge`, `install` and `demo` print 0. Guess the score first.
 
@@ -1116,6 +1378,16 @@ The grade's install is the exception in CLAUDE.md: yes, install to lab-pdi.
    filed, or not a problem and why.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude commits the grade's files, GRADE.md, .gitignore and BACKLOG.md, on a
+   new branch, opens a pull request, reviews its own diff without checking it
+   out, fixes real findings once and files the rest, then merges when the
+   build and tests pass. You get the pull request link and one line per
+   finding.
+
+   </details>
+
    🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
 
 <details><summary>🛟 It stops and asks you something anyway</summary>
@@ -1141,6 +1413,16 @@ tell your instructor.
 
 ### 2. Freeze a runbook
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The runbook is what someone who didn't build the app uses to install, check
+and fix it, without reading the code. Each VERIFY marks a place the handoff
+couldn't check; replacing it with a real screen gives the drill somewhere to
+look. Freezing it before the drill keeps the test fair: the drill tests the
+runbook as written, not one patched while you watch.
+
+</details>
+
 1. 🤖 **Claude**, in a fresh session: type this, alone:
 
    ```
@@ -1155,6 +1437,16 @@ tell your instructor.
    such as sys_properties.list, and point every index row only at platform
    screens and the app's own lists and logs. Show me each change first.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude replaces each VERIFY, a place the handoff couldn't check, with the
+   screen to open, named by its table list, and points every index row only at
+   platform screens and the app's own lists and logs. It shows you each change
+   before writing it, so you can catch a wrong screen. The drill reads only
+   this runbook, so every row must lead somewhere real.
+
+   </details>
 
    Read the changes. Type `yes`, or say what to correct.
 3. ⌨️ **Terminal**, in your window:
@@ -1192,6 +1484,15 @@ tell your instructor.
    filed, or not a problem and why.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude commits RUNBOOK.md, the HANDOFF.md draft and .gitignore on a new
+   branch, opens a pull request, reviews its own diff without checking it out,
+   fixes real findings once and files the rest, then merges when the build and
+   tests pass. You get the pull request link and one line per finding.
+
+   </details>
+
    🌐 **Browser:** open the pull request link. ✅ It shows **Merged**. From
    now on the runbook is **frozen**: don't change it until the drill ends,
    except with the fix in step 4.
@@ -1215,6 +1516,17 @@ tell your instructor.
 </details>
 
 ### 3. Your partner plants
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Someone else breaks one thing on your instance, so you don't know the cause,
+just as a support person wouldn't. Claude proposes a realistic failure and
+writes a drill card with how to plant it and how to undo it; your partner
+makes the change by hand, never Claude. Closing the planting session means the
+Claude that diagnoses never saw what was planted: all it gets is the symptom
+report.
+
+</details>
 
 Whoever plants doesn't diagnose. 🤖 **Claude:**
 <span data-show="surface:terminal">**In the terminal:** type `/exit`.</span>
@@ -1245,6 +1557,16 @@ Then leave the room. Your partner, at your computer:
 No partner? Plant it yourself, and write `builder`: it's a weaker drill.
 
 ### 4. Diagnose from the runbook
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+This is the drill: Claude starts with no memory of earlier sessions, reads
+only the runbook, and asks you to look at the screens it names. It refuses to
+start if it has already seen the drill card or the design record, since a
+diagnosis from those would prove nothing. If it finds the planted cause, the
+runbook works for someone new; if not, the gap is in the runbook, not in you.
+
+</details>
 
 1. Update your app, and start Claude with no memory of earlier sessions:
 
@@ -1311,6 +1633,15 @@ The runbook has a gap. Leave the failure planted.
    "<the symptom report>", the cause <the planted cause>, and where to
    look <the screen that shows it, as a table list>. Change nothing else.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude adds one row to the runbook's Symptom → cause index, from the
+   symptom, cause and screen you give it, and changes nothing else. The next
+   diagnosis, in a fresh session, then has a row that leads to the cause.
+
+   </details>
+
 2. ⌨️ In your window: `grep -c VERIFY RUNBOOK.md`. ✅ It prints `0`.
 3. 🤖 **Claude:** type `Commit RUNBOOK.md on a new branch docs/runbook-fix.`
    Then paste step 2's last paste from its `ship it.` line on, then `go`.
@@ -1320,6 +1651,16 @@ The runbook has a gap. Leave the failure planted.
 </details>
 
 ### 5. Restore, then verdict
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Undoing the failure, and checking the router works again, leaves the app as it
+was before the drill. The verdict then reads every drill card and diagnosis,
+and checks three things: every record the app ships has a reason in the
+design, the runbook is complete, and the drill found the planted cause. It
+says READY only if all three pass, and names each blocking item if not.
+
+</details>
 
 1. 🌐 Your partner restores the failure as the card says, checks the
    before state, and fills in **Restored on**. Alone? You restore it.
@@ -1351,6 +1692,15 @@ The runbook has a gap. Leave the failure planted.
    pull, and give me the pull request link and one line per finding: fixed,
    filed, or not a problem and why.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude commits HANDOFF.md, with its verdict, on a new branch, opens a pull
+   request, reviews its own diff without checking it out, fixes real findings
+   once and files the rest, then merges when the build and tests pass. You get
+   the pull request link and one line per finding.
+
+   </details>
 
    🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
 
@@ -1400,6 +1750,14 @@ sub-step 3.
 
 ### 6. Close HANDOFF stories
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The HANDOFF stories are proved by the drill, not by a test or a live check.
+The commit hash in each closing comment ties it to the exact runbook the drill
+used. The HANDOFF grade then finds those stories closed, each with its proof.
+
+</details>
+
 Only on READY.
 
 1. ⌨️ **Terminal**, in your window:
@@ -1432,6 +1790,15 @@ Only on READY.
 meet yet. Any left? Build them with Part 1, from step 2, then come back.
 
 ### 7. Grade at HANDOFF
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+This is the final grade, and the one the move to production checks. It runs
+from a fresh session on main, installs the app itself, and scores the same
+fixed rubric, now with the HANDOFF stories closed. Its GRADE.md is the one you
+show when the app moves on.
+
+</details>
 
 1. ⌨️ **Terminal**, in your window:
 
@@ -1512,6 +1879,16 @@ The grade's install is the exception in CLAUDE.md: yes, install to lab-pdi.
    filed, or not a problem and why.
    ```
 
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude commits the grade's files, GRADE.md, .gitignore and BACKLOG.md, on a
+   new branch, opens a pull request, reviews its own diff without checking it
+   out, fixes real findings once and files the rest, then merges when the
+   build and tests pass. You get the pull request link and one line per
+   finding.
+
+   </details>
+
    🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
 
 <details><summary>🛟 It stops and asks you something anyway</summary>
@@ -1536,6 +1913,15 @@ tell your instructor.
 
 ### 8. Log it
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The catch log is the evidence of what the method found that passing tests
+alone would have missed. Keeping a line only once its fix is merged means the
+log counts real fixes, not open worries. This round's lines cover the grades
+and the drill.
+
+</details>
+
 🤖 **Claude:** paste this, then `go`:
 
 ```
@@ -1548,6 +1934,14 @@ design, guard, test, review, partner, grade, drill. Show me the lines,
 and when I reply keep, append them to
 ~/projects/hr-case-router/catches.md.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts this module's catches as one line each, in the catch log's
+format, from what happened in this session. You read them and reply `keep`, or
+say what to change. They go in your catch log.
+
+</details>
 
 Keep a line only once its fix is merged. Reply `keep`, or say what to
 change. ⌨️ In your window:

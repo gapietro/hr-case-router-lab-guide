@@ -22,6 +22,15 @@ it got back?
 
 ### 1. 🔮 Guess, then ask Claude for the facts
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The design can only use what the platform really offers. Here Claude lists the
+platform facts the lab's decisions rest on, with how sure it is of each and
+how to check it, before anything is checked. Your guess gives you a list of
+your own to compare with it.
+
+</details>
+
 Guess first: what does an agent that moves HR cases need from the platform?
 
 <details><summary>🔮 The answer, once you've guessed</summary>
@@ -126,6 +135,16 @@ proves" or "From code on Australia Patch 5". For each, say how sure you are and 
 records only. Design nothing, run nothing, write no file.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude reads the PRD, the consult, the customer's technical notes and the
+lab's decisions, and lists, as numbered facts, every decision that depends on
+research or a first live check. For each, it says how sure it is and how to
+check it by reading records only. It designs, runs and writes nothing: this is
+the list your instance checks next.
+
+</details>
+
 ✅ Eight facts: Transfer Case (`ReclassifyCaseTransfer`); the start in the
 background (`AiAgentRuntimeUtil`); the tools as `hr.router`; its roles;
 P12; the assignment rules for an empty group; the `list_edit` rule on the
@@ -134,6 +153,14 @@ workflow, inactive and not used: your design record says why. Compare with
 your guess.
 
 ### 2. Have Claude check them on your instance
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A fact counts only when your own instance shows it. Claude runs read-only
+queries and prints the raw rows under each mark, so you judge the evidence
+yourself rather than trust its summary.
+
+</details>
 
 The SDK plugin's `now-sdk query` reads records through your `lab-pdi`
 login and changes nothing.
@@ -151,6 +178,17 @@ my instance). Something this app will create, or only a run can show,
 finds nothing yet: mark it couldn't check, never contradicted. Change
 nothing on the instance and write no file.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude checks each fact with one or two read-only `now-sdk query` commands on
+your `lab-pdi` login, and changes nothing. For every fact you get the command
+exactly as run, the raw rows it returned, and one mark: confirmed,
+contradicted, couldn't check, or production only. Anything the app hasn't
+created yet, or only a run can show, is marked couldn't check, so an honest
+gap isn't reported as a contradiction.
+
+</details>
 
 If it asks permission for `now-sdk query --auth lab-pdi`, choose **Yes**
 (not "Yes, and don't ask again").
@@ -187,6 +225,15 @@ no functions of your own. Per fact, gs.print its number, the table and
 query, and the raw values, never "confirmed".
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude writes a background script, `research-script.js`, that only reads
+records, using a short list of allowed calls. For each fact it prints the
+table, the query and the raw values, never a verdict. You check the script,
+then run it yourself as admin, so the evidence still comes from your instance.
+
+</details>
+
 ✏️ **Editor:** open `hr-case-router/research-script.js`. ✅ Every word just
 before a `(`, and after `new`, is one of those calls; `if (`, `while (` and
 `for (` are fine too. Another word? Don't run it: type
@@ -204,6 +251,14 @@ Mark each fact from the script output below only: confirmed,
 contradicted, couldn't check, or production only (in inputs/TECH-NOTES.md,
 not on my instance). Facts it didn't look up are not checked.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude marks each fact only from the script output you pasted: confirmed,
+contradicted, couldn't check, or production only. A fact the script didn't
+look up stays unchecked, so no mark rests on Claude's memory.
+
+</details>
 
 </details>
 
@@ -228,6 +283,15 @@ Predict workflow and the ReclassifyCaseTransfer method? -->
 
 ### 3. Audit each mark against its rows
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A mark is Claude's reading of the rows, and a reading can be wrong even when
+the query ran fine. Checking each mark against its own rows is the audit. The
+facts, with your corrections, go into a file the LLD copies as it is, so the
+design rests only on what you've checked.
+
+</details>
+
 For each fact, read the rows first, then the mark. A query in the wrong
 table, no rows marked `confirmed`, or a row that says the opposite: correct
 it in one line, such as
@@ -244,11 +308,30 @@ final mark, mine where I corrected yours, the command exactly as run, and
 the rows that back it. Those go into the LLD as they are.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude writes every fact it checked to `research-facts.md`: its final mark,
+yours wherever you corrected it, the command exactly as run, and the rows
+behind it. That file is the research record. The LLD copies it as it is, so
+what you audited is what the design relies on.
+
+</details>
+
 ✏️ **Editor:** open `hr-case-router/research-facts.md`. ✅ Every fact you
 checked is there, each mark matches its rows, and each `production only`
 fact cites TECH-NOTES.md, not a query. Compare with your guess in step 1.
 
 ### 4. Draft the LLD
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The low-level design (LLD) says how each part of the app will be built, and
+ties each part to a PRD capability. Drafting it only from the PRD, the
+consult, your audited facts and the decisions already made means nothing in it
+is new or unbacked. A summary first lets you fix its shape before the file is
+written.
+
+</details>
 
 ✏️ **Editor:** skim `hr-case-router/docs/DECISIONS.md`: the technical
 decisions already made, so the build has nothing left to ask.
@@ -265,6 +348,16 @@ invent a business decision. Show me a summary first; don't write the file
 yet.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts `docs/LLD-HRCaseRouter.md` from the template, citing a PRD
+capability for every component and taking every decision in `DECISIONS.md` as
+made. Section 7 copies your audited facts, and anything still undecided goes
+in section 8 as D1, D2 and so on, never an invented business decision. It
+shows you a summary first and writes the file only when you say so.
+
+</details>
+
 ✅ The summary covers capabilities 1 to 9: 3 is the agent and its three
 tools, and only `apply_route` moves a case, after 4's checks; 7's override
 rule comes after the workshop; section 7 is `research-facts.md`.
@@ -275,6 +368,14 @@ tools table has `read_case`, `apply_route` and `leave_note`, and section 7
 matches `research-facts.md`, fact for fact.
 
 ### 5. Log it
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A wrong platform fact found now costs one line; found at install time, it
+costs rework. Logging this module's catches adds to the record Module 9
+counts.
+
+</details>
 
 🤖 **Claude:**
 
@@ -288,6 +389,14 @@ design, guard, test, review, partner, grade, drill. Show me the lines,
 and when I reply keep, append them to
 ~/projects/hr-case-router/catches.md.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts this module's catches as one line each, in the catch log's
+format, from what happened in this session. You read them and reply `keep`, or
+say what to change. Module 9 counts them.
+
+</details>
 
 Keep a `research` line for each claim your instance contradicted or didn't
 support, if it changed your LLD, and for each mark you corrected against

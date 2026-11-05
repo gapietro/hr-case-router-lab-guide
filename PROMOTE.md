@@ -97,6 +97,15 @@ pull, and give me the pull request link and one line per finding: fixed,
 filed, or not a problem and why.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude pushes your branch, opens a pull request, reviews its own
+diff without checking it out, fixes real findings once and files the rest,
+then merges when the build and tests pass. You get the pull request link and
+one line per finding.
+
+</details>
+
 🌐 **Browser:** ✅ the pull request link shows **Merged**. It asks you
 something, or isn't merged? Use the two 🛟 boxes under Module 8, step 7.
 
@@ -109,6 +118,16 @@ what was graded:
    package-lock.json say 1.0.0, never now.config.json. Commit both on a
    new branch chore/version-1.0.0.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude sets the app's version to 1.0.0 in package.json and
+   package-lock.json, leaves now.config.json alone, and commits both files on
+   a new branch. Once that's shipped, the grade and the tag that follow are of
+   version 1.0.0.
+
+   </details>
+
 2. Grade at HANDOFF again, on `main` as it is now: After the workshop,
    Part 4, step 7, typing `<alias>` for the alias and OWN-PRD section 7's
    register reply, with the branch `chore/grade-v1.0.0` in place of

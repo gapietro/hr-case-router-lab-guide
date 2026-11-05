@@ -30,6 +30,14 @@ README's [What you need](README.md#what-you-need).
 
 ### 1. Get your instance
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your own instance is where you build and install the app. Its name goes
+into the SDK's sign-in, and into the guard that keeps it out of your
+commits, so note it now.
+
+</details>
+
 Your instructor gives you your own instance, with HR Service Delivery, its
 demo data and AI Agent Studio. Save its admin password in your password
 manager, and note its address, such as `https://dev123456.service-now.com`.
@@ -39,6 +47,13 @@ Note the instance's name, such as `dev123456`.
 <div data-value="instance"></div>
 
 ### 2. Check your instance
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Checking now finds a missing user, group or role while there's still time
+to fix it, not on the morning of the workshop.
+
+</details>
 
 Check your instance has what the lab needs: the demo data, the lab's groups
 and users, and an ordinary HR fulfiller who can see HR cases.
@@ -141,6 +156,14 @@ lab's plugins and checks run from a terminal.
 </div>
 
 ### 3. Install the tools
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Every later step runs one of these tools, and one that's missing or too
+old fails in ways that are hard to read. The check comes first, so you
+install only what's missing.
+
+</details>
 
 <div data-show="os:mac">
 
@@ -617,6 +640,14 @@ Your company network. Tell your instructor before the day.
 
 ### 4. Sign in to GitHub and get this guide
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+You sign in once with `gh`, and git uses the same sign-in for every clone
+and push after. The guide you download holds files you run or read later:
+the lab's settings script and the customer's inputs.
+
+</details>
+
 **The lab needs GitHub.** Your company's GitLab can't stand in for it.
 
 <details><summary>ℹ️ Why not GitLab?</summary>
@@ -785,6 +816,17 @@ then run the `gh repo clone` line again.
 
 ### 5. Add the lab's Claude Code settings
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+These settings fence Claude in for the lab. It starts in auto mode, so it
+asks you less, but it still asks before any SDK command that writes to
+your instance. They block `now-sdk auth`, turn off connectors, new
+memories and web search, and keep Claude out of your notes, this guide and
+your keys. Any settings you had are backed up first, and Module 9 puts
+them back.
+
+</details>
+
 <div data-ask="m0-cc-before" data-options="yes|no" data-labels="Yes|No, this is my first time">
 
 **Have you used Claude Code on this computer before?**
@@ -815,6 +857,15 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 ✅ It prints `Lab settings in place.`
 
 ### 6. Sign in to Claude Code
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+You sign in once, and Claude can work in every session after. This first
+start also proves the lab's settings reached Claude: auto mode is on, and
+its limits hold. A setting that didn't apply would leave Claude freer than
+the lab expects, and nothing else would tell you.
+
+</details>
 
 On a Pro or Max plan? 🌐 **Browser:** first, in claude.ai, open
 **Settings > Privacy** and turn off model training.
@@ -996,6 +1047,15 @@ Then start a new session, and type `/status` again.
 
 ### 7. Connect the SDK to your instance
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The SDK needs a saved sign-in to read your instance and install your app
+on it, and every SDK command in the lab uses it by the name `lab-pdi`. You
+type the password yourself: Claude is never allowed to run `now-sdk auth`,
+so it never sees your password.
+
+</details>
+
 Your instance must be awake. Type the password only here, never in Claude.
 
 ⌨️ **Terminal:** replace `dev123456` with your instance's name, from its
@@ -1037,6 +1097,15 @@ times out? That's your company network: tell your instructor.
 ## Part 3 — The kit and a clean bench
 
 ### 8. Install the kit and the SDK plugin
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The kit, `prove-it`, gives Claude the lab's stages: consult, design
+challenge, build plan, grade and handoff, each proving itself before the
+next starts. Its version is pinned, so it matches what this guide shows.
+The SDK plugin lets Claude look up facts instead of guessing them.
+
+</details>
 
 Two plugins. The kit runs the lab's rituals. ServiceNow's SDK plugin teaches
 Claude the SDK from its docs (`now-sdk explain`) and reads records on your
@@ -1100,6 +1169,15 @@ instructor.
 
 ### 9. Make your folders
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your workspace keeps everything for your app in one place: the app's repo
+goes in it, the PRD goes in `brief` in Module 1, and Claude logs each catch
+in `catches.md`. With `projects` open in VS Code, you can read every file
+Claude writes.
+
+</details>
+
 ⌨️ **Terminal:**
 
 ```
@@ -1125,6 +1203,15 @@ touch ~/projects/hr-case-router/catches.md
 `projects` folder in your home folder. Keep it open.
 
 ### 10. Check nothing else is loaded
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Anything else Claude loads, such as another plugin, an MCP server, a hook
+or your own instruction file, changes how it behaves and what it can do.
+The lab's steps and checks expect only the kit and the SDK plugin, so
+anything extra goes off for now, and Module 9 brings it back.
+
+</details>
 
 Claude loads every plugin, server, hook and instruction file you have. For
 the lab, it should load only the kit and the SDK plugin.
@@ -1246,6 +1333,15 @@ file you haven't named, and a guard checks each commit for secrets.
 
 ### 11. Look up your scope
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your scope is your app's own name space on the instance: every table,
+property and role the app makes starts with it. The SDK needs it to create
+the app, and the vendor prefix in it is the one your instance gives its
+own apps.
+
+</details>
+
 🌐 **Browser:**
 
 1. As admin, type `sys_properties.list` in the filter navigator and press
@@ -1262,6 +1358,15 @@ Note your scope.
 <div data-value="scope"></div>
 
 ### 12. Create the app
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+`now-sdk init` makes your app's starting files: its project settings, its
+build setup and a `src` folder for the code. Everything Claude builds later
+goes on top of them. It reaches your instance through `lab-pdi` while it
+works, which is why the instance must be awake.
+
+</details>
 
 Your instance must be awake.
 
@@ -1302,6 +1407,16 @@ then the three lines above. Still failing? Tell your instructor.
 
 ### 13. Let Claude set up the repo
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your app's folder becomes a repo with its safety in place before anything
+is committed. The allow list (`.gitignore`) means git tracks only the
+files it names, and the guard, a script git runs before each commit,
+refuses a file the list doesn't name or a line shaped like a secret. Your
+commits carry GitHub's noreply address, not your own email.
+
+</details>
+
 <div data-show="surface:terminal">
 
 **In the terminal:** ⌨️ start Claude in the app folder, and pick **Yes**
@@ -1340,6 +1455,18 @@ examples, never installed, so don't ask. Make README.md the single line
 and stop if the build fails. Commit nothing. Last, run git config
 user.email and git -C ~/projects/prove-it-kit describe --tags.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude gets the kit at version `v0.1.4`, starts the repo on `main`, sets
+this repo's commit email, and puts in the kit's allow list and guard. It
+deletes the template's two example files, then installs the packages and
+builds the app, to prove the starting point works before anything is
+committed. Its last two commands print your commit email and the kit's
+version, so you can check both yourself. One prompt does it all, so every
+participant's repo starts the same way.
+
+</details>
 
 Claude may read the SDK's docs for a few minutes first. Asked "Allow this
 read outside the working directories?"? Choose **Yes, and keep allowing any
@@ -1382,6 +1509,13 @@ Claude change files to make it pass.
 </details>
 
 ### 14. 🔮 Try to beat the guard
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Every commit in the lab relies on the guard, so you test it once here,
+with a fake token, where nothing real is at stake.
+
+</details>
 
 **The idea:** a check only counts if it could have failed. Here you try to
 commit a fake token, to see the guard stop it before you rely on it.
@@ -1467,6 +1601,15 @@ echo '0 | guard | the guard was not installed; once installed, it blocked the to
 
 ### 15. Commit for real
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+With the fake token gone, this is your repo's real first commit: the allow
+list and a one-line README, checked by the guard. It's one of only two
+commits made straight to `main`: later changes reach it through pull
+requests.
+
+</details>
+
 ⌨️ **Terminal:**
 
 ```
@@ -1495,6 +1638,18 @@ before? Then `git log --oneline` shows that one commit: go on.
 ## Part 5 — Your repo's rules, and GitHub
 
 ### 16. Give the repo its rules
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+`CLAUDE.md` is the file Claude reads at the start of every session in this
+folder: the rules for how you and Claude work together. The kit's copy sets
+how a session opens and closes, how a pull request is shipped, how the
+backlog is ranked, that nothing is built without a signed design record,
+and that every test names the design term it proves. You add your app's
+facts and the lab's own rules, so every session follows them without you
+repeating them.
+
+</details>
 
 <div data-show="surface:terminal">
 
@@ -1556,12 +1711,32 @@ At the end of .gitignore, add only these allow lines, one per line:
 !/CLAUDE.md, !/docs/, !/SESSION-NOTE.md. Commit nothing.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude copies the kit's `CLAUDE.md` into your repo and fills in its
+Project facts: your scope, `lab-pdi`, and where the design record and the
+lab's decisions live. It makes the six changes the prompt lists and keeps
+the kit's other rules as they are. Then it adds three allow lines to
+`.gitignore`, so git can track `CLAUDE.md`, `docs/` and `SESSION-NOTE.md`,
+and commits nothing, so you can check the file first.
+
+</details>
+
 ✅ ✏️ **Editor**, `hr-case-router/app/CLAUDE.md`: Project facts show your
 scope and `lab-pdi`; there's a Platform facts section; Learning checkpoints
 is one line; and the end of `hr-case-router/app/.gitignore` has the three
 allow lines.
 
 ### 17. Read every name
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+You check with your own eyes which files git would commit, and that
+`CLAUDE.md` names no instance, before the next commit makes them part of
+the repo's history. You also give the guard your instance's name, so it
+blocks any later commit that names it.
+
+</details>
 
 <div data-show="os:mac surface:terminal">
 
@@ -1647,6 +1822,14 @@ Then run the `grep` again.
 
 ### 18. Commit, and go private on GitHub
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your repo goes on GitHub, private, so only you and the people you invite
+can see it. The kit files your stories, milestones and pull requests
+there, and from now on every change reaches `main` through a pull request.
+
+</details>
+
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
 ```
@@ -1697,6 +1880,14 @@ Note the new name.
 ## Part 6 — Before the day
 
 ### 19. Read the inputs, and 🔮 guess
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Everything the app does traces back to what the customer asked for in
+these files. Guessing before you see the real PRD makes you read them as a
+builder would, and shows you afterwards what you'd have missed.
+
+</details>
 
 ✏️ **Editor:** read three files in
 `hr-case-router-lab-guide/files/inputs/`: `USE-CASE.md` and

@@ -20,6 +20,14 @@ through tests that all pass?
 
 ### 1. 🔮 Guess the attacks
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Guessing first means you'll see which attacks the reviewer thought of that you
+didn't, and which of yours it missed. Thinking like an attacker for a minute
+is the habit this module builds.
+
+</details>
+
 Guess first: three ways to get a case moved to `Lab Locked Out`, or moved
 when it should stay where it is.
 
@@ -40,6 +48,15 @@ only to a group the checks allow.
 </details>
 
 ### 2. Start a fresh reviewer
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A fresh session knows nothing of how the app was built, so it doesn't share
+the builder's blind spots. Starting from an up-to-date `main` means it attacks
+the finished build, not an old copy. Its attempts become tests on a branch of
+their own, so nothing it writes changes your app.
+
+</details>
 
 <div data-show="surface:terminal">
 
@@ -88,6 +105,17 @@ fails. Commit the tests. Fix nothing, push nothing, install nothing. End
 with every attempt, and what you didn't get to.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude, as a reviewer who didn't build the app, spends ten minutes trying to
+get a case moved where the routing rules or the access check forbid it. It
+runs the tests itself, then turns each attack into a test named for the design
+term it targets, so an attack that gets through shows up as a failing test. It
+commits the tests on `test/break-access`, changes no code, and ends with every
+attempt and what it didn't get to.
+
+</details>
+
 ✅ It ran the tests, listed its attempts, and its commits say
 `[test/break-access`.
 
@@ -122,6 +150,13 @@ git branch -f main origin/main
 
 ### 3. Compare with yours
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your guesses are a second attacker. Any attack the reviewer missed becomes one
+more test, so the build is checked against it too.
+
+</details>
+
 Did it try each of your three? For any it missed, 🤖 **Claude**, with your
 attack in a few words, such as `click Reroute twice, fast`:
 
@@ -130,6 +165,15 @@ Also try: <your attack>. Commit a test for it.
 ```
 
 ### 4. Go back to a clean main
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The reviewer's tests stay on their own branch: a test that shows an attack
+getting through fails, and a failing test on `main` would block every later
+merge. Ending on a clean `main` means the next module starts from exactly
+what's merged.
+
+</details>
 
 ⌨️ **Terminal**, in your window: `git status --short`
 

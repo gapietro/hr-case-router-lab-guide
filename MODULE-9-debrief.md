@@ -17,6 +17,14 @@ close the day's session.
 
 ### 1. Count your catches
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The count comes from `catches.md`, the lines you kept in each module, so it
+rests on what was written down at the time, not on memory. It shows which
+parts of the method caught the most.
+
+</details>
+
 ⌨️ **Terminal**, in your window:
 
 ```
@@ -41,6 +49,13 @@ grep '|' ~/projects/hr-case-router/catches.md | cut -d'|' -f2 | tr -d ' ' | sort
 
 ### 2. Add yours to the room's board
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+One person's count is small. The room's columns together show which parts of
+the method paid off across many builds, not only yours.
+
+</details>
+
 Add your counts to your instructor's columns. Then ask together:
 
 1. **Which column is biggest?** There the process paid for itself.
@@ -50,6 +65,14 @@ Add your counts to your instructor's columns. Then ask together:
    `drill` after the workshop. Your own tests had passed first.
 
 ### 3. Sort out what's real
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A demo can make staged work look finished. Sorting honestly tells you, and
+anyone you show the app to, what still has to be built or proved before it's
+real.
+
+</details>
 
 Sort your app into three short lists:
 
@@ -65,6 +88,13 @@ then [to production](PROMOTE.md).
 
 ### 4. Take it home
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The day only pays off if you use the method again. One sentence each turns it
+into a next step you can act on at work.
+
+</details>
+
 Decide, in one sentence each: the next real work you'll build this way, the
 one stage you'd keep, and the building block you're missing at work. Short
 of time? Do it at home.
@@ -73,6 +103,14 @@ Ask your instructor for your instance's end date: After the workshop
 needs the instance until then.
 
 ### 5. Close the session
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The session note is how the next session, or the next person, picks up without
+guessing. Shipping it puts it on `main`, where whoever opens the repo next
+will find it.
+
+</details>
 
 Claude closed? <span data-show="surface:terminal">**In the terminal:** ⌨️
 in the Claude window: `cd ~/projects/hr-case-router/app && claude`</span>
@@ -89,6 +127,14 @@ on `~/projects/hr-case-router/app`, with the top **Local** entry and
    open, the exact next step, and the top three next items. Commit only
    SESSION-NOTE.md, on a new branch docs/session-note.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude writes down where the work stands in SESSION-NOTE.md, so a fresh
+   session, or you after a break, can pick up exactly here.
+
+   </details>
+
 2. 🤖 **Claude:** then paste this, type `go` after it, and press **Enter**:
 
    ```
@@ -100,6 +146,15 @@ on `~/projects/hr-case-router/app`, with the top **Local** entry and
    pull, and give me the pull request link and one line per finding: fixed,
    filed, or not a problem and why.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude pushes your branch, opens a pull request, reviews its own
+   diff without checking it out, fixes real findings once and files the rest,
+   then merges when the build and tests pass. You get the pull request link
+   and one line per finding.
+
+   </details>
 
 🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
 
@@ -135,6 +190,14 @@ Used a separate user account? Skip this part. Going straight on to
 
 ### 6. Put your settings back
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The lab added its own Claude Code settings, which limit what Claude may do,
+and kept a backup of yours. This puts yours back, so Claude works for you as
+it did before the lab.
+
+</details>
+
 Close Claude everywhere first:
 <span data-show="surface:terminal">**In the terminal:** type `/exit` in
 every Claude window.</span>
@@ -168,6 +231,15 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
 ✅ The last command says `Lab settings NOT in place:`. That's what you want.
 
 ### 7. Switch back on what Module 0 switched off
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Module 0 set aside your own instructions, plugins, MCP servers and GitHub
+sign-in, so they couldn't steer the lab. Each sub-step puts one back, only
+where Module 0 saved how it was, and leaves alone anything you never switched
+off.
+
+</details>
 
 ⌨️ **Terminal:** only what Module 0 saved, in
 `~/projects/hr-case-router-notes`.
@@ -296,6 +368,14 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
    </details>
 
 ### 8. Remove the plugins and the SDK login
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Once you're done with the lab, its kit and your instance's sign-in have no
+more use on this computer. Removing them leaves nothing that can reach the lab
+instance, and deletes a saved file that can hold keys.
+
+</details>
 
 ⌨️ **Terminal**, once you're done with the lab for good, After the workshop
 included. The `rm` line deletes the MCP settings Module 0 saved, as they

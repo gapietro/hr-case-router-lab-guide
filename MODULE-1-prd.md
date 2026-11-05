@@ -19,6 +19,14 @@ information guesses. Does the accepted PRD keep both?
 
 ### 1. Get today's guide
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Your instructor works from the newest copy of this guide. Pulling it now means
+the steps you read match theirs, and so do the files later modules copy from
+it.
+
+</details>
+
 ⌨️ **Terminal:**
 
 ```
@@ -49,6 +57,16 @@ Tell your instructor before you go on.
 </details>
 
 ### 2. Have Claude trace the PRD
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The draft PRD, the product requirements document, was written from three
+inputs: the use case, the workshop notes and a change request. Tracing it ties
+each PRD line to the input sentence that asked for it, so you can see what has
+no source and what got left out. Claude works on copies in a folder of its
+own, so this guide's files stay untouched.
+
+</details>
 
 <div data-show="surface:terminal">
 
@@ -124,9 +142,26 @@ changes what gets built but isn't in the PRD. Quote, don't paraphrase.
 Don't edit any file.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude reads the PRD and the three inputs. For each capability and
+requirement, it quotes the input sentence behind it or says "no source"; then
+it lists what the inputs ask for that the PRD leaves out. It quotes rather
+than paraphrases, so you can check each claim yourself, and it edits nothing.
+
+</details>
+
 Compare its list with your pre-work guess.
 
 ### 3. Decide the gaps, in one table
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A gap is only useful once someone decides what to do about it. One table lets
+you judge every gap side by side, in one reply. Anything only the customer can
+settle becomes an open decision: a question for them, not a guess in the PRD.
+
+</details>
 
 🤖 **Claude:**
 
@@ -143,6 +178,16 @@ line under 7. Open decisions and changes no other line. Never add a
 capability. Then wait, and edit PRD-HRCaseRouter.md only
 when I reply "Make the changes."
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude puts every unsourced line and every left-out statement into one
+numbered table: the PRD line, the closest input sentence, the gap, and its
+recommendation, Leave or Open decision. An open decision only adds a question
+under 7. Open decisions, so the PRD never grows a capability nobody asked for.
+Claude then waits, and edits the PRD only when you reply "Make the changes."
+
+</details>
 
 ✅ One numbered table, usually 10 to 20 rows, most of them Leave.
 
@@ -185,6 +230,14 @@ the sidebar. It holds the conversation.
 
 ### 4. Log it
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A catch is a real problem the process found that got fixed or changed a
+decision. Logging this module's catches now, while you remember them, starts
+the record Module 9 counts: what each check was worth.
+
+</details>
+
 🤖 **Claude:**
 
 ```
@@ -198,6 +251,14 @@ and when I reply keep, append them to
 ~/projects/hr-case-router/catches.md.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts this module's catches as one line each, in the catch log's
+format, from what happened in this session. You read them and reply `keep`, or
+say what to change. Module 9 counts them.
+
+</details>
+
 Keep a line for each gap that changed the PRD in step 3. Then reply
 `keep`.
 
@@ -205,6 +266,15 @@ Keep a line for each gap that changed the PRD in step 3. Then reply
 `tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you kept.
 
 ### 5. Get the customer's acceptance
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The customer has answered the open decisions you raised. Putting each answer
+into the PRD and recording their acceptance turns the draft into the agreed
+version that every later module builds from. Claude copies it into your
+workspace's `brief` folder, where the next module reads it.
+
+</details>
 
 ⌨️ **Terminal**, in that window, get the customer's answers:
 
@@ -223,6 +293,17 @@ Acceptance from it with today's date, and replace "Draft 2" with
 "Accepted" and today's date. Change nothing else.
 Then copy the PRD into ~/projects/hr-case-router/brief/.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude puts each of the customer's answers into every PRD section it affects,
+replacing each "is an open decision". Where they gave no answer, it follows
+their Anything else row and tells you what it chose. It sets 7. Open decisions
+to "None.", fills in 8. Acceptance, marks the PRD Accepted with today's date,
+and copies it to `~/projects/hr-case-router/brief/`, the copy later modules
+build from.
+
+</details>
 
 When it's done: <span data-show="surface:terminal">**In the terminal:**
 type `/exit` alone.</span> ⌨️ **Terminal**, in your window:

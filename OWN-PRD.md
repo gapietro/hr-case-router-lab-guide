@@ -256,6 +256,17 @@ choose one.
    date, under its title. Change nothing else. Then copy the PRD into
    ~/projects/<app>/brief/.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude puts each of the real owner's answers into every part of your PRD it
+   affects, fills in Acceptance, marks the PRD accepted, and copies it into
+   your app's brief folder. If an open decision has no answer, it stops and
+   names it instead of choosing one. Everything after this reads the accepted
+   PRD, so every business decision in it is the owner's.
+
+   </details>
+
 4. ⌨️ **Terminal:** `ls ~/projects/<app>/brief`. ✅ It lists only your
    PRD. ✏️ **Editor:** ✅ its Open decisions reads `None.`, and its
    Acceptance names the real owner.
@@ -293,6 +304,17 @@ team.
   Anything only the real owner can answer, record as an open decision;
   never guess. Yes, raise any other open decisions you find.
   ```
+
+  <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+  These are your answers to the consult's opening questions: how big the work
+  is, and how to handle what it can't check. Claude runs no commands, marks
+  anything it couldn't check VERIFY, and records what only the real owner can
+  answer as an open decision, never a guess. It then restates the brief for
+  you to check.
+
+  </details>
+
 - Step 4: its list also shows your `LOG.md`. Keep it.
 - Step 5: read every AI row, the **Data and ownership** table, every
   **VERIFY** and every **Readiness** row that isn't ready.
@@ -321,6 +343,16 @@ Everything else is deferred, not dropped.
    one. For each, list the capabilities it covers, what it defers, and the
    riskiest assumption it tests. Don't write any file.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude reads your PRD and the consult, and proposes two or three slices:
+   thin paths a real user can follow from start to finish. For each, you get
+   the capabilities it covers, what it defers, and the riskiest assumption it
+   tests. It writes no file: you choose one, and write SLICE.md yourself.
+
+   </details>
+
 2. Choose the one that **tests your riskiest assumption first**, not the
    easiest. Keep it small: cutting it later is costly (section 5).
 3. ✏️ **Editor:** write `~/projects/<app>/SLICE.md` by hand: the
@@ -433,6 +465,17 @@ settled for your app: never copy the workshop's.
   fact, say how sure you are and how to check it by reading records only.
   Design nothing, run nothing, write no file.
   ```
+
+  <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+  Claude lists the platform facts your slice's design relies on, marks the
+  five it depends on most, and says how sure it is of each and how to check it
+  by reading records. It designs nothing, runs nothing and writes no file. The
+  module then has Claude check those facts on your instance, so the design
+  rests on rows, not guesses.
+
+  </details>
+
 - Step 2: its fallback script runs only with your platform team's OK.
 - Step 4: ✅ the summary covers every capability in `SLICE.md`, and lists
   each deferred one as not built.
@@ -460,6 +503,18 @@ or on a call with your screen shared. They answer; you type their words.
   is concrete, even where a file already answers it. Then gates. The
   capabilities SLICE.md defers are out of scope for this record.
   ```
+
+  <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+  This answers the design challenge's first question with your feature name,
+  and tells it which files are your design. For each question, Claude offers
+  three or four numbered answers drawn from those files, with the files' own
+  answer first, and says so when none answers it. Then it challenges failure,
+  security, cost and boundaries in full, one question at a time, then the
+  gates, leaving what SLICE.md defers out of scope.
+
+  </details>
+
 - Steps 2 and 3: a question the owner can't answer today? Stop, and carry
   on when they can. Never answer for them. Check step 3's read-back
   against your own file's rows.
@@ -586,6 +641,15 @@ for each term, a test on main or an open story I'm keeping that names it.
 Change nothing.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude lists the design terms named in each story you want to cut, and for
+each term a test on main, or a story you're keeping, that names it. It changes
+nothing. A term with neither would cap the grade if its story went, so this
+shows which cuts are safe.
+
+</details>
+
 A term with neither? Keep the story, or first withdraw the term with the
 real owner (After the workshop, Part 3: changed to say it's withdrawn, then
 named in an `it.todo`). Then cut: After the workshop, Part 3, step 2, with
@@ -621,6 +685,16 @@ how tests must be named, which can stop slice 1's tests counting.
    ../docs/LLD-<Feature>-2.md, with the decisions in
    ../docs/DECISIONS.md.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   This is your answer when the amend asks what changed: the next slice's
+   capabilities, its LLD and its decisions. Claude then asks about the new
+   capabilities, reads every new or changed term back, and writes them into
+   the design record once the real owner confirms.
+
+   </details>
+
 4. File the new stories: After the workshop, Part 3, step 2, as written.
 5. Merge it, in one pull request: After the workshop, Part 3, step 3,
    sub-step 1, with these lines in place of its first two:
@@ -629,6 +703,16 @@ how tests must be named, which can stop slice 1's tests counting.
    docs/DESIGN-<Feature>.md, docs/LLD-<Feature>-2.md and BACKLOG.md on a
    new branch docs/amend-slice-2.
    ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude copies the next slice's LLD into your app's docs folder, then
+   commits it with the amended design record and the backlog on one new
+   branch. The ship-it lines after it then review and merge that branch, so
+   the next slice's design lands in one pull request.
+
+   </details>
+
 6. Build it: Module 6 from step 6, then section 5 again.
 
 ---

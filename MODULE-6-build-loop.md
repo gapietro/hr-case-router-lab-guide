@@ -25,6 +25,15 @@ live check prove the agent read this one?
 
 ### 1. Open the session
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A fresh session in your app's folder starts Claude with your repo's own rules
+and files, and nothing left over from earlier chats. Asking for the top three
+items makes it rank the work from your backlog and the live issues, by how
+close each is to the next gate, so you build what matters most first.
+
+</details>
+
 <div data-show="surface:terminal">
 
 **In the terminal:** ⌨️ in the Claude window, after `/exit` if Claude is
@@ -73,6 +82,16 @@ git switch docs/plan
 
 ### 2. 🔮 Guess, then take the top story
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Guessing the tests before Claude writes them gives you something to compare:
+what it thought of that you didn't, and the other way round. Then the prompt
+starts the story the lab's way: tests first, on a branch of its own, each
+named after the design term it proves. The kit's grade counts a term as tested
+only when its number appears in a test's name or test file.
+
+</details>
+
 Guess three test cases for the top story, one of them unusual. Step 3
 compares.
 
@@ -106,6 +125,15 @@ without waiting for me:
 Run them, show me them failing, and stop before any implementation.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude takes the top story, restates it in five bullets, and writes its tests
+on a new branch, adding Vitest if it's missing. It runs them, shows you them
+failing, and stops before writing any code. A test you've seen fail is one
+that can catch a mistake, and its name ties it to the design term it proves.
+
+</details>
+
 <details><summary>🛟 It says the top story is a ruling, not code</summary>
 
 `<n>` is the story's number, from step 1. 🤖 **Claude:** type `/clear`,
@@ -132,6 +160,15 @@ When it's merged, type `/clear` and start again from step 1.
 </details>
 
 ### 3. Check the failing tests
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+This is your check on Claude's work before any code exists, while a wrong test
+is still cheap to fix. A branch other than `main` keeps the story away from
+`main` until it's reviewed. Tests that fail now prove they test something: a
+test that passes before the code exists can't catch anything.
+
+</details>
 
 ⌨️ **Terminal**, in your window:
 
@@ -163,6 +200,16 @@ match, and show me them failing again.`
 
 ### 4. Make them pass, and check the shape
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Now Claude writes the code, only as much as the tests need. The shape check is
+this module's idea in practice: a check written as plain code on plain data
+can be tested on your laptop, with no instance. `GlideRecord`, `gs.` and
+`current.` are ServiceNow calls, so a check that uses them can only be tested
+on an instance.
+
+</details>
+
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
 ```
@@ -170,6 +217,15 @@ Make them pass with the least code that does it, then run npm test and
 now-sdk build. Tell me in one line which file holds a plain-code check, or
 "none in this story". Stop before ship it.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude writes the least code that makes the failing tests pass, then runs the
+tests and the ServiceNow build. It names the file that holds a plain-code
+check, if there is one, and stops before shipping. You see the passing run and
+the build's result before anything is merged.
+
+</details>
 
 ✅ In Claude's output, `npm test` passes and `now-sdk build` ends with no
 errors.
@@ -186,6 +242,14 @@ checks come in a later story: move on.
 
 ### 5. Ship it
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Shipping takes your branch to `main` through a pull request and a review, so
+nothing reaches `main` unreviewed. When the pull request merges, it closes the
+story's issue, so the board shows only what's left.
+
+</details>
+
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
 ```
@@ -197,6 +261,15 @@ and npm test too once there's a test script. Then switch to main and
 pull, and give me the pull request link and one line per finding: fixed,
 filed, or not a problem and why.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude pushes your branch, opens a pull request, reviews its own
+diff without checking it out, fixes real findings once and files the rest,
+then merges when the build and tests pass. You get the pull request link and
+one line per finding.
+
+</details>
 
 It pushes, opens a pull request, runs `/code-review`, fixes, and merges:
 a few minutes.
@@ -240,6 +313,15 @@ Close issue #<n>, citing the pull request that built it.
 ## Part 2 — The batch, over lunch (start at 13:25)
 
 ### 6. Start the batch
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+With one story built by hand, you hand the rest of the thin path to Claude
+while you eat. The prompt sets the rules you just followed, tests first, a
+review, no merge while anything fails, so the batch builds the way you did.
+The laptop must stay awake: if it sleeps, the batch stops.
+
+</details>
 
 Still on step 4 or 5 at 13:25? Finish ship it first, then type `/clear`.
 
@@ -306,12 +388,39 @@ and actions, outcome and why, skipped ones too) and the next gate's live
 count of open stories.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude takes the open stories in the order they depend on each other and gives
+each to a sub-agent, on its own branch and worktree, side by side only where
+stories share no files. Each sub-agent builds its story the way you built
+yours: tests first with their failing run saved, code until every test passes
+and the build is clean, then a pull request with both runs and its review
+findings; it never merges: Claude does, one at a time, after re-testing.
+Claude skips stories that need instance work, a design change or a business
+decision, stops a story after three failures, and ends once the code that
+moves a new case with `apply_route`, or leaves a note naming the check,
+Reroute and the seed data are all merged, or once nothing it can build is
+left. You'll see a failing test run early, then, at the end, a table of every
+story with its pull request and outcome, and the next gate's count of open
+stories.
+
+</details>
+
 Stay until a failing test run appears, or it stops with its table. Then
 lock the screen
 (<kbd data-mac="Ctrl+Cmd+Q" data-win="Win+L">Ctrl+Cmd+Q (Mac) · Win+L (Windows)</kbd>):
 the batch keeps running.
 
 ### 7. Read the evidence, from 14:15
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Claude's summary can say anything; the pull requests show what really ran. Two
+of them, each with a failing run, a passing run and its findings, tell you the
+batch kept the rules while you were away. Then you update your own copy of
+`main` and run the tests yourself, so what you install is what was merged.
+
+</details>
 
 🌐 **Browser:** in your repo's **Pull requests** tab, click **Closed**, and
 open two merged ones: `apply_route`'s and Reroute's. ✅ Each has five
@@ -358,6 +467,15 @@ turn after the workshop.
   after three failures. Then carry on with this:
   ```
 
+  <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+  Claude treats merged pull requests as done, finishes the batch's open ones
+  first, and leaves alone any story that already stopped after three failures.
+  The batch prompt you paste after it then carries on with the stories that
+  are left. You get the same table at the end as a batch that never stopped.
+
+  </details>
+
 </details>
 
 <details><summary>🛟 At 14:30, one of those three isn't merged</summary>
@@ -393,6 +511,15 @@ git switch main && git pull && npm install && npm test
 ## Part 3 — Install and try it live (by 14:30)
 
 ### 8. Build and install
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Until now the app has existed only as code and tests on your laptop. Building
+turns the merged source into an app, and installing puts it on your lab
+instance, where it meets live HR cases for the first time. You install from a
+clean, up-to-date `main`, so the instance gets exactly what was reviewed.
+
+</details>
 
 ⌨️ **Terminal**, in your window:
 
@@ -444,6 +571,15 @@ Then tell your instructor what it says.
 
 ### 9. Switch it on
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The install leaves the router switched off, and can leave the dispatcher, the
+job that starts each run, without its every-minute trigger: without either,
+new cases sit unrouted, often with no message. Without the role, `hr.demo`
+can't use Reroute.
+
+</details>
+
 An admin does these by hand, so nothing goes live or gets a role unseen.
 `<SCOPE>` is the `scope` line in `app/now.config.json`, such as
 `x_123456_hcr_ga`.
@@ -490,6 +626,14 @@ After every install, do sub-steps 1 and 3 again: an install turns the
 switch off, and can leave the job without a trigger. The role stays.
 
 ### 10. Warm it up
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The warm-up keeps those first failures out of the cases you'll judge. Closing
+the router's leftover conversations matters too: while `hr.router` has one
+open, the dispatcher starts no new run.
+
+</details>
 
 The first runs after an install can each fail once per HR table (DECISIONS,
 P8). Two warm-up cases take those failures.
@@ -570,6 +714,15 @@ router didn't finish, five minutes from creation, then click it again.
 
 ### 11. Watch it route, as `hr.demo`
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Working as `hr.demo`, a fulfiller rather than an admin, shows the app works
+with the access real HR staff have. What you check here is what your design's
+DEMO gate asks for: a routed case, a stopped one, and a Reroute that starts a
+run.
+
+</details>
+
 The agent reads the case and the article; `apply_route` checks its choice
 before anything moves. One case the checks pass, one they stop. Nothing is
 instant: the dispatcher starts a run a minute, and a run takes about one.
@@ -617,6 +770,15 @@ the Lab Locked Out case">, labelled for the gate it holds up. Show me
 first; file after I say yes. No code.
 ```
 
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts a GitHub issue that describes the defect in plain words,
+labelled for the gate it holds up, and shows it to you before filing. It
+writes no code. Filing it first puts the defect on the board, so its fix goes
+through the same tests and review as any story.
+
+</details>
+
 Reply `yes`. Then paste this, with the issue's number for `<n>`, then `go`:
 
 ```
@@ -627,6 +789,17 @@ failing, then make them pass, and run now-sdk build. Then ship it: fix
 real findings once, file design findings as register issues, merge when
 npm test and now-sdk build pass, and give me one line per finding.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude restates the issue in five bullets, then fixes it the way you built
+your first story: tests first on a new branch, seen failing, then code until
+they pass and the build is clean. Then it ships it: a review, real findings
+fixed, design findings filed as register issues, and a merge once the tests
+and the build pass. You get one line per finding, and the fix is on `main`,
+ready to install.
+
+</details>
 
 When it's merged, ⌨️ **Terminal**, in your window:
 
@@ -673,6 +846,14 @@ impersonation**. As admin:
 
 ### 12. Log it
 
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+A catch only counts if it's written down: Module 9 counts this file, not your
+memory. Logging now, while the session still holds the details, gets each
+catch down with what caught it.
+
+</details>
+
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
 ```
@@ -685,6 +866,14 @@ design, guard, test, review, partner, grade, drill. Show me the lines,
 and when I reply keep, append them to
 ~/projects/hr-case-router/catches.md.
 ```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts this module's catches as one line each, in the catch log's
+format, from what happened in this session. You read them and reply `keep`, or
+say what to change. Module 9 counts them.
+
+</details>
 
 Look for a `review` line per fixed review finding, step 5's too, and a
 `test` line per defect step 11 found. Reply `keep`, or say what to change.
