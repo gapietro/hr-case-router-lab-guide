@@ -92,9 +92,9 @@ it. Stay logged in as admin, and impersonate it when a step says so.
    </div>
 
    Open `hr.demo`.
-4. In its **Roles** tab: ✅ it lists `sn_hr_core.case_writer`. If not,
-   click **Edit...**, move `sn_hr_core.case_writer` from the left list to
-   the right, and click **Save**.
+4. In its **Roles** tab: ✅ it lists `sn_hr_core.case_writer` and
+   `sn_hr_le.case_writer`. If one is missing, click **Edit...**, move it from
+   the left list to the right, and click **Save**.
 5. In its **Groups** tab: ✅ it lists `Lab HR Team`. If not, click
    **Edit...**, move `Lab HR Team` from the left list to the right, and
    click **Save**.
