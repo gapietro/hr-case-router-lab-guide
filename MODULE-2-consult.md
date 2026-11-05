@@ -21,6 +21,21 @@ Nothing gets built: the consult advises how to build each capability.
 Which capabilities need AI? What may the agent change? Keep your guess
 in your head: step 5 checks it.
 
+<details><summary>🔮 The answer, once you've guessed</summary>
+
+Only capabilities 3 and 5, routing a new case and Reroute, need AI. The
+agent itself may change nothing: it proposes a service and a group, and its
+tools write.
+
+Reading loose case text is what AI is good at. A write must be predictable
+and testable, so it belongs to plain code: the `apply_route` tool runs every
+check itself (the routing rules, the group's access, restricted services,
+the 0.7 threshold), and only then moves the case. The rules, the caps, the
+log and the weekly numbers are plain code too. AI proposes; plain code
+decides.
+
+</details>
+
 ### 2. Start the consult
 
 <div data-show="surface:terminal">

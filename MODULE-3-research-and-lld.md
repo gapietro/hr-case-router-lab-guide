@@ -24,6 +24,21 @@ it got back?
 
 Guess first: what does an agent that moves HR cases need from the platform?
 
+<details><summary>🔮 The answer, once you've guessed</summary>
+
+A way for code to transfer a case to another service; a way to start the
+agent from code, in the background; a user to run as, `hr.router`, with
+the roles an AI user needs; tools that really run as that user; and a run
+aimed at the app's log row, so the case never lands in the prompt.
+
+Claude states each one confidently. It counts only when rows on your
+instance show it, and two, the tools' user and the log row, only a run can
+show: "couldn't check" is the honest mark for now. Research should also
+find ServiceNow's own "Predict service and transfer HR Cases" workflow. It
+stays off: it always transfers, with none of the checks.
+
+</details>
+
 <div data-show="surface:terminal">
 
 **In the terminal:** ⌨️ copy the inputs, and start Claude:

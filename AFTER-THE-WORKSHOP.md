@@ -997,6 +997,21 @@ tell your instructor.
 
 Once `merge`, `install` and `demo` print 0. Guess the score first.
 
+<details><summary>🔮 The answer, once you've guessed</summary>
+
+Higher than the day's preview, and it can have no cap at all. The stories
+whose untested terms capped the preview at 74 are merged now, so that cap
+lifts once each of their terms has a test.
+
+With no cap, the score is the average of the three dimensions, and each
+missed row costs a sixth of its dimension, about 6 points overall. One miss,
+such as `code.lint` with no lint script, gives (100 + 83 + 100) ÷ 3 = 94;
+two give 89. A term with no test, or a gate check with no evidence, still
+caps it at 74; a failed build, test run or secrets scan, at 49. Production
+asks more: a HANDOFF grade of 75 or more, with no cap.
+
+</details>
+
 1. ⌨️ **Terminal**, in your window:
 
    ```

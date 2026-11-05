@@ -1388,6 +1388,19 @@ commit a fake token, to see the guard stop it before you rely on it.
 
 Guess first: will the guard stop a commit with a token in it?
 
+<details><summary>🔮 The answer, once you've guessed</summary>
+
+Yes. Before git makes the commit, the guard reads every line being added,
+spots a line shaped like a token, and refuses with `BLOCKED:`.
+
+But only if it runs. git runs it only when it's in `.git/hooks` and marked
+as a program, and a guard that never runs lets everything through without a
+word. So you watch it refuse a fake token now, while a miss costs nothing.
+Later, the grade scans the repo's history for secrets: one that got in caps
+the grade at 49 out of 100.
+
+</details>
+
 ⌨️ **Terminal**, still in `~/projects/hr-case-router/app`:
 
 ```
@@ -1688,6 +1701,20 @@ Note the new name.
 ✏️ **Editor:** read `hr-case-router-lab-guide/files/inputs/USE-CASE.md`
 and `WORKSHOP-NOTES.md`, the customer's own words. Then guess what a PRD
 built from them needs. Module 1 compares your guess with the real PRD.
+
+<details><summary>🔮 The answer, once you've guessed</summary>
+
+Every request in the inputs, each traced to its sentence: route a case by
+what it says; never to a group that can't open it; a restricted route for
+sensitive cases; a confidence threshold; a record of why each case went where
+it did; a fix for a misroute; and the reporting.
+
+It also keeps the workshop's two warnings. An agent makes many AI calls,
+at least 25 where a skill makes one, and an agent with poor information
+guesses. Anything only the customer can decide is an open decision, never
+a guess.
+
+</details>
 
 ## You now have
 

@@ -21,6 +21,21 @@ that you didn't?
 
 Guess first: the score out of 100, and the one weakness it will find.
 
+<details><summary>🔮 The answer, once you've guessed</summary>
+
+Usually a preview scoring around 70. The weakness: design terms in open
+stories, such as the weekly numbers, have no test yet, which caps the score
+at 74.
+
+A cap is a ceiling, not the score. The rubric's 18 rows are six per
+dimension, and the score is the dimensions' average: if design misses two
+rows, code quality one and readiness two, as is typical today, that's
+(67 + 83 + 67) ÷ 3 = 72. A failed or skipped build, test run or secrets
+scan caps it at 49. Low is honest: the grader scores only what it ran or
+can cite.
+
+</details>
+
 ### 2. Start from a clean main
 
 ⌨️ **Terminal**, in your window:

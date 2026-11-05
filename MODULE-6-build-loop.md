@@ -76,6 +76,21 @@ git switch docs/plan
 Guess three test cases for the top story, one of them unusual. Step 3
 compares.
 
+<details><summary>🔮 The answer, once you've guessed</summary>
+
+They depend on your story, usually the thin path: a new case's run, end to
+end, whose agent only leaves a note. Typical: with routing switched off, a
+new case gets a `skipped` row and no note; a service ticked "Never send to
+AI" is refused with a note; a run's target is its log row, never the case.
+
+Unusual: a case whose text comes back empty is an error, not empty text; a
+case with `transferred_from` set starts no run; a second `leave_note` on
+the same run is refused. Unusual cases are where bugs hide: the builder
+tests the path they pictured. Each test must fail before the code exists:
+a test you never saw fail proves nothing.
+
+</details>
+
 🤖 **Claude:** paste this, whatever the top story is, type `go` after it,
 and press **Enter**:
 
