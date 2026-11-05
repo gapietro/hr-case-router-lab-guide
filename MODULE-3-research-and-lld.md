@@ -168,25 +168,30 @@ login and changes nothing.
 🤖 **Claude:**
 
 ```
-Check each of those facts on my instance, using only now-sdk query: its
---help, and read-only queries with --auth lab-pdi, --fields and --limit 5,
-one or two per fact. No scripts, no other command. For each fact, in
-order: the fact; each command exactly as run; the raw rows it returned,
-or that none came back; then one mark: confirmed, contradicted, couldn't
-check (say why), or production only (true in inputs/TECH-NOTES.md, not on
-my instance). Something this app will create, or only a run can show,
-finds nothing yet: mark it couldn't check, never contradicted. Change
-nothing on the instance and write no file.
+Check every one of those facts on my instance, in order, using only
+now-sdk query: its --help, and read-only queries with --auth lab-pdi,
+--fields, --display-value true and --limit 50, as many as each fact
+needs. Narrow each query to its fact: one user, one table, one name. A
+query that returns 50 rows may have missed some: narrow it and run it
+again. No scripts, no other command. For each fact: the fact; each
+command exactly as run; the raw rows it returned, or that none came
+back; then one mark: confirmed, contradicted, couldn't check (say why),
+or production only (true in inputs/TECH-NOTES.md, not on my instance).
+Something this app will create, or only a run can show, finds nothing
+yet: mark it couldn't check, never contradicted. End with a table of
+every fact and its mark. Change nothing on the instance and write no
+file.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-Claude checks each fact with one or two read-only `now-sdk query` commands on
-your `lab-pdi` login, and changes nothing. For every fact you get the command
-exactly as run, the raw rows it returned, and one mark: confirmed,
-contradicted, couldn't check, or production only. Anything the app hasn't
-created yet, or only a run can show, is marked couldn't check, so an honest
-gap isn't reported as a contradiction.
+Claude checks all the facts with read-only `now-sdk query` commands on your
+`lab-pdi` login, as many per fact as it needs, and changes nothing. Names come
+back as names, not record ids, and no list is cut short without Claude
+narrowing the query. For every fact you get the commands exactly as run, the
+raw rows, and one mark; a table of every mark ends it. Anything the app hasn't
+created yet, or only a run can show, is marked couldn't check, so an honest gap
+isn't reported as a contradiction.
 
 </details>
 
