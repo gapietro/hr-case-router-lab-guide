@@ -2,10 +2,9 @@
 
 *⏱ About 2 hours · at home, at least two days before the workshop*
 
-Set up your instance, your tools and your app's private repo, then read the
-customer's inputs, so the day starts with the build. **The idea:** a check
-only counts if it could have failed. In Part 4 you try to beat your repo's
-guard with a fake token.
+Get your environment ready before the workshop: your instance, your tools,
+Claude Code and your app's private repo. Then read the customer's inputs.
+On the day you start building straight away, with nothing left to install.
 
 <details><summary>ℹ️ Why are we doing this?</summary>
 
@@ -1242,6 +1241,9 @@ Claude change files to make it pass.
 </details>
 
 ### 15. 🔮 Try to beat the guard
+
+**The idea:** a check only counts if it could have failed. Here you try to
+commit a fake token, to see the guard stop it before you rely on it.
 
 Guess first: will the guard stop a commit with a token in it?
 
