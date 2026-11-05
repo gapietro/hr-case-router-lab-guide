@@ -62,11 +62,27 @@ Then run `git status --short` again.
 
 ### 3. Run the grade, in a fresh session
 
-⌨️ **Terminal**, in the Claude window, after `/exit` if Claude is open:
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ in the Claude window, after `/exit` if Claude is
+open:
 
 ```
 cd ~/projects/hr-case-router/app && claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router/app`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude**, before anything else: type this, alone:
 

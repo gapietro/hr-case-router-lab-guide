@@ -24,7 +24,9 @@ it got back?
 
 Guess first: what does an agent that moves HR cases need from the platform?
 
-⌨️ **Terminal:**
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ copy the inputs, and start Claude:
 
 ```
 cd ~/projects/hr-case-router && mkdir -p inputs docs
@@ -33,6 +35,28 @@ cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/
 cp ../hr-case-router-lab-guide/files/DECISIONS.md docs/
 claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** ⌨️ in your window, copy the inputs:
+
+```
+cd ~/projects/hr-case-router && mkdir -p inputs docs
+cp ../hr-case-router-lab-guide/files/inputs/TECH-NOTES.md inputs/
+cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/
+cp ../hr-case-router-lab-guide/files/DECISIONS.md docs/
+```
+
+Then 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude:**
 
@@ -73,9 +97,23 @@ If it asks permission for `now-sdk query --auth lab-pdi`, choose **Yes**
 (not "Yes, and don't ask again").
 Any other alias, or `now-sdk auth`: **No**.
 
-✅ Under each fact, a ⏺ line runs `query` on the table the fact is about,
-with `--auth lab-pdi`, and ⎿ rows under it. If it says `… +N lines`, press
-**Ctrl+O**: the rows are the evidence; the mark is only Claude's reading.
+<div data-show="surface:terminal">
+
+**In the terminal:** ✅ Under each fact, a ⏺ line runs `query` on the table
+the fact is about, with `--auth lab-pdi`, and ⎿ rows under it. If it says
+`… +N lines`, press **Ctrl+O**: the rows are the evidence; the mark is only
+Claude's reading.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** ✅ in the **Verbose** view (**Ctrl+O** until it shows),
+each fact has a `query` call on the table it's about, with `--auth lab-pdi`,
+and the rows it printed. The rows are the evidence; the mark is only
+Claude's reading.
+
+</div>
 
 <details><summary>🛟 now-sdk query fails, or Claude won't run it</summary>
 
@@ -96,8 +134,10 @@ before a `(`, and after `new`, is one of those calls; `if (`, `while (` and
 `Read-only, please: use only the allowed calls.` and check again.
 
 🌐 **Browser**, as admin: type `sys.scripts.do` in the filter
-navigator, press **Enter**, paste the script (**Cmd+A**, **Cmd+C** in the
-Editor) and click **Run script**. Copy the output lines, minus any URL or
+navigator, press **Enter**, paste the script
+(<kbd data-mac="Cmd+A" data-win="Ctrl+A">Cmd+A (Mac) · Ctrl+A (Windows)</kbd>,
+<kbd data-mac="Cmd+C" data-win="Ctrl+C">Cmd+C (Mac) · Ctrl+C (Windows)</kbd>
+in the Editor) and click **Run script**. Copy the output lines, minus any URL or
 instance name. 🤖 **Claude:** paste this, then the lines:
 
 ```
@@ -191,7 +231,8 @@ support, if it changed your LLD, and for each mark you corrected against
 its rows in step 3. Then reply `keep`.
 
 ✅ ⌨️ `tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you
-kept. Then type `/exit` in Claude.
+kept. <span data-show="surface:terminal">**In the terminal:** then type
+`/exit` in Claude.</span>
 
 ## You now have
 

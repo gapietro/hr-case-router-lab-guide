@@ -37,9 +37,14 @@ mistake. Those moments are the lesson.
 The buffer, 16:20–17:00, is for catching up. Behind? Ask your instructor
 for a checkpoint to start the next module from.
 
-To read this guide as one page, after Module 0 step 5, run this in a
-terminal: `open ~/projects/hr-case-router-lab-guide/LAB.html`. **Copy my
-setup**, under the setup chip at the top right, brings your answers across.
+To read this guide as one page, after Module 0 step 5:
+<span data-show="os:mac">**On Mac:** run this in a terminal:
+`open ~/projects/hr-case-router-lab-guide/LAB.html`.</span>
+<span data-show="os:win">**On Windows:** open File Explorer, click its
+address bar, type
+`%USERPROFILE%\projects\hr-case-router-lab-guide\LAB.html`, and press
+**Enter**.</span> **Copy my setup**, under the setup chip at the top right,
+brings your answers across.
 
 You work alone on the day. Your partner joins you after the workshop, to
 attack your app and to test your runbook.
@@ -54,8 +59,21 @@ attack your app and to test your runbook.
 | **A GitHub account** | A personal one is simplest; a company one only if it can create private repos. The lab needs GitHub: your company's GitLab can't stand in. Send your instructor your user name by the pre-session, a week before, and accept their invite to this guide. |
 | **About 2 hours, at least two days before** | For [Module 0](MODULE-0-prework.md). And an hour for the pre-session, a week before, if you can. |
 
+<div data-show="surface:terminal">
+
 **Claude Code, in the terminal.** This guide is written for Claude Code in
 a terminal window.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**Claude Code, in the Code tab.** The guide shows the desktop app's way
+wherever it differs. You still need a terminal app, and the `claude`
+command, for the ⌨️ steps: installing the kit, the checks, and every
+password.
+
+</div>
 
 Module 0 installs everything else, including the prove-it kit: the Claude
 Code plugin the lab runs on.
@@ -103,8 +121,39 @@ Under some checks there's a closed 🛟 box. Open it only if what you see is
 different. ℹ️ boxes say why, if you want to know. **Detail**, top right,
 opens more help or less, at any time.
 
-While Claude runs in a Terminal window, that window is Claude's. For ⌨️
-steps, use a second window: press **Cmd+N**.
+<div data-show="os:mac surface:terminal">
+
+**On Mac, in the terminal:** While Claude runs in a Terminal window, that
+window is Claude's. For ⌨️ steps, use a second window, **your window**:
+press **Cmd+N**.
+
+</div>
+
+<div data-show="os:win surface:terminal">
+
+**On Windows, in the terminal:** while Claude runs in a Git Bash tab, that
+tab is Claude's. For ⌨️ steps, use a second Git Bash tab, **your window**:
+press **Ctrl+Shift+T** in Windows Terminal.
+
+</div>
+
+<div data-show="os:mac surface:desktop">
+
+**On Mac, in the Code tab:** Claude runs in the desktop app. For ⌨️ steps,
+**your window** is a window of the Terminal app. Don't use the Code tab's own
+terminal pane: whether Claude can read what you type there isn't checked
+yet, and passwords must stay out of Claude.
+
+</div>
+
+<div data-show="os:win surface:desktop">
+
+**On Windows, in the Code tab:** Claude runs in the desktop app. For ⌨️
+steps, **your window** is a Git Bash tab in Windows Terminal. Don't use the
+Code tab's own terminal pane: whether Claude can read what you type there
+isn't checked yet, and passwords must stay out of Claude.
+
+</div>
 
 Enter sends a message to Claude. For a new line inside one, type `\` and
 then press **Enter**. **Sending:** paste a 🤖 box, type `go` after it, press
@@ -113,14 +162,40 @@ then press **Enter**. **Sending:** paste a 🤖 box, type `go` after it, press
 with no `go`. Some replies must be exact, such as `Confirmed.`: each step
 gives the words.
 
-When Claude runs a command, Claude Code shows it on a line starting with ⏺,
-and its output under it, on lines starting with ⎿. Read that output, not
-Claude's summary. If it says `… +N lines`, press **Ctrl+O** to see it all.
+<div data-show="surface:terminal">
+
+**In the terminal:** When Claude runs a command, Claude Code shows it on a
+line starting with ⏺, and its output under it, on lines starting with ⎿.
+Read that output, not Claude's summary. If it says `… +N lines`, press
+**Ctrl+O** to see it all.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** set the view to **Verbose** in each new session. Open
+the session menu (the caret beside the session title), then **Transcript
+view**, then **Verbose**; or press **Ctrl+O** until it shows. The normal
+view folds each command into a summary; **Verbose** shows every tool call.
+Read what each command printed, not Claude's summary.
+
+</div>
 
 <details data-help="general"><summary>🛟 Claude closed, or the window crashed, mid-step?</summary>
 
-In the same folder, run `claude --continue`. It reopens the conversation
-where it stopped.
+<div data-show="surface:terminal">
+
+**In the terminal:** in the same folder, run `claude --continue`. It reopens
+the conversation where it stopped.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** open the desktop app again, and click the session in
+the sidebar. It holds the conversation.
+
+</div>
 
 </details>
 
@@ -152,9 +227,10 @@ where it stopped.
 
 Your instance's password goes into its login page in the browser, and into
 `now-sdk auth`, which you run in your own terminal window (first in Module 0
-step 8). Your Mac's password, if `sudo` asks for it, goes into your own
-terminal window too. The lab's settings block `now-sdk auth` for Claude, so
-it can't happen by mistake.
+step 8). <span data-show="os:mac">**On Mac:** your Mac's password, if
+`sudo` asks for it, goes into your own terminal window too.</span> The
+lab's settings block `now-sdk auth` for Claude, so it can't happen by
+mistake.
 
 </details>
 

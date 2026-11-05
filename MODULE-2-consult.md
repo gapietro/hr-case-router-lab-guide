@@ -23,11 +23,26 @@ in your head: step 5 checks it.
 
 ### 2. Start the consult
 
-⌨️ **Terminal:** if asked to trust the folder, pick **Yes**.
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ if asked to trust the folder, pick **Yes**.
 
 ```
 cd ~/projects/hr-case-router && claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude:** type this, with nothing after it:
 
@@ -39,8 +54,25 @@ cd ~/projects/hr-case-router && claude
 
 <details><summary>🛟 It writes CONSULT.md before you confirm</summary>
 
-The kit broke its rule. Tell your instructor, type `/exit`, run
-`rm CONSULT.md` and `claude`, and type `/prove-it:consult` again.
+The kit broke its rule. Tell your instructor. Then:
+
+<div data-show="surface:terminal">
+
+**In the terminal:** type `/exit`, run `rm CONSULT.md` and `claude`, and
+type `/prove-it:consult` again.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** ⌨️ in your window, run
+`rm ~/projects/hr-case-router/CONSULT.md`. Start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>)
+on `~/projects/hr-case-router`, with the top **Local** entry and **Open
+folder…** under the prompt box. Press **Ctrl+O** until the view is
+**Verbose**, and type `/prove-it:consult` again.
+
+</div>
 
 </details>
 
@@ -65,7 +97,7 @@ It runs for several minutes and writes only `CONSULT.md`. Don't run the
 `/prove-it:design-challenge` it suggests: research comes first. If that
 shows as grey text, ignore it: **Tab** or **Right arrow** would accept it.
 
-⌨️ **Terminal**, in a second window (**Cmd+N**), when it's done:
+⌨️ **Terminal**, in your window, when it's done:
 
 ```
 ls -A ~/projects/hr-case-router
@@ -133,7 +165,8 @@ after it. Your own answers and corrections aren't catches. Then reply
 `keep`.
 
 ✅ ⌨️ `tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you
-kept. Then type `/exit` in Claude.
+kept. <span data-show="surface:terminal">**In the terminal:** then type
+`/exit` in Claude.</span>
 
 ## You now have
 

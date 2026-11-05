@@ -25,11 +25,27 @@ live check prove the agent read this one?
 
 ### 1. Open the session
 
-⌨️ **Terminal**, in the Claude window, after `/exit` if Claude is open:
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ in the Claude window, after `/exit` if Claude is
+open:
 
 ```
 cd ~/projects/hr-case-router/app && claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router/app`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude:**
 
@@ -212,12 +228,26 @@ Close issue #<n>, citing the pull request that built it.
 
 Still on step 4 or 5 at 13:25? Finish ship it first, then type `/clear`.
 
-Leave the laptop open and plugged in. ⌨️ **Terminal**, in your window, on a
-Mac:
+Leave the laptop open and plugged in, and stop it sleeping:
+
+<div data-show="os:mac">
+
+**On Mac:** ⌨️ in your window:
 
 ```
 caffeinate -i
 ```
+
+</div>
+
+<div data-show="os:win">
+
+**On Windows:** open **Settings > System > Power & battery**, then
+**Screen, sleep, & hibernate timeouts**. Note what **When plugged in, put
+my device to sleep after** says, then set it to **Never**. Your company may
+lock this setting: then tell your instructor.
+
+</div>
 
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**. On a Pro
 plan, type `Use one sub-agent at a time.` at the end, before `go`.
@@ -262,7 +292,9 @@ count of open stories.
 ```
 
 Stay until a failing test run appears, or it stops with its table. Then
-lock the screen (**Ctrl+Cmd+Q**): the batch keeps running.
+lock the screen
+(<kbd data-mac="Ctrl+Cmd+Q" data-win="Win+L">Ctrl+Cmd+Q (Mac) · Win+L (Windows)</kbd>):
+the batch keeps running.
 
 ### 7. Read the evidence, from 14:15
 
@@ -291,9 +323,15 @@ turn after the workshop.
 
 <details><summary>🛟 No table yet</summary>
 
-- **Claude is still working** (it shows `esc to interrupt`): let it finish.
-- **It stopped, or closed:** if closed, ⌨️ in the Claude window, run
-  `cd ~/projects/hr-case-router/app && claude --continue`. Then 🤖 type
+- **Claude is still working:** let it finish.
+  <span data-show="surface:terminal">**In the terminal:** it shows
+  `esc to interrupt`.</span> <span data-show="surface:desktop">**In the
+  Code tab:** the stop button shows by the prompt box.</span>
+- **It stopped, or closed:** if closed,
+  <span data-show="surface:terminal">**In the terminal:** ⌨️ in the Claude
+  window, run `cd ~/projects/hr-case-router/app && claude --continue`.</span>
+  <span data-show="surface:desktop">**In the Code tab:** open the desktop
+  app again, and click the session in the sidebar.</span> Then 🤖 type
   `Carry on with the batch.`
 - **Still stuck:** 🤖 type `/clear`, paste this, then the
   [step 6](#6-start-the-batch) prompt (on a Pro plan, with its extra line),
@@ -316,7 +354,20 @@ use that scope wherever the steps say `<SCOPE>`.
 
 </details>
 
-⌨️ **Terminal**, in your window: **Ctrl+C** stops `caffeinate`. Then:
+<div data-show="os:mac">
+
+**On Mac:** in your window, press **Ctrl+C** to stop `caffeinate`.
+
+</div>
+
+<div data-show="os:win">
+
+**On Windows:** in **Settings > System > Power & battery**, set **When
+plugged in, put my device to sleep after** back to what it was.
+
+</div>
+
+⌨️ **Terminal**, in your window:
 
 ```
 git switch main && git pull && npm install && npm test
@@ -449,7 +500,10 @@ End impersonation. As admin, in this order, then as `hr.demo` click
 **Reroute** on the case and wait two minutes: 1. in `sys_properties.list`,
 set `<SCOPE>.enabled` to `true`; 2. no dispatcher row in `sys_trigger.list`?
 open the job in `sysauto_script.list` and click **Update**; 3. ⌨️ run
-`pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`,
+<span data-show="os:mac">**On Mac:**
+`pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>
+<span data-show="os:win">**On Windows:**
+`clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>,
 then in `sys.scripts.do` pick **global**, paste, and click **Run script**.
 Reroute says a run is already in progress? Wait for the note saying the
 router didn't finish, five minutes from creation, then click it again.
@@ -457,11 +511,27 @@ router didn't finish, five minutes from creation, then click it again.
 </details>
 
 4. End impersonation. When both notes are there, close any conversation
-   the warm-up left open (DECISIONS, P14). ⌨️ **Terminal**, your window:
+   the warm-up left open (DECISIONS, P14). Copy the script:
+
+   <div data-show="os:mac">
+
+   **On Mac:** ⌨️ **Terminal**, your window:
 
    ```
    pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js
    ```
+
+   </div>
+
+   <div data-show="os:win">
+
+   **On Windows:** ⌨️ **Terminal**, your window:
+
+   ```
+   clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js
+   ```
+
+   </div>
 
    🌐 **Browser**, as admin: type `sys.scripts.do` in the filter navigator
    and press **Enter**. Set the scope picker above the script to

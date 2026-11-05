@@ -20,12 +20,27 @@ apply another?
 
 ### 1. Start the challenge
 
-⌨️ **Terminal:**
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ start Claude in your workspace:
 
 ```
 cd ~/projects/hr-case-router
 claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude:** type this, alone:
 
@@ -156,9 +171,11 @@ and when I reply keep, append them to
 
 Confirm a `design` line for each question none of your files answered, or
 where your LLD and DECISIONS disagreed, with the term it added. Terms you
-added at the read-back aren't catches. Reply `keep`, then type `/exit`.
+added at the read-back aren't catches. Reply `keep`.
+<span data-show="surface:terminal">**In the terminal:** then type
+`/exit`.</span>
 
-⌨️ **Terminal:**
+⌨️ **Terminal**, in your window:
 
 ```
 tail -n 5 ~/projects/hr-case-router/catches.md

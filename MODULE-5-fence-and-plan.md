@@ -19,14 +19,38 @@ the plan's review find something real?
 
 ### 1. Bring the design in, and check it's ready
 
-1. ⌨️ **Terminal:** this window becomes the Claude window. The second line
-   brings in the lab's platform-rules test (P1-P5, P12, P13):
+1. Bring in the lab's platform-rules test (P1-P5, P12, P13), the second
+   line, and start Claude in your app:
+
+   <div data-show="surface:terminal">
+
+   **In the terminal:** ⌨️ this window becomes the Claude window:
 
    ```
    cd ~/projects/hr-case-router/app
    cp ../../hr-case-router-lab-guide/files/platform-rules.test.ts src/
    claude
    ```
+
+   </div>
+
+   <div data-show="surface:desktop">
+
+   **In the Code tab:** ⌨️ in your window:
+
+   ```
+   cd ~/projects/hr-case-router/app
+   cp ../../hr-case-router-lab-guide/files/platform-rules.test.ts src/
+   ```
+
+   Then 🤖 start a new session
+   (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+   In the row under the prompt box, pick the top entry under **Local**, click
+   the folder control, choose **Open folder…**, and pick
+   `~/projects/hr-case-router/app`.
+   Then press **Ctrl+O** until the view is **Verbose**.
+
+   </div>
 
 2. 🤖 **Claude:**
 
@@ -60,7 +84,7 @@ the plan's review find something real?
    number clashes with an id in docs/LLD-HRCaseRouter.md.
    ```
 
-4. ⌨️ **Terminal**, in your window (**Cmd+N**):
+4. ⌨️ **Terminal**, in your window:
 
    ```
    cd ~/projects/hr-case-router/app

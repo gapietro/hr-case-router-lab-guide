@@ -37,7 +37,10 @@ Tell your instructor before you go on.
 
 ### 2. Have Claude trace the PRD
 
-⌨️ **Terminal:** start Claude in a review folder. Pick **Yes** to trust it.
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ start Claude in a review folder. Pick **Yes** to
+trust it.
 
 ```
 mkdir -p ~/projects/hr-case-router-prd-review
@@ -45,6 +48,27 @@ cd ~/projects/hr-case-router-lab-guide/files
 cp -n inputs/USE-CASE.md inputs/WORKSHOP-NOTES.md inputs/CHANGE-REQUEST.md PRD-HRCaseRouter.md ~/projects/hr-case-router-prd-review/
 cd ~/projects/hr-case-router-prd-review && claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** ⌨️ in your window, make a review folder:
+
+```
+mkdir -p ~/projects/hr-case-router-prd-review
+cd ~/projects/hr-case-router-lab-guide/files
+cp -n inputs/USE-CASE.md inputs/WORKSHOP-NOTES.md inputs/CHANGE-REQUEST.md PRD-HRCaseRouter.md ~/projects/hr-case-router-prd-review/
+```
+
+Then 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router-prd-review`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude:**
 
@@ -98,9 +122,20 @@ the same rule for your recommendations, then wait.
 
 <details><summary>🛟 Claude closed, or the window crashed</summary>
 
-⌨️ **Terminal:**
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️
 `cd ~/projects/hr-case-router-prd-review && claude --continue`. It reopens
 the conversation where it stopped.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** open the desktop app again, and click the session in
+the sidebar. It holds the conversation.
+
+</div>
 
 </details>
 
@@ -122,7 +157,7 @@ and when I reply keep, append them to
 Keep a line for each gap that changed the PRD in step 3. Then reply
 `keep`.
 
-✅ ⌨️ In a second window (**Cmd+N**),
+✅ ⌨️ In your window,
 `tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you kept.
 
 ### 5. Get the customer's acceptance
@@ -145,7 +180,8 @@ Acceptance from it with today's date, and replace "Draft 2" with
 Then copy the PRD into ~/projects/hr-case-router/brief/.
 ```
 
-When it's done, type `/exit` alone. Then ⌨️ **Terminal:**
+When it's done: <span data-show="surface:terminal">**In the terminal:**
+type `/exit` alone.</span> ⌨️ **Terminal**, in your window:
 
 ```
 ls ~/projects/hr-case-router/brief
@@ -168,9 +204,10 @@ manager, with today's date.
 
 <details><summary>🛟 It prints a number above 0, or a check fails</summary>
 
-⌨️ **Terminal:**
-`cd ~/projects/hr-case-router-prd-review && claude --continue`. Then
-🤖 **Claude:** type `Recheck sections 4, 6, 7 and 8 and the Draft 2 line
+<span data-show="surface:terminal">**In the terminal:** ⌨️
+`cd ~/projects/hr-case-router-prd-review && claude --continue`.</span>
+<span data-show="surface:desktop">**In the Code tab:** click the review
+session in the sidebar.</span> Then 🤖 **Claude:** type `Recheck sections 4, 6, 7 and 8 and the Draft 2 line
 against my request, fix them, then copy the PRD again.`
 
 </details>

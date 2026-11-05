@@ -61,8 +61,13 @@ needs the instance until then.
 
 ### 5. Close the session
 
-Claude closed? ⌨️ **Terminal**, in the Claude window:
-`cd ~/projects/hr-case-router/app && claude`
+Claude closed? <span data-show="surface:terminal">**In the terminal:** ⌨️
+in the Claude window: `cd ~/projects/hr-case-router/app && claude`</span>
+<span data-show="surface:desktop">**In the Code tab:** 🤖 start a new
+session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>)
+on `~/projects/hr-case-router/app`, with the top **Local** entry and
+**Open folder…** under the prompt box, then **Verbose** (**Ctrl+O**).</span>
 
 1. 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
@@ -117,7 +122,13 @@ Used a separate user account? Skip this part. Going straight on to
 
 ### 6. Put your settings back
 
-⌨️ **Terminal**, with every Claude window closed (`/exit`):
+Close Claude everywhere first:
+<span data-show="surface:terminal">**In the terminal:** type `/exit` in
+every Claude window.</span>
+<span data-show="surface:desktop">**In the Code tab:** close every session
+(<kbd data-mac="Cmd+W" data-win="Ctrl+W">Cmd+W (Mac) · Ctrl+W (Windows)</kbd>).</span>
+
+⌨️ **Terminal**, in your window:
 
 ```
 git -C ~/projects/hr-case-router-lab-guide pull

@@ -86,8 +86,14 @@ Settle these at the kick-off. The prompts and commands below use them.
    ```
    ✏️ **Editor:** write your values in `LOG.md`. The Log it prompts add
    your catches to `catches.md`.
-2. ⌨️ **Terminal**, with every Claude window closed, the lab's settings
-   (Module 0 step 6):
+2. Close Claude everywhere first:
+   <span data-show="surface:terminal">**In the terminal:** type `/exit` in
+   every Claude window.</span>
+   <span data-show="surface:desktop">**In the Code tab:** close every
+   session
+   (<kbd data-mac="Cmd+W" data-win="Ctrl+W">Cmd+W (Mac) · Ctrl+W (Windows)</kbd>).</span>
+   Then ⌨️ **Terminal**, in your window, the lab's settings (Module 0
+   step 6):
    ```
    git -C ~/projects/hr-case-router-lab-guide pull
    node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
@@ -209,7 +215,10 @@ Run them in this order, on your app:
    once you're done with this method.
 
 **Before you paste a prompt or command**, paste it into a new VS Code tab
-(**Cmd+N**), make section 7's swaps (**Cmd+Option+F**) and fill in each
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>),
+make section 7's swaps
+(<kbd data-mac="Cmd+Option+F" data-win="Ctrl+H">Cmd+Option+F (Mac) · Ctrl+H (Windows)</kbd>)
+and fill in each
 `<…>`, then copy it out. Times, lunch and the instructor's finished build
 don't apply. Your instance asleep, or not answering? Ask your platform
 team.
@@ -233,7 +242,13 @@ team.
 A slice is the thinnest piece a real user can use from start to finish.
 Everything else is deferred, not dropped.
 
-1. ⌨️ **Terminal:** `cd ~/projects/<app> && claude`. Then 🤖 **Claude:**
+1. <span data-show="surface:terminal">**In the terminal:** ⌨️
+   `cd ~/projects/<app> && claude`.</span>
+   <span data-show="surface:desktop">**In the Code tab:** start a new
+   session (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>)
+   on `~/projects/<app>`, with the top **Local** entry and **Open folder…**
+   under the prompt box, then **Verbose** (**Ctrl+O**).</span> Then 🤖
+   **Claude:**
    ```
    Read brief/ and CONSULT.md. Propose two or three end-to-end slices. Each
    slice must: let a real user do one complete thing; be about 5 to 8
@@ -328,7 +343,13 @@ settled for your app: never copy the workshop's.
   cp ../hr-case-router-lab-guide/files/LLD-TEMPLATE.md docs/
   ```
   ✏️ Copy your technical documents into `~/projects/<app>/inputs/`, as
-  Markdown. Then ⌨️ `claude`, and 🤖 paste this instead of the module's:
+  Markdown. Then <span data-show="surface:terminal">**In the terminal:** ⌨️
+  `claude`.</span> <span data-show="surface:desktop">**In the Code tab:**
+  start a new session
+  (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>)
+  on `~/projects/<app>`, with the top **Local** entry and **Open folder…**
+  under the prompt box, then **Verbose** (**Ctrl+O**).</span> 🤖 Paste this
+  instead of the module's:
   ```
   Read brief/, CONSULT.md, SLICE.md, inputs/ and
   docs/DECISIONS.md. List every platform fact the design relies on,

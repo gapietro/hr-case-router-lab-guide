@@ -21,7 +21,12 @@ asleep, your instructor wakes it: ask them.
 
 <details><summary>🛟 You put your machine back after Module 9</summary>
 
-⌨️ **Terminal**, with every Claude window closed (`/exit`):
+Close Claude everywhere first:
+<span data-show="surface:terminal">**In the terminal:** type `/exit` in
+every Claude window.</span>
+<span data-show="surface:desktop">**In the Code tab:** close every session
+(<kbd data-mac="Cmd+W" data-win="Ctrl+W">Cmd+W (Mac) · Ctrl+W (Windows)</kbd>).</span>
+Then ⌨️ **Terminal**, in your window:
 
 1. The lab's settings:
 
@@ -76,12 +81,24 @@ asleep, your instructor wakes it: ask them.
 
 **Words used here**
 
-- **Your window:** a second Terminal window (**Cmd+N**), never the one
-  Claude runs in.
+- **Your window:** <span data-show="os:mac surface:terminal">**On Mac, in
+  the terminal:** a second Terminal window (**Cmd+N**), never the one Claude
+  runs in.</span> <span data-show="os:win surface:terminal">**On Windows, in
+  the terminal:** a second Git Bash tab (**Ctrl+Shift+T**), never the one
+  Claude runs in.</span> <span data-show="surface:desktop">**In the Code
+  tab:** the terminal app you use for ⌨️ steps, never the Code tab's own
+  terminal pane.</span>
 - **`<SCOPE>`:** your app's scope, the `scope` line in
   `app/now.config.json`, such as `x_123456_hcr_ga`.
-- **Fresh session:** in the Claude window, type `/exit`, then ⌨️
-  `cd ~/projects/hr-case-router/app && claude`.
+- **Fresh session:** <span data-show="surface:terminal">**In the
+  terminal:** in the Claude window, type `/exit`, then ⌨️
+  `cd ~/projects/hr-case-router/app && claude`.</span>
+  <span data-show="surface:desktop">**In the Code tab:** start a new session
+  (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+  In the row under the prompt box, pick the top entry under **Local**, click
+  the folder control, choose **Open folder…**, and pick
+  `~/projects/hr-case-router/app`.
+  Then press **Ctrl+O** until the view is **Verbose**.</span>
 - **The session open:** Module 6 step 1's paste, sent first in a fresh
   session when a step asks for it:
 
@@ -89,8 +106,11 @@ asleep, your instructor wakes it: ask them.
   Read BACKLOG.md and SESSION-NOTE.md, and check them against the open
   issues. Tell me the top three items by gate distance, one line each.
   ```
-- **Claude closed, or the window crashed, mid-step?** In the same folder,
-  run `claude --continue`. It reopens the conversation where it stopped.
+- **Claude closed mid-step, or its window crashed?**
+  <span data-show="surface:terminal">**In the terminal:** in the same
+  folder, run `claude --continue`. It reopens the conversation where it
+  stopped.</span> <span data-show="surface:desktop">**In the Code tab:** open
+  the desktop app again, and click the session in the sidebar.</span>
 
 ## Part 1 — Finish the build
 
@@ -228,8 +248,11 @@ description, click the issue number after **Closes**. ✅ The issue shows
   Take your recommendation, file it as a register issue if it's about the
   design, and carry on with the batch.
   ```
-- **It stopped, or closed:** if closed, ⌨️ in the Claude window, run
-  `cd ~/projects/hr-case-router/app && claude --continue`. Then 🤖 type
+- **It stopped, or closed:** if closed,
+  <span data-show="surface:terminal">**In the terminal:** ⌨️ in the Claude
+  window, run `cd ~/projects/hr-case-router/app && claude --continue`.</span>
+  <span data-show="surface:desktop">**In the Code tab:** open the desktop
+  app again, and click the session in the sidebar.</span> Then 🤖 type
   `Carry on with the batch.`
 - **Still stuck:** 🤖 type `/clear`, paste this, then the prompt above and
   its Pro-plan line, then `go`:
@@ -372,7 +395,10 @@ table (P8).
    description** to its "Example request:" line, and click **Submit**.
    ✅ Within about three minutes, each has a work note by `hr.router`.
 7. End impersonation, and close any conversation left open (P14). ⌨️ Run
-   `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`.
+   <span data-show="os:mac">**On Mac:**
+   `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`.</span>
+   <span data-show="os:win">**On Windows:**
+   `clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`.</span>
    🌐 As admin, in `sys.scripts.do`, set the scope picker to **global**,
    paste, and click **Run script**. ✅ It prints `Closed` lines, any number.
 
@@ -457,7 +483,10 @@ End impersonation. As admin, in this order, then as `hr.demo` click
 **Reroute** on the case and wait two minutes: 1. set `<SCOPE>.enabled` to
 `true`; 2. no dispatcher row in `sys_trigger.list`? open the job in
 `sysauto_script.list` and click **Update**; 3. ⌨️ run
-`pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`,
+<span data-show="os:mac">**On Mac:**
+`pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>
+<span data-show="os:win">**On Windows:**
+`clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>,
 then in `sys.scripts.do` pick **global**, paste, and click **Run script**.
 
 </details>
@@ -1001,11 +1030,18 @@ tell your instructor.
 
 ### 3. Your partner plants
 
-Whoever plants doesn't diagnose. 🤖 **Claude:** type `/exit`, and leave the
-room. Your partner, at your computer:
+Whoever plants doesn't diagnose. 🤖 **Claude:**
+<span data-show="surface:terminal">**In the terminal:** type `/exit`.</span>
+<span data-show="surface:desktop">**In the Code tab:** close the session
+(<kbd data-mac="Cmd+W" data-win="Ctrl+W">Cmd+W (Mac) · Ctrl+W (Windows)</kbd>).</span>
+Then leave the room. Your partner, at your computer:
 
-1. ⌨️ In the Claude window, runs
-   `cd ~/projects/hr-case-router/app && claude`. Then 🤖 types
+1. <span data-show="surface:terminal">**In the terminal:** ⌨️ in the Claude
+   window, runs `cd ~/projects/hr-case-router/app && claude`.</span>
+   <span data-show="surface:desktop">**In the Code tab:** starts a new
+   session (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>)
+   on `~/projects/hr-case-router/app`, with the top **Local** entry and
+   **Open folder…** under the prompt box.</span> Then 🤖 types
    `/prove-it:handoff plant`.
 2. ✏️ Reads the card it names, such as
    `~/projects/hr-case-router/drill-card.md`. Unrealistic? 🤖 Types
@@ -1013,19 +1049,47 @@ room. Your partner, at your computer:
 3. ✏️ Writes the before state on the card. 🌐 Plants the failure, as
    admin, the way the card says. ✏️ Fills in **Planted by**
    `partner`, and **Planted on**.
-4. 🤖 Types `/exit`, and writes you a symptom report, such as
+4. <span data-show="surface:terminal">**In the terminal:** 🤖 types
+   `/exit`.</span> <span data-show="surface:desktop">**In the Code tab:**
+   archives the planting session, so you can't read it: hovers over it in
+   the sidebar, opens its menu, and chooses **Archive**.</span>
+   Then writes you a symptom report, such as
    `My new HR case never got a routing note.`
 
 No partner? Plant it yourself, and write `builder`: it's a weaker drill.
 
 ### 4. Diagnose from the runbook
 
-1. ⌨️ In the Claude window, with Claude closed:
+1. Update your app, and start Claude with no memory of earlier sessions:
+
+   <div data-show="surface:terminal">
+
+   **In the terminal:** ⌨️ in the Claude window, with Claude closed:
 
    ```
    cd ~/projects/hr-case-router/app && git switch main && git pull
    CLAUDE_CODE_DISABLE_AUTO_MEMORY=1 claude
    ```
+
+   </div>
+
+   <div data-show="surface:desktop">
+
+   **In the Code tab:** ⌨️ in your window:
+
+   ```
+   cd ~/projects/hr-case-router/app && git switch main && git pull
+   ```
+
+   Then 🤖 start a new session
+   (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+   In the row under the prompt box, pick the top entry under **Local**, click
+   the folder control, choose **Open folder…**, and pick
+   `~/projects/hr-case-router/app`.
+   Then press **Ctrl+O** until the view is **Verbose**. The lab's settings
+   already keep Claude's memory off.
+
+   </div>
 2. 🤖 **Claude**, first, with no session open: type this, with the symptom
    report:
 

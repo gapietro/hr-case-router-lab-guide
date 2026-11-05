@@ -35,9 +35,9 @@ Your instructor gives you your own instance, with HR Service Delivery, its
 demo data and AI Agent Studio. Save its admin password in your password
 manager, and note its address, such as `https://dev123456.service-now.com`.
 
-Reading this guide as `LAB.html`? Put the instance's name, such as
-`dev123456`, in **Your values** (the setup chip, top right): every
-terminal command then shows it.
+Note the instance's name, such as `dev123456`.
+
+<div data-value="instance"></div>
 
 ### 2. Check the demo data
 
@@ -159,19 +159,42 @@ you see.
 
 First set up Git Bash, the terminal every ⌨️ step uses:
 
-1. 🌐 **Browser:** download Git for Windows from
-   https://git-scm.com/downloads/win, and run it. On **Select
-   Components**, tick **Add a Git Bash Profile to Windows Terminal**; keep
-   every other default.
-2. Open Windows Terminal: press the **Windows** key, type `Terminal`, and
+1. 🌐 **Browser:** open https://git-scm.com/downloads/win, and click
+   **Git for Windows/x64 Setup** (**Git for Windows/ARM64 Setup** on an
+   ARM computer).
+2. Open the file from your Downloads folder.
+3. Click **Yes** when Windows asks to allow changes.
+4. Click **Next** on each screen until **Select Components**.
+5. Tick **Add a Git Bash Profile to Windows Terminal**, and keep every
+   other default.
+6. Click **Next** on each screen that's left, then **Install**, then
+   **Finish**.
+7. Open Windows Terminal: press the **Windows** key, type `Terminal`, and
    press **Enter**.
-3. Click **⌄**, beside the **+** at the top, then **Settings**. In
-   **Settings > Startup**, set **Default profile** to **Git Bash**, click **Save**,
-   and close every Windows Terminal window.
+8. Click **⌄**, beside the **+** at the top, then **Settings**.
+9. In **Settings > Startup**, set **Default profile** to **Git Bash**, and
+   click **Save**.
+10. Close every Windows Terminal window.
 
 Then open Windows Terminal again: it opens in Git Bash.
 
 </div>
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Never installed tools like these? How this step goes</summary>
+
+1. Run the check below, even on a new computer. `command not found`
+   means that tool isn't installed yet: that's expected.
+2. Answer **No, one is missing or too old**. Each tool's install then
+   shows below the question, step by step, in the order to do them.
+3. Install only the tools that failed, top to bottom.
+4. An installer may ask for your computer's password, or for permission
+   to make changes: that's expected. Can't give it, because your company
+   manages the computer? Tell your instructor before the day.
+5. When you've installed them, close every terminal window, then open a
+   new one, and run the check again. A window that was open before an
+   install can't see the new tool.
+
+</details>
 
 ⌨️ **Terminal:** check what you have:
 
@@ -206,6 +229,7 @@ claude --version
 ✅ Node.js is `v22.22` or later, `now-sdk` is `4.8.0` or later, and
 Claude Code is `2.1.228` or later. The others print any version. The guide
 is written against Claude Code `2.1.312` and `now-sdk` `4.13.6`.
+`command not found` counts as missing.
 
 <div data-ask="m0-tools-ok" data-options="yes|no" data-labels="Yes, all of them|No, one is missing or too old">
 
@@ -215,18 +239,94 @@ is written against Claude Code `2.1.312` and `now-sdk` `4.13.6`.
 
 <div data-show="choice.m0-tools-ok:no">
 
-**If one is missing or too old:** install what's missing, then run the
-checks again.
+**If one is missing or too old:** install each tool that failed, in the
+order below, and skip the ones that passed. Then run the checks again.
 
 <div data-show="os:mac">
 
-**On Mac:** install Node.js LTS from https://nodejs.org and the GitHub
-CLI from https://cli.github.com. Then, in ⌨️ **Terminal**, install the
-SDK and Claude Code:
+**On Mac:**
+
+**Node.js:** download the macOS installer, the `.pkg`, from
+https://nodejs.org/en/download, and run it.
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Node.js on Mac</summary>
+
+1. 🌐 **Browser:** open https://nodejs.org/en/download.
+2. Skip the commands at the top of the page.
+3. Under **Or get a prebuilt Node.js® for macOS**, click
+   **macOS Installer (.pkg)**. The same file works on every Mac, Apple
+   silicon or Intel.
+4. Open the file from your Downloads folder.
+5. Click **Continue** on each screen, and **Agree** to the licence.
+6. Click **Install**, and type your Mac's password.
+7. Click **Close** when it says the installation was successful.
+8. In a new Terminal window (**Cmd+N**), run `node --version`: it prints
+   a version, such as `v26.13.0`.
+
+</details>
+
+**git:** it comes with Apple's command line developer tools. Did the
+check open a box offering to install them? Click **Install** there.
+
+No box? In ⌨️ **Terminal**, install them:
+
+```
+xcode-select --install
+```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `xcode-select --install`: Asks macOS to install Apple's command line
+   developer tools, which include git. A box opens to do it.
+
+</details>
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: git on Mac</summary>
+
+1. Click **Install** in the box offering the command line developer
+   tools: the one the check opened, or the one the line opens.
+2. Click **Agree** to the licence.
+3. Wait for the download to finish: it can take 10 minutes or more.
+4. Click **Done**.
+5. In a new Terminal window (**Cmd+N**), run `git --version`: it prints a
+   version.
+
+</details>
+
+**GitHub CLI:** download the file ending in `_macOS_universal.pkg` from
+https://github.com/cli/cli/releases/latest, and run it. macOS blocks it
+the first time: allow it in **System Settings > Privacy & Security**, with
+**Open Anyway**.
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: the GitHub CLI on Mac</summary>
+
+1. 🌐 **Browser:** open https://github.com/cli/cli/releases/latest.
+2. Under **Assets**, click the file whose name ends in
+   `_macOS_universal.pkg`, such as `gh_2.103.3_macOS_universal.pkg`. Not
+   listed? Click the link that shows all the assets first.
+3. Open the file from your Downloads folder. macOS says it can't check
+   the file, because GitHub doesn't sign it.
+4. Click **Done** (**OK** on older macOS). Don't delete the file.
+5. Open **System Settings** from the Apple menu, then **Privacy &
+   Security**.
+6. Scroll down to **Security**, and click **Open Anyway** beside the
+   installer's name. The button stays for about an hour after you first
+   open the file.
+7. Click **Open Anyway** in the box that asks again, on macOS 15 and
+   later.
+8. Type your Mac's password.
+9. Click **Continue** on each screen of the installer, then **Install**.
+10. Type your Mac's password, and click **Close**.
+11. In a new Terminal window (**Cmd+N**), run `gh --version`: it prints a
+    version.
+
+</details>
+
+**ServiceNow SDK:** it needs Node.js first. Open a new Terminal window
+(**Cmd+N**). Then, in ⌨️ **Terminal**:
 
 ```
 npm install -g @servicenow/sdk
-curl -fsSL https://claude.ai/install.sh | bash
 ```
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
@@ -234,43 +334,100 @@ curl -fsSL https://claude.ai/install.sh | bash
 1. `npm install -g @servicenow/sdk`: Installs ServiceNow's SDK with `npm`,
    which came with Node.js. `-g` makes the `now-sdk` command work in every
    folder.
-2. `curl … | bash`: Downloads Claude Code's own installer from claude.ai
-   and runs it. It needs no `sudo`, and Claude Code then keeps itself up to
-   date. It shows no progress while it downloads: wait for
-   `Claude Code successfully installed!`.
 
 </details>
 
-Then open a new Terminal window (**Cmd+N**) and run the checks again.
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: the ServiceNow SDK on Mac</summary>
+
+1. Open a new Terminal window with **Cmd+N**, so it can find the Node.js
+   you just installed.
+2. Paste the line, and press **Enter**.
+3. Wait for a line that starts `added`, a minute or two. Lines that start
+   `npm warn` are normal.
+4. Run `now-sdk --version`: it prints a version, such as `4.13.6`.
+
+</details>
+
+**Claude Code:** in ⌨️ **Terminal**, run its own installer:
+
+```
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `curl … | bash`: Downloads Claude Code's own installer from claude.ai
+   and runs it. It needs no `sudo`, and Claude Code then keeps itself up to
+   date.
+
+</details>
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Claude Code on Mac</summary>
+
+1. Paste the line, and press **Enter**. Never type `sudo` in front of it.
+2. Wait for `Claude Code successfully installed!`: it shows nothing while
+   it downloads, for up to a few minutes.
+3. In a new Terminal window (**Cmd+N**), run `claude --version`: it
+   prints a version, such as `2.1.312 (Claude Code)`.
+
+</details>
+
+**Then:** open a new Terminal window (**Cmd+N**), and run the checks
+again.
 
 </div>
 
 <div data-show="os:win">
 
-**On Windows:** install Node.js LTS (the `.msi`) from https://nodejs.org.
+**On Windows:** run each installer from your Downloads folder, and click
+**Yes** when Windows asks to allow changes.
 
-**In PowerShell, not Git Bash:** open PowerShell (press the **Windows**
-key, type `PowerShell`, press **Enter**). Then, in ⌨️ **Terminal**,
-install the GitHub CLI and Claude Code:
+**Node.js:** download the Windows installer, the `.msi`, from
+https://nodejs.org/en/download, and run it.
 
-```
-winget install --id GitHub.cli --source winget
-irm https://claude.ai/install.ps1 | iex
-```
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Node.js on Windows</summary>
 
-<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
-
-1. `winget install --id GitHub.cli --source winget`: Installs the GitHub
-   CLI with `winget`, Windows' own app installer. `--source winget` takes it
-   from winget's own list, not the Microsoft Store.
-2. `irm … | iex`: Downloads Claude Code's own installer from claude.ai and
-   runs it: `irm` fetches the file and `iex` runs it. It shows no progress
-   while it downloads: wait for `Claude Code successfully installed!`.
+1. 🌐 **Browser:** open https://nodejs.org/en/download.
+2. Skip the commands at the top of the page.
+3. Under **Or get a prebuilt Node.js® for Windows**, click
+   **Windows Installer (.msi)**.
+4. Open the file from your Downloads folder.
+5. Click **Next** on each screen, and tick the box that accepts the
+   licence. Keep every default, and leave any box that offers to install
+   extra tools unticked.
+6. Click **Install**, then **Yes** when Windows asks to allow changes.
+7. Click **Finish**.
+8. Close every terminal window, open Windows Terminal again, and run
+   `node --version`: it prints a version, such as `v26.13.0`.
 
 </details>
 
-Close every terminal window. Then, in ⌨️ **Terminal** (Windows Terminal,
-in Git Bash), install the SDK, and run the checks again:
+**git:** it comes with Git for Windows, at the start of this step. Did
+`git --version` fail? Close every terminal window, and open Windows
+Terminal again. Still fails? Install Git for Windows, as at the start of
+this step.
+
+**GitHub CLI:** download the file ending in `_windows_amd64.msi` from
+https://github.com/cli/cli/releases/latest, and run it.
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: the GitHub CLI on Windows</summary>
+
+1. 🌐 **Browser:** open https://github.com/cli/cli/releases/latest.
+2. Under **Assets**, click the file whose name ends in
+   `_windows_amd64.msi`, such as `gh_2.103.3_windows_amd64.msi`
+   (`_windows_arm64.msi` on an ARM computer). Not listed? Click the link
+   that shows all the assets first.
+3. Open the file from your Downloads folder.
+4. Click **Next** on each screen, keeping every default, then **Install**.
+5. Click **Yes** when Windows asks to allow changes.
+6. Click **Finish**.
+7. Close every terminal window, open Windows Terminal again, and run
+   `gh --version`: it prints a version.
+
+</details>
+
+**ServiceNow SDK:** it needs Node.js first. Close every terminal window,
+and open Windows Terminal again, in Git Bash. Then, in ⌨️ **Terminal**:
 
 ```
 npm install -g @servicenow/sdk
@@ -284,13 +441,96 @@ npm install -g @servicenow/sdk
 
 </details>
 
-</div>
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: the ServiceNow SDK on Windows</summary>
+
+1. Close every terminal window, so the next one can find the Node.js you
+   just installed. A new tab isn't enough.
+2. Open Windows Terminal: press the **Windows** key, type `Terminal`, and
+   press **Enter**. Its prompt ends in `$`: that's Git Bash.
+3. Paste the line with **Ctrl+V**, or a right-click, and press **Enter**.
+4. Wait for a line that starts `added`, a minute or two. Lines that start
+   `npm warn` are normal.
+5. Run `now-sdk --version`: it prints a version, such as `4.13.6`.
+
+</details>
+
+**Claude Code:** in PowerShell, not Git Bash. Open PowerShell: press the
+**Windows** key, type `PowerShell`, and press **Enter**. Then, in
+⌨️ **Terminal**:
+
+```
+irm https://claude.ai/install.ps1 | iex
+```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `irm … | iex`: Downloads Claude Code's own installer from claude.ai and
+   runs it: `irm` fetches the file and `iex` runs it.
+
+</details>
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Claude Code on Windows</summary>
+
+1. Open PowerShell, as above. Its prompt starts with `PS`. It needs no
+   administrator rights.
+2. Paste the line with **Ctrl+V**, or a right-click, and press **Enter**.
+3. Wait for `Claude Code successfully installed!`: it shows nothing while
+   it downloads, for up to a few minutes.
+4. Close PowerShell.
+5. Close every terminal window, open Windows Terminal again, and run
+   `claude --version`: it prints a version, such as
+   `2.1.312 (Claude Code)`.
+
+</details>
+
+**Then:** close every terminal window, open Windows Terminal again, in
+Git Bash, and run the checks again.
 
 </div>
 
-Install VS Code from https://code.visualstudio.com too: it's your editor.
-**Never installed tools like these?** That's fine: ask Claude at
-https://claude.ai, or any AI assistant, to walk you through it.
+</div>
+
+**VS Code:** install it too, if you haven't: it's your editor, and the
+check doesn't cover it.
+
+<div data-show="os:mac">
+
+**On Mac:** download it from https://code.visualstudio.com/download, and
+drag **Visual Studio Code** into your **Applications** folder.
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: VS Code on Mac</summary>
+
+1. 🌐 **Browser:** open https://code.visualstudio.com/download.
+2. Click **Download for Mac**.
+3. Open the file from your Downloads folder.
+4. Drag **Visual Studio Code** into your **Applications** folder.
+5. Open VS Code from **Applications**.
+6. Click **Open** when macOS asks whether to open an app from the
+   internet. VS Code's window opens.
+
+</details>
+
+</div>
+
+<div data-show="os:win">
+
+**On Windows:** download the User Installer from
+https://code.visualstudio.com/download, and run it. It needs no
+administrator rights.
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: VS Code on Windows</summary>
+
+1. 🌐 **Browser:** open https://code.visualstudio.com/download.
+2. Click **Download for Windows**: its file name starts
+   `VSCodeUserSetup`.
+3. Open the file from your Downloads folder.
+4. Accept the agreement, and click **Next** on each screen, keeping every
+   default.
+5. Click **Install**, then **Finish**. VS Code's window opens.
+
+</details>
+
+</div>
 
 <details data-show="os:mac"><summary>🛟 An install or a check doesn't work on Mac</summary>
 
@@ -308,7 +548,11 @@ https://claude.ai, or any AI assistant, to walk you through it.
   again with `sudo` in front, and type your Mac's password; nothing shows
   as you type. Then run `sudo chown -R $(id -u):$(id -g) ~/.npm`, so npm's
   cache stays yours. Never put `sudo` in front of the Claude Code line.
-- **A box offers "command line developer tools":** click **Install**.
+- **No Open Anyway button for the GitHub CLI:** your Mac is managed. Tell
+  your instructor before the day.
+- **An installer asks for an administrator's name and password:** your Mac
+  is managed, and you can't install on it yourself. Tell your instructor
+  before the day.
 - **claude --version still prints an old version after the installer:**
   an earlier install of Claude Code comes first. Tell your instructor.
 
@@ -328,13 +572,14 @@ https://claude.ai, or any AI assistant, to walk you through it.
   ```
 
 - **irm: command not found:** you're in Git Bash. Open PowerShell, as
-  above, and paste the lines again.
+  above, and paste the line again.
 - **Git Bash isn't in Windows Terminal's Default profile list:** run Git
   for Windows' installer again, and on **Select Components** tick
   **Add a Git Bash Profile to Windows Terminal**. No Windows Terminal at
   all, on Windows 10? Install it from the Microsoft Store first.
-- **winget isn't allowed, or isn't found:** download the GitHub CLI's
-  `.msi` from https://cli.github.com, and run it instead.
+- **Windows asks for an administrator's password, or won't install:**
+  your computer is managed, and you can't install on it yourself. Tell
+  your instructor before the day.
 - **EPERM or EBUSY from npm:** close every other terminal window and VS
   Code, then run the `npm install` line again.
 - **claude --version still prints an old version after the installer:**
@@ -526,7 +771,8 @@ then run the `gh repo clone` line again.
 
 <div data-show="choice.m0-cc-before:yes">
 
-**If you have:** close every other Claude Code window first, with `/exit`.
+**If you have:** close every other Claude Code window first: `/exit` in
+each terminal, and close each session in the desktop app.
 The lab's settings start Claude in auto mode, turn off connectors, new
 memories and web search, block `now-sdk auth`, have Claude ask you before
 the SDK commands that write to your instance, such as `now-sdk install`,
@@ -551,7 +797,9 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 On a Pro or Max plan? 🌐 **Browser:** first, in claude.ai, open
 **Settings > Privacy** and turn off model training.
 
-⌨️ **Terminal:**
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ start Claude in your home folder:
 
 ```
 cd ~
@@ -572,7 +820,62 @@ shows.
 ✅ It lists `Read(~/projects/hr-case-router-lab-guide/**)`. Press **Esc**,
 then type `/exit`.
 
-<details><summary>🛟 It says ⏸ manual mode on</summary>
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** the Code-tab steps in this guide follow Anthropic's
+docs for the desktop app, and haven't been tried in this lab yet. One
+doesn't match what you see? Tell your instructor what you see.
+
+1. Open the Claude desktop app, sign in, and click **Code** at the top of
+   the sidebar.
+2. Start a new session (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+   In the row under the prompt box, pick the top entry under **Local**, click
+   the folder control, choose **Open folder…**, and pick your home folder.
+   Send nothing yet.
+
+✅ The mode selector, in the row under the prompt box, shows **Auto**.
+
+🤖 **Claude:** type `/status` alone.
+
+✅ Its **Claude Code** row shows `2.1.228` or later. The Code tab has its
+own copy of Claude Code, so this can differ from `claude --version`.
+
+⌨️ **Terminal**, in your window: `/permissions` doesn't work in the Code
+tab, so check the lab's settings file here:
+
+```
+node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
+```
+
+✅ It prints `Lab settings in place.`
+
+🤖 **Claude:** now check Claude really follows them. Paste this, and press
+**Enter**:
+
+```
+Run now-sdk auth --list.
+```
+
+✅ Claude says the command was denied, and shows no list.
+
+</div>
+
+<div data-show="os:win surface:desktop">
+
+**On Windows, in the Code tab:** the lab's rules are `Bash(…)` rules. With
+Git for Windows installed, Claude Code in a terminal runs commands in Git
+Bash, and those rules also turn its PowerShell tool off. Anthropic's docs
+don't say yet whether the Code tab's own copy does the same. The
+`now-sdk auth --list` check above tests it, and in step 14 each command
+Claude runs must be marked Bash. Either fails? Stop, and use Claude Code
+in Git Bash instead.
+<button data-set="surface:terminal">Use the terminal steps</button>
+
+</div>
+
+<details data-show="surface:terminal"><summary>🛟 It says ⏸ manual mode on</summary>
 
 Type `/exit`, then put the settings back and start again:
 
@@ -586,10 +889,65 @@ more often. Tell your instructor.
 
 </details>
 
-<details><summary>🛟 The Deny tab doesn't list it</summary>
+<details data-show="surface:desktop"><summary>🛟 The mode selector shows Manual</summary>
+
+⌨️ In your window, put the settings back:
+
+```
+node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
+```
+
+Then start a new session on your home folder again. Still **Manual**? Pick
+**Auto** in the mode selector. No **Auto** in it? Pick another model in the
+model picker, toward the right of that row: auto mode needs a recent one.
+Still none? Your organisation turned auto mode off. Claude will just ask
+more often. Tell your instructor.
+
+</details>
+
+<details data-show="surface:terminal"><summary>🛟 The Deny tab doesn't list it</summary>
 
 Your organisation's policy overrides the lab's settings. Type `/exit`, and
 tell your instructor.
+
+</details>
+
+<details data-show="surface:desktop"><summary>🛟 It prints Lab settings NOT in place</summary>
+
+⌨️ In your window, run the settings script again, without `--check`:
+
+```
+node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
+```
+
+✅ It prints `Lab settings in place.` Still not? Tell your instructor.
+
+</details>
+
+<details data-show="surface:desktop"><summary>🛟 Claude ran now-sdk auth --list</summary>
+
+The lab's rules didn't stop it. Stop here: don't use the Code tab for the
+lab until your instructor has looked. Tell them what Claude showed, and
+whether you're on Mac or Windows. Meanwhile, use Claude Code in a
+terminal. <button data-set="surface:terminal">Use the terminal steps</button>
+
+</details>
+
+<details data-show="surface:desktop"><summary>🛟 The Claude Code row shows an older version</summary>
+
+<div data-show="os:mac">
+
+**On Mac:** click **Claude** in the menu bar, then **Check for Updates…**.
+
+</div>
+
+<div data-show="os:win">
+
+**On Windows:** click **Help**, then **Check for Updates…**.
+
+</div>
+
+Then start a new session, and type `/status` again.
 
 </details>
 
@@ -752,7 +1110,7 @@ claude plugin install prove-it@prove-it
 Your own setup would steer the lab. Add `.off` to each name `ls` lists,
 such as `mv ~/CLAUDE.md ~/CLAUDE.md.off`; Module 9 moves them back. Hooks
 (`grep` or `git config`)? Tell your instructor: a separate user account on
-your Mac is cleanest.
+your computer is cleanest.
 
 </details>
 
@@ -772,15 +1130,18 @@ file you haven't named, and a guard checks each commit for secrets.
 2. Your scope is `x_<prefix>_hcr_<your initials, lower case>`, such as
    `x_123456_hcr_ga`.
 
-✅ Your scope is all lower case, with 18 characters or fewer. In
-`LAB.html`, put it in **Your values** (the setup chip, top right).
+✅ Your scope is all lower case, with 18 characters or fewer.
+
+Note your scope.
+
+<div data-value="scope"></div>
 
 ### 13. Create the app
 
 Your instance must be awake.
 
 ⌨️ **Terminal:** replace `<SCOPE>` with your scope from step 12 (already
-done if it's in **Your values**: the setup chip, top right):
+done if you typed it in step 12):
 
 ```
 mkdir -p ~/projects/hr-case-router/app
@@ -801,12 +1162,27 @@ then the three lines above. Still failing? Tell your instructor.
 
 ### 14. Let Claude set up the repo
 
-⌨️ **Terminal:** start Claude in the app folder, and pick **Yes** when it
-asks if you trust it:
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ start Claude in the app folder, and pick **Yes**
+when it asks if you trust it:
 
 ```
 cd ~/projects/hr-case-router/app && claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router/app`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
@@ -831,14 +1207,37 @@ reads outside the working directories**.
 
 ✅ The `now-sdk build` output ends with `Build completed successfully`, the
 email ends in `@users.noreply.github.com`, and `describe` prints `v0.1.4`.
-Then type `/exit`.
+<span data-show="surface:terminal">**In the terminal:** then type `/exit`.</span>
+
+<div data-show="os:win surface:desktop">
+
+**On Windows, in the Code tab:** ✅ in the **Verbose** view, each command
+Claude ran is marked Bash, not PowerShell. One says PowerShell? Stop here:
+the lab's safety rules don't cover it. Tell your instructor, and use Claude
+Code in Git Bash from here on.
+<button data-set="surface:terminal">Use the terminal steps</button>
+
+</div>
 
 <details><summary>🛟 npm install or the build failed</summary>
 
-npm says its cache is broken, or owned by root? ⌨️ In a second window
-(**Cmd+N**), run `sudo chown -R $(id -u):$(id -g) ~/.npm`, type your Mac's
-password, then paste the prompt again. Anything else: tell your instructor
-the first error line, and don't let Claude change files to make it pass.
+<div data-show="os:mac">
+
+**On Mac:** npm says its cache is broken, or owned by root? ⌨️ In a second
+Terminal window (**Cmd+N**), run `sudo chown -R $(id -u):$(id -g) ~/.npm`,
+type your Mac's password, then paste the prompt again.
+
+</div>
+
+<div data-show="os:win">
+
+**On Windows:** npm says EPERM or EBUSY? Close VS Code and every terminal
+window but Claude's, then paste the prompt again.
+
+</div>
+
+Anything else: tell your instructor the first error line, and don't let
+Claude change files to make it pass.
 
 </details>
 
@@ -897,11 +1296,26 @@ before? Then `git log --oneline` shows that one commit: go on.
 
 ### 17. Give the repo its rules
 
-⌨️ **Terminal:** this window becomes the Claude window:
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ this window becomes the Claude window:
 
 ```
 cd ~/projects/hr-case-router/app && claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router/app`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
@@ -949,7 +1363,28 @@ allow lines.
 
 ### 18. Read every name
 
-⌨️ **Terminal**, in a second window (**Cmd+N**). Replace `dev123456` with
+<div data-show="os:mac surface:terminal">
+
+**On Mac, in the terminal:** Claude has this window. Open a second one,
+your window, with **Cmd+N**.
+
+</div>
+
+<div data-show="os:win surface:terminal">
+
+**On Windows, in the terminal:** Claude has this tab. Open a second Git Bash
+tab, your window, with **Ctrl+Shift+T**.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** your window is the terminal app you've used so far,
+not the Code tab.
+
+</div>
+
+⌨️ **Terminal**, in your window. Replace `dev123456` with
 your instance's name (already done if it's in **Your values**: the setup
 chip, top right): that line
 teaches the guard to block any commit that names your instance. `-n` makes `git add` a dry run:
@@ -999,7 +1434,8 @@ Then run the `grep` again.
 Run git add . and commit on main as "chore: SDK project and CLAUDE.md".
 ```
 
-✅ Git prints `[main …] chore: SDK project and CLAUDE.md`. Type `/exit`.
+✅ Git prints `[main …] chore: SDK project and CLAUDE.md`.
+<span data-show="surface:terminal">**In the terminal:** type `/exit`.</span>
 
 ⌨️ **Terminal**, in the same window:
 
@@ -1020,6 +1456,10 @@ error? Use another name:
 ```
 gh repo create hr-case-router-2 --private --source . --remote=origin --push
 ```
+
+Note the new name.
+
+<div data-value="repo"></div>
 
 </details>
 

@@ -25,11 +25,33 @@ when it should stay where it is.
 
 ### 2. Start a fresh reviewer
 
-⌨️ **Terminal**, in the Claude window, after `/exit` if Claude is open:
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ in the Claude window, after `/exit` if Claude is
+open:
 
 ```
 cd ~/projects/hr-case-router/app && git switch main && git pull && claude
 ```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** ⌨️ in your window:
+
+```
+cd ~/projects/hr-case-router/app && git switch main && git pull
+```
+
+Then 🤖 start a new session
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**, click
+the folder control, choose **Open folder…**, and pick
+`~/projects/hr-case-router/app`.
+Then press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 🤖 **Claude**, before anything else: paste this, type `go` after it, and
 press **Enter**:
@@ -98,7 +120,8 @@ Also try: <your attack>. Commit a test for it.
 git switch main && git status --short
 ```
 
-✅ No files listed. 🤖 **Claude:** type `/exit`.
+✅ No files listed. <span data-show="surface:terminal">**In the terminal:**
+🤖 **Claude:** type `/exit`.</span>
 
 ## You now have
 
