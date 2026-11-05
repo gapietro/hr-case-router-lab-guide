@@ -155,12 +155,26 @@ isn't checked yet, and passwords must stay out of Claude.
 
 </div>
 
-Enter sends a message to Claude. For a new line inside one, type `\` and
-then press **Enter**. **Sending:** paste a 🤖 box, type `go` after it, press
-**Enter**. A line starting with `/`, and one-word replies such as `yes`,
-`keep`, `approve`, `apply` and `ship it` (alone), are typed on their own,
-with no `go`. Some replies must be exact, such as `Confirmed.`: each step
-gives the words.
+**Typing to Claude.** Claude has one box at the bottom where you type.
+**Enter** sends what's in it. For a new line inside one, type `\` and then
+press **Enter**. Three kinds of thing go in that box:
+
+- **A 🤖 box from this guide.** **Sending:** paste a 🤖 box, type `go` after
+  it, press **Enter**.
+- **A line starting with `/`.** It isn't a question for Claude: it starts
+  something ready-made. Some are Claude Code's own commands, such as
+  `/status`, which shows which version you have. Others start a **skill**:
+  instructions written in advance and installed with a plugin, which Claude
+  then follows step by step. The kit's skills all start `/prove-it:`, such
+  as `/prove-it:consult` in Module 2. Type `/` and a list appears; keep
+  typing to narrow it, then press **Enter**.
+- **A short reply.** When Claude asks you something, such as whether to keep
+  a line, answer in a word or two.
+
+A line starting with `/`, and one-word replies such as `yes`, `keep`,
+`approve`, `apply` and `ship it` (alone), are typed on their own, with no
+`go`. Some replies must be exact, such as `Confirmed.`: each step gives the
+words. Copy them as shown, full stop included.
 
 <div data-show="surface:terminal">
 
