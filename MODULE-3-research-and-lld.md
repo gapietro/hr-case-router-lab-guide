@@ -394,7 +394,8 @@ and when I reply keep, append them to
 
 Claude drafts this module's catches as one line each, in the catch log's
 format, from what happened in this session. You read them and reply `keep`, or
-say what to change. Module 9 counts them.
+say what to change. They go in your catch log, the record of what the process
+caught.
 
 </details>
 

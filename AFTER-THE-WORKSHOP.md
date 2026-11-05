@@ -740,11 +740,11 @@ npm test and now-sdk build pass, and give me one line per finding.
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-Claude restates the issue in five bullets, then fixes it the way you built
+Claude restates the issue in five bullets, then builds it the way you built
 your first story: tests first on a new branch, seen failing, then code until
 they pass and the build is clean. Then it ships it: a review, real findings
 fixed, design findings filed as register issues, and a merge once the tests
-and the build pass. You get one line per finding, and the fix is on `main`,
+and the build pass. You get one line per finding, and the change is on `main`,
 ready to install.
 
 </details>
@@ -811,7 +811,8 @@ exactly where you stopped.
 
    Claude drafts this module's catches as one line each, in the catch log's
    format, from what happened in this session. You read them and reply `keep`,
-   or say what to change. They go in your catch log.
+   or say what to change. They go in your catch log, the record of what the
+   process caught.
 
    </details>
 
@@ -991,12 +992,12 @@ step 3:
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-   Claude restates the issue in five bullets, then fixes it the way you built
+   Claude restates the issue in five bullets, then builds it the way you built
    your first story: tests first on a new branch, seen failing, then code
    until they pass and the build is clean. Then it ships it: a review, real
    findings fixed, design findings filed as register issues, and a merge once
-   the tests and the build pass. You get one line per finding, and the fix is
-   on `main`, ready to install.
+   the tests and the build pass. You get one line per finding, and the change
+   is on `main`, ready to install.
 
    </details>
 
@@ -1062,7 +1063,8 @@ tests.
 
    Claude drafts this module's catches as one line each, in the catch log's
    format, from what happened in this session. You read them and reply `keep`,
-   or say what to change. They go in your catch log.
+   or say what to change. They go in your catch log, the record of what the
+   process caught.
 
    </details>
 
@@ -1248,12 +1250,12 @@ tell your instructor.
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-   Claude restates the story in five bullets, then builds it the way you built
+   Claude restates the issue in five bullets, then builds it the way you built
    your first story: tests first on a new branch, seen failing, then code
    until they pass and the build is clean. Then it ships it: a review, real
    findings fixed, design findings filed as register issues, and a merge once
-   the tests and the build pass. You get one line per finding, and the fix is
-   on `main`, ready to install.
+   the tests and the build pass. You get one line per finding, and the change
+   is on `main`, ready to install.
 
    </details>
 
@@ -1939,7 +1941,8 @@ and when I reply keep, append them to
 
 Claude drafts this module's catches as one line each, in the catch log's
 format, from what happened in this session. You read them and reply `keep`, or
-say what to change. They go in your catch log.
+say what to change. They go in your catch log, the record of what the process
+caught.
 
 </details>
 
