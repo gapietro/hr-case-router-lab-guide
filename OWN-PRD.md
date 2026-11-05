@@ -93,14 +93,14 @@ Settle these at the kick-off. The prompts and commands below use them.
    session
    (<kbd data-mac="Cmd+W" data-win="Ctrl+W">Cmd+W (Mac) · Ctrl+W (Windows)</kbd>).</span>
    Then ⌨️ **Terminal**, in your window, the lab's settings (Module 0
-   step 6):
+   step 5):
    ```
    git -C ~/projects/hr-case-router-lab-guide pull
    node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
    ```
    ✅ It prints `Lab settings in place.`
 3. ⌨️ Did Module 9 step 8? Install the kit and the SDK plugin again
-   (Module 0 step 9):
+   (Module 0 step 8):
    ```
    claude plugin marketplace add 'gapietro/prove-it-kit#v0.1.4'
    claude plugin install prove-it@prove-it
@@ -109,7 +109,7 @@ Settle these at the kick-off. The prompts and commands below use them.
    ✅ None of the three prints an error. Skipped Module 9 step 8? Remove
    the workshop's login, so nothing reaches the lab instance by mistake:
    `now-sdk auth --delete lab-pdi`
-4. ⌨️ The SDK login for your development instance (Module 0 step 8), your
+4. ⌨️ The SDK login for your development instance (Module 0 step 7), your
    platform team's way. With basic sign-in, `<instance>` being its name:
    ```
    now-sdk auth --add https://<instance>.service-now.com --type basic --alias <alias>
@@ -121,9 +121,9 @@ Settle these at the kick-off. The prompts and commands below use them.
 6. In `LAB.html`, open **Your values** (the setup chip, top right), click
    **Clear my values** at the bottom of the panel, and confirm, so the
    steps you reuse show placeholders for section 7's swaps.
-7. Run Module 0 step 11, from `~/projects/<app>`. Then Module 0 steps 13
-   to 19, with section 7's swaps. Skip step 12: your scope is `<SCOPE>`.
-   In step 18, if your instances use your company's own domain, add it:
+7. Run Module 0 step 10, from `~/projects/<app>`. Then Module 0 steps 12
+   to 18, with section 7's swaps. Skip step 11: your scope is `<SCOPE>`.
+   In step 17, if your instances use your company's own domain, add it:
    `echo '<domain>' >> .prove-it/patterns`
 8. 🌐 **Browser**, as admin, on your development instance: create
    `<test user>` in `sys_user.list`, with your real users' roles. ✅ Its
@@ -556,11 +556,11 @@ as written.
 
 | Where | The workshop's wording | Yours |
 |---|---|---|
-| Module 0, steps 13, 14 and 16 | `HR Case Router` | Your app's name |
-| Module 0, step 13 | `--template typescript.basic` | `--template <your template>` |
-| Module 0, step 17 | `holds the lab's settled decisions` | `holds my positions list` |
-| Module 0, step 17 | `run now-sdk query --auth lab-pdi, read-only, and quote the rows` | `run now-sdk query --auth <alias>, read-only, on configuration tables and never fields that hold personal data, and quote the rows` |
-| Module 0, step 19 | `gh repo create hr-case-router` | `gh repo create <org>/<app>` |
+| Module 0, steps 12, 13 and 15 | `HR Case Router` | Your app's name |
+| Module 0, step 12 | `--template typescript.basic` | `--template <your template>` |
+| Module 0, step 16 | `holds the lab's settled decisions` | `holds my positions list` |
+| Module 0, step 16 | `run now-sdk query --auth lab-pdi, read-only, and quote the rows` | `run now-sdk query --auth <alias>, read-only, on configuration tables and never fields that hold personal data, and quote the rows` |
+| Module 0, step 18 | `gh repo create hr-case-router` | `gh repo create <org>/<app>` |
 | Module 1, step 2 | `cp -n inputs/USE-CASE.md inputs/WORKSHOP-NOTES.md inputs/CHANGE-REQUEST.md PRD-HRCaseRouter.md` and `against the three input files here` | Copy your files in yourself, and `against the input files here` |
 | Module 1, step 5 | `Apply CUSTOMER-ANSWERS.md to PRD-HRCaseRouter.md` | Section 3's owner's answers, instead |
 | Module 2, step 3 | `My answers: size is one release` | Section 4's answers, instead |

@@ -22,7 +22,7 @@ README's [What you need](README.md#what-you-need).
 
 | Send your instructor | By when |
 |---|---|
-| Your GitHub user name: no account yet? Step 5 helps you make one | As soon as you can, by the pre-session a week before: their invite needs it |
+| Your GitHub user name: no account yet? Step 4 helps you make one | As soon as you can, by the pre-session a week before: their invite needs it |
 | "Done", or what's missing from **You now have**, at the end | At least two days before the workshop |
 | Anything that stops an install: a proxy, a certificate error, no admin rights | As soon as you hit it: two weeks before if you can |
 
@@ -38,22 +38,10 @@ Note the instance's name, such as `dev123456`.
 
 <div data-value="instance"></div>
 
-### 2. Check the demo data
+### 2. Check your instance
 
-🌐 **Browser:** log in to your instance as `admin`. Click **All** at the top
-left, type `sn_hr_core_case.list` in the box under it, and press **Enter**.
-Then do the same with `sn_hr_core_service.list`.
-
-✅ Both lists have rows: demo HR cases and HR services.
-
-<details><summary>🛟 It's asleep or gone, or has no HR cases</summary>
-
-Tell your instructor. Waking an instance that's asleep (hibernating) takes a
-few minutes.
-
-</details>
-
-### 3. Act as an ordinary HR fulfiller
+Check your instance has what the lab needs: the demo data, the lab's groups
+and users, and an ordinary HR fulfiller who can see HR cases.
 
 `hr.demo` is an HR fulfiller with no admin rights: your instance comes with
 it. Stay logged in as admin, and impersonate it when a step says so.
@@ -68,11 +56,15 @@ it. Stay logged in as admin, and impersonate it when a step says so.
 
 </details>
 
-🌐 **Browser**, as admin:
+🌐 **Browser:** log in to your instance as `admin`.
 
-1. Open `sys_user_group.list`. In the **Name** column's search box, type
+1. Click **All** at the top left, type `sn_hr_core_case.list` in the
+   box under it, and press **Enter**. Then do the same with
+   `sn_hr_core_service.list`. ✅ Both lists have rows: demo HR cases and HR
+   services.
+2. Open `sys_user_group.list`. In the **Name** column's search box, type
    `Lab` and press **Enter**. ✅ It lists `Lab HR Team` and `Lab Locked Out`.
-2. Open `sys_user.list`. In the **User ID** column's search box, type
+3. Open `sys_user.list`. In the **User ID** column's search box, type
    `hr.router` and press **Enter**. ✅ It's listed: the agent runs as it, so
    never impersonate or change it. Do the same for `hr.demo`.
 
@@ -94,24 +86,31 @@ it. Stay logged in as admin, and impersonate it when a step says so.
    Lab: my instance has no hr.demo user. Instance: <your instance's name, such as dev123456>.
    ```
 
-   Meanwhile, do Part 2 (steps 4 to 8): it doesn't need `hr.demo`. Then come
+   Meanwhile, do Part 2 (steps 3 to 7): it doesn't need `hr.demo`. Then come
    back here.
 
    </div>
 
    Open `hr.demo`.
-3. In its **Roles** tab: ✅ it lists `sn_hr_core.case_writer`. If not,
+4. In its **Roles** tab: ✅ it lists `sn_hr_core.case_writer`. If not,
    click **Edit...**, move `sn_hr_core.case_writer` from the left list to
    the right, and click **Save**.
-4. In its **Groups** tab: ✅ it lists `Lab HR Team`. If not, click
+5. In its **Groups** tab: ✅ it lists `Lab HR Team`. If not, click
    **Edit...**, move `Lab HR Team` from the left list to the right, and
    click **Save**.
-5. Impersonate `hr.demo`: click your avatar (top right), then
+6. Impersonate `hr.demo`: click your avatar (top right), then
    **Impersonate user**. In the dialog, type `hr.demo`, pick **HR Demo**,
    and click **Impersonate user**. Close any welcome pop-up.
-6. Open `sn_hr_core_case.list`. ✅ It lists HR cases.
-7. End impersonation: click your avatar, then **End impersonation**. You're
+7. Open `sn_hr_core_case.list`. ✅ It lists HR cases.
+8. End impersonation: click your avatar, then **End impersonation**. You're
    admin again.
+
+<details><summary>🛟 It's asleep or gone, or has no HR cases</summary>
+
+Tell your instructor. Waking an instance that's asleep (hibernating) takes a
+few minutes.
+
+</details>
 
 <details><summary>🛟 hr.router, hr.demo or a group is missing, or hr.demo sees no cases</summary>
 
@@ -123,12 +122,12 @@ and nothing admin: Module 6 gives it the app's own role.
 
 ## Part 2 — Your tools
 
-**Tools at a glance:** what step 4 checks and installs, and why.
+**Tools at a glance:** what step 3 checks and installs, and why.
 
 | Tool | What it is | Why the lab needs it | Version |
 |---|---|---|---|
 | **Node.js** | Runs JavaScript programs on your computer. It comes with `npm`, which installs them. | The ServiceNow SDK runs on it, and `npm` installs the SDK. `npm` also installs your app's packages and runs its tests, and the lab's settings script runs on Node.js. | `v22.22` or later |
-| **git** | Keeps a folder's history: each saved snapshot is a commit. | Your app's repo, its guard, and a branch for every story. Claude runs most git commands; you read what they print. <span data-show="os:win">**On Windows:** Git for Windows also brings Git Bash. You run every ⌨️ step in it, and the lab's settings (step 6) keep Claude in it too, where the safety rules apply.</span> | Any |
+| **git** | Keeps a folder's history: each saved snapshot is a commit. | Your app's repo, its guard, and a branch for every story. Claude runs most git commands; you read what they print. <span data-show="os:win">**On Windows:** Git for Windows also brings Git Bash. You run every ⌨️ step in it, and the lab's settings (step 5) keep Claude in it too, where the safety rules apply.</span> | Any |
 | **GitHub CLI** (`gh`) | GitHub's own command-line tool. | Signs you in to GitHub, gets this guide, makes your app's private repo, and lets the kit file your stories, milestones and pull requests. | Any |
 | **ServiceNow SDK** (`now-sdk`) | ServiceNow's tool for building an app as code, from files on your computer. | Builds the HR Case Router, reads your instance, and installs the app on it. | `4.8.0` or later |
 | **Claude Code** (`claude`) | Claude, working in your folders: it reads and writes files, and runs commands. | It writes the app; you make the decisions. It has its own installer, and doesn't need Node.js. | `2.1.228` or later |
@@ -141,7 +140,7 @@ lab's plugins and checks run from a terminal.
 
 </div>
 
-### 4. Install the tools
+### 3. Install the tools
 
 <div data-show="os:mac">
 
@@ -215,7 +214,7 @@ claude --version
    of your files, one saved change (a commit) at a time: your app's repo is a
    git repo.
 3. `gh --version`: Prints the version of `gh`, GitHub's own command-line tool,
-   then a web address. Step 5 uses it to sign in to GitHub and to download
+   then a web address. Step 4 uses it to sign in to GitHub and to download
    this guide.
 4. `now-sdk --version`: Prints the version of ServiceNow's SDK tool, such as
    `4.13.6`. It builds your app from the files on your computer and installs
@@ -592,7 +591,7 @@ Your company network. Tell your instructor before the day.
 
 </details>
 
-### 5. Sign in to GitHub and get this guide
+### 4. Sign in to GitHub and get this guide
 
 **The lab needs GitHub.** Your company's GitLab can't stand in for it.
 
@@ -679,7 +678,7 @@ instructor this message, in the room's chat or by email:
 Lab: no invite yet to the lab guide repo. My GitHub user name is <your user name>.
 ```
 
-Meanwhile, step 8 (connect the SDK) and step 12 (look up your scope) don't
+Meanwhile, step 7 (connect the SDK) and step 11 (look up your scope) don't
 need this guide's repo: do those, then come back here.
 
 </div>
@@ -760,7 +759,7 @@ then run the `gh repo clone` line again.
 
 </details>
 
-### 6. Add the lab's Claude Code settings
+### 5. Add the lab's Claude Code settings
 
 <div data-ask="m0-cc-before" data-options="yes|no" data-labels="Yes|No, this is my first time">
 
@@ -791,7 +790,7 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 
 ✅ It prints `Lab settings in place.`
 
-### 7. Sign in to Claude Code
+### 6. Sign in to Claude Code
 
 On a Pro or Max plan? 🌐 **Browser:** first, in claude.ai, open
 **Settings > Privacy** and turn off model training.
@@ -867,7 +866,7 @@ Run now-sdk auth --list.
 Git for Windows installed, Claude Code in a terminal runs commands in Git
 Bash, and those rules also turn its PowerShell tool off. Anthropic's docs
 don't say yet whether the Code tab's own copy does the same. The
-`now-sdk auth --list` check above tests it, and in step 14 each command
+`now-sdk auth --list` check above tests it, and in step 13 each command
 Claude runs must be marked Bash. Either fails? Stop, and use Claude Code
 in Git Bash instead.
 <button data-set="surface:terminal">Use the terminal steps</button>
@@ -950,7 +949,7 @@ Then start a new session, and type `/status` again.
 
 </details>
 
-### 8. Connect the SDK to your instance
+### 7. Connect the SDK to your instance
 
 Your instance must be awake. Type the password only here, never in Claude.
 
@@ -979,7 +978,7 @@ times out? That's your company network: tell your instructor.
 
 ## Part 3 — The kit and a clean bench
 
-### 9. Install the kit and the SDK plugin
+### 8. Install the kit and the SDK plugin
 
 Two plugins. The kit runs the lab's rituals. ServiceNow's SDK plugin teaches
 Claude the SDK from its docs (`now-sdk explain`) and reads records on your
@@ -1029,7 +1028,7 @@ instructor.
 
 </details>
 
-### 10. Make your folders
+### 9. Make your folders
 
 ⌨️ **Terminal:**
 
@@ -1055,7 +1054,7 @@ touch ~/projects/hr-case-router/catches.md
 ✏️ **Editor:** in VS Code, choose **File > Open Folder…** and open the
 `projects` folder in your home folder. Keep it open.
 
-### 11. Check nothing else is loaded
+### 10. Check nothing else is loaded
 
 Claude loads every plugin, server, hook and instruction file you have. For
 the lab, it should load only the kit and the SDK plugin.
@@ -1118,7 +1117,7 @@ your computer is cleanest.
 Your app's code gets its own repo, fenced in two ways: it ignores every
 file you haven't named, and a guard checks each commit for secrets.
 
-### 12. Look up your scope
+### 11. Look up your scope
 
 🌐 **Browser:**
 
@@ -1135,12 +1134,12 @@ Note your scope.
 
 <div data-value="scope"></div>
 
-### 13. Create the app
+### 12. Create the app
 
 Your instance must be awake.
 
-⌨️ **Terminal:** replace `<SCOPE>` with your scope from step 12 (already
-done if you typed it in step 12):
+⌨️ **Terminal:** replace `<SCOPE>` with your scope from step 11 (already
+done if you typed it in step 11):
 
 ```
 mkdir -p ~/projects/hr-case-router/app
@@ -1159,7 +1158,7 @@ then the three lines above. Still failing? Tell your instructor.
 
 </details>
 
-### 14. Let Claude set up the repo
+### 13. Let Claude set up the repo
 
 <div data-show="surface:terminal">
 
@@ -1240,7 +1239,7 @@ Claude change files to make it pass.
 
 </details>
 
-### 15. 🔮 Try to beat the guard
+### 14. 🔮 Try to beat the guard
 
 **The idea:** a check only counts if it could have failed. Here you try to
 commit a fake token, to see the guard stop it before you rely on it.
@@ -1281,7 +1280,7 @@ echo '0 | guard | the guard was not installed; once installed, it blocked the to
 
 </details>
 
-### 16. Commit for real
+### 15. Commit for real
 
 ⌨️ **Terminal:**
 
@@ -1296,7 +1295,7 @@ before? Then `git log --oneline` shows that one commit: go on.
 
 ## Part 5 — Your repo's rules, and GitHub
 
-### 17. Give the repo its rules
+### 16. Give the repo its rules
 
 <div data-show="surface:terminal">
 
@@ -1363,7 +1362,7 @@ scope and `lab-pdi`; there's a Platform facts section; Learning checkpoints
 is one line; and the end of `hr-case-router/app/.gitignore` has the three
 allow lines.
 
-### 18. Read every name
+### 17. Read every name
 
 <div data-show="os:mac surface:terminal">
 
@@ -1428,7 +1427,7 @@ Then run the `grep` again.
 
 </details>
 
-### 19. Commit, and go private on GitHub
+### 18. Commit, and go private on GitHub
 
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
@@ -1467,7 +1466,7 @@ Note the new name.
 
 ## Part 6 — Before the day
 
-### 20. Read the inputs, and 🔮 guess
+### 19. Read the inputs, and 🔮 guess
 
 ✏️ **Editor:** read `hr-case-router-lab-guide/files/inputs/USE-CASE.md`
 and `WORKSHOP-NOTES.md`, the customer's own words. Then guess what a PRD

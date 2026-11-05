@@ -37,7 +37,7 @@ mistake. Those moments are the lesson.
 The buffer, 16:20–17:00, is for catching up. Behind? Ask your instructor
 for a checkpoint to start the next module from.
 
-To read this guide as one page, after Module 0 step 5:
+To read this guide as one page, after Module 0 step 4:
 <span data-show="os:mac">**On Mac:** run this in a terminal:
 `open ~/projects/hr-case-router-lab-guide/LAB.html`.</span>
 <span data-show="os:win">**On Windows:** open File Explorer, click its
@@ -241,7 +241,7 @@ the sidebar. It holds the conversation.
 
 Your instance's password goes into its login page in the browser, and into
 `now-sdk auth`, which you run in your own terminal window (first in Module 0
-step 8). <span data-show="os:mac">**On Mac:** your Mac's password, if
+step 7). <span data-show="os:mac">**On Mac:** your Mac's password, if
 `sudo` asks for it, goes into your own terminal window too.</span> The
 lab's settings block `now-sdk auth` for Claude, so it can't happen by
 mistake.
