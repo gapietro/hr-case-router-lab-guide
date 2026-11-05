@@ -312,7 +312,7 @@ proof: a failing run, a passing run and a review.
 🤖 **Claude**, in a fresh session: paste the session open, then `go`.
 ✅ Three lines.
 
-Then paste this, type `go` after it, and press **Enter**. On a Pro plan,
+🤖 **Claude:** then paste this, type `go` after it, and press **Enter**. On a Pro plan,
 type `Use one sub-agent at a time.` at the end, before `go`.
 
 ```
@@ -727,7 +727,7 @@ through the same tests and review as any story.
 
 </details>
 
-Reply `yes`. Then paste this, with the issue's number for `<n>`, then `go`:
+Reply `yes`. Then 🤖 **Claude:** paste this, with the issue's number for `<n>`, then `go`:
 
 ```
 Take issue #<n>. Restate it in five bullets, then build it tests first,
@@ -1101,7 +1101,7 @@ log, so anyone can see why the record moved.
    ```
    /prove-it:design-challenge amend docs/DESIGN-HRCaseRouter.md
    ```
-3. When it asks what changed and why, paste this, filled in, then `go`:
+3. 🤖 **Claude:** when it asks what changed and why, paste this, filled in, then `go`:
 
    ```
    <what changed: the exact steps that got through, the register issue's

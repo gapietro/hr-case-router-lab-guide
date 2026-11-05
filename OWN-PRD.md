@@ -491,8 +491,8 @@ instance's endpoint and credential for [PROMOTE.md](PROMOTE.md).
 The real owner sits with you for all of it, about two hours: beside you,
 or on a call with your screen shared. They answer; you type their words.
 
-- Step 1: when it asks you to confirm the feature name, paste this
-  instead:
+- Step 1: when it asks you to confirm the feature name, 🤖 **Claude:**
+  paste this instead:
   ```
   <Feature>. My design is the PRD in brief/, SLICE.md,
   docs/LLD-<Feature>.md and docs/DECISIONS.md. For every question,
@@ -678,8 +678,8 @@ how tests must be named, which can stop slice 1's tests counting.
    Then Module 3, steps 1 to 4, with `SLICE-2.md` for `SLICE.md` and
    `docs/LLD-<Feature>-2.md` for `docs/LLD-<Feature>.md`: a new file, so
    slice 1's LLD stays as it was.
-3. Amend the design: After the workshop, Part 3, step 1, with the real
-   owner there, and this as what changed:
+3. 🤖 **Claude:** amend the design: After the workshop, Part 3, step 1,
+   with the real owner there, and paste this as what changed:
    ```
    The next slice: the capabilities in ../SLICE-2.md, designed in
    ../docs/LLD-<Feature>-2.md, with the decisions in
@@ -696,8 +696,8 @@ how tests must be named, which can stop slice 1's tests counting.
    </details>
 
 4. File the new stories: After the workshop, Part 3, step 2, as written.
-5. Merge it, in one pull request: After the workshop, Part 3, step 3,
-   sub-step 1, with these lines in place of its first two:
+5. 🤖 **Claude:** merge it, in one pull request: After the workshop, Part 3,
+   step 3, sub-step 1, with these lines in place of its first two:
    ```
    Copy ../docs/LLD-<Feature>-2.md into docs/. Commit
    docs/DESIGN-<Feature>.md, docs/LLD-<Feature>-2.md and BACKLOG.md on a

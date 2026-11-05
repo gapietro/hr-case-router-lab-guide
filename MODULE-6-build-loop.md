@@ -779,7 +779,7 @@ through the same tests and review as any story.
 
 </details>
 
-Reply `yes`. Then paste this, with the issue's number for `<n>`, then `go`:
+Reply `yes`. Then 🤖 **Claude:** paste this, with the issue's number for `<n>`, then `go`:
 
 ```
 Take issue #<n>. Restate it in five bullets, then build it tests first,
