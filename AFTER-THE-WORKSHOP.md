@@ -181,9 +181,9 @@ Then ⌨️ **Terminal**, in your window:
 ✏️ **Editor:** open `hr-case-router/app/docs/LLD-HRCaseRouter.md`, and
 check:
 
-1. §1: each capability built or deferred: capability 3 as one AI agent
-   with three tools, and capability 7's override rule built after the
-   workshop.
+1. §1: each capability built or deferred: capabilities 3 and 5 as one AI
+   agent with three tools, and capability 7's override rule built after
+   the workshop.
 2. §3: the agent, its tools and the plain-code checks, and when each runs,
    such as *when a case is created, or a fulfiller clicks Reroute*.
 3. §4: the roles, `hr.router`, what the app may read under the HR security
@@ -525,15 +525,17 @@ request:" lines.
 
 1. **Route.** Create case A on the `Lab HR Team` service, with its line.
    ✅ It's in `Lab HR Team`. `hr.router`'s note quotes A's own line, with a
-   confidence of 0.7 or more and the group before. As admin, open A's row
-   in `<SCOPE>_run_log.list` and its execution plan: only look, never start
-   a test run. ✅ `routed`; the plan `completed`, by `hr.router` (P10).
+   confidence of 0.7 or more and the service and group before. As admin,
+   open A's row in `<SCOPE>_run_log.list` and its execution plan: only
+   look, never start a test run. ✅ `routed`; the plan `completed`, by
+   `hr.router` (P10).
 2. **Stopped.** Create case B on the `Lab Locked Out` service, with its
    own line. ✅ **Assignment group** hasn't changed, and `hr.router`'s note
    names the access check. Its log row is `stopped`.
 3. **Reroute.** On case A, set **Assignment group** to any other group,
    click **Update**, then **Reroute**. ✅ "Routing queued", then A is back
-   in `Lab HR Team`, with a new note.
+   in `Lab HR Team`, with a new note. **Assigned to** is empty, or a member
+   of `Lab HR Team`.
 4. **A new service.** Create case C on the `Lab Locked Out` service, with
    the `Lab HR Team` line. ✅ It's transferred to a new case on the
    `Lab HR Team` service, in `Lab HR Team`, with `hr.router`'s note. As
@@ -542,7 +544,13 @@ request:" lines.
 5. **A restricted service.** As `owner.demo`, open
    `<SCOPE>_routing_rule.list`, open the `Lab HR Team` row, tick **Never
    send to AI**, and click **Update**. On case A, click **Reroute**. ✅ It
-   says the service never goes to AI. As `owner.demo`, untick it.
+   says the service never goes to AI. A has a new work note saying so, and
+   its **Assignment group** hasn't changed. As `owner.demo`, untick it. As
+   admin, open the row, right-click its header bar, and choose
+   **History** > **List**. ✅ Both changes to **Never send to AI**, each by
+   `owner.demo`, with its time.
+   <!-- DRY RUN: does History > List show the rule's audit? Can owner.demo
+   see it without admin? -->
 6. **Below the threshold.** As admin, set `<SCOPE>.confidence_threshold`
    to `0.99`. On case A, set **Assignment group** to any other group,
    click **Update**, then **Reroute**. ✅ It stays, and the note names the
@@ -552,10 +560,12 @@ request:" lines.
    routing guidance**, click **Checkout**, add one word, and click
    **Publish**. Note its **Version**. On case A, click **Reroute**. As
    `owner.demo`, ✅ the newest `<SCOPE>_run_detail.list` row shows that
-   version. As admin, restore it: **Checkout**, remove the word, **Publish**.
+   version, and `hr.demo` as who started the run. As admin, restore it:
+   **Checkout**, remove the word, **Publish**.
 8. **The caps.** As admin, set `<SCOPE>.runs_per_hour` to `1`. On case A,
    click **Reroute**. ✅ It says the routing cap was reached: this hour's
-   runs count. As admin, set it back to `10`.
+   runs count. A has a new work note saying so, and its **Assignment
+   group** hasn't changed. As admin, set it back to `10`.
 9. **A hand-picked group.** On case A, set **Assignment group** to
    `Lab Locked Out`. ✅ A warning, before it saves. Don't save it: reload
    the page.
@@ -568,11 +578,18 @@ request:" lines.
     <!-- DRY RUN: name the override and detail columns once they exist;
     DECISIONS doesn't fix them. -->
 11. **The log.** As `owner.demo`, open `<SCOPE>_run_log.list`. ✅ A row
-    per run and refusal today. 🤖 **Claude:** type `How do I run the
-    weekly numbers job by hand for this week? Change nothing.` Run it, and
-    open `<SCOPE>_weekly_numbers.list`. ✅ This week's row counts today's
-    runs, and overridden is a number, never `not tracked`.
-    <!-- DRY RUN: can the job be run by hand for the current week? -->
+    per run and refusal today. Open one. ✅ Every field is read-only, with
+    no **Update** or **Delete** button. As `hr.demo`, open
+    `<SCOPE>_run_log.list`. ✅ No run's row shows. 🤖 **Claude:** type
+    `How do I run the weekly numbers job by hand for this week? Change
+    nothing.` Run it as admin. As `owner.demo`, open
+    `<SCOPE>_weekly_numbers.list`. ✅ This week's row has runs started,
+    counting today's; routed; left with a note; overridden, a number, never
+    `not tracked`; moves stopped by each check; the share routed; and cases
+    assigned to a group that can't open them.
+    <!-- DRY RUN: can the job be run by hand for the current week? Can
+    owner.demo read _weekly_numbers? DECISIONS' access row doesn't name
+    it. -->
 
 Then end impersonation.
 

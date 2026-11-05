@@ -13,8 +13,8 @@ change process**, run by the people who own those instances.
 scope: it can't be promoted as built. To take the HR Case Router to
 production, run it as [your own PRD](OWN-PRD.md) on your company's
 development instance, with your company's routing rules, article and
-restricted services, the agent's caps and masking agreed with your platform
-team, and the override rule from [After the workshop](AFTER-THE-WORKSHOP.md).
+restricted services, the agent's caps as the owner sets them, masking
+confirmed with your platform team, and the override rule from [After the workshop](AFTER-THE-WORKSHOP.md).
 
 How apps move between your instances is your platform team's decision:
 this page is a **checklist**, not a script.

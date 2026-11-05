@@ -1698,16 +1698,21 @@ Note the new name.
 
 ### 19. Read the inputs, and 🔮 guess
 
-✏️ **Editor:** read `hr-case-router-lab-guide/files/inputs/USE-CASE.md`
-and `WORKSHOP-NOTES.md`, the customer's own words. Then guess what a PRD
-built from them needs. Module 1 compares your guess with the real PRD.
+✏️ **Editor:** read three files in
+`hr-case-router-lab-guide/files/inputs/`: `USE-CASE.md` and
+`WORKSHOP-NOTES.md`, the customer's own words, and `CHANGE-REQUEST.md`, a
+draft of their latest request, still to be confirmed. Then guess what a
+PRD built from them needs. Module 1 compares your guess with the real PRD.
 
 <details><summary>🔮 The answer, once you've guessed</summary>
 
-Every request in the inputs, each traced to its sentence: route a case by
-what it says; never to a group that can't open it; a restricted route for
-sensitive cases; a confidence threshold; a record of why each case went where
-it did; a fix for a misroute; and the reporting.
+Every request in the inputs, each traced to its sentence: an agent that
+routes a case itself by what it says, changing its group or transferring
+it; never to a group that can't open it; sensitive HR services never sent
+to AI; a confidence threshold, below which the case stays where it is with
+a note, and no triage queue; Reroute, so fulfillers can have a case
+routed again; a record of why each case went where it did; and the
+reporting.
 
 It also keeps the workshop's two warnings. An agent makes many AI calls,
 at least 25 where a skill makes one, and an agent with poor information

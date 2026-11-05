@@ -314,8 +314,8 @@ Everything else is deferred, not dropped.
    Read brief/ and CONSULT.md. Propose two or three end-to-end slices. Each
    slice must: let a real user do one complete thing; be about 5 to 8
    stories; use no generative AI unless I say its cost, data approval,
-   masking and limits are agreed, and then one AI agent whose tools check
-   every change in plain code, behind caps and an on switch; avoid anything
+   masking and limits are agreed, and then one AI agent whose one writing
+   tool checks every change in plain code, behind caps and an on switch; avoid anything
    the consult marked not ready or conditional, or listed under Open
    decisions; and avoid integrations unless the slice can't work without
    one. For each, list the capabilities it covers, what it defers, and the

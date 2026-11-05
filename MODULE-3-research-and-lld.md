@@ -116,10 +116,9 @@ Then press **Ctrl+O** until the view is **Verbose**.
 ```
 Read brief/, CONSULT.md, inputs/TECH-NOTES.md and docs/DECISIONS.md.
 List, as numbered facts, every row in docs/DECISIONS.md that says "your
-research confirms", "your research should find", "first live check proves" or
-"From code on Australia Patch 5". For each, say how sure you are and how
-to check it by reading records only. Design nothing, run nothing, write
-no file.
+research confirms", "your research should find", "first live check
+proves" or "From code on Australia Patch 5". For each, say how sure you are and how to check it by reading
+records only. Design nothing, run nothing, write no file.
 ```
 
 ✅ Six facts: Transfer Case (`ReclassifyCaseTransfer`), the start in the

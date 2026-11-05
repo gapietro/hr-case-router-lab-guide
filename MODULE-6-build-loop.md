@@ -587,8 +587,8 @@ instant: the dispatcher starts a run a minute, and a run takes about one.
 
    ✅ **Assignment group** is `Lab HR Team`. The newest work note, by
    `hr.router`, gives a reason quoting this case's own "Example request:"
-   line, a confidence, and the group before: proof the agent read this
-   case.
+   line, a confidence, and the service and group before: proof the agent
+   read this case.
 4. Open the second case, a minute or two later.
 
    ✅ **Assignment group** hasn't changed. The newest work note, by
@@ -653,14 +653,20 @@ again. Then create the two cases again, as `hr.demo`.
 
 </details>
 
+5. On the first case, click **Reroute**.
+
+   ✅ It says **Routing queued**. Wait about two minutes, and reload: a new
+   work note by `hr.router`.
+
 🌐 **Browser**, end impersonation: your avatar, then **End
 impersonation**. As admin:
 
-5. Open `<SCOPE>_run_log.list`, newest first.
+6. Open `<SCOPE>_run_log.list`, newest first.
 
-   ✅ The two cases' rows show **State** `routed` and `stopped`.
-6. Open the `routed` row's **Execution plan** field. Only look: never
-   start a test run in AI Agent Studio.
+   ✅ The three newest rows: the first case's two, both **State** `routed`,
+   the newer one from Reroute, and the second case's `stopped`.
+7. Open the first case's older `routed` row's **Execution plan** field.
+   Only look: never start a test run in AI Agent Studio.
 
    ✅ **State** `completed`, created by `hr.router`. The plan, the log row
    and the note prove a run, never the agent's word (DECISIONS, P10).
