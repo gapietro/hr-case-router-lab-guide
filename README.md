@@ -317,21 +317,21 @@ own row.
 
 After Module 0, `~/projects` holds:
 
-```
+```example
 hr-case-router-lab-guide/   this guide: you read it, Claude never does
-hr-case-router/              your workspace: Claude works here
-  app/                        your app's repo, private on GitHub
-  brief/                      the PRD, from Module 1
-  catches.md                  one line per catch
-hr-case-router-notes/        what Module 9 restores: Claude never reads it
-prove-it-kit/                 a copy of the kit
+hr-case-router/             your workspace: Claude works here
+  app/                      your app's repo, private on GitHub
+  brief/                    the PRD, from Module 1
+  catches.md                one line per catch
+hr-case-router-notes/       what Module 9 restores: Claude never reads it
+prove-it-kit/               a copy of the kit
 ```
 
 You write no notes. At the end of each module, a **Log it** prompt has
 Claude draft that module's catches, one line each. Reply `keep`, or say
 what to change:
 
-```
+```example
 <module> | <what caught it> | <what it caught, and what was done>
 ```
 
