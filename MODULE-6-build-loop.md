@@ -21,6 +21,24 @@ live check prove the agent read this one?
 
 </details>
 
+<details><summary>ℹ️ Why tests first, then the least code</summary>
+
+- **The test comes first,** so it says what the story must do before any
+  code exists. Written after, a test tends to describe what the code
+  happens to do, mistakes included.
+- **You watch it fail,** because a test that has never failed may test
+  nothing: a wrong check, or one that never runs.
+- **Then the least code that passes it,** so every line is there because a
+  test asked for it. Code no test asked for is untested, and that's where
+  bugs hide.
+- **With Claude it matters more.** It writes plausible code fast, and tests
+  it writes alongside its code tend to agree with that code's mistakes.
+  Tests first, seen failing, are your check on its work.
+- **What they can't prove:** the tests run on your laptop, without
+  ServiceNow. Step 11's live check proves the rest.
+
+</details>
+
 ## Part 1 — Your first story, by hand
 
 ### 1. Open the session
