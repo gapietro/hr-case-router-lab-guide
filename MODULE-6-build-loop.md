@@ -694,9 +694,11 @@ the execution plan prove a run).
 **Impersonate user**. Type `hr.demo`, pick **HR Demo**, and click
 **Impersonate user**. Close any welcome pop-up.
 
-3. For each of the two services, open `sn_hr_core_case.do?sys_id=-1`. Set
-   **HR service** to it and **Short description** to its "Example
-   request:" line, and click **Submit**.
+3. For each of the two services, paste this into the address bar:
+   `https://dev123456.service-now.com/sn_hr_core_case.do?sys_id=-1`.
+   Once your instance's name is in **Values**, the guide shows it here.
+   Set **HR service** to the service and **Short description** to its
+   "Example request:" line, and click **Submit**.
    <!-- DRY RUN: how does hr.demo create an HR case in the classic UI: which
    fields are mandatory (Opened for, Subject person), and does the form switch
    to the service's HR table? -->
@@ -768,7 +770,9 @@ instant: the dispatcher starts a run a minute, and a run takes about one.
 🌐 **Browser**, impersonate `hr.demo` again (your avatar, then
 **Impersonate user**, and pick **HR Demo**).
 
-1. Open `sn_hr_core_case.do?sys_id=-1`. Set **HR service** to the service
+1. Paste this into the address bar:
+   `https://dev123456.service-now.com/sn_hr_core_case.do?sys_id=-1`.
+   Set **HR service** to the service
    you noted for `Lab HR Team`, and **Short description** to its "Example
    request:" line. Click **Submit**.
 2. Do the same for the `Lab Locked Out` service.

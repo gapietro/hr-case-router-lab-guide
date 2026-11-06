@@ -581,8 +581,10 @@ owner. 🌐 **Browser**, as admin:
 Then warm up: the first runs after an install can each fail once per HR
 table (P8).
 
-6. Impersonate `hr.demo` (your avatar, then **Impersonate user**). Open
-   `sn_hr_core_case.do?sys_id=-1` once for each service in
+6. Impersonate `hr.demo` (your avatar, then **Impersonate user**). Paste
+   `https://dev123456.service-now.com/sn_hr_core_case.do?sys_id=-1`
+   into the address bar (the guide shows your instance's name once it's in
+   **Values**), once for each service in
    `<SCOPE>_routing_rule.list`: set **HR service** to it and **Short
    description** to its "Example request:" line, and click **Submit**.
    ✅ Within about three minutes, each has a work note by `hr.router`.
@@ -614,8 +616,10 @@ watch, as the product manager.
 - **As `hr.demo` or `owner.demo`:** as admin, click your avatar, then
   **Impersonate user**. Type the user ID, pick that user, and click
   **Impersonate user**.
-- **Create a case:** open `sn_hr_core_case.do?sys_id=-1`, set **HR
-  service** and **Short description**, and click **Submit**.
+- **Create a case:** paste
+  `https://dev123456.service-now.com/sn_hr_core_case.do?sys_id=-1`
+  into the address bar, set **HR service** and **Short description**, and
+  click **Submit**.
 
 Nothing is instant: after you create a case or click **Reroute**, wait
 about two minutes, then reload the case. After a line as admin or
