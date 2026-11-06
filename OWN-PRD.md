@@ -522,6 +522,15 @@ or on a call with your screen shared. They answer; you type their words.
   `Confirmed.` alone. When it asks the name and role, type theirs, such as
   `Sam Lee, product owner`. ✅ §9 names the owner.
 
+<details><summary>ℹ️ What §9 and C1… mean</summary>
+
+`§` means section. `§9` is section 9 of the design record, its approval: who
+confirmed it, and when. The record's rules are numbered `C1`, `C2` and so on.
+Your LLD's sections run from `§1`, its scope, to `§8`, its open decisions.
+[All the labels](APPENDIX.md#1-7-sections-of-a-document).
+
+</details>
+
 Every later amend works the same way, with the owner there: Module 5's
 boxes, Module 6 step 2's ruling box, After the workshop, Part 3, and
 section 6. No owner, no amend.

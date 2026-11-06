@@ -134,6 +134,15 @@ that can catch a mistake, and its name ties it to the design term it proves.
 
 </details>
 
+<details><summary>ℹ️ What C1, C2… mean</summary>
+
+`C<n>` in the prompt stands for a design term's number, such as `C7`: Claude
+puts the real one at the start of each test's name, from section 3 of your
+design record. The grade counts a term as tested only when a test names it.
+[All the labels](APPENDIX.md#c1-c2-design-terms).
+
+</details>
+
 <details><summary>🛟 It says the top story is a ruling, not code</summary>
 
 `<n>` is the story's number, from step 1. 🤖 **Claude:** type `/clear`,
@@ -637,6 +646,17 @@ open, the dispatcher starts no new run.
 
 The first runs after an install can each fail once per HR table (DECISIONS,
 P8). Two warm-up cases take those failures.
+
+<details><summary>ℹ️ What P8, P14… mean</summary>
+
+`P1` to `P15` are the platform rules in `docs/DECISIONS.md`. P8: the first
+runs after an install may each fail once per HR table, so run again. P14: while
+`hr.router` has a conversation open, no new run starts. Step 11 cites P6 (the
+note must show the agent read that case) and P10 (only the log, the notes and
+the execution plan prove a run).
+[All the labels](APPENDIX.md#p1-to-p15-platform-rules).
+
+</details>
 <!-- DRY RUN: time. Two runs, one a minute: about three minutes. -->
 
 🌐 **Browser**, as admin:

@@ -116,6 +116,15 @@ attempt and what it didn't get to.
 
 </details>
 
+<details><summary>ℹ️ What C1, C2… mean</summary>
+
+Each attack's test is named with the design term it targets, such as `C9`:
+a numbered rule in section 3 of your design record, not a capability. A test
+that fails means an attack got through that term.
+[All the labels](APPENDIX.md#c1-c2-design-terms).
+
+</details>
+
 ✅ It ran the tests, listed its attempts, and its commits say
 `[test/break-access`.
 

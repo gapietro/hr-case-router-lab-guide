@@ -16,7 +16,8 @@ can't route, the case stays where it is, with a note.
 - `PRESESSION.html` is the pre-session's deck, from a week before the day.
   Open it in a browser: the arrow keys move, and **N** shows the notes.
 - `AFTER-THE-WORKSHOP.md` finishes the app after the day. `OWN-PRD.md` and
-  `PROMOTE.md` are optional tracks.
+  `PROMOTE.md` are optional tracks. `APPENDIX.md` says what the labels in
+  Claude's output mean, such as `C3` or `P8`.
 
 ## Rules
 

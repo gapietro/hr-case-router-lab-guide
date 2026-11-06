@@ -1,6 +1,7 @@
 # Getting it to production
 
-[Lab home](README.md) · [← Your own PRD track](OWN-PRD.md)
+[Lab home](README.md) · [← Your own PRD track](OWN-PRD.md) ·
+[Labels in Claude's output →](APPENDIX.md)
 
 *⏱ Set by your company's change calendar · book your platform team now*
 
@@ -70,6 +71,14 @@ already admitted).
 5. **Demo data stays out of production.** Your seed records are part of the
    app's source, so they'd install everywhere. Agree how they're excluded
    from the production install, and confirm it works on test.
+
+<details><summary>ℹ️ What §2–§3 and §4 mean</summary>
+
+`§` means section. In your LLD, `§2` is its components, `§3` its logic and
+`§4` its security, with the access the app needs.
+[All the labels](APPENDIX.md#1-7-sections-of-a-document).
+
+</details>
 6. **Per-instance configuration.** Role-to-group assignments, settings,
    the agent's run-as user and any integration's endpoint and credential
    differ per instance, set by an admin, by hand, from the runbook. List them.

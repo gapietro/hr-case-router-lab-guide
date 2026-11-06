@@ -153,6 +153,15 @@ than paraphrases, so you can check each claim yourself, and it edits nothing.
 
 Compare its list with your pre-work guess.
 
+<details><summary>ℹ️ What R2, R8… mean</summary>
+
+Claude quotes the customer's use case, which numbers its requirements:
+`R8 (Must)` is requirement 8, a must-have; **Should** is wanted but not
+essential. The PRD's own capabilities have no letter: Claude writes them out,
+"capability 3". [All the labels](APPENDIX.md#r2-r8-the-customers-requirements).
+
+</details>
+
 ### 3. Decide the gaps, in one table
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>

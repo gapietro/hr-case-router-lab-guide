@@ -152,6 +152,16 @@ assignment group; and ServiceNow's "Predict service and transfer HR Cases"
 workflow, inactive and not used: your design record says why. Compare with
 your guess.
 
+<details><summary>ℹ️ What P12 means</summary>
+
+`P1` to `P15` are the platform rules in `docs/DECISIONS.md`: things your
+instance really does that the build must allow for, each with its reason.
+P12: a run's record is the app's own log row, never the case, so the platform
+never copies the whole case, personal data included, into the AI's request. Lower-case `p0` to `p2`, in Module 5, are
+something else. [All the labels](APPENDIX.md#p1-to-p15-platform-rules).
+
+</details>
+
 ### 2. Have Claude check them on your instance
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
@@ -371,6 +381,15 @@ Fix the summary if needed, then type `Looks right. Write the file.`
 ✏️ **Editor:** open `hr-case-router/docs/LLD-HRCaseRouter.md`. ✅ Its
 tools table has `read_case`, `apply_route` and `leave_note`, and section 7
 matches `research-facts.md`, fact for fact.
+
+<details><summary>ℹ️ What D1, §7… mean</summary>
+
+`D1`, `D2`… are your LLD's open decisions, in its section 8: questions it
+can't settle yet, for the customer or Module 4 to decide. `§` means section,
+so if Claude writes `§7`, it means section 7, the research log.
+[All the labels](APPENDIX.md#d1-d2-open-decisions-in-your-lld).
+
+</details>
 
 ### 5. Log it
 

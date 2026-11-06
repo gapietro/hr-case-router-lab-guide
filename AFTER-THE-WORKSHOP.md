@@ -207,6 +207,15 @@ it, carry on: the design record wins. If it doesn't, change the design in
 [Part 3](#part-3--change-the-design-when-a-fix-needs-it) first. Never edit
 the LLD.
 
+<details><summary>ℹ️ What §1, §3… mean</summary>
+
+`§` means section: `§1` is section 1 of your LLD, its scope, and `§7` its
+research log. Your LLD has eight sections. Your design record has ten, and
+numbers its rules `C1`, `C2` and so on.
+[All the labels](APPENDIX.md#1-7-sections-of-a-document).
+
+</details>
+
 ### 2. Rule the register, then find the next gate
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
@@ -370,6 +379,15 @@ bullets, a failing run then a passing run, and its review findings. In its
 description, click the issue number after **Closes**. ✅ The issue shows
 **Closed**.
 
+<details><summary>ℹ️ What C1, C2… mean</summary>
+
+`C<n>` in the prompt stands for a design term's number, such as `C7`: Claude
+puts the real one at the start of each test's name, from section 3 of your
+design record. The grade counts a term as tested only when a test names it.
+[All the labels](APPENDIX.md#c1-c2-design-terms).
+
+</details>
+
 <details data-help="nosplit"><summary>🛟 It stops early, asks you something, or Claude closes</summary>
 
 - **It asks you something:** 🤖 type this:
@@ -512,6 +530,17 @@ Tell me this error's cause in plain words. Change nothing.
 
 A defect in the app? Fix it with the last box in step 5. Anything else:
 tell your instructor.
+
+</details>
+
+<details><summary>ℹ️ What P7, P8… mean</summary>
+
+`P1` to `P15` are the platform rules in `docs/DECISIONS.md`: things your
+instance really does that the build must allow for. Here: P7, every install
+turns the on switch off; P8, the first runs may each fail once per HR table;
+P9, a job may need saving once to get its trigger; P14, one open conversation
+for `hr.router` stops new runs.
+[All the labels](APPENDIX.md#p1-to-p15-platform-rules).
 
 </details>
 

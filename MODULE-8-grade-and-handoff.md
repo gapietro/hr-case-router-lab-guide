@@ -231,6 +231,16 @@ today's preview, it's likely to show:
   `<SCOPE>.runs_per_day` and `<SCOPE>.enabled`, `<SCOPE>` being your scope,
   such as `x_123456_hcr_ga`.
 
+<details><summary>ℹ️ What design.terms-tested and (9) mean</summary>
+
+Each row is one of the grade's checks: the area it looks at, a dot, then what
+it checks. `design.terms-tested` checks that a test names every design term
+(`C1`, `C2`…). `(9)` is capability 9, the weekly numbers. The milestone
+graded is the merge gate's, such as `M1 · merge`.
+[All the labels](APPENDIX.md#designterms-tested-the-grades-checks).
+
+</details>
+
 <details><summary>🛟 Caps applied says 49</summary>
 
 The build, the tests or the secrets scan failed, or didn't run: **Checks

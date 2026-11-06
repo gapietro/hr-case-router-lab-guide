@@ -313,6 +313,10 @@ own row.
   that changed a decision. A check firing on something you planted to test
   it isn't a catch.
 
+Claude also writes short labels, such as `C3`, `P8` or `§7`. The
+[appendix](APPENDIX.md) says what each means, and each step that uses one
+has an ℹ️ box.
+
 ## Your folders and your catches
 
 After Module 0, `~/projects` holds:

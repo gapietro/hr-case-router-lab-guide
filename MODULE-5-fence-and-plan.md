@@ -146,6 +146,16 @@ nothing left open, before it becomes a plan.
 
    </details>
 
+   <details><summary>ℹ️ What §7, term numbers and P1… mean</summary>
+
+   `§7` is section 7 of the design record, its gates. A term number is a design
+   term's `C` number, such as `C4`; the check makes sure your LLD uses none of
+   them: its own are `D1`, `D2` and so on. `P1` to `P15`, in item 1, are the platform
+   rules in `docs/DECISIONS.md`.
+   [All the labels](APPENDIX.md#c1-c2-design-terms).
+
+   </details>
+
 4. ⌨️ **Terminal**, in your window:
 
    ```
@@ -266,6 +276,15 @@ Any no? Tell Claude in one line, such as `Story 4's done-when can't be
 checked.`, and answer the new preview. A term marked "pending ruling — no
 test yet" is a no too: open the 🛟 below. **Never approve a preview you
 answered no to.**
+
+<details><summary>ℹ️ What M1 · merge and p0… mean</summary>
+
+The plan files one GitHub milestone per gate, in order, such as `M1 · merge`:
+the stories that gate needs. Each story gets a priority label: `p0` holds up
+the next gate, `p1` the gate after, `p2` further out. Lower-case `p` isn't a
+platform rule. [All the labels](APPENDIX.md#m1--merge-milestones).
+
+</details>
 
 <details><summary>🛟 It refuses the record, or shows "pending ruling"</summary>
 

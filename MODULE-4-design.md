@@ -84,13 +84,15 @@ the customer is out of scope for this record.
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-This confirms the feature name, HRCaseRouter, and tells the challenge your
-design is already written down: the PRD, your LLD and `DECISIONS.md`. For each
-question, Claude offers 3 or 4 numbered answers drawn from those files, with
-their own answer first; if none answers it, it says so and puts its
-recommendation first. On failure, security, cost and boundaries it asks only
-what your files leave open, then moves on to gates, and anything still waiting
-on the customer stays out of this record.
+This names the feature HRCaseRouter and tells Claude your design is already
+written down, in the PRD, your LLD (how each part will be built) and
+`DECISIONS.md`. For each question, Claude offers 3 or 4 numbered answers taken
+from those files, with the files' own answer first; if they don't answer it,
+Claude says so and puts the answer it recommends first. Then it asks about what
+could go wrong, who may see or change what, what the app costs to run and
+what's left out, but only where your files leave a gap, and then about the
+gates, the checkpoints the build must pass. Anything still waiting on the
+customer stays out of this design.
 
 </details>
 
@@ -164,12 +166,15 @@ OPEN or VERIFY. Read the terms back again.
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-This asks Claude to add a term for each decision in `DECISIONS.md` it left
-out, and to cover the seed data, the run states, the build order, the
-out-of-scope rows as boundaries, capability 4's checks, and one owner for each
-table the app writes. It replaces weaker terms that say the same thing and
-leaves nothing marked OPEN or VERIFY. Then it reads the whole list back again,
-so you check the new version before anything is written.
+Claude's first list of terms, the numbered rules your design record will hold,
+often misses decisions, so this tells it to add one for every decision in
+`DECISIONS.md`. That includes the starting records the app installs, the stages
+a run goes through, the order you build in, each thing this release leaves out,
+each check on a move the agent wants to make (one term per check), that only
+the `apply_route` tool changes a case, and which part of the app writes to each
+table. Where two terms say the same thing it keeps the more exact one, and no
+term may stay undecided (OPEN) or unchecked (VERIFY). Then Claude reads the
+whole list back, so you can check it before anything is written.
 
 </details>
 
@@ -187,6 +192,16 @@ so you check the new version before anything is written.
 
 Anything wrong? Reply `Not agreed yet.` and the change, until it's right.
 
+<details><summary>ℹ️ What C1, §7… mean</summary>
+
+Claude numbers each term `C1`, `C2`…: one rule of your design record that a
+test or a person can check. Think of `C` as *contract*: it isn't a capability,
+and capability 3 is never `C3`. `§` means section: `§3` is the record's list
+of terms, `§7` its gates and `§9` its sign-off.
+[All the labels](APPENDIX.md#c1-c2-design-terms).
+
+</details>
+
 <details><summary>🛟 Still wrong after two rounds</summary>
 
 🤖 **Claude:**
@@ -200,10 +215,10 @@ again.
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-Claude lists each row of `DECISIONS.md`, from How a run starts to Caps and
-retention, beside the number of the term that covers it, or MISSING. It adds a
-term for every MISSING row and reads the whole list back, so you can see at a
-glance that nothing was dropped.
+Claude lists each decision in `DECISIONS.md`, from How a run starts to Caps
+and retention, next to the number of the term that covers it, or the word
+MISSING if no term does. Then it adds a term for each missing one and reads the
+whole list back, so you can see at a glance that nothing was left out.
 
 </details>
 

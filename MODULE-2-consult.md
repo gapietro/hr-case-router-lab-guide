@@ -201,6 +201,16 @@ code, with a reason. Then **Data and ownership**, **Cost** and
 Look for capability 3's choice, each write's owner, and any requirement
 not **ready**. Compare with your guess.
 
+<details><summary>ℹ️ What the row numbers mean</summary>
+
+Each row of `CONSULT.md` is one of the PRD's nine capabilities, numbered as in
+the PRD's section 3: row 3 is capability 3, routing a new case. If Claude
+writes `C3` here, it means capability 3. From Module 4 on, `C3` means rule 3
+of your design record, never a capability.
+[All the labels](APPENDIX.md#capabilities-1-to-9-no-letter).
+
+</details>
+
 ### 6. Push back
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
