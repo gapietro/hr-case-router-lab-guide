@@ -4,6 +4,9 @@
 
 ## 1. Scope and traceability
 
+Name each capability in words, "capability 3", never `C3`: C numbers
+belong to the design record's terms.
+
 | PRD capability | Built here? | Where in this LLD | If not built: why, and when |
 |---|---|---|---|
 

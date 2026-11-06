@@ -320,15 +320,17 @@ mark held. When Claude has answered, paste:
 ```
 Write every fact you checked to research-facts.md in this folder: its
 final mark, mine where I corrected yours, the command exactly as run, and
-the rows that back it. Those go into the LLD as they are.
+the rows that back it. Those go into the LLD as they are. Name my instance
+only as lab-pdi: no web address and no user name.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 Claude writes every fact it checked to `research-facts.md`: its final mark,
 yours wherever you corrected it, the command exactly as run, and the rows
-behind it. That file is the research record. The LLD copies it as it is, so
-what you audited is what the design relies on.
+behind it. It names your instance only as `lab-pdi`, so its address and your
+user name never reach the repo, where the guard would refuse them. The LLD
+copies the file as it is, so what you audited is what the design relies on.
 
 </details>
 
@@ -355,7 +357,8 @@ decisions already made, so the build has nothing left to ask.
 
 ```
 Draft docs/LLD-HRCaseRouter.md from docs/LLD-TEMPLATE.md, the PRD,
-CONSULT.md and research-facts.md. Every component cites a PRD capability.
+CONSULT.md and research-facts.md. Every component cites a PRD capability,
+written as "capability 3", never C3: C numbers are the design record's.
 Take every decision in docs/DECISIONS.md as made. Section 7 copies
 every fact from research-facts.md, with its mark and command, as audited.
 Anything still undecided goes in section 8, numbered D1, D2…: never
@@ -366,10 +369,11 @@ yet.
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 Claude drafts `docs/LLD-HRCaseRouter.md` from the template, citing a PRD
-capability for every component and taking every decision in `DECISIONS.md` as
-made. Section 7 copies your audited facts, and anything still undecided goes
-in section 8 as D1, D2 and so on, never an invented business decision. It
-shows you a summary first and writes the file only when you say so.
+capability for every component, in words, and taking every decision in
+`DECISIONS.md` as made. Section 7 copies your audited facts, and anything still
+undecided goes in section 8 as D1, D2 and so on, never an invented business
+decision. It shows you a summary first and writes the file only when you say
+so.
 
 </details>
 
@@ -382,11 +386,13 @@ Fix the summary if needed, then type `Looks right. Write the file.`
 tools table has `read_case`, `apply_route` and `leave_note`, and section 7
 matches `research-facts.md`, fact for fact.
 
-<details><summary>ℹ️ What D1, §7… mean</summary>
+<details><summary>ℹ️ What D1, §7 and C3 mean</summary>
 
 `D1`, `D2`… are your LLD's open decisions, in its section 8: questions it
 can't settle yet, for the customer or Module 4 to decide. `§` means section,
-so if Claude writes `§7`, it means section 7, the research log.
+so if Claude writes `§7`, it means section 7, the research log. `C3` is
+rule 3 of the design record Module 4 writes, so the LLD writes capabilities
+in words: "capability 3".
 [All the labels](APPENDIX.md#d1-d2-open-decisions-in-your-lld).
 
 </details>

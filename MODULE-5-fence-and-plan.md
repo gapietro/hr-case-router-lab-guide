@@ -207,7 +207,29 @@ Then run sub-step 4 again.
 
 </details>
 
-<details><summary>🛟 There's a no, or the first grep prints a line</summary>
+<details><summary>🛟 It says a term number clashes with the LLD</summary>
+
+Your LLD numbered the capabilities `C1`, `C2`…, like the design record's
+terms. Only the labels change, not what the LLD says. 🤖 **Claude:**
+
+```
+In docs/LLD-HRCaseRouter.md, write each capability labelled C1 to C9 as
+capability 1 to capability 9, and change nothing else. Commit only that
+file on docs/plan. Then answer the three questions again.
+```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude renames the LLD's capability labels, `C1` to `C9`, to capability 1 to
+capability 9, so they no longer share numbers with the design record's terms.
+It changes nothing else in the LLD, commits only that file, and answers the
+three readiness questions again.
+
+</details>
+
+</details>
+
+<details><summary>🛟 Another no, or the first grep prints a line</summary>
 
 🤖 **Claude:** type
 `/prove-it:design-challenge amend docs/DESIGN-HRCaseRouter.md`. When it
