@@ -681,30 +681,45 @@ the execution plan prove a run).
 
 1. Open `<SCOPE>_routing_rule.list`.
 
-   ✅ Two active rows, one routed to `Lab HR Team` and one to
-   `Lab Locked Out`. Note each row's **HR service**.
+   ✅ Two active rows: **HR service** `Request Background Check` routed to
+   `Lab HR Team`, and `Non-Disclosure Agreement` routed to `Lab Locked Out`.
+   Both services come with every instance's HR demo data; the groups are the
+   lab's.
 2. Open `kb_knowledge.list`. In the **Short description** search box, type
    `HR routing guidance` and press **Enter**. Open the top row: its
    **Number** shows **(empty)**.
 
-   ✅ **Workflow** is **Published**. Scroll inside the article body: it has
-   one "Example request:" line for each of those HR services. Copy both.
+   ✅ **Workflow** is **Published**. Scroll inside the article body: a
+   section for `Request Background Check`, handled by `Lab HR Team`, and one
+   for `Non-Disclosure Agreement`, handled by `Lab Locked Out`, each ending in
+   the "Example request:" line the steps below paste. No article, or no rows
+   in sub-step 1? See the 🛟 box below.
 
 🌐 **Browser**, impersonate `hr.demo`: click your avatar (top right), then
 **Impersonate user**. Type `hr.demo`, pick **HR Demo**, and click
 **Impersonate user**. Close any welcome pop-up.
 
-3. For each of the two services, paste this into the address bar:
-   `https://dev123456.service-now.com/sn_hr_core_case.do?sys_id=-1`.
-   Once your instance's name is in **Values**, the guide shows it here.
-   Set **HR service** to the service and **Short description** to its
-   "Example request:" line, and click **Submit**.
-   <!-- DRY RUN: how does hr.demo create an HR case in the classic UI: which
-   fields are mandatory (Opened for, Subject person), and does the form switch
-   to the service's HR table? -->
+3. Create two warm-up cases. Paste this into the address bar and press
+   **Enter**:
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_talent_management.do%3Fsys_id%3D-1`.
+   On the blank **HR Talent Management Case** form: **Opened for**
+   `HR Demo`; **HR service** `Request Background Check` (click the
+   magnifier); **Short description**
+   `Please start the background check for our new analyst, who joins on the first of next month.`;
+   then **Submit**, top right. The text must be there before Submit: the app
+   starts a run as the case is saved. Then the same address again with HR
+   service `Non-Disclosure Agreement` and short description
+   `I need to sign the non-disclosure agreement for my new role before I start.`.
+   Step 11 does this with more detail.
 
-   ✅ Within about three minutes, each case has a work note by
-   `hr.router`, whatever it says. Reload a case to see it.
+   ✅ Within about three minutes, each case has a work note by `hr.router`,
+   whatever it says. To see it: paste
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEnew%20analyst%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
+   into the address bar (empty as `hr.demo`? end impersonation and paste it
+   as admin), click the top row's number, and look at the newest entry in the
+   activity stream below the form; for the other case, use `non-disclosure`
+   in place of `new%20analyst` in that address. No note? See step 11's
+   🛟 box "No note by hr.router".
 
 <details><summary>🛟 No note after three minutes</summary>
 
@@ -752,6 +767,34 @@ router didn't finish, five minutes from creation, then click it again.
    ✅ It prints `Closed <n> open conversation(s) of hr.router` and `Closed <n>
    in-progress interaction(s) of hr.router`, with any count, 0 included.
 
+<details><summary>🛟 No routing rules, or no "HR routing guidance" article</summary>
+
+The seed data isn't on your instance. It's a story like any other: the two
+routing rules, the knowledge base and the article, as code in `src/`. Either
+it isn't merged yet, or it's merged but not installed. ⌨️ **Terminal**, in
+your window: `git switch main && git pull && git log --oneline -15`. A line
+about seed data, routing rules or the article? Do step 8 again: build and
+install. No such line? 🤖 **Claude:** paste this, then `go`:
+
+```
+Which story holds the seed data: the routing rules for the demo HR services Request Background Check (to Lab HR Team) and Non-Disclosure Agreement (to Lab Locked Out), found by name, the "Lab HR routing" knowledge base and the published article? If it isn't merged, take it next, the same way as the last story.
+```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude finds the story that seeds the routing rules, the knowledge base and
+the article, and if it isn't merged yet, takes it next through the usual
+loop.
+
+</details>
+
+When it's merged, do step 8 again, then come back to sub-steps 1 and 2 here.
+An article that's there but whose knowledge base isn't (its **Knowledge
+base** field is empty) gets the same fix: the seed must create the knowledge
+base in `src/` (DECISIONS, seed data).
+
+</details>
+
 ### 11. Watch it route, as `hr.demo`
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
@@ -767,28 +810,129 @@ The agent reads the case and the article; `apply_route` checks its choice
 before anything moves. One case the checks pass, one they stop. Nothing is
 instant: the dispatcher starts a run a minute, and a run takes about one.
 
+You create two HR cases by hand, as an HR agent would, and watch what the
+app does to each. Case A is on the `Request Background Check` service, which
+`Lab HR Team` handles: the agent should move it there. Case B is on the
+`Non-Disclosure Agreement` service, which `Lab Locked Out` handles: the agent
+should pick that group, and the checks should stop the move, because
+`Lab Locked Out` can't open this kind of case.
+
 🌐 **Browser**, impersonate `hr.demo` again (your avatar, then
 **Impersonate user**, and pick **HR Demo**).
 
-1. Paste this into the address bar:
-   `https://dev123456.service-now.com/sn_hr_core_case.do?sys_id=-1`.
-   Set **HR service** to the service
-   you noted for `Lab HR Team`, and **Short description** to its "Example
-   request:" line. Click **Submit**.
-2. Do the same for the `Lab Locked Out` service.
-3. Wait about two minutes, then open the first case.
-   <!-- DRY RUN: time. And which group does a new case start in? If it's
-   already Lab HR Team, the note says it's in the right place. -->
+1. **Create case A.** Paste this into the address bar and press **Enter**:
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_talent_management.do%3Fsys_id%3D-1`.
+   It's a blank **HR Talent Management Case** form, the kind both lab
+   services belong to. Fill in these three fields; leave every other field as
+   the form has it:
+   - **Opened for:** `HR Demo`, if it isn't already.
+   - **HR service:** click the magnifier and pick `Request Background Check`.
+     Not in the list? See the 🛟 box below.
+   - **Short description:** paste
+     `Please start the background check for our new analyst, who joins on the first of next month.`,
+     the article's "Example request:" line for this service, exactly as
+     written.
 
-   ✅ **Assignment group** is `Lab HR Team`. The newest work note, by
-   `hr.router`, gives a reason quoting this case's own "Example request:"
-   line, a confidence, and the service and group before: proof the agent
-   read this case.
-4. Open the second case, a minute or two later.
+   Click **Submit**, at the top right. The app starts a run the moment a case
+   is saved, so the text has to be there before this one click: don't create
+   the case first and add the text after. The platform fills **Assignment
+   group** (such as **HR Tier 1**) and **Assigned to** itself as it saves:
+   fine. Changing that group is the agent's job, and what you check next.
+2. **Create case B** the same way: the same address, **Opened for**
+   `HR Demo`, **HR service** `Non-Disclosure Agreement`, **Short
+   description**
+   `I need to sign the non-disclosure agreement for my new role before I start.`,
+   then **Submit**.
+3. Wait about two minutes, then open case A. Paste this into the address bar:
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEnew%20analyst%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
+   It lists the HR cases `hr.demo` opened whose short description has "new
+   analyst" in it, newest first: yours, not the build's old test cases. Click
+   the top row's number. The list is empty? `hr.demo` can't see a case once
+   the platform hands it to a group it isn't in: end impersonation and paste
+   the address again as admin.
 
-   ✅ **Assignment group** hasn't changed. The newest work note, by
-   `hr.router`, names the access check: `Lab Locked Out` can't open this
-   HR table, and the code stopped the move.
+   On the case, look at two things: the **Assignment group** field, and the
+   newest entry in the activity stream below the form (the **Notes** tab, or
+   scroll down), which is a work note by `hr.router`.
+
+   ✅ **Assignment group** is `Lab HR Team`, no longer what the form set
+   (such as `HR Tier 1`). The newest work note, by `hr.router`, gives a
+   reason quoting this case's own "Example request:" line, a confidence, and
+   the service and group before: proof the agent read this case.
+4. Open case B the same way, a minute or two later, with
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEnon-disclosure%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
+
+   ✅ **Assignment group** is still what the form set (such as `HR Tier 1`),
+   not `Lab Locked Out`. The newest work note, by `hr.router`, names the
+   access check: `Lab Locked Out` can't open this HR table, and the code
+   stopped the move.
+
+<details><summary>🛟 No note by hr.router: read the run's state</summary>
+
+Every case the app sees gets a row in its run log, and the row's **State**
+says how far the run got. End impersonation. As admin, open
+`<SCOPE>_run_log.list`, newest first, and find the case's row:
+
+| State | What it means | What to do |
+|---|---|---|
+| No row at all | The app never saw the case | Check that the address in sub-step 1 named `sn_hr_core_case_talent_management.do`, and that `<SCOPE>.enabled` is `true` in `sys_properties.list`. Create the case again. |
+| `skipped` | The router was off, or a run was already going on the case | Set `<SCOPE>.enabled` to `true`, or wait for the other run; then **Reroute** |
+| `refused` | Stopped before any AI ran: the service has no active routing rule, the rule's **Never send to AI** box is ticked, a cap was reached, or the article isn't published exactly once | The case's work note says which. Fix that one, as admin, then **Reroute** |
+| `queued`, for minutes | The dispatcher isn't starting runs | Step 10's 🛟 box "No note after three minutes" |
+| `start_failed` | The dispatcher couldn't start the AI agent workflow | Read the system log, below |
+| `running` or `applying` | A run is still going | Wait two minutes, and reload |
+| `routed`, `stopped` or `left`, and still no note | The note write was refused: the first write to an HR table can be (DECISIONS, P8) | **Reroute** |
+
+No work note to say why? The app's first write to an HR table can be refused,
+so the note may be missing too. Open `<SCOPE>_run_detail.list`, newest first:
+the run's detail row keeps what it can. Then read the system log: type
+`syslog.list` in the filter navigator and press **Enter**. In the
+**Message** search box, type `*<SCOPE>` and press **Enter**; sort by
+**Created**, newest first. The rows at the run's time say what failed.
+
+`Illegal access to package_private script include function AIASharedDao`
+in a `start_failed` line means the dispatcher starts the workflow from a
+Fluent module. The start must be in classic script (DECISIONS, How it starts
+the workflow). That's a defect: 🤖 **Claude:** paste this, then `go`:
+
+```
+File a GitHub issue in plain words: every run is start_failed with "Illegal access to package_private script include function AIASharedDao: caller not in scope sn_aia". DECISIONS says the start call must be classic script, not a Fluent module. Show me first; file after I say yes. No code.
+```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude drafts an issue for the start failure, quoting the error and the
+DECISIONS rule it breaks, and shows it to you before filing. It writes no
+code. You then take that issue through the loop like any other story, build,
+install, and come back to sub-step 1.
+
+</details>
+
+</details>
+
+<details><summary>🛟 The HR service isn't in the list</summary>
+
+The form's **HR service** list holds only the services of that form's kind of
+case. Both lab services are Talent Management ones, so check the address: it
+must name `sn_hr_core_case_talent_management.do`, not `sn_hr_core_case.do`.
+Close the form without submitting and paste the address again.
+
+Right form, and the service is listed as admin but not as `hr.demo`? The
+service is turned off, or its **HR criteria** leave `HR Demo` out. End
+impersonation, open `sn_hr_core_service.list`, and open the service:
+✅ **Active** is ticked, and **HR criteria** is empty or covers `HR Demo`.
+Otherwise tell your instructor, with the service's name.
+
+Avoid **HR Case Management › Create New Case** for these cases: its
+**Create case** button saves the case before you can type a short
+description, so the agent's first run reads an empty case and you'd have to
+click **Reroute** after adding the text.
+
+Neither routing rule has a service, or `<SCOPE>_routing_rule.list` is empty?
+The seed found no groups named `Lab HR Team` and `Lab Locked Out` on your
+instance: Module 0's check (DECISIONS, seed data). Tell your instructor.
+
+</details>
 
 <details><summary>🛟 The note says the case text was empty</summary>
 
