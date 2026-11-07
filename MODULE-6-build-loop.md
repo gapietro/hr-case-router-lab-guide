@@ -875,7 +875,7 @@ says how far the run got. End impersonation. As admin, open
 
 | State | What it means | What to do |
 |---|---|---|
-| No row at all | The app never saw the case | Check that the address in sub-step 1 named `sn_hr_core_case_talent_management.do`, and that `<SCOPE>.enabled` is `true` in `sys_properties.list`. Create the case again. |
+| No row at all | The app never saw the case: the insert rule didn't run | Check that the address in sub-step 1 named `sn_hr_core_case_talent_management.do`. Then, in `sys_script.list`, the app's insert rule is **Active**; if not, do step 8 again. Create the case again. |
 | `skipped` | The router was off, or a run was already going on the case | Set `<SCOPE>.enabled` to `true`, or wait for the other run; then **Reroute** |
 | `refused` | Stopped before any AI ran: the service has no active routing rule, the rule's **Never send to AI** box is ticked, a cap was reached, or the article isn't published exactly once | The case's work note says which. Fix that one, as admin, then **Reroute** |
 | `queued`, for minutes | The dispatcher isn't starting runs | Step 10's 🛟 box "No note after three minutes" |
@@ -896,7 +896,7 @@ Fluent module. The start must be in classic script (DECISIONS, How it starts
 the workflow). That's a defect: 🤖 **Claude:** paste this, then `go`:
 
 ```
-File a GitHub issue in plain words: every run is start_failed with "Illegal access to package_private script include function AIASharedDao: caller not in scope sn_aia". DECISIONS says the start call must be classic script, not a Fluent module. Show me first; file after I say yes. No code.
+File a GitHub issue in plain words: every run is start_failed with "Illegal access to package_private script include function AIASharedDao: caller not in scope sn_aia". DECISIONS says the start call must be the dispatcher job's own inline classic script, not a Fluent module or anything it calls. Show me first; file after I say yes. No code.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
