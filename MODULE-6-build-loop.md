@@ -681,8 +681,8 @@ the execution plan prove a run).
 
 1. Open `<SCOPE>_routing_rule.list`.
 
-   ✅ Two active rows: **HR service** `Request Background Check` routed to
-   `Lab HR Team`, and `Non-Disclosure Agreement` routed to `Lab Locked Out`.
+   ✅ Two active rows: **HR service** `Direct Deposit Inquiry` routed to
+   `Lab HR Team`, and `Payroll Discrepancy` routed to `Lab Locked Out`.
    Both services come with every instance's HR demo data; the groups are the
    lab's.
 2. Open `kb_knowledge.list`. In the **Short description** search box, type
@@ -690,8 +690,8 @@ the execution plan prove a run).
    **Number** shows **(empty)**.
 
    ✅ **Workflow** is **Published**. Scroll inside the article body: a
-   section for `Request Background Check`, handled by `Lab HR Team`, and one
-   for `Non-Disclosure Agreement`, handled by `Lab Locked Out`, each ending in
+   section for `Direct Deposit Inquiry`, handled by `Lab HR Team`, and one
+   for `Payroll Discrepancy`, handled by `Lab Locked Out`, each ending in
    the "Example request:" line the steps below paste. No article, or no rows
    in sub-step 1? See the 🛟 box below.
 
@@ -701,24 +701,24 @@ the execution plan prove a run).
 
 3. Create two warm-up cases. Paste this into the address bar and press
    **Enter**:
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_talent_management.do%3Fsys_id%3D-1`.
-   On the blank **HR Talent Management Case** form: **Opened for**
-   `HR Demo`; **HR service** `Request Background Check` (click the
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`.
+   On the blank **HR Payroll Case** form: **Opened for**
+   `HR Demo`; **HR service** `Direct Deposit Inquiry` (click the
    magnifier); **Short description**
-   `Please start the background check for our new analyst, who joins on the first of next month.`;
+   `My direct deposit didn't arrive this pay period. Can you check which bank account it went to?`;
    then **Submit**, top right. The text must be there before Submit: the app
    starts a run as the case is saved. Then the same address again with HR
-   service `Non-Disclosure Agreement` and short description
-   `I need to sign the non-disclosure agreement for my new role before I start.`.
+   service `Payroll Discrepancy` and short description
+   `My last paycheck was short by eight hours of overtime. Please correct the amount.`.
    Step 11 does this with more detail.
 
    ✅ Within about three minutes, each case has a work note by `hr.router`,
    whatever it says. To see it: paste
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEnew%20analyst%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
    into the address bar (empty as `hr.demo`? end impersonation and paste it
    as admin), click the top row's number, and look at the newest entry in the
-   activity stream below the form; for the other case, use `non-disclosure`
-   in place of `new%20analyst` in that address. No note? See step 11's
+   activity stream below the form; for the other case, use `paycheck`
+   in place of `direct%20deposit` in that address. No note? See step 11's
    🛟 box "No note by hr.router".
 
 <details><summary>🛟 No note after three minutes</summary>
@@ -777,7 +777,7 @@ about seed data, routing rules or the article? Do step 8 again: build and
 install. No such line? 🤖 **Claude:** paste this, then `go`:
 
 ```
-Which story holds the seed data: the routing rules for the demo HR services Request Background Check (to Lab HR Team) and Non-Disclosure Agreement (to Lab Locked Out), found by name, the "Lab HR routing" knowledge base and the published article? If it isn't merged, take it next, the same way as the last story.
+Which story holds the seed data: the routing rules for the demo HR services Direct Deposit Inquiry (to Lab HR Team) and Payroll Discrepancy (to Lab Locked Out), found by name, the "Lab HR routing" knowledge base and the published article? If it isn't merged, take it next, the same way as the last story.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
@@ -811,9 +811,9 @@ before anything moves. One case the checks pass, one they stop. Nothing is
 instant: the dispatcher starts a run a minute, and a run takes about one.
 
 You create two HR cases by hand, as an HR agent would, and watch what the
-app does to each. Case A is on the `Request Background Check` service, which
+app does to each. Case A is on the `Direct Deposit Inquiry` service, which
 `Lab HR Team` handles: the agent should move it there. Case B is on the
-`Non-Disclosure Agreement` service, which `Lab Locked Out` handles: the agent
+`Payroll Discrepancy` service, which `Lab Locked Out` handles: the agent
 should pick that group, and the checks should stop the move, because
 `Lab Locked Out` can't open this kind of case.
 
@@ -821,15 +821,15 @@ should pick that group, and the checks should stop the move, because
 **Impersonate user**, and pick **HR Demo**).
 
 1. **Create case A.** Paste this into the address bar and press **Enter**:
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_talent_management.do%3Fsys_id%3D-1`.
-   It's a blank **HR Talent Management Case** form, the kind both lab
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`.
+   It's a blank **HR Payroll Case** form, the kind both lab
    services belong to. Fill in these three fields; leave every other field as
    the form has it:
    - **Opened for:** `HR Demo`, if it isn't already.
-   - **HR service:** click the magnifier and pick `Request Background Check`.
+   - **HR service:** click the magnifier and pick `Direct Deposit Inquiry`.
      Not in the list? See the 🛟 box below.
    - **Short description:** paste
-     `Please start the background check for our new analyst, who joins on the first of next month.`,
+     `My direct deposit didn't arrive this pay period. Can you check which bank account it went to?`,
      the article's "Example request:" line for this service, exactly as
      written.
 
@@ -839,14 +839,14 @@ should pick that group, and the checks should stop the move, because
    group** (such as **HR Tier 1**) and **Assigned to** itself as it saves:
    fine. Changing that group is the agent's job, and what you check next.
 2. **Create case B** the same way: the same address, **Opened for**
-   `HR Demo`, **HR service** `Non-Disclosure Agreement`, **Short
+   `HR Demo`, **HR service** `Payroll Discrepancy`, **Short
    description**
-   `I need to sign the non-disclosure agreement for my new role before I start.`,
+   `My last paycheck was short by eight hours of overtime. Please correct the amount.`,
    then **Submit**.
 3. Wait about two minutes, then open case A. Paste this into the address bar:
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEnew%20analyst%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
-   It lists the HR cases `hr.demo` opened whose short description has "new
-   analyst" in it, newest first: yours, not the build's old test cases. Click
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
+   It lists the HR cases `hr.demo` opened whose short description has "direct
+   deposit" in it, newest first: yours, not the build's old test cases. Click
    the top row's number. The list is empty? `hr.demo` can't see a case once
    the platform hands it to a group it isn't in: end impersonation and paste
    the address again as admin.
@@ -860,7 +860,7 @@ should pick that group, and the checks should stop the move, because
    reason quoting this case's own "Example request:" line, a confidence, and
    the service and group before: proof the agent read this case.
 4. Open case B the same way, a minute or two later, with
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEnon-disclosure%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEpaycheck%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
 
    ✅ **Assignment group** is still what the form set (such as `HR Tier 1`),
    not `Lab Locked Out`. The newest work note, by `hr.router`, names the
@@ -875,7 +875,7 @@ says how far the run got. End impersonation. As admin, open
 
 | State | What it means | What to do |
 |---|---|---|
-| No row at all | The app never saw the case: the insert rule didn't run | Check that the address in sub-step 1 named `sn_hr_core_case_talent_management.do`. Then, in `sys_script.list`, the app's insert rule is **Active**; if not, do step 8 again. Create the case again. |
+| No row at all | The app never saw the case: the insert rule didn't run | Check that the address in sub-step 1 named `sn_hr_core_case_payroll.do`. Then, in `sys_script.list`, the app's insert rule is **Active**; if not, do step 8 again. Create the case again. |
 | `skipped` | The router was off, or a run was already going on the case | Set `<SCOPE>.enabled` to `true`, or wait for the other run; then **Reroute** |
 | `refused` | Stopped before any AI ran: the service has no active routing rule, the rule's **Never send to AI** box is ticked, a cap was reached, or the article isn't published exactly once | The case's work note says which. Fix that one, as admin, then **Reroute** |
 | `queued`, for minutes | The dispatcher isn't starting runs | Step 10's 🛟 box "No note after three minutes" |
@@ -896,7 +896,7 @@ Fluent module. The start must be in classic script (DECISIONS, How it starts
 the workflow). That's a defect: 🤖 **Claude:** paste this, then `go`:
 
 ```
-File a GitHub issue in plain words: every run is start_failed with "Illegal access to package_private script include function AIASharedDao: caller not in scope sn_aia". DECISIONS says the start call must be the dispatcher job's own inline classic script, not a Fluent module or anything it calls. Show me first; file after I say yes. No code.
+File a GitHub issue in plain words: every run is start_failed with "Illegal access to package_private script include function AIASharedDao: caller not in scope sn_aia". DECISIONS says the dispatcher job's own classic script makes the start call, after the module claims the run; never a Fluent module or anything it calls. Show me first; file after I say yes. No code.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
@@ -913,8 +913,8 @@ install, and come back to sub-step 1.
 <details><summary>🛟 The HR service isn't in the list</summary>
 
 The form's **HR service** list holds only the services of that form's kind of
-case. Both lab services are Talent Management ones, so check the address: it
-must name `sn_hr_core_case_talent_management.do`, not `sn_hr_core_case.do`.
+case. Both lab services are Payroll ones, so check the address: it must name
+`sn_hr_core_case_payroll.do`, not `sn_hr_core_case.do`.
 Close the form without submitting and paste the address again.
 
 Right form, and the service is listed as admin but not as `hr.demo`? The

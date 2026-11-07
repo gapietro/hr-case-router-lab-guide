@@ -582,10 +582,10 @@ Then warm up: the first runs after an install can each fail once per HR
 table (P8).
 
 6. Impersonate `hr.demo` (your avatar, then **Impersonate user**). Paste
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_talent_management.do%3Fsys_id%3D-1`
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`
    into the address bar (the guide shows your instance's name once it's in
-   **Values**), once for each of the two services, `Request Background Check`
-   and `Non-Disclosure Agreement`: set **HR service** to it and **Short
+   **Values**), once for each of the two services, `Direct Deposit Inquiry`
+   and `Payroll Discrepancy`: set **HR service** to it and **Short
    description** to its "Example request:" line, and click **Submit**.
    ✅ Within about three minutes, each has a work note by `hr.router`.
 7. End impersonation, and close any conversation left open (P14). ⌨️ Run
@@ -617,10 +617,10 @@ watch, as the product manager.
   **Impersonate user**. Type the user ID, pick that user, and click
   **Impersonate user**.
 - **Create a case:** paste
-  `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_talent_management.do%3Fsys_id%3D-1`
+  `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`
   into the address bar, set **HR service** and **Short description**, and
-  click **Submit**. It's the HR Talent Management Case form, the kind both
-  lab services belong to (Module 6, step 11).
+  click **Submit**. It's the HR Payroll Case form, the kind both lab
+  services belong to (Module 6, step 11).
 
 Nothing is instant: after you create a case or click **Reroute**, wait
 about two minutes, then reload the case. After a line as admin or

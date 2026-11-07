@@ -67,7 +67,10 @@ already admitted).
    access for you as the app runs; on test and production it may not, and
    logic that worked on dev fails. Make sure every cross-scope privilege the
    app needs is **declared in source** (your LLD §4 lists them), and
-   confirm with your platform team.
+   confirm with your platform team. One isn't the app's to declare: the
+   lab setup made HR's two security-policy tables readable from other app
+   scopes, so the access check can read them. Your instances need the same
+   setting, made by their admin.
 5. **Demo data stays out of production.** Your seed records are part of the
    app's source, so they'd install everywhere. Agree how they're excluded
    from the production install, and confirm it works on test.
