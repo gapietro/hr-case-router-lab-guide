@@ -31,9 +31,10 @@ in your head: step 5 checks it.
 
 <details><summary>🔮 The answer, once you've guessed</summary>
 
-Only capabilities 3 and 5, routing a new case and Reroute, need AI. The
-agent itself may change nothing: it proposes a service and a group, and its
-tools write.
+Only routing needs AI: capability 3's agent, which Reroute (capability 5)
+runs again on a case. The Reroute button itself is plain code. The agent
+may change nothing: it proposes a service and a group, and its tools
+write.
 
 Reading loose case text is what AI is good at. A write must be predictable
 and testable, so it belongs to plain code: the `apply_route` tool runs every
@@ -122,8 +123,8 @@ brief is right; until then it writes nothing.
 Don't type `confirmed` yet. 🤖 **Claude:** paste this, for all its questions:
 
 ```
-My answers: size is one release, built on the day except the override
-rule. Assume AI Agent Studio. Modalities: agent, tool (a script the agent
+My answers: size is one release, built on the day except capability 7's
+override rule. Assume AI Agent Studio. Modalities: agent, tool (a script the agent
 calls) or plain code. Run no commands; mark anything unchecked VERIFY.
 Anything only the customer can answer, record as an open decision; never
 guess. Yes, raise any other open decisions you find.
@@ -132,7 +133,7 @@ guess. Yes, raise any other open decisions you find.
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 This answers all the consult's questions in one message: one release, built on
-AI Agent Studio, and three ways to build each capability, an agent, a tool or
+the day except capability 7's override rule, on AI Agent Studio, and three ways to build each capability, an agent, a tool or
 plain code. It tells Claude to run no commands, to mark anything it hasn't
 checked VERIFY, and to record anything only the customer can answer as an open
 decision, never a guess. Claude replies with its restatement of the brief, for
