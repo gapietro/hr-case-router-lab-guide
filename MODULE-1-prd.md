@@ -198,7 +198,7 @@ Claude then waits, and edits the PRD only when you reply "Make the changes."
 
 </details>
 
-✅ One numbered table, usually 10 to 20 rows, most of them Leave.
+✅ One numbered table, usually 10 to 40 rows, most of them Leave.
 
 Read each row's two quotes: does the input really say that? To change
 rows, reply once with their numbers and what to do instead, such as
