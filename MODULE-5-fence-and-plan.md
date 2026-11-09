@@ -203,8 +203,20 @@ Your repo isn't on GitHub yet: Module 0 step 18 didn't run. ⌨️ **Terminal**,
 in your window:
 
 ```
+git switch main
 gh repo create hr-case-router --private --source . --remote=origin --push
+git switch docs/plan
 ```
+
+<details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+1. `git switch main`: Goes to `main`, because `gh` pushes only the branch
+   you're on, and GitHub makes the first one it gets the repo's main branch.
+2. `gh repo create hr-case-router --private … --push`: Makes your private
+   repo on GitHub, saves its address as `origin`, and pushes `main`.
+3. `git switch docs/plan`: Goes back to your plan's branch.
+
+</details>
 
 The name already exists? Module 0 step 18's 🛟 has what to do. Then run
 sub-step 4 again.
