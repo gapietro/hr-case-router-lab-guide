@@ -48,8 +48,8 @@ instance show it. Four only a run or the install can show: the tools'
 user, the log row, an assignment rule filling an empty group, and the
 app's list rule. "Couldn't check" is the honest mark for those for now.
 Research should also find ServiceNow's own "Predict service and transfer
-HR Cases" workflow. It stays off: it always transfers, with none of the
-checks.
+HR Cases" workflow. Its triggers stay off, so nothing starts it: it
+always transfers, with none of the checks.
 
 </details>
 
@@ -145,11 +145,13 @@ the list your instance checks next.
 
 </details>
 
-✅ Eight facts: Transfer Case (`ReclassifyCaseTransfer`); the start in the
+✅ Eight rows of `DECISIONS.md`, which Claude may split into 20 or more
+numbered facts. Among them: Transfer Case (`ReclassifyCaseTransfer`); the start in the
 background (`AiAgentRuntimeUtil`); the tools as `hr.router`; its roles;
 P12; the assignment rules for an empty group; the `list_edit` rule on the
 assignment group; and ServiceNow's "Predict service and transfer HR Cases"
-workflow, inactive and not used: your design record says why. Compare with
+workflow, never started because its triggers are off, and not used: your
+design record says why. Compare with
 your guess.
 
 <details><summary>ℹ️ What P12 means</summary>
@@ -282,7 +284,8 @@ look up stays unchecked, so no mark rests on Claude's memory.
 Look it up by hand and tell Claude, such as
 `Fact 3: contradicted. My instance shows …`.
 
-- `AiAgentRuntimeUtil`: `sys_script_include.list`. Read **Accessible from**.
+- `AiAgentRuntimeUtil`: `sys_script_include.list`. **Accessible from**
+  reads "All application scopes".
 - The "AI Agent Background" channel: `sys_cs_channel.list`.
 - `hr.router`: `sys_user.list`, open it, and read its **Roles** and
   **Groups** tabs.
@@ -291,8 +294,11 @@ Look it up by hand and tell Claude, such as
   `sn_hr`.
 - List-edit rules: `sys_security_acl.list`, **Name** starting
   `sn_hr_core_case`, **Operation** `list_edit`.
-<!-- DRY RUN: confirm the AiAgentRuntimeUtil line; which lists show the
-Predict workflow and the ReclassifyCaseTransfer method? -->
+- The Predict workflow: `sn_aia_usecase.list`, **Name** "Predict service
+  and transfer HR Cases". Its triggers: `sn_aia_trigger_configuration.list`,
+  **Usecase** that name, each **Active** false.
+- Transfer methods, `ReclassifyCaseTransfer` among them:
+  `sn_hr_core_transfer_case_config.list`.
 
 </details>
 
@@ -356,7 +362,8 @@ decisions already made, so the build has nothing left to ask.
 🤖 **Claude:**
 
 ```
-Draft docs/LLD-HRCaseRouter.md from docs/LLD-TEMPLATE.md, the PRD,
+Draft docs/LLD-HRCaseRouter.md in this folder, not in app/, and don't
+commit it: Module 5 moves it into the app. Use docs/LLD-TEMPLATE.md, the PRD,
 CONSULT.md and research-facts.md. Every component cites a PRD capability,
 written as "capability 3", never C3: C numbers are the design record's.
 Take every decision in docs/DECISIONS.md as made. Section 7 copies
@@ -368,7 +375,8 @@ yet.
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-Claude drafts `docs/LLD-HRCaseRouter.md` from the template, citing a PRD
+Claude drafts `docs/LLD-HRCaseRouter.md` in your workspace, not in `app/`
+(Module 5 moves it there), from the template, citing a PRD
 capability for every component, in words, and taking every decision in
 `DECISIONS.md` as made. Section 7 copies your audited facts, and anything still
 undecided goes in section 8 as D1, D2 and so on, never an invented business

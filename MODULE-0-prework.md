@@ -1679,6 +1679,7 @@ Copy ~/projects/prove-it-kit/templates/CLAUDE.md to CLAUDE.md and fill in
 its Project facts, with the scope from now.config.json; keep the rules.
 Instance alias lab-pdi. The design record will be
 docs/DESIGN-HRCaseRouter.md: the contract. docs/LLD-HRCaseRouter.md is
+written in the workspace first and copied here with the design record; it is
 background, frozen once written, and docs/DECISIONS.md holds the
 lab's settled decisions: if they disagree, the design record wins. The
 workspace is one folder up. No hostnames, no credentials. Then make these
