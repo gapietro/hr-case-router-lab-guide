@@ -754,7 +754,8 @@ as written.
 | Module 4, step 3 | `from How a run starts to Caps and retention` | `under What's built, Roles and access, Failures, and Limits and retention` |
 | Module 4, step 3 | `Include the seed data, the run states and the build order` | Keep it if your slice has an AI call. Otherwise: `Include the seed data and the on switch` |
 | Module 4, step 3 | `capability 4's checks, each run by apply_route itself on the route it applies` | `your central rule's checks from docs/LLD-<Feature>.md §3` |
-| Module 4, step 3 | `only apply_route changes a case;` | Keep it if your slice has an AI call, with your writing tool's name. Otherwise: `the on switch installs false, and while it's false none of the app's logic runs;` |
+| Module 4, step 3 | `only apply_route changes a case's service, group or Assigned to;` | Keep it if your slice has an AI call, with your writing tool's name and the fields it changes. Otherwise: `the on switch installs false, and while it's false none of the app's logic runs;` |
+| Module 4, step 3 | `with its writers as docs/DECISIONS.md names them` | `with the code that writes it` |
 | Module 5, step 2 | `Every check apply_route runs itself` | `Every check of your central rule, which Module 4 step 3 added,` |
 | Module 6, step 2 | `C<n>: a run's target is its log row, never the case` | `C<n>: ` and one rule of your central rule |
 | Module 6, step 6 | `Run the build loop with sub-agents through the open stories, until a new HR case is moved to a group by apply_route` | After the workshop, Part 1, step 3's prompt, instead |

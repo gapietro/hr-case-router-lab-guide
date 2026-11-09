@@ -4,8 +4,8 @@
 
 Claude challenges your design, question by question; you confirm the
 result. **The idea:** agreed building plans. Once agreed, moving a wall needs
-a written change order. **The catch:** can the agent check one route, then
-apply another?
+a written change order. **The catch:** which questions can't your PRD, LLD
+and decisions answer?
 
 <details><summary>ℹ️ Why are we doing this?</summary>
 
@@ -125,8 +125,9 @@ Use the gates in docs/DECISIONS.md, word for word.
 ```
 
 ✅ Before the read-back, it has asked about failure, security, cost,
-boundaries and gates (milestones), and what stops the agent checking one
-route and applying another.
+boundaries and gates (milestones). It may not ask what stops the agent
+checking one route and applying another: `docs/DECISIONS.md` already
+answers that, and step 3 makes it terms.
 
 <details><summary>🛟 It skipped one</summary>
 
@@ -159,7 +160,8 @@ Names: rows that decide the same thing share one term. Include the seed
 data, the run states and the build order; each row that's out of scope
 for this record, as a boundary term; capability 4's checks, each run by
 apply_route itself on the route it applies, as consecutive terms; only
-apply_route changes a case; every table the app writes has one owner.
+apply_route changes a case's service, group or Assigned to; each table the
+app writes, with its writers as docs/DECISIONS.md names them.
 Replace any weaker term that says the same. Nothing in the record says
 OPEN or VERIFY. Read the terms back again.
 ```
@@ -171,8 +173,8 @@ often misses decisions, so this tells it to add one for every decision in
 `DECISIONS.md`. That includes the starting records the app installs, the stages
 a run goes through, the order you build in, each thing this release leaves out,
 each check on a move the agent wants to make (one term per check), that only
-the `apply_route` tool changes a case, and which part of the app writes to each
-table. Where two terms say the same thing it keeps the more exact one, and no
+the `apply_route` tool changes a case's service, group or assignee, and which
+parts of the app write to each table, as `DECISIONS.md` names them. Where two terms say the same thing it keeps the more exact one, and no
 term may stay undecided (OPEN) or unchecked (VERIFY). Then Claude reads the
 whole list back, so you can check it before anything is written.
 
@@ -188,6 +190,8 @@ whole list back, so you can check it before anything is written.
 - Each out-of-scope row is a boundary term.
 - Capability 4's checks sit together, one per term, each run by
   `apply_route` on the route it applies.
+- Each table's writers are the ones **Who writes each table** names: no
+  new module, such as a shared writer.
 - No term says `OPEN` or `VERIFY`.
 
 Anything wrong? Reply `Not agreed yet.` and the change, until it's right.
@@ -277,8 +281,14 @@ caught.
 </details>
 
 Confirm a `design` line for each question none of your files answered, or
-where your LLD and DECISIONS disagreed, with the term it added. Terms you
-added at the read-back aren't catches. Reply `keep`.
+where your LLD and DECISIONS disagreed, with the term it added. Terms
+added at the read-back aren't catches. Any line about one? 🤖 Reply:
+
+```
+Drop the lines about terms added at the read-back, then append the rest.
+```
+
+Otherwise reply `keep`.
 <span data-show="surface:terminal">**In the terminal:** then type
 `/exit`.</span>
 
