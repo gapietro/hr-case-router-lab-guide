@@ -1677,7 +1677,9 @@ Then press **Ctrl+O** until the view is **Verbose**.
 ```
 Copy ~/projects/prove-it-kit/templates/CLAUDE.md to CLAUDE.md and fill in
 its Project facts, with the scope from now.config.json; keep the rules.
-Instance alias lab-pdi. The design record will be
+Instance alias lab-pdi, already set up: drop the template's now-sdk auth
+hint. The Build line names now-sdk build and says install runs only as
+Platform facts allows. The design record will be
 docs/DESIGN-HRCaseRouter.md: the contract. docs/LLD-HRCaseRouter.md is
 written in the workspace first and copied here with the design record; it is
 background, frozen once written, and docs/DECISIONS.md holds the
@@ -1689,9 +1691,12 @@ changes, and only these:
   fact about the instance, run now-sdk query --auth lab-pdi, read-only, and
   quote the rows; never run now-sdk auth; never run now-sdk install, except
   the grade's install to lab-pdi after I name the alias.
-- Replace the Learning checkpoints section with one line: at a decision
-  that shapes the design, give your recommendation and its trade-off, and
-  take it when I reply yes; never ask me to answer first.
+- Keep the Learning checkpoints heading and replace its text with one
+  line: at a decision that shapes the design, give your recommendation and
+  its trade-off, and take it when I reply yes; never ask me to answer first.
+- Under Brakes, replace the Pre-build restatement rule with: before
+  building a story, restate it in five bullets or fewer, then build it;
+  don't wait for my confirmation.
 - Under Ship ritual, add: review the pull request's diff without checking
   it out; never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or BACKLOG.md
   to answer a review finding, file it as a register issue instead; there's
@@ -1716,8 +1721,10 @@ At the end of .gitignore, add only these allow lines, one per line:
 
 Claude copies the kit's `CLAUDE.md` into your repo and fills in its
 Project facts: your scope, `lab-pdi`, and where the design record and the
-lab's decisions live. It makes the six changes the prompt lists and keeps
-the kit's other rules as they are. Then it adds three allow lines to
+lab's decisions live. It makes the seven changes the prompt lists and keeps
+the kit's other rules as they are. One change matters later: Claude
+restates each story before building it but doesn't wait for you, so
+"never ask me a design question" holds. Then it adds three allow lines to
 `.gitignore`, so git can track `CLAUDE.md`, `docs/` and `SESSION-NOTE.md`,
 and commits nothing, so you can check the file first.
 
@@ -1725,8 +1732,9 @@ and commits nothing, so you can check the file first.
 
 ✅ ✏️ **Editor**, `hr-case-router/app/CLAUDE.md`: Project facts show your
 scope and `lab-pdi`; there's a Platform facts section; Learning checkpoints
-is one line; and the end of `hr-case-router/app/.gitignore` has the three
-allow lines.
+has one line under its heading; Brakes' restatement rule doesn't wait for
+you; and the end of `hr-case-router/app/.gitignore` has the three allow
+lines.
 
 ### 17. Read every name
 
