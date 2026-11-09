@@ -192,6 +192,8 @@ whole list back, so you can check it before anything is written.
   `apply_route` on the route it applies.
 - Each table's writers are the ones **Who writes each table** names: no
   new module, such as a shared writer.
+- A row that lists things keeps every item in its term, such as each table
+  in **Access across scopes**, the HR security policies included.
 - No term says `OPEN` or `VERIFY`.
 
 Anything wrong? Reply `Not agreed yet.` and the change, until it's right.
