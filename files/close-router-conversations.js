@@ -3,6 +3,7 @@
 // Your app can't close a conversation itself, so run this as a background script on your
 // instance, in the global scope. It touches hr.router's records only, and counts a record only
 // once it has read the new state back.
+if (gs.getCurrentScopeName() != 'rhino.global') throw new Error('STOP: set the scope picker above the script to global, then run it again.');
 (function () {
     var HR_ROUTER = '978cf62cf3f9ef2b13807f6ce8029c3a'; // md5('sys_user:hr.router')
     var now = new GlideDateTime().getValue();
