@@ -226,14 +226,16 @@ to one, whatever it said the first time.
 
 ```
 Name the owner of each write to a case in Data and ownership. The agent
-never writes; a deterministic tool or plain code does. If that changes
-your advice, update CONSULT.md and show me the change.
+never writes; a deterministic tool or plain code does. A tool the agent
+calls, which runs its own checks, owns its writes. If that changes your
+advice, update CONSULT.md and show me the change.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 Claude names, for each write to a case in the Data and ownership section, the
-tool or plain code that owns it, so the agent owns none. If that changes its
+tool or plain code that owns it, so the agent owns none. A tool the agent calls
+still owns its own writes: its code decides, not the agent. If that changes its
 advice, it updates `CONSULT.md` and shows you exactly what changed. The lab
 asks this every time: a write must be predictable and testable, which plain
 code is and an agent isn't.
