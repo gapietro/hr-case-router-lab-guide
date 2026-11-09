@@ -167,6 +167,7 @@ nothing left open, before it becomes a plan.
    git diff --stat main HEAD
    grep -nE 'OPEN|VERIFY' docs/DESIGN-HRCaseRouter.md
    grep -n -i 'service-now' docs/*.md
+   git remote get-url origin
    ```
 
    <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
@@ -183,11 +184,32 @@ nothing left open, before it becomes a plan.
       `docs` that names a `service-now` address, such as your instance's. The
       repo's guard treats your instance's name as a secret, so it stays out of
       the repo. `-i` matches upper and lower case.
+   5. `git remote get-url origin`: Prints your repo's address on GitHub, which
+      Module 0 step 18 saved as `origin`. Step 3 files your plan there.
 
    </details>
 
 ✅ Claude answers four yeses. The last line of `git diff` starts
-`4 files changed`, and both `grep` lines print nothing.
+`4 files changed`, both `grep` lines print nothing, and the last line prints
+your `hr-case-router` repo's address.
+
+⛔ **Any no, a line from a `grep`, or an error from `git remote`? Don't start
+step 2.** Fix it first with its 🛟 below. The plan is built from the record as
+it stands: a gap left here becomes a guess in the plan.
+
+<details><summary>🛟 git remote prints an error</summary>
+
+Your repo isn't on GitHub yet: Module 0 step 18 didn't run. ⌨️ **Terminal**,
+in your window:
+
+```
+gh repo create hr-case-router --private --source . --remote=origin --push
+```
+
+The name already exists? Module 0 step 18's 🛟 has what to do. Then run
+sub-step 4 again.
+
+</details>
 
 <details><summary>🛟 The second grep prints a line</summary>
 
@@ -300,7 +322,8 @@ Read the preview and that list, and answer each yes or no:
 
 Any no? Tell Claude in one line, such as `Story 4's done-when can't be
 checked.`, and answer the new preview. A term marked "pending ruling — no
-test yet" is a no too: open the 🛟 below. **Never approve a preview you
+test yet", a story titled "Ruling: …", or a list of where the plan departs
+from the record is a no too: open the 🛟 below. **Never approve a preview you
 answered no to.**
 
 <details><summary>ℹ️ What M1 · merge and p0… mean</summary>
@@ -312,15 +335,16 @@ platform rule. [All the labels](APPENDIX.md#m1--merge-milestones).
 
 </details>
 
-<details><summary>🛟 It refuses the record, or shows "pending ruling"</summary>
+<details><summary>🛟 It refuses the record, or shows a ruling it needs</summary>
 
 🤖 **Claude:** type
 `/prove-it:design-challenge amend docs/DESIGN-HRCaseRouter.md`. When it
 asks what changed, paste this:
 
 ```
-Rule on each OPEN item, and sign what's unsigned. For each ruling, give
-me 3 or 4 numbered answers, your recommended one first.
+Rule on each OPEN item and each ruling the build plan asked for, and
+sign what's unsigned. For each ruling, give me 3 or 4 numbered answers,
+your recommended one first.
 ```
 
 Reply with a number, usually `1`. At the read-back, type `Confirmed.`
