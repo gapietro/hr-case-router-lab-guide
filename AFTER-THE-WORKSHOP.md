@@ -627,26 +627,27 @@ about two minutes, then reload the case. After a line as admin or
 `owner.demo`, impersonate `hr.demo` again.
 
 Get ready, as admin: in `<SCOPE>_routing_rule.list`, ✅ two active rows:
-note the `Lab HR Team` and `Lab Locked Out` services. From the published
+note each row's service: `Direct Deposit Inquiry`, routed to `Lab HR Team`,
+and `Payroll Discrepancy`, routed to `Lab Locked Out`. From the published
 **HR routing guidance** in `kb_knowledge.list`, copy both "Example
 request:" lines.
 
-1. **Route.** Create case A on the `Lab HR Team` service, with its line.
+1. **Route.** Create case A on the `Direct Deposit Inquiry` service, with its line.
    ✅ It's in `Lab HR Team`. `hr.router`'s note quotes A's own line, with a
    confidence of 0.7 or more and the service and group before. As admin,
    open A's row in `<SCOPE>_run_log.list` and its execution plan: only
    look, never start a test run. ✅ `routed`; the plan `completed`, by
    `hr.router` (P10).
-2. **Stopped.** Create case B on the `Lab Locked Out` service, with its
+2. **Stopped.** Create case B on the `Payroll Discrepancy` service, with its
    own line. ✅ **Assignment group** hasn't changed, and `hr.router`'s note
    names the access check. Its log row is `stopped`.
 3. **Reroute.** On case A, set **Assignment group** to any other group,
    click **Update**, then **Reroute**. ✅ "Routing queued", then A is back
    in `Lab HR Team`, with a new note. **Assigned to** is empty, or a member
    of `Lab HR Team`.
-4. **A new service.** Create case C on the `Lab Locked Out` service, with
-   the `Lab HR Team` line. ✅ It's transferred to a new case on the
-   `Lab HR Team` service, in `Lab HR Team`, with `hr.router`'s note. As
+4. **A new service.** Create case C on the `Payroll Discrepancy` service, with
+   the `Direct Deposit Inquiry` line. ✅ It's transferred to a new case on the
+   `Direct Deposit Inquiry` service, in `Lab HR Team`, with `hr.router`'s note. As
    admin, ✅ the run log has one row for C: the transfer started no run.
    The old case's **Transferred to** opens the new one.
 5. **A restricted service, and one with no rule.** As `owner.demo`, open
@@ -1700,7 +1701,7 @@ says READY only if all three pass, and names each blocking item if not.
 
 1. 🌐 Your partner restores the failure as the card says, checks the
    before state, and fills in **Restored on**. Alone? You restore it.
-2. 🌐 As `hr.demo`, on a case on the `Lab HR Team` service, set
+2. 🌐 As `hr.demo`, on a case on the `Direct Deposit Inquiry` service, set
    **Assignment group** to any other group, click **Update**, then
    **Reroute**. Wait about two minutes, and reload. ✅ It's in
    `Lab HR Team`, with `hr.router`'s note quoting the article and a

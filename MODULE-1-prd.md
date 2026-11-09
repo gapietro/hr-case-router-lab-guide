@@ -273,7 +273,8 @@ Keep a line for each gap that changed the PRD in step 3. Then reply
 `keep`.
 
 ✅ ⌨️ In your window,
-`tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you kept.
+`tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you kept,
+each starting `1 | `, this module's number, never a count.
 
 ### 5. Get the customer's acceptance
 
