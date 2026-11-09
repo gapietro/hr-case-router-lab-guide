@@ -133,14 +133,18 @@ nothing left open, before it becomes a plan.
    Read docs/DESIGN-HRCaseRouter.md and check it's ready to build. Change
    nothing. Answer yes or no for each: every gate in §7 can pass as
    written; no term needs a ruling before code can be written; no term
-   number clashes with an id in docs/LLD-HRCaseRouter.md.
+   number clashes with an id in docs/LLD-HRCaseRouter.md; no two terms
+   contradict each other. For each no, name the terms.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-   Claude reads the design record and answers yes or no to three readiness
+   Claude reads the design record and answers yes or no to four readiness
    checks: every gate in §7 can pass as written, no term needs a ruling before
-   code, and no term number clashes with an id in the LLD. It changes nothing.
+   code, no term number clashes with an id in the LLD, and no two terms
+   contradict each other, such as one saying a tool writes nothing and
+   another having it log something. For each no, it names the terms. It
+   changes nothing.
    A no found here is fixed with a signed amendment before the plan is
    drafted.
 
@@ -182,7 +186,7 @@ nothing left open, before it becomes a plan.
 
    </details>
 
-✅ Claude answers three yeses. The last line of `git diff` starts
+✅ Claude answers four yeses. The last line of `git diff` starts
 `4 files changed`, and both `grep` lines print nothing.
 
 <details><summary>🛟 The second grep prints a line</summary>
@@ -215,7 +219,7 @@ terms. Only the labels change, not what the LLD says. 🤖 **Claude:**
 ```
 In docs/LLD-HRCaseRouter.md, write each capability labelled C1 to C9 as
 capability 1 to capability 9, and change nothing else. Commit only that
-file on docs/plan. Then answer the three questions again.
+file on docs/plan. Then answer the four questions again.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
@@ -223,7 +227,7 @@ file on docs/plan. Then answer the three questions again.
 Claude renames the LLD's capability labels, `C1` to `C9`, to capability 1 to
 capability 9, so they no longer share numbers with the design record's terms.
 It changes nothing else in the LLD, commits only that file, and answers the
-three readiness questions again.
+four readiness questions again.
 
 </details>
 
