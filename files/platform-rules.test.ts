@@ -105,17 +105,18 @@ function calls(text: string, name: string): string[] {
     return out
 }
 
-/** The text inside the first `key: [ ... ]` of a block, brackets matched. */
-function list(text: string, key: string): string {
+/** The text inside the first `key: [ ... ]` of a block, brackets matched: '' when there's no such key, null when its
+ *  brackets don't match, so a rule can say it couldn't read the list instead of passing an empty one. */
+function list(text: string, key: string): string | null {
     const start = text.search(new RegExp(`\\b${key}\\s*:\\s*\\[`))
     if (start < 0) return ''
     const open = text.indexOf('[', start)
     const close = closing(text, open)
-    return close < 0 ? '' : text.slice(open + 1, close)
+    return close < 0 ? null : text.slice(open + 1, close)
 }
 
-/** The top-level `{ ... }` objects in a list's text, braces matched. */
-function objects(text: string): string[] {
+/** The top-level `{ ... }` objects in a list's text, braces matched; null when a brace doesn't match. */
+function objects(text: string): string[] | null {
     const out: string[] = []
     for (let i = 0; i < text.length; i++) {
         const end = skipString(text, i)
@@ -125,7 +126,7 @@ function objects(text: string): string[] {
         }
         if (text[i] !== '{') continue
         const close = closing(text, i)
-        if (close < 0) break
+        if (close < 0) return null
         out.push(text.slice(i, close + 1))
         i = close
     }
@@ -149,7 +150,7 @@ function toolScript(tool: string, whole: string, file: string): string | undefin
 
 /** The input keys a tool script reads: inputs.key, inputs['key'], const { key } = inputs, and the same through an alias. */
 function inputsRead(script: string): Set<string> {
-    const names = ['inputs', ...[...script.matchAll(/\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*inputs\s*(?:;|\n|$)/g)].map((m) => m[1])]
+    const names = ['inputs', ...[...script.matchAll(/\b(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*inputs\b(?!\s*[.[])/g)].map((m) => m[1])]
     const keys = new Set<string>()
     for (const name of names) {
         const n = escape(name)
@@ -209,10 +210,21 @@ describe('Platform rules (docs/DECISIONS.md)', () => {
         for (const f of fluent) {
             const whole = code(f)
             for (const call of calls(whole, 'AiAgent')) {
-                for (const tool of objects(list(call, 'tools'))) {
+                const toolList = list(call, 'tools')
+                const tools = toolList === null ? null : objects(toolList)
+                if (tools === null) {
+                    bad.push(`${at(f)}: an AiAgent's tools list can't be read (its brackets don't match): fix it so this rule can check its tools`)
+                    continue
+                }
+                for (const tool of tools) {
                     if (!/\btype\s*:\s*['"]script['"]/.test(tool)) continue
                     const name = /\bname\s*:\s*['"]([^'"]+)['"]/.exec(tool)?.[1] ?? '(unnamed)'
-                    const inputs = [...list(tool, 'inputs').matchAll(/\bname\s*:\s*['"]([^'"]+)['"]/g)].map((m) => m[1])
+                    const inputList = list(tool, 'inputs')
+                    if (inputList === null) {
+                        bad.push(`${at(f)}: tool '${name}': its inputs list can't be read (its brackets don't match)`)
+                        continue
+                    }
+                    const inputs = [...inputList.matchAll(/\bname\s*:\s*['"]([^'"]+)['"]/g)].map((m) => m[1])
                     const script = toolScript(tool, whole, f)
                     if (script === undefined) {
                         bad.push(`${at(f)}: tool '${name}': write its script inline, as a constant in this file, or with Now.include, so this rule can read it`)
@@ -247,13 +259,17 @@ describe('Platform rules (docs/DECISIONS.md)', () => {
     it('P12 and P13: a run starts with the log row as its target, never an HR case, and with conversationUser', () => {
         const bad: string[] = []
         const texts = files.map((f) => ({ f, text: code(f) }))
-        // A call is a method call, `x.startAiAgentConversation(`; a type or a fake that declares the method isn't one.
-        const starts = texts.flatMap(({ f, text }) => [...text.matchAll(/\.\s*startAiAgentConversation\s*\(/g)].map(() => at(f)))
+        // A start is a member reference, `x.startAiAgentConversation`, so `.call()` and `.bind()` count too; a type or a
+        // fake that only declares the method isn't one.
+        const starts = texts.flatMap(({ f, text }) => [...text.matchAll(/\.\s*startAiAgentConversation\b/g)].map(() => at(f)))
         if (starts.length > 1) bad.push(`the start is called ${starts.length} times (${[...new Set(starts)].join(', ')}): call it once, in the dispatcher job's script, so this rule checks the call that runs`)
         if (starts.length > 0) {
             const app = texts.map(({ text }) => text).join('\n')
-            if (!/\bconversationUser\b/.test(app)) bad.push('pass conversationUser in the start request (P13), or the start fails with ER0004')
-            if (!/\btargetTable\b/.test(app)) bad.push("set the start request's targetTable and targetRecordId to the run's log row (P12)")
+            const sets = (key: string) => new RegExp(`\\b${key}['"]?\\s*(?::|=(?!=))`).test(app)
+            if (!sets('conversationUser')) bad.push('set conversationUser in the start request (P13), or the start fails with ER0004')
+            for (const key of ['targetTable', 'targetRecordId']) {
+                if (!sets(key)) bad.push(`set the start request's ${key} to the run's log row (P12)`)
+            }
         }
         for (const { f, text } of texts) {
             if (/\btargetTable['"]?\s*[:=]\s*['"]sn_hr_/.test(text)) bad.push(`${at(f)}: the target is an HR table (P12): the platform copies the whole case into the prompt; target the run's log row`)
