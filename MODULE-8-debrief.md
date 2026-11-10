@@ -81,18 +81,27 @@ grep '|' ~/projects/hr-case-router/catches.md | cut -d'|' -f2 | tr -d ' ' | sort
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-One person's count is small. The room's columns together show which parts of
-the method paid off across many builds, not only yours.
+Your count alone is small. Added up across the room, it shows which parts of
+the day caught the most mistakes: that's the evidence for working this way,
+or against it.
 
 </details>
 
-Add your counts to your instructor's columns. Then ask together:
+Your instructor has a board with one column for each kind of catch. The
+kinds are the words in step 1's second list, such as `design` or `review`:
+each one names what caught the mistake.
 
-1. **Which column is biggest?** There the process paid for itself.
-2. **Which came before any code?** `prd`, `consult`, `research`, `design`:
-   the cheapest.
-3. **Which came from an inspection?** `review` today; `grade`, `partner` and
-   `drill` after the workshop. Your own tests had passed first.
+1. Add your numbers to the board's columns, as your instructor asks.
+2. Then talk it through with the room:
+   - **Where did most catches come from?** That part of the day earned its
+     time.
+   - **How many came before any code was written?** Those are `prd`,
+     `consult`, `research` and `design`. A mistake caught there costs a
+     sentence to fix, not a rebuild.
+   - **How many came from someone checking finished work?** Today that's
+     `review`: Claude's code review found them after your own tests had
+     already passed. `grade`, `partner` and `drill` come after the
+     workshop.
 
 ### 3. Sort out what's real
 
