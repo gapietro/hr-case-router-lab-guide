@@ -259,7 +259,7 @@ the sidebar. It holds the conversation.
 
 A catch is a real problem the process found that got fixed or changed a
 decision. Logging this module's catches now, while you remember them, starts
-the record Module 9 counts: what each check was worth.
+the record Module 8 counts: what each check was worth.
 
 </details>
 

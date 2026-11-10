@@ -23,7 +23,7 @@ design term, and Module 5 checks your LLD uses none.
 | `§1`, `§7`… | Section 1, section 7 of a document | The design record or your LLD | Module 3, step 4 |
 | `M1 · merge`… | A milestone: the stories one gate needs | GitHub, **Milestones** | Module 5, step 2 |
 | `p0`, `p1`, `p2` | A story's priority: how soon its gate comes | GitHub, **Labels** | Module 5, step 2 |
-| `design.terms-tested`… | One of the grade's checks | `GRADE.md` | Module 8, step 5 |
+| `design.terms-tested`… | One of the grade's checks | `GRADE.md` | Module 7, step 5 |
 
 ## Capabilities 1 to 9, no letter
 
@@ -105,7 +105,7 @@ about: usually the design record, sometimes your LLD.
 The build plan files one GitHub milestone per gate, numbered in the order
 you reach them, such as `M1 · merge` and `M2 · install`. A milestone holds the
 stories its gate needs: a gate passes only when its stories are done. The
-grade marks one milestone at a time: Module 8 grades the merge gate.
+grade marks one milestone at a time: Module 7 grades the merge gate.
 
 ## p0, p1, p2: priority labels
 

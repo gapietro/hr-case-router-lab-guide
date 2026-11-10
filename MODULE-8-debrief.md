@@ -1,4 +1,4 @@
-# Module 9 — What the process caught
+# Module 8 — What the process caught
 
 *⏱ 15 min · 16:05*
 
@@ -30,21 +30,21 @@ what this one needs.
 
 ```
 git -C ~/projects/hr-case-router-lab-guide pull -q
-bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 9
+bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 8
 ```
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
 1. `git -C ~/projects/hr-case-router-lab-guide pull -q`: Gets the newest
    copy of this guide, the check's script included. `-q` prints only errors.
-2. `bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 9`:
+2. `bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 8`:
    Checks that each earlier module left what its checks promise, such as
    your files, your GitHub repo and a clean `main`. It changes nothing. Each
    failed line names the step that fixes it.
 
 </details>
 
-✅ The last line is `Ready for Module 9.`
+✅ The last line is `Ready for Module 8.`
 
 <details><summary>🛟 It prints a ❌</summary>
 

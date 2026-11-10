@@ -528,7 +528,7 @@ tell your instructor.
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 Claude reviews the plan's pull request before it merges. Logging only what
-that review really found, and what got fixed, keeps the record Module 9 counts
+that review really found, and what got fixed, keeps the record Module 8 counts
 honest.
 
 </details>

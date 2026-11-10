@@ -440,7 +440,7 @@ in words: "capability 3".
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 A wrong platform fact found now costs one line; found at install time, it
-costs rework. Logging this module's catches adds to the record Module 9
+costs rework. Logging this module's catches adds to the record Module 8
 counts.
 
 </details>

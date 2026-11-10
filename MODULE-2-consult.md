@@ -281,7 +281,7 @@ shows any change to `CONSULT.md`.
 
 A catch here is a gap in the PRD that the consult brought to light and that
 changed a decision. Logging it now, while you remember it, adds to the record
-Module 9 counts.
+Module 8 counts.
 
 </details>
 

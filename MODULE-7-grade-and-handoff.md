@@ -1,4 +1,4 @@
-# Module 8 — Grade: could someone else own this?
+# Module 7 — Grade: could someone else own this?
 
 *⏱ 40 min · 15:25*
 
@@ -31,21 +31,21 @@ what this one needs.
 
 ```
 git -C ~/projects/hr-case-router-lab-guide pull -q
-bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 8
+bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 7
 ```
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
 1. `git -C ~/projects/hr-case-router-lab-guide pull -q`: Gets the newest
    copy of this guide, the check's script included. `-q` prints only errors.
-2. `bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 8`:
+2. `bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 7`:
    Checks that each earlier module left what its checks promise, such as
    your files, your GitHub repo and a clean `main`. It changes nothing. Each
    failed line names the step that fixes it.
 
 </details>
 
-✅ The last line is `Ready for Module 8.`
+✅ The last line is `Ready for Module 7.`
 
 <details><summary>🛟 It prints a ❌</summary>
 

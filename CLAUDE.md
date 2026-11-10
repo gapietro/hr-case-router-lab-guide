@@ -8,7 +8,7 @@ can't route, the case stays where it is, with a note.
 
 ## How to use it
 
-- **Start at `README.md`**, then follow Module 0 to Module 9 in order.
+- **Start at `README.md`**, then follow Module 0 to Module 8 in order.
   `LAB.html` is the same guide as one page, to open in a browser.
 - `files/` holds the inputs the modules copy into your app's repo: the PRD,
   `DECISIONS.md`, the customer's answers, `inputs/`, the platform-rules test

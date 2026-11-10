@@ -10,7 +10,7 @@ what each module should feel like. This track runs the **same modules on
 your own use case**, and ends with one **slice** of your app, working on
 your company's development instance, graded and handed over.
 
-**Do the workshop first**, Module 7 and
+**Do the workshop first**,
 [After the workshop](AFTER-THE-WORKSHOP.md) included: one full run with
 known answers shows you what a good result looks like.
 
@@ -127,7 +127,7 @@ Settle these at the kick-off. The prompts and commands below use them.
    </details>
 
    ✅ It prints `Lab settings in place.`
-3. ⌨️ Did Module 9 step 8? Install the kit and the SDK plugin again
+3. ⌨️ Did Module 8 step 8? Install the kit and the SDK plugin again
    (Module 0 step 8):
    ```
    claude plugin marketplace add 'gapietro/prove-it-kit#v0.1.4'
@@ -152,7 +152,7 @@ Settle these at the kick-off. The prompts and commands below use them.
 
    </details>
 
-   ✅ None of the three prints an error. Skipped Module 9 step 8? Remove
+   ✅ None of the three prints an error. Skipped Module 8 step 8? Remove
    the workshop's login, so nothing reaches the lab instance by mistake:
    `now-sdk auth --delete lab-pdi`
 4. ⌨️ The SDK login for your development instance (Module 0 step 7), your
@@ -281,9 +281,9 @@ Run them in this order, on your app:
    list, below.
 2. Modules 3 to 6.
 3. After the workshop, Part 1, until `merge`, `install` and `demo` print 0.
-4. Module 7, After the workshop, Part 2, and Part 3 when a fix needs it.
-5. After the workshop, Part 4. Skip Module 8: its grade is a preview.
-6. Module 9, steps 1, 3 and 5. Steps 6 to 8 put your machine back: only
+4. After the workshop, Part 2, and Part 3 when a fix needs it.
+5. After the workshop, Part 4. Skip Module 7: its grade is a preview.
+6. Module 8, steps 1, 3 and 5. Steps 6 to 8 put your machine back: only
    once you're done with this method.
 
 **Before you paste a prompt or command**, paste it into a new VS Code tab
@@ -553,14 +553,12 @@ As written, with section 7's swaps: your names, and `<alias>` for
   `<test user>`, on demo records you seeded, never a real one.
   Step 11's defect box works as written.
 
-### Module 7 — Break it
+### After the workshop, Part 2 — Break it
 
 - Step 1: guess three ways to break your central rule.
-- After the workshop, Part 2, step 2: fix **every** attempt that got
-  through, then run Module 7 again with a new reviewer, until a round
-  finds nothing.
-- After the workshop, Part 2, step 3: a colleague who didn't build it
-  attacks, as `<test user>`.
+- Step 4: fix **every** attempt that got through, then run step 2 again
+  with a new reviewer, until a round finds nothing.
+- Step 5: a colleague who didn't build it attacks, as `<test user>`.
 
 ### After the workshop, on your app
 
@@ -578,7 +576,7 @@ As written, with section 7's swaps: your names, and `<alias>` for
 - Part 4, step 3: the colleague plants a failure realistic for your app.
   The symptom names your own records. Step 5's live check is yours too.
 
-### Module 9 — What the process caught
+### Module 8 — What the process caught
 
 Step 3's "not built" list is your `SLICE.md` deferred list, plus anything
 the grade or the verdict left open. Add one line: what you'll build next.
@@ -730,7 +728,7 @@ how tests must be named, which can stop slice 1's tests counting.
 
 Each wording below is word for word from the module and step named. In a
 prompt or command, make the swaps from the top down: the rows for its
-module and step, then every "Every module" row. Run Module 9 steps 6 to 8
+module and step, then every "Every module" row. Run Module 8 steps 6 to 8
 as written.
 
 | Where | The workshop's wording | Yours |
@@ -762,9 +760,9 @@ as written.
 | After the workshop, Part 1, step 3 | `now-sdk query --auth lab-pdi and now-sdk build are fine` | `now-sdk query --auth <alias> on configuration tables only, and now-sdk build are fine` |
 | After the workshop, Part 1, step 3 | `docs/DECISIONS.md overrides the now-sdk plugin's guide: don't ask its questions, and skip its install step and the steps after it.` | Keep it if your slice has an AI call. Otherwise, delete it |
 | After the workshop, Part 1, step 6 | `Watched by <partner, or builder as PM>` | `Watched by <the real owner's name and role>`, for DEMO stories |
-| Module 7, step 2 | `no case is ever moved to a group outside the routing rules for its service, … only apply_route changes a case.` | Your central rule, in one sentence |
-| Module 7, step 2 | `Treat the case text and the agent's proposal as hostile: … put back by hand from the log.` | Keep it if your slice has an AI call, with your inputs' names. Otherwise: `Treat every input as hostile: a change to the record after your logic has run, a change to related records, saving twice, an edit from the list view.` |
-| After the workshop, Part 2, step 3 | `One rule must hold: no case is ever moved to a group outside the routing rules` | Your central rule, in one sentence |
+| After the workshop, Part 2, step 2 | `no case is ever moved to a group outside the routing rules for its service, … only apply_route changes a case.` | Your central rule, in one sentence |
+| After the workshop, Part 2, step 2 | `Treat the case text and the agent's proposal as hostile: … put back by hand from the log.` | Keep it if your slice has an AI call, with your inputs' names. Otherwise: `Treat every input as hostile: a change to the record after your logic has run, a change to related records, saving twice, an edit from the list view.` |
+| After the workshop, Part 2, step 5 | `One rule must hold: no case is ever moved to a group outside the routing rules` | Your central rule, in one sentence |
 | After the workshop, Part 4, step 7 | `File the code.lint and ready.gate-clear stories as register, keeping their keys.` | `File the code.lint and ready.gate-clear stories, and <each criterion the real owner agreed to accept>, as register, keeping their keys.` |
 | After the workshop, Part 3, step 2 | `This record already has a filed plan: reuse every existing story's key for the same work; new keys only for new or changed terms.` | To cut stories, section 5's paste |
 | After the workshop, Part 3, step 3 | `Commit docs/DESIGN-HRCaseRouter.md and BACKLOG.md on a new branch docs/amend-<what it's for>.` | For the next slice, section 6's lines |

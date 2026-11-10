@@ -10,7 +10,7 @@ use case. Claude Code writes the code. You make the decisions, and checks
 decide whether work may go on.
 
 **The method is what you learn**: the AI types, people and checks decide.
-Modules 1 to 8 each have one **catch**, a moment where the process stops a
+Modules 1 to 7 each have one **catch**, a moment where the process stops a
 mistake. Those moments are the lesson.
 
 ## The day
@@ -29,9 +29,9 @@ mistake. Those moments are the lesson.
 | 13:25 · lunch | 6, continued | Claude builds the next stories while you eat |
 | 14:15 · 60 min | 6, continued | The app installed, and the AI agent working live |
 | 15:15 · 10 min | Break | |
-| 15:25 · 40 min | [8 · Grade](MODULE-8-grade-and-handoff.md) | `GRADE.md`, a preview |
-| 16:05 · 15 min | [9 · Debrief](MODULE-9-debrief.md) | Your count of catches |
-| Afterwards | [After the workshop](AFTER-THE-WORKSHOP.md) Part 1, then [7 · Break it](MODULE-7-break-it.md), then the rest of After the workshop | A finished app, attacked and handed over |
+| 15:25 · 40 min | [7 · Grade](MODULE-7-grade-and-handoff.md) | `GRADE.md`, a preview |
+| 16:05 · 15 min | [8 · Debrief](MODULE-8-debrief.md) | Your count of catches |
+| Afterwards | [After the workshop](AFTER-THE-WORKSHOP.md) | A finished app, attacked and handed over |
 | Then | [Your own PRD](OWN-PRD.md), [to production](PROMOTE.md) | The method on your own work |
 
 The buffer, 16:20–17:00, is for catching up. Behind? Ask your instructor
@@ -251,7 +251,7 @@ mistake.
 <details data-detail="extra"><summary>ℹ️ Two installs, two ways</summary>
 
 In Module 6 you run `now-sdk install --auth lab-pdi` yourself, in your own
-terminal window. When the grade runs, in Module 8 and after the workshop,
+terminal window. When the grade runs, in Module 7 and after the workshop,
 it runs the install after asking you: that's the one install Claude runs.
 The lab's settings make Claude ask before the SDK commands that write to
 your instance, such as `now-sdk install`.
@@ -285,7 +285,7 @@ own row.
 | Reading or changing files in `~/projects/hr-case-router`, Module 1's `~/projects/hr-case-router-prd-review` or the kit's copy, `~/projects/prove-it-kit` | **Yes** | Claude's workspace |
 | `now-sdk auth` | **No** | It takes your password (rule 2) |
 | `now-sdk install`, `deploy`, `exec`, `execute`, `run`, `move` or `cicd`, in any form, or `npm run deploy` | **No** | They change your instance, and you decide when (rule 3) |
-| The grade asks to run `now-sdk install --auth lab-pdi` (Module 8, and the grades after the workshop) | **Yes**, for that command only | The one install Claude runs, after asking |
+| The grade asks to run `now-sdk install --auth lab-pdi` (Module 7, and the grades after the workshop) | **Yes**, for that command only | The one install Claude runs, after asking |
 | Any alias but `lab-pdi`, or anything that names your instance | **No** | It could reach another instance |
 | Anything in this guide's folder | **No** | Claude never reads this guide (rule 1) |
 | Anything else, or you're not sure | **No**, then ask Claude what it was for | A No costs a minute; a wrong Yes may not undo |
@@ -327,7 +327,7 @@ hr-case-router/             your workspace: Claude works here
   app/                      your app's repo, private on GitHub
   brief/                    the PRD, from Module 1
   catches.md                one line per catch
-hr-case-router-notes/       what Module 9 restores: Claude never reads it
+hr-case-router-notes/       what Module 8 restores: Claude never reads it
 prove-it-kit/               a copy of the kit
 ```
 
@@ -339,7 +339,7 @@ what to change:
 <module> | <what caught it> | <what it caught, and what was done>
 ```
 
-For example: `1 | prd | An input asked for something the PRD left out; I listed it under Open decisions`. Module 9 counts them.
+For example: `1 | prd | An input asked for something the PRD left out; I listed it under Open decisions`. Module 8 counts them.
 
 <details data-detail="extra" data-topic="servicenow"><summary>ℹ️ New to ServiceNow? Four moves cover every step</summary>
 

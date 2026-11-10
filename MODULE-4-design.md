@@ -318,7 +318,7 @@ repo. Not yet: that's Module 5.
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 Logging the design's catches now records what questioning it was worth, before
-any code exists. Module 9 counts them.
+any code exists. Module 8 counts them.
 
 </details>
 

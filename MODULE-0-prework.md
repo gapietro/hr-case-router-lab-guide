@@ -739,7 +739,7 @@ need this guide's repo: do those, then come back here.
 </div>
 
 ⌨️ **Terminal:** the first three lines save how `gh` and git sign in to
-GitHub now, so Module 9 can put them back:
+GitHub now, so Module 8 can put them back:
 
 ```
 mkdir -p ~/projects/hr-case-router-notes
@@ -759,24 +759,24 @@ git -C ~/projects/hr-case-router-lab-guide remote get-url origin
    folder is already there.
 2. `[ -e … ] || gh auth status > … 2>&1`: Writes down which GitHub account
    `gh` is signed in to right now, if any, into `gh-before-lab.txt`, so Module
-   9 can put things back the way they were. The `[ -e … ] ||` part means "only
+   8 can put things back the way they were. The `[ -e … ] ||` part means "only
    if that file isn't there yet", so running the block twice never overwrites
    your record of how things were before. `>` sends what `gh auth status`
    prints into that file, and `2>&1` sends its error messages, such as "not
    logged in", there too.
 3. `[ -e … ] || git config --global --get-regexp '^credential\.' > …`: Writes
    down how git signs in to websites now, into
-   `git-credentials-before-lab.txt`, so Module 9 can put it back after line 4
+   `git-credentials-before-lab.txt`, so Module 8 can put it back after line 4
    changes it. An empty file means git had nothing set.
 4. `gh auth setup-git --hostname github.com --force`: Tells git, everywhere
    on this computer, to get its sign-in for GitHub from `gh`, so clone, pull
    and push don't ask you to sign in. It runs before line 5 so that signing
    in never replaces the GitHub sign-in your computer had saved before: line
-   3's file is how Module 9 puts git back.
+   3's file is how Module 8 puts git back.
 5. `gh auth login --web --git-protocol https`: Signs the GitHub command-line
    tool, `gh`, in to your GitHub account through your browser. It saves the
    sign-in on your computer, and if `gh` was signed in to another account,
-   this one becomes the active one: line 2's file is how Module 9 switches
+   this one becomes the active one: line 2's file is how Module 8 switches
    back. `https` means git talks to GitHub over a normal secure web
    connection, with no SSH keys to set up.
 6. `gh repo clone …/hr-case-router-lab-guide
@@ -822,7 +822,7 @@ These settings fence Claude in for the lab. It starts in auto mode, so it
 asks you less, but it still asks before any SDK command that writes to
 your instance. They block `now-sdk auth`, turn off connectors, new
 memories and web search, and keep Claude out of your notes, this guide and
-your keys. Any settings you had are backed up first, and Module 9 puts
+your keys. Any settings you had are backed up first, and Module 8 puts
 them back.
 
 </details>
@@ -843,7 +843,7 @@ the SDK commands that write to your instance, such as `now-sdk install`,
 and keep Claude out of your notes, this guide and your keys (`~/.ssh`,
 `~/.aws`, `gh`'s login, `~/.npmrc`, `~/.netrc`). Your own settings are
 backed up and kept (your own auto mode rules wait in the backup), and
-Module 9 restores them. Cleanest of all: a separate user account on your
+Module 8 restores them. Cleanest of all: a separate user account on your
 computer.
 
 </div>
@@ -1209,7 +1209,7 @@ touch ~/projects/hr-case-router/catches.md
 Anything else Claude loads, such as another plugin, an MCP server, a hook
 or your own instruction file, changes how it behaves and what it can do.
 The lab's steps and checks expect only the kit and the SDK plugin, so
-anything extra goes off for now, and Module 9 brings it back.
+anything extra goes off for now, and Module 8 brings it back.
 
 </details>
 
@@ -1259,7 +1259,7 @@ prints nothing.
 
 <details><summary>🛟 Other plugins or MCP servers are listed</summary>
 
-⌨️ First save what you have, once, so Module 9 can switch it back on:
+⌨️ First save what you have, once, so Module 8 can switch it back on:
 
 ```
 cd ~/projects/hr-case-router-notes
@@ -1270,16 +1270,16 @@ cd ~/projects/hr-case-router-notes
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
 1. `cd ~/projects/hr-case-router-notes`: Goes into your lab notes folder, so
-   the two files the next lines write land there, where Module 9 looks for
+   the two files the next lines write land there, where Module 8 looks for
    them.
 2. `[ -e plugins-before-lab.txt ] || claude plugin list > …`: Writes the
    list of your plugins, and which are enabled, into
-   `plugins-before-lab.txt`, so Module 9 knows which to switch back on. The
+   `plugins-before-lab.txt`, so Module 8 knows which to switch back on. The
    `[ -e … ] ||` part means "only if that file isn't there yet", so running
    it again never overwrites your record of how things were before.
 3. `[ -e mcp-before-lab.json ] || (umask 077; node -p … > …)`: Copies your
    MCP servers' settings out of Claude Code's own file,
-   `~/.claude.json`, into `mcp-before-lab.json`, so Module 9 can add them
+   `~/.claude.json`, into `mcp-before-lab.json`, so Module 8 can add them
    back after you remove them. `umask 077` makes the new file readable only
    by you, because a server's settings can hold a key. The `[ -e … ] ||`
    part works as in line 2.
@@ -1320,7 +1320,7 @@ claude plugin install prove-it@prove-it
 <details><summary>🛟 ls, grep or git config shows something</summary>
 
 Your own setup would steer the lab. Add `.off` to each name `ls` lists,
-such as `mv ~/CLAUDE.md ~/CLAUDE.md.off`; Module 9 moves them back. Hooks
+such as `mv ~/CLAUDE.md ~/CLAUDE.md.off`; Module 8 moves them back. Hooks
 (`grep` or `git config`)? Tell your instructor: a separate user account on
 your computer is cleanest.
 

@@ -9,8 +9,8 @@
 
 N="$1"
 case "$N" in
-  [1-9]) ;;
-  *) echo "Usage: bash check-progress.sh <module number, 1 to 9>"; exit 2 ;;
+  [1-8]) ;;
+  *) echo "Usage: bash check-progress.sh <module number, 1 to 8>"; exit 2 ;;
 esac
 
 W="${HCR_WORKSPACE:-$HOME/projects/hr-case-router}"
@@ -119,13 +119,7 @@ fi
 
 # --- Module 7 ----------------------------------------------------------------
 if [ "$N" -ge 8 ]; then
-  check "The reviewer's tests are on test/break-access" "Module 7 step 2" \
-    git -C "$A" rev-parse -q --verify refs/heads/test/break-access
-fi
-
-# --- Module 8 ----------------------------------------------------------------
-if [ "$N" -ge 9 ]; then
-  check "app/'s main holds GRADE.md" "Module 8 step 7" on_main GRADE.md
+  check "app/'s main holds GRADE.md" "Module 7 step 7" on_main GRADE.md
 fi
 
 echo

@@ -1092,7 +1092,7 @@ impersonation**. As admin:
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-A catch only counts if it's written down: Module 9 counts this file, not your
+A catch only counts if it's written down: Module 8 counts this file, not your
 memory. Logging now, while the session still holds the details, gets each
 catch down with what caught it.
 

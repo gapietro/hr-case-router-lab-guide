@@ -120,7 +120,7 @@ one line per finding.
 </details>
 
 🌐 **Browser:** ✅ the pull request link shows **Merged**. It asks you
-something, or isn't merged? Use the two 🛟 boxes under Module 8, step 7.
+something, or isn't merged? Use the two 🛟 boxes under Module 7, step 7.
 
 **Then version, grade and tag it**, so test and production get exactly
 what was graded:
@@ -192,8 +192,8 @@ steps again.
    fix it through the build loop on development, then version, grade and
    tag it again (end of section 2), and start this step again.
 2. **First contact with real data.** Test usually holds copies of real
-   records. Re-run your live check, and Module 7's attacks on your central
-   rule, **as ordinary users**. Check the cross-scope access works here.
+   records. Re-run your live check, and After the workshop Part 2's attacks on
+   your central rule, **as ordinary users**. Check the cross-scope access works here.
    An agent? Run it on a copied real record, and confirm with your platform
    team that what its tools returned was masked. Anything that fails goes
    back through the build loop on development. Never a fix on test.
