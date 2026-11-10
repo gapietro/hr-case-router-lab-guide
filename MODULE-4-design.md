@@ -30,6 +30,36 @@ design.
 
 </details>
 
+⌨️ **Terminal**, in your window: first check that the earlier modules left
+what this one needs.
+
+```
+git -C ~/projects/hr-case-router-lab-guide pull -q
+bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 4
+```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `git -C ~/projects/hr-case-router-lab-guide pull -q`: Gets the newest
+   copy of this guide, the check's script included. `-q` prints only errors.
+2. `bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 4`:
+   Checks that each earlier module left what its checks promise, such as
+   your files, your GitHub repo and a clean `main`. It changes nothing. Each
+   failed line names the step that fixes it.
+
+</details>
+
+✅ The last line is `Ready for Module 4.`
+
+<details><summary>🛟 It prints a ❌</summary>
+
+Do the step each ❌ names, then run the check again. Can't fix one? Tell your
+instructor before you go on: every later step builds on it. They can help you
+fix it, or give you a checkpoint to start this module from.
+
+</details>
+
+
 <div data-show="surface:terminal">
 
 **In the terminal:** ⌨️ start Claude in your workspace:
@@ -197,6 +227,38 @@ whole list back, so you can check it before anything is written.
 - No term says `OPEN` or `VERIFY`.
 
 Anything wrong? Reply `Not agreed yet.` and the change, until it's right.
+
+Then, before you confirm, have Claude check the terms against the files they
+come from. 🤖 paste this:
+
+```
+Not agreed yet. Check these terms against docs/DECISIONS.md and
+docs/LLD-HRCaseRouter.md. Match each DECISIONS row from How a run starts
+to Caps and retention to the term that covers it, and show only the rows
+with none, as MISSING. Then answer yes or no: no two terms contradict
+each other; every term says what its DECISIONS row says, no more and no
+less; every way a run can end names the state its log row ends in; no
+term needs a ruling before code can be written; no term number clashes
+with an id in the LLD; each gate in Tests and gates can pass with these
+terms. For each MISSING row and each no, name the terms and the row, fix
+the terms, and read them back again.
+```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude checks the terms it read back against `DECISIONS.md` and your LLD
+before anything is signed. It lists any decision no term covers, then answers
+six yes-or-no questions: do two terms contradict each other, does any term
+say more or less than its decision, does every way a run ends say what state
+it ends in, does any term still need a ruling, does any term number clash
+with the LLD's, and can every gate pass. It fixes each problem and reads the
+terms back again. A gap caught here costs one reply; caught after signing,
+it costs a signed amendment.
+
+</details>
+
+✅ No row is MISSING, and six yeses. A no? Claude fixes the terms and reads
+them back: paste the check again until it answers six yeses.
 
 <details><summary>ℹ️ What C1, §7… mean</summary>
 

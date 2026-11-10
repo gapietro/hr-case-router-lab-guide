@@ -26,6 +26,36 @@ hardest when you review it.
 
 </details>
 
+⌨️ **Terminal**, in your window: first check that the earlier modules left
+what this one needs.
+
+```
+git -C ~/projects/hr-case-router-lab-guide pull -q
+bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 2
+```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `git -C ~/projects/hr-case-router-lab-guide pull -q`: Gets the newest
+   copy of this guide, the check's script included. `-q` prints only errors.
+2. `bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 2`:
+   Checks that each earlier module left what its checks promise, such as
+   your files, your GitHub repo and a clean `main`. It changes nothing. Each
+   failed line names the step that fixes it.
+
+</details>
+
+✅ The last line is `Ready for Module 2.`
+
+<details><summary>🛟 It prints a ❌</summary>
+
+Do the step each ❌ names, then run the check again. Can't fix one? Tell your
+instructor before you go on: every later step builds on it. They can help you
+fix it, or give you a checkpoint to start this module from.
+
+</details>
+
+
 Which capabilities need AI? What may the agent change? Keep your guess
 in your head: step 5 checks it.
 

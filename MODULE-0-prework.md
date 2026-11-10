@@ -1933,4 +1933,12 @@ a guess.
   your private `hr-case-router` repo on GitHub.
 - The inputs, read, and your guess at what the PRD needs.
 
+⌨️ **Terminal:** check it all at once:
+
+```
+bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 1
+```
+
+✅ The last line is `Ready for Module 1.` A ❌ names the step to do again.
+
 Anything missing? Tell your instructor at least two days before the day.

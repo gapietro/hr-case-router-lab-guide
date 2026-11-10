@@ -56,6 +56,22 @@ Tell your instructor before you go on.
 
 </details>
 
+Then ⌨️ check that Module 0 left what this lab needs:
+
+```
+bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 1
+```
+
+✅ The last line is `Ready for Module 1.`
+
+<details><summary>🛟 It prints a ❌</summary>
+
+Do the step each ❌ names, then run the check again. Can't fix one? Tell your
+instructor before you go on: every later step builds on it. They can help you
+fix it, or give you a checkpoint to start this module from.
+
+</details>
+
 ### 2. Have Claude trace the PRD
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
