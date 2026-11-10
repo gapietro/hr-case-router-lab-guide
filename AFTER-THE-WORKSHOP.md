@@ -343,7 +343,8 @@ depends on a skipped one if its code can still be written and tested;
 otherwise skip it too. You only plan, delegate, merge and report. Per
 story: one sub-agent, in its own git worktree and branch; a five-bullet
 restatement in the pull request, not confirmed with me; tests first in
-Vitest through npm test, named "C<n>: …", with an it.todo naming any term
+Vitest through npm test, named "C<n>: …", one number per term, never a
+range, with an it.todo naming any term
 that needs no code; the failing run saved; code until the whole suite
 passes and now-sdk build is clean; no new npm packages besides Vitest. The
 sub-agent pushes, opens the pull request with "Closes #<story>", both runs
@@ -588,13 +589,15 @@ table (P8).
    and `Payroll Discrepancy`: set **HR service** to it and **Short
    description** to its "Example request:" line, and click **Submit**.
    ✅ Within about three minutes, each has a work note by `hr.router`.
-7. End impersonation, and close any conversation left open (P14). ⌨️ Run
+7. End impersonation, and close any conversation left open (P14). 🌐 As
+   admin, open `sys.scripts.modern.do` and set the scope picker to **global**.
+   Then ⌨️ run
    <span data-show="os:mac">**On Mac:**
    `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`.</span>
    <span data-show="os:win">**On Windows:**
    `clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`.</span>
-   🌐 As admin, in `sys.scripts.do`, set the scope picker to **global**,
-   paste, and click **Run script**. ✅ It prints `Closed` lines, any number.
+   🌐 Paste it into the script box, and click **Run script**. ✅ It prints
+   `Closed` lines, any number.
 
 ### 5. Check it live
 
@@ -715,21 +718,26 @@ Then end impersonation.
 End impersonation. As admin, in this order, then as `hr.demo` click
 **Reroute** on the case and wait two minutes: 1. set `<SCOPE>.enabled` to
 `true`; 2. no dispatcher row in `sys_trigger.list`? open the job in
-`sysauto_script.list` and click **Update**; 3. ⌨️ run
+`sysauto_script.list` and click **Update**; 3. open `sys.scripts.modern.do` and
+pick **global**, then ⌨️ run
 <span data-show="os:mac">**On Mac:**
 `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>
 <span data-show="os:win">**On Windows:**
 `clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>,
-then in `sys.scripts.do` pick **global**, paste, and click **Run script**.
+paste it there, and click **Run script**.
 
 </details>
 
-<details><summary>🛟 No Reroute button, or the note says the case text was empty</summary>
+<details><summary>🛟 No Reroute button, or the note says the case text was empty, or its confidence isn't a number</summary>
 
 - **No Reroute button:** closed or transferred case? Use another. If not,
   as admin, give `hr.demo` `<SCOPE>.user` in **User Administration**.
 - **Empty case text:** a first read of an HR table can come back empty
   (P8). Click **Reroute**, and wait two minutes.
+- **A confidence that isn't a number:** the AI sometimes sends a word, such
+  as `fmt_error`, where its confidence goes, and the code stops the move.
+  Click **Reroute**, and wait two minutes. That run's log row stays
+  `stopped`.
 
 </details>
 
@@ -878,19 +886,20 @@ exactly where you stopped.
 5. 🤖 **Claude:** paste this, then `go`:
 
    ```
-   ship it. Review the diff without checking it out. Fix real findings in
-   the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-   BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-   register issue instead. There's no CI: merge once now-sdk build passes,
-   and npm test too once there's a test script. Then switch to main and
-   pull, and give me the pull request link and one line per finding: fixed,
-   filed, or not a problem and why.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
    Claude pushes your branch, opens a pull request, reviews its own
-   diff without checking it out, fixes real findings once and files the rest,
+   diff without checking it out, posts the review on it, fixes real findings once and files the rest,
    then merges when the build and tests pass. You get the pull request link
    and one line per finding.
 
@@ -1233,19 +1242,20 @@ design now rules on it.
    ```
    Commit docs/DESIGN-HRCaseRouter.md and BACKLOG.md on a new branch
    docs/amend-<what it's for>.
-   ship it. Review the diff without checking it out. Fix real findings in
-   the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-   BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-   register issue instead. There's no CI: merge once now-sdk build passes,
-   and npm test too once there's a test script. Then switch to main and
-   pull, and give me the pull request link and one line per finding: fixed,
-   filed, or not a problem and why.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
    Claude commits the amended design record and BACKLOG.md on a new branch,
-   opens a pull request, reviews its own diff without checking it out, fixes
+   opens a pull request, reviews its own diff without checking it out, posts the review on it, fixes
    real findings once and files the rest, then merges when the build and tests
    pass. You get the pull request link and one line per finding.
 
@@ -1406,20 +1416,21 @@ The grade's install is the exception in CLAUDE.md: yes, install to lab-pdi.
    ```
    Commit GRADE.md, .gitignore and BACKLOG.md together on a new branch
    chore/grade-demo.
-   ship it. Review the diff without checking it out. Fix real findings in
-   the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-   BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-   register issue instead. There's no CI: merge once now-sdk build passes,
-   and npm test too once there's a test script. Then switch to main and
-   pull, and give me the pull request link and one line per finding: fixed,
-   filed, or not a problem and why.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
    Claude commits the grade's files, GRADE.md, .gitignore and BACKLOG.md, on a
    new branch, opens a pull request, reviews its own diff without checking it
-   out, fixes real findings once and files the rest, then merges when the
+   out, posts the review on it, fixes real findings once and files the rest, then merges when the
    build and tests pass. You get the pull request link and one line per
    finding.
 
@@ -1512,20 +1523,21 @@ runbook as written, not one patched while you watch.
    ```
    Commit RUNBOOK.md, HANDOFF.md and .gitignore on a new branch
    docs/runbook.
-   ship it. Review the diff without checking it out. Fix real findings in
-   the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-   BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-   register issue instead. There's no CI: merge once now-sdk build passes,
-   and npm test too once there's a test script. Then switch to main and
-   pull, and give me the pull request link and one line per finding: fixed,
-   filed, or not a problem and why.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
    Claude commits RUNBOOK.md, the HANDOFF.md draft and .gitignore on a new
-   branch, opens a pull request, reviews its own diff without checking it out,
-   fixes real findings once and files the rest, then merges when the build and
+   branch, opens a pull request, reviews its own diff without checking it out, posts the
+   review on it, fixes real findings once and files the rest, then merges when the build and
    tests pass. You get the pull request link and one line per finding.
 
    </details>
@@ -1721,19 +1733,20 @@ says READY only if all three pass, and names each blocking item if not.
 
    ```
    Commit HANDOFF.md on a new branch docs/verdict.
-   ship it. Review the diff without checking it out. Fix real findings in
-   the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-   BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-   register issue instead. There's no CI: merge once now-sdk build passes,
-   and npm test too once there's a test script. Then switch to main and
-   pull, and give me the pull request link and one line per finding: fixed,
-   filed, or not a problem and why.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
    Claude commits HANDOFF.md, with its verdict, on a new branch, opens a pull
-   request, reviews its own diff without checking it out, fixes real findings
+   request, reviews its own diff without checking it out, posts the review on it, fixes real findings
    once and files the rest, then merges when the build and tests pass. You get
    the pull request link and one line per finding.
 
@@ -1907,20 +1920,21 @@ The grade's install is the exception in CLAUDE.md: yes, install to lab-pdi.
    ```
    Commit GRADE.md, .gitignore and BACKLOG.md together on a new branch
    chore/grade-handoff.
-   ship it. Review the diff without checking it out. Fix real findings in
-   the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-   BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-   register issue instead. There's no CI: merge once now-sdk build passes,
-   and npm test too once there's a test script. Then switch to main and
-   pull, and give me the pull request link and one line per finding: fixed,
-   filed, or not a problem and why.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
    Claude commits the grade's files, GRADE.md, .gitignore and BACKLOG.md, on a
    new branch, opens a pull request, reviews its own diff without checking it
-   out, fixes real findings once and files the rest, then merges when the
+   out, posts the review on it, fixes real findings once and files the rest, then merges when the
    build and tests pass. You get the pull request link and one line per
    finding.
 

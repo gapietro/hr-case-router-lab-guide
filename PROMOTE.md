@@ -100,19 +100,20 @@ Then commit and ship it. 🤖 **Claude**, in `~/projects/<app>/app`:
 this, type `go` after it, and press **Enter**:
 
 ```
-ship it. Review the diff without checking it out. Fix real findings in
-the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-register issue instead. There's no CI: merge once now-sdk build passes,
-and npm test too once there's a test script. Then switch to main and
-pull, and give me the pull request link and one line per finding: fixed,
-filed, or not a problem and why.
+ship it. Review the diff without checking it out, and post the review's
+findings on the pull request as a comment, even if there are none. Fix
+real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+file it as a register issue instead. There's no CI: merge once now-sdk
+build passes, and npm test too once there's a test script. Then switch to
+main and pull, and give me the pull request link and one line per
+finding: fixed, filed, or not a problem and why.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 Claude pushes your branch, opens a pull request, reviews its own
-diff without checking it out, fixes real findings once and files the rest,
+diff without checking it out, posts the review on it, fixes real findings once and files the rest,
 then merges when the build and tests pass. You get the pull request link and
 one line per finding.
 

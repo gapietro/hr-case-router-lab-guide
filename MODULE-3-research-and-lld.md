@@ -286,7 +286,7 @@ before a `(`, and after `new`, is one of those calls; `if (`, `while (` and
 `for (` are fine too. Another word? Don't run it: type
 `Read-only, please: use only the allowed calls.` and check again.
 
-🌐 **Browser**, as admin: type `sys.scripts.do` in the filter
+🌐 **Browser**, as admin: type `sys.scripts.modern.do` in the filter
 navigator, press **Enter**, paste the script
 (<kbd data-mac="Cmd+A" data-win="Ctrl+A">Cmd+A (Mac) · Ctrl+A (Windows)</kbd>,
 <kbd data-mac="Cmd+C" data-win="Ctrl+C">Cmd+C (Mac) · Ctrl+C (Windows)</kbd>

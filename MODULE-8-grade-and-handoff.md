@@ -60,14 +60,14 @@ Guess first: the score out of 100, and the one weakness it will find.
 
 <details><summary>🔮 The answer, once you've guessed</summary>
 
-Usually a preview scoring around 70. The weakness: design terms in open
+Usually a preview scoring around 60. The weakness: design terms in open
 stories, such as the weekly numbers, have no test yet, which caps the score
 at 74.
 
 A cap is a ceiling, not the score. The rubric's 18 rows are six per
 dimension, and the score is the dimensions' average: if design misses two
-rows, code quality one and readiness two, as is typical today, that's
-(67 + 83 + 67) ÷ 3 = 72. A failed or skipped build, test run or secrets
+rows, code quality two and readiness three, as is typical today, that's
+(67 + 67 + 50) ÷ 3 = 61. A failed or skipped build, test run or secrets
 scan caps it at 49. Low is honest: the grader scores only what it ran or
 can cite.
 
@@ -251,12 +251,16 @@ today's preview, it's likely to show:
 
 - **Caps applied:** 74, for `design.terms-tested` and
   `design.gates-evidenced`: open MERGE stories, such as the weekly numbers
-  (9), hold design terms no test names yet.
+  (9), hold design terms no test names yet. `design.gates-evidenced` also
+  names any pull request with no review posted on it.
 - **Unverified:** `code.lint`, with no lint script, as lint isn't a
   criterion here; `ready.real-user`, until an issue or pull request records
   a check you did as `hr.demo`.
 - **Fail:** `ready.gate-clear`, for those open stories: that makes it a
-  preview.
+  preview. `ready.config-documented`, as `README.md` lists nothing until
+  its MERGE story is built. `code.logic-off-instance`, as your server
+  code calls the platform: the design doesn't ask for that, so the grade
+  puts it on the register.
 - **Pass:** `ready.ai-bounded`, citing `<SCOPE>.runs_per_hour`,
   `<SCOPE>.runs_per_day` and `<SCOPE>.enabled`, `<SCOPE>` being your scope,
   such as `x_123456_hcr_ga`.
@@ -333,19 +337,20 @@ so the next person to open the repo sees the score and what limits it.
 2. 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
    ```
-   ship it. Review the diff without checking it out. Fix real findings in
-   the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-   BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-   register issue instead. There's no CI: merge once now-sdk build passes,
-   and npm test too once there's a test script. Then switch to main and
-   pull, and give me the pull request link and one line per finding: fixed,
-   filed, or not a problem and why.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
    ```
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
    Claude pushes your branch, opens a pull request, reviews its own
-   diff without checking it out, fixes real findings once and files the rest,
+   diff without checking it out, posts the review on it, fixes real findings once and files the rest,
    then merges when the build and tests pass. You get the pull request link
    and one line per finding.
 

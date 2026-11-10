@@ -1698,7 +1698,8 @@ changes, and only these:
   building a story, restate it in five bullets or fewer, then build it;
   don't wait for my confirmation.
 - Under Ship ritual, add: review the pull request's diff without checking
-  it out; never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or BACKLOG.md
+  it out; post the review's findings on the pull request as a comment,
+  even if there are none; never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or BACKLOG.md
   to answer a review finding, file it as a register issue instead; there's
   no CI, so merge once now-sdk build passes, and npm test too once there's
   a test script; when the pull request builds a story, put "Closes

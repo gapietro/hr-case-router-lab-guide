@@ -168,8 +168,9 @@ without waiting for me:
 - add Vitest and the "test" script if they're missing;
 - start each test's name with the design term it proves, like "C<n>: a
   run's target is its log row, never the case", using the term's real
-  number from docs/DESIGN-HRCaseRouter.md; if the story proves no term,
-  say so and name the tests after the story.
+  number from docs/DESIGN-HRCaseRouter.md, one number per term, never a
+  range like "C30 to C38"; if the story proves no term, say so and name
+  the tests after the story.
 Run them, show me them failing, and stop before any implementation.
 ```
 
@@ -310,19 +311,20 @@ story's issue, so the board shows only what's left.
 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
 ```
-ship it. Review the diff without checking it out. Fix real findings in
-the code once. Never edit docs/, GRADE.md, RUNBOOK.md, HANDOFF.md or
-BACKLOG.md to answer a finding, and don't stop to ask me: file it as a
-register issue instead. There's no CI: merge once now-sdk build passes,
-and npm test too once there's a test script. Then switch to main and
-pull, and give me the pull request link and one line per finding: fixed,
-filed, or not a problem and why.
+ship it. Review the diff without checking it out, and post the review's
+findings on the pull request as a comment, even if there are none. Fix
+real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+file it as a register issue instead. There's no CI: merge once now-sdk
+build passes, and npm test too once there's a test script. Then switch to
+main and pull, and give me the pull request link and one line per
+finding: fixed, filed, or not a problem and why.
 ```
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 Claude pushes your branch, opens a pull request, reviews its own
-diff without checking it out, fixes real findings once and files the rest,
+diff without checking it out, posts the review on it, fixes real findings once and files the rest,
 then merges when the build and tests pass. You get the pull request link and
 one line per finding.
 
@@ -427,7 +429,8 @@ depends on a skipped one if its code can still be written and tested;
 otherwise skip it too. You only plan, delegate, merge and report. Per
 story: one sub-agent, in its own git worktree and branch; a five-bullet
 restatement in the pull request, not confirmed with me; tests first in
-Vitest through npm test, named "C<n>: …", with an it.todo naming any
+Vitest through npm test, named "C<n>: …", one number per term, never a
+range, with an it.todo naming any
 term that needs no code; the failing run saved; code until the whole
 suite passes and now-sdk build is clean; no new npm packages besides
 Vitest. The sub-agent pushes, opens the pull request with "Closes
@@ -743,7 +746,10 @@ the execution plan prove a run).
    Step 11 does this with more detail.
 
    ✅ Within about three minutes, each case has a work note by `hr.router`,
-   whatever it says. To see it: paste
+   whatever it says. The `Payroll Discrepancy` case is meant to stay where
+   it is, with no new **Assignment group**: `Lab Locked Out` can't open this
+   kind of case, so the code stops the move, and the note names the access
+   check. To see a note: paste
    `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
    into the address bar (empty as `hr.demo`? end impersonation and paste it
    as admin), click the top row's number, and look at the newest entry in the
@@ -756,19 +762,27 @@ the execution plan prove a run).
 End impersonation. As admin, in this order, then as `hr.demo` click
 **Reroute** on the case and wait two minutes: 1. in `sys_properties.list`,
 set `<SCOPE>.enabled` to `true`; 2. no dispatcher row in `sys_trigger.list`?
-open the job in `sysauto_script.list` and click **Update**; 3. ⌨️ run
+open the job in `sysauto_script.list` and click **Update**; 3. open
+`sys.scripts.modern.do` and pick **global**, then ⌨️ run
 <span data-show="os:mac">**On Mac:**
 `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>
 <span data-show="os:win">**On Windows:**
 `clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>,
-then in `sys.scripts.do` pick **global**, paste, and click **Run script**.
+paste it there, and click **Run script**.
 Reroute says a run is already in progress? Wait for the note saying the
 router didn't finish, five minutes from creation, then click it again.
 
 </details>
 
 4. End impersonation. When both notes are there, close any conversation
-   the warm-up left open (DECISIONS, P14). Copy the script:
+   the warm-up left open (DECISIONS, P14).
+
+   🌐 **Browser**, as admin: type `sys.scripts.modern.do` in the filter navigator
+   and press **Enter**. Set the scope picker above the script to
+   **global**.
+
+   Then copy the script, last, so nothing else replaces it on your
+   clipboard:
 
    <div data-show="os:mac">
 
@@ -790,9 +804,8 @@ router didn't finish, five minutes from creation, then click it again.
 
    </div>
 
-   🌐 **Browser**, as admin: type `sys.scripts.do` in the filter navigator
-   and press **Enter**. Set the scope picker above the script to
-   **global**, paste, and click **Run script**.
+   🌐 **Browser**, in `sys.scripts.modern.do`: paste it into the script box, and
+   click **Run script**.
 
    ✅ It prints `Closed <n> open conversation(s) of hr.router` and `Closed <n>
    in-progress interaction(s) of hr.router`, with any count, 0 included.
@@ -970,6 +983,21 @@ A first read of an HR table can come back empty (DECISIONS, P8). On the
 case, click **Reroute**. ✅ It says **Routing queued**. Wait about two
 minutes, and reload.
 <!-- DRY RUN: the note's exact words for read_case's empty-text error. -->
+
+</details>
+
+<details><summary>🛟 The note's confidence isn't a number</summary>
+
+The AI sometimes sends a word, such as `fmt_error`, where its confidence
+goes. The code stops the move and leaves the case where it was: a check
+doing its job, not a defect. On the case, click **Reroute**. ✅ It says
+**Routing queued**. Wait about two minutes, and reload: the new note gives
+a number.
+
+In sub-step 6, that case then has one more row, **State** `stopped`: the
+run that sent the word.
+
+The same on three runs in a row? Tell your instructor.
 
 </details>
 

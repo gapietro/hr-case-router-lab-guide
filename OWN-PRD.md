@@ -408,7 +408,7 @@ settled for your app: never copy the workshop's.
    | Question | Decision |
    |---|---|
    | Where tests run | Locally in Vitest, through `npm test`, never ATF, next to the code under `src/` as `*.test.ts`. Checks only the platform can prove: by hand, as <test user>. |
-   | MERGE | Every change reviewed. `now-sdk build` and `npm test` exit 0; lint isn't a criterion. Every design term, boundary terms included, is named in a test file: a unit test, a named live check under INSTALL, or an `it.todo` naming the term and why it needs no code. |
+   | MERGE | Every change reviewed, with the review's findings posted on its pull request, even if there are none. The repo's setup commits, made before it has any pull request, are its base, not changes. `now-sdk build` and `npm test` exit 0; lint isn't a criterion. Every design term, boundary terms included, is named in a test file: a unit test, a named live check under INSTALL, or an `it.todo` naming the term and why it needs no code. Each term by its own number: "C30 to C38" names only C30 and C38. |
    | INSTALL | Installs cleanly on the development instance, and the live checks for what this slice builds pass, as <test user>, not an admin. |
    | DEMO | The real owner sees the slice work live, as <test user>. |
    | HANDOFF | Someone else diagnoses a failure from the runbook alone. |
