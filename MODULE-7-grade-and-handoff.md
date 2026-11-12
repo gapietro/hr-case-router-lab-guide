@@ -221,7 +221,9 @@ item and any **cap**. A preview is headed `Preview: milestone not reached`.
 
 <details><summary>🛟 The install says 401, or times out</summary>
 
-Your instance is asleep. Ask your instructor to wake it, then 🤖
+Your instance is asleep. Open it in your browser: if its page offers a
+wake-up link, click it and wait, up to 20 minutes. No link, or still
+asleep? Ask your instructor. Then 🤖
 **Claude:** type `It's awake now: run the install to lab-pdi again.` Choose
 **Yes** again, for that command only.
 

@@ -107,23 +107,27 @@ each one names what caught the mistake.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-A demo can make staged work look finished. Sorting honestly tells you, and
-anyone you show the app to, what still has to be built or proved before it's
-real.
+A demo can make unfinished work look done. Saying honestly which parts you've
+actually seen work tells you, and anyone you show the app to, what's left
+before it's real.
 
 </details>
 
-Sort your app into three short lists:
+Go through your app's parts and put each one in one of three groups. Jot
+them down, or say them with the room:
 
-- **Real:** what you watched work live, as `hr.demo`.
-- **Staged:** what only tests or the grade's checks have shown.
-- **Not built:** anything not merged yet, such as the weekly numbers (9),
-  the override rule (7, after the workshop), what your grade left open,
-  the runbook, the drill and the verdict.
+- **Proven:** you watched it work live on your instance, as `hr.demo`. For
+  example, a new case routed to `Lab HR Team`, with its work note.
+- **Only tested:** your tests or the grade say it works, but you haven't
+  seen it happen live yet.
+- **Not built yet:** anything that isn't merged, and anything your grade
+  left open. For example, the weekly numbers, the rule that records when a
+  person overrides the router, the runbook, the failure drill and the
+  handover verdict. After the workshop builds these.
 
-Your app is a teaching copy, on a lab instance. The customer's way to production
-is the method again: [your own PRD](OWN-PRD.md) on the customer's dev instance,
-then [to production](PROMOTE.md).
+Your app is a practice copy, on a lab instance. To build the customer's real
+one, you use the same method again: [your own PRD](OWN-PRD.md) on the customer's
+dev instance, then [to production](PROMOTE.md).
 
 ### 4. Take it home
 

@@ -606,8 +606,9 @@ the install ends with a link to your app.
 
 <details><summary>🛟 It says 401, or times out</summary>
 
-Your instance is asleep. Ask your instructor to wake it, then run the same
-two lines again.
+Your instance is asleep. Open it in your browser: if its page offers a
+wake-up link, click it and wait, up to 20 minutes. No link, or still
+asleep? Ask your instructor. Then run the same two lines again.
 
 </details>
 

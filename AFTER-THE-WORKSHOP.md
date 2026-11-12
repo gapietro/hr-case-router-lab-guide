@@ -14,10 +14,13 @@ what your passing tests missed.
 | 2 · Break it, for real | 2 hours and 15 minutes | 1 hour |
 | 3 · Change the design | 45 minutes a change, only when a fix needs one | — |
 | 4 · Grade and hand over | 3 hours | 1 hour |
+| 5 · Put your computer back | 15 minutes | — |
 
 Book your partner now. **Your instance** stays up until the end date your
 instructor gives you at the debrief: finish Part 4 before then. When it's
-asleep, your instructor wakes it: ask them.
+asleep, open it in your browser: if its page offers a wake-up link, click
+it and wait, up to 20 minutes. No link, or still asleep? Ask your
+instructor.
 
 <details><summary>🛟 You put your machine back after Module 8</summary>
 
@@ -130,9 +133,37 @@ Then ⌨️ **Terminal**, in your window:
    version. `claude mcp list` says `No MCP servers configured`. `ls` prints
    only `No such file or directory` lines, `grep` prints `0`, and
    `git config` prints nothing.
-5. Something else listed? Module 8 step 7 switched it back on. Switch each
-   off again, by the name listed: `claude plugin disable <name>`, or for a
-   server, `claude mcp remove <name>` (a `plugin:…` server goes with its
+5. Something else listed? Module 8 step 7 switched it back on. First save
+   what you have, so Part 5 can switch it back on:
+
+   ```
+   cd ~/projects/hr-case-router-notes
+   [ -e plugins-before-lab.txt ] || claude plugin list > plugins-before-lab.txt
+   [ -e mcp-before-lab.json ] || (umask 077; node -p 'JSON.stringify(require(require("os").homedir()+"/.claude.json").mcpServers||{},null,2)' > mcp-before-lab.json)
+   ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router-notes`: Goes into your lab notes folder,
+      so the two files the next lines write land there, where Part 5 looks
+      for them.
+   2. `[ -e plugins-before-lab.txt ] || claude plugin list > …`: Writes the
+      list of your plugins, and which are enabled, into
+      `plugins-before-lab.txt`, so Part 5 knows which to switch back on. The
+      `[ -e … ] ||` part means "only if that file isn't there yet", so the
+      record Module 0 made is kept.
+   3. `[ -e mcp-before-lab.json ] || (umask 077; node -p … > …)`: Copies your
+      MCP servers' settings out of Claude Code's own file, `~/.claude.json`,
+      into `mcp-before-lab.json`, so Part 5 can add them back after you
+      remove them. Module 8 step 8 deletes this file, so without this line a
+      server you remove now is gone for good. `umask 077` makes the file
+      readable only by you, because a server's settings can hold a key.
+
+   </details>
+
+   Then switch each off again, by the name listed:
+   `claude plugin disable <name>`, or for a server,
+   `claude mcp remove <name>` (a `plugin:…` server goes with its
    plugin). Won't switch off, or you never added it? It's your
    organisation's: leave it, and tell your instructor. Add `.off` to the
    name of each file or folder `ls` lists, such as
@@ -516,8 +547,9 @@ the install ends with a link to your app.
 
 <details><summary>🛟 It says 401, or times out</summary>
 
-Your instance is asleep. Ask your instructor to wake it, then run the same
-two lines again.
+Your instance is asleep. Open it in your browser: if its page offers a
+wake-up link, click it and wait, up to 20 minutes. No link, or still
+asleep? Ask your instructor. Then run the same two lines again.
 
 </details>
 
@@ -1550,7 +1582,9 @@ asks more: a HANDOFF grade of 75 or more, with no cap.
 
 <details><summary>🛟 The install says 401, or times out</summary>
 
-Your instance is asleep. Ask your instructor to wake it, then 🤖
+Your instance is asleep. Open it in your browser: if its page offers a
+wake-up link, click it and wait, up to 20 minutes. No link, or still
+asleep? Ask your instructor. Then 🤖
 **Claude:** type `It's awake now: run the install to lab-pdi again.` Choose
 **Yes** again, for that command only.
 
@@ -2054,7 +2088,9 @@ show when the app moves on.
 
 <details><summary>🛟 The install says 401, or times out</summary>
 
-Your instance is asleep. Ask your instructor to wake it, then 🤖
+Your instance is asleep. Open it in your browser: if its page offers a
+wake-up link, click it and wait, up to 20 minutes. No link, or still
+asleep? Ask your instructor. Then 🤖
 **Claude:** type `It's awake now: run the install to lab-pdi again.` Choose
 **Yes** again, for that command only.
 
@@ -2159,8 +2195,238 @@ tail -n 5 ~/projects/hr-case-router/catches.md
 
 ✅ It shows the lines you kept.
 
+## Part 5 — Put your computer back
+
+Once the HANDOFF grade is done, put Claude Code, git and GitHub back as
+they were before the lab.
+
+### 1. Put your settings back
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The lab added its own Claude Code settings, which limit what Claude may do,
+and kept a backup of yours. This puts yours back, so Claude works for you as
+it did before the lab.
+
+</details>
+
+Close Claude everywhere first:
+<span data-show="surface:terminal">**In the terminal:** type `/exit` in
+every Claude window.</span>
+<span data-show="surface:desktop">**In the Code tab:** close every session
+(<kbd data-mac="Cmd+W" data-win="Ctrl+W">Cmd+W (Mac) · Ctrl+W (Windows)</kbd>).</span>
+
+⌨️ **Terminal**, in your window:
+
+```
+git -C ~/projects/hr-case-router-lab-guide pull
+node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --restore
+node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
+```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `git -C ~/projects/hr-case-router-lab-guide pull`: Downloads the newest
+   version of this guide from GitHub into its folder,
+   `hr-case-router-lab-guide`. `-C` runs git as if you were inside that
+   folder, so you don't have to go there first.
+2. `node …/merge-claude-settings.mjs --restore`: Runs the lab's settings
+   script to put your own Claude Code settings back: your backup exactly, or,
+   if you had no settings file before the lab, yours without the lab's
+   settings.
+3. `node …/merge-claude-settings.mjs --check`: Runs the same script to check,
+   changing nothing, whether the lab's settings are in place. Now you want
+   them gone.
+
+</details>
+
+✅ The last command says `Lab settings NOT in place:`. That's what you want.
+
+### 2. Switch back on what the lab switched off
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The lab set aside your own instructions, plugins, MCP servers and GitHub
+sign-in, so they couldn't steer the lab. Each sub-step puts one back, only
+where the lab saved how it was, and leaves alone anything you never switched
+off.
+
+</details>
+
+⌨️ **Terminal:** only what the lab saved, in
+`~/projects/hr-case-router-notes`.
+
+1. Rename back each file or folder the lab gave an `.off`:
+
+   ```
+   for f in ~/CLAUDE.md ~/projects/CLAUDE.md ~/.claude/CLAUDE.md \
+            ~/.claude/skills ~/.claude/agents ~/.claude/commands; do
+     [ -e "$f.off" ] && [ ! -e "$f" ] && mv "$f.off" "$f"
+   done
+   ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `for f in ~/CLAUDE.md … \`: Starts a loop over your own instruction
+      files and folders, the ones Claude reads in every session. The `\` at
+      the end carries the list on to the next line.
+   2. `~/.claude/skills ~/.claude/agents ~/.claude/commands; do`: Ends the
+      list with your own skills, agents and commands folders. `do` starts what
+      runs for each one, which the loop calls `$f`.
+   3. `[ -e "$f.off" ] && [ ! -e "$f" ] && mv "$f.off" "$f"`: Renames the
+      `.off` copy back to its own name, but only if the `.off` one is there
+      and nothing has taken the name since. Anything you never switched off is
+      left alone.
+   4. `done`: Ends the loop.
+
+   </details>
+
+2. Each plugin `plugins-before-lab.txt` shows `✔ enabled`:
+   `claude plugin enable <name>`, with its line after `❯` as `<name>`.
+3. Only if `mcp-before-lab.json` is there, add its servers back:
+
+   ```
+   cd ~/projects/hr-case-router-notes
+   node -e '
+   for (const [n, c] of Object.entries(require("./mcp-before-lab.json")))
+     require("child_process").execFileSync("claude", ["mcp", "add-json",
+       "--scope", "user", n, JSON.stringify(c)], { stdio: "inherit" })'
+   claude mcp list
+   ```
+
+   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router-notes`: Goes into your notes folder,
+      `hr-case-router-notes`, where the lab saved how things were before the
+      lab. Claude never reads it.
+   2. `node -e '`: Runs the next three lines as a small Node.js script. The
+      `'` here and the one at the end of the script's last line wrap it.
+   3. `for (const [n, c] of Object.entries(require("./mcp-before-lab.json")))`:
+      Reads `mcp-before-lab.json`, the MCP servers you had before the lab, and
+      goes through them one by one: `n` is a server's name and `c` its
+      settings.
+   4. `require("child_process").execFileSync("claude", ["mcp", "add-json",`:
+      Runs `claude mcp add-json` for each server, which adds a server to
+      Claude Code from its settings.
+   5. `"--scope", "user", n, JSON.stringify(c)], { stdio: "inherit" })'`: Ends
+      that command: `--scope user` adds the server in every folder, as it was
+      before, under its name and with its settings. `stdio: "inherit"` shows
+      you what `claude` prints.
+   6. `claude mcp list`: Lists the MCP servers Claude Code can use now, so you
+      can see yours are back.
+
+   </details>
+
+   ✅ It lists your servers again.
+4. `cat ~/projects/hr-case-router-notes/gh-before-lab.txt`. Is the account
+   above `Active account: true` not your lab one? Switch back to it:
+   `gh auth switch --user <that account>`. Does it say you weren't logged
+   in to any GitHub hosts? Sign the lab account out: `gh auth logout`.
+5. Put back how git signed in to GitHub. Module 0's `gh auth setup-git`
+   changed it for every repo on this computer:
+
+   ```
+   cd ~/projects/hr-case-router-notes
+   for h in https://github.com https://gist.github.com; do
+     git config --global --unset-all "credential.$h.helper"
+   done
+   grep -E '^credential\.https://(gist\.)?github\.com\.helper( |$)' git-credentials-before-lab.txt |
+     while read -r k v; do git config --global --add "$k" "$v"; done
+   git config --global --get-regexp '^credential\.' | diff - git-credentials-before-lab.txt && echo same
+   ```
+
+   <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
+
+   1. `cd ~/projects/hr-case-router-notes`: Goes into your notes folder,
+      `hr-case-router-notes`, where the lab saved how things were before the
+      lab. Claude never reads it.
+   2. `for h in …; do`: Starts a loop over GitHub's two web addresses, GitHub
+      itself and its gists: Module 0's `gh auth setup-git` set how git signs
+      in to both.
+   3. `git config --global --unset-all "credential.$h.helper"`: Removes every
+      sign-in helper git has for that address, `gh` included, from the
+      settings for every repo on this computer.
+   4. `done`: Ends the loop.
+   5. `grep -E '^credential\.… git-credentials-before-lab.txt |`: Picks out,
+      from the file Module 0 saved, the sign-in helpers git had for GitHub
+      before the lab. The `|` at the end passes them to the next line.
+   6. `while read -r k v; do git config --global --add "$k" "$v"; done`: Adds
+      each of those helpers back, one at a time: `k` is the setting's name and
+      `v` its value.
+   7. `git config --global --get-regexp '^credential\.' | diff - … && echo same`:
+      Compares how git signs in now with the saved file. `diff` prints each
+      line that differs; when none does, `echo same` prints `same`.
+
+   </details>
+
+   ✅ It prints `same`.
+
+   <details><summary>🛟 It says No such file or directory</summary>
+
+   The lab didn't save how git signed in, so git now signs in to GitHub
+   the way it does for every site: the Keychain on a Mac, Credential
+   Manager on Windows. Used something else for GitHub before the lab?
+   Add it back: `git config --global --add credential.https://github.com.helper <it>`.
+
+   </details>
+
+   <details><summary>🛟 It prints lines starting with &lt; or &gt;</summary>
+
+   Those lines are what differs from before the lab. Same lines in another
+   order, or a `credential` setting you changed yourself during the lab?
+   That's fine. It says `could not lock config file`? Close VS Code and run
+   the block again: running it twice is safe.
+
+   </details>
+
+### 3. Remove the plugins and the SDK login
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+Once you're done with the lab, its kit and your instance's sign-in have no
+more use on this computer. Removing them leaves nothing that can reach the lab
+instance, and deletes a saved file that can hold keys.
+
+</details>
+
+⌨️ **Terminal**, now you're done with the lab. The `rm` line deletes the MCP
+settings the lab saved, as they can hold keys:
+
+```
+claude plugin uninstall prove-it@prove-it
+claude plugin marketplace remove prove-it
+now-sdk auth --delete lab-pdi
+rm -f ~/projects/hr-case-router-notes/mcp-before-lab.json
+claude plugin list
+```
+
+<details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
+
+1. `claude plugin uninstall prove-it@prove-it`: Uninstalls the lab's kit, the
+   `prove-it` plugin, from Claude Code.
+2. `claude plugin marketplace remove prove-it`: Removes the kit's marketplace:
+   the list of plugins Claude Code installed the kit from.
+3. `now-sdk auth --delete lab-pdi`: Deletes the SDK's saved sign-in to your
+   lab instance, `lab-pdi`, from this computer.
+4. `rm -f ~/projects/hr-case-router-notes/mcp-before-lab.json`: Deletes the
+   copy of your MCP server settings that the lab saved, as it can hold keys.
+   `-f` means no complaint if the file isn't there.
+5. `claude plugin list`: Lists the plugins Claude Code still has, so you can
+   see the kit is gone.
+
+</details>
+
+✅ The list no longer shows `prove-it@prove-it`.
+
+Won't build with the SDK again? Remove ServiceNow's plugin too:
+
+```
+claude plugin uninstall servicenow-sdk@claude-plugins-official
+```
+
 ## You now have
 
 A finished app, handed over, and its catches in `catches.md`.
+Claude Code, git and GitHub as they were before the lab.
 You're done when the HANDOFF grade isn't a preview: its findings are your
 next work, not part of done.

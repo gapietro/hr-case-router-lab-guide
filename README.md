@@ -78,11 +78,6 @@ password.
 Module 0 installs everything else, including the prove-it kit: the Claude
 Code plugin the lab runs on.
 
-**Your answers stay in this browser, on this computer.** Nothing is sent
-anywhere: not to your instructor, not to Claude. The link and the
-downloaded copy of this guide keep separate setups; **Copy my setup**
-carries yours across.
-
 ## What you should be able to do
 
 Before the day, you should be able to:

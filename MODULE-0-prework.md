@@ -122,8 +122,10 @@ it. Stay logged in as admin, and impersonate it when a step says so.
 
 <details><summary>🛟 It's asleep or gone, or has no HR cases</summary>
 
-Tell your instructor. Waking an instance that's asleep (hibernating) takes a
-few minutes.
+- **Asleep:** its page says it's hibernating. Click the wake-up link on
+  that page and wait: waking can take 20 minutes. No link, or still asleep
+  after that? Tell your instructor.
+- **Gone, or no HR cases:** tell your instructor.
 
 </details>
 
