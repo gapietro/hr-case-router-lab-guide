@@ -28,6 +28,8 @@
   --fix:#FDF0E3;         /* the fix boxes */
   --note:#EDF2F5;        /* the why boxes */
   --rail:#13263A;        /* the navigation rail stays navy in both themes */
+  --hero:#13263A;        /* navy fills with white text: the Notes panel's download button, the pin tip */
+  --heading:#13263A;     /* headings inside the Notes panel */
   --rail-2:#1C3654;
   --rail-text:#FFFFFF;
   --rail-muted:#A9B8C7;
@@ -51,8 +53,8 @@
   --nav-w:300px;
   --bar-h:52px;          /* the fixed top bar: setup chip, Detail, Search, Stuck?, Theme */
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#13263A;--surface:#1A3150;--text:#FFFFFF;--muted:#A9B8C7;--line:#2C4766;--accent:#F08A24;--accent-fill:#F08A24;--on-accent:#13263A;--accent-soft:#2A3F58;--blue:#8FC1E3;--blue-line:#8FC1E3;--code:#0E1D2C;--code-text:#8FC1E3;--check:#17344F;--fix:#1C3654;--note:#162F4A;--rail:#0C1826;--rail-2:#13263A;--rail-text:#FFFFFF;--rail-muted:#A9B8C7;--rail-line:#22394F;--rail-hover:#1C3654;--rail-accent:#F08A24;--rail-current:#F08A24;--term-bg:#0A1521;--term-text:#FFFFFF;--term-tag:#A9B8C7;--term-edge:#8FC1E3;--claude-bg:#2B2F35;--claude-line:#4A3B2E;--claude-edge:#F08A24;--claude-tag:#F5A65B;--var-bg:#5A3E22;--danger:#FF9C8F}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#13263A;--surface:#1A3150;--text:#FFFFFF;--muted:#A9B8C7;--line:#2C4766;--accent:#F08A24;--accent-fill:#F08A24;--on-accent:#13263A;--accent-soft:#2A3F58;--blue:#8FC1E3;--blue-line:#8FC1E3;--code:#0E1D2C;--code-text:#8FC1E3;--check:#17344F;--fix:#1C3654;--note:#162F4A;--rail:#0C1826;--rail-2:#13263A;--rail-text:#FFFFFF;--rail-muted:#A9B8C7;--rail-line:#22394F;--rail-hover:#1C3654;--rail-accent:#F08A24;--rail-current:#F08A24;--term-bg:#0A1521;--term-text:#FFFFFF;--term-tag:#A9B8C7;--term-edge:#8FC1E3;--claude-bg:#2B2F35;--claude-line:#4A3B2E;--claude-edge:#F08A24;--claude-tag:#F5A65B;--var-bg:#5A3E22;--danger:#FF9C8F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#13263A;--surface:#1A3150;--text:#FFFFFF;--muted:#A9B8C7;--line:#2C4766;--accent:#F08A24;--accent-fill:#F08A24;--on-accent:#13263A;--accent-soft:#2A3F58;--blue:#8FC1E3;--blue-line:#8FC1E3;--code:#0E1D2C;--code-text:#8FC1E3;--check:#17344F;--fix:#1C3654;--note:#162F4A;--rail:#0C1826;--rail-2:#13263A;--rail-text:#FFFFFF;--rail-muted:#A9B8C7;--rail-line:#22394F;--rail-hover:#1C3654;--rail-accent:#F08A24;--rail-current:#F08A24;--term-bg:#0A1521;--term-text:#FFFFFF;--term-tag:#A9B8C7;--term-edge:#8FC1E3;--claude-bg:#2B2F35;--claude-line:#4A3B2E;--claude-edge:#F08A24;--claude-tag:#F5A65B;--var-bg:#5A3E22;--danger:#FF9C8F;--hero:#0C1826;--heading:#FFFFFF}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#13263A;--surface:#1A3150;--text:#FFFFFF;--muted:#A9B8C7;--line:#2C4766;--accent:#F08A24;--accent-fill:#F08A24;--on-accent:#13263A;--accent-soft:#2A3F58;--blue:#8FC1E3;--blue-line:#8FC1E3;--code:#0E1D2C;--code-text:#8FC1E3;--check:#17344F;--fix:#1C3654;--note:#162F4A;--rail:#0C1826;--rail-2:#13263A;--rail-text:#FFFFFF;--rail-muted:#A9B8C7;--rail-line:#22394F;--rail-hover:#1C3654;--rail-accent:#F08A24;--rail-current:#F08A24;--term-bg:#0A1521;--term-text:#FFFFFF;--term-tag:#A9B8C7;--term-edge:#8FC1E3;--claude-bg:#2B2F35;--claude-line:#4A3B2E;--claude-edge:#F08A24;--claude-tag:#F5A65B;--var-bg:#5A3E22;--danger:#FF9C8F;--hero:#0C1826;--heading:#FFFFFF}
 *{box-sizing:border-box}
 html{scroll-padding-top:calc(var(--bar-h) + 16px)}
 body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
@@ -235,25 +237,80 @@ pre.terminal .var{background:var(--var-term-bg)}
 .detail-wrap{position:relative;flex:none}
 .pop{position:absolute;top:calc(100% + 6px);right:0;width:320px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.2);padding:14px 16px;z-index:30;font-size:15px;line-height:1.45}
 .pop p{margin:8px 0 0}
-/* Bookmarks (#37): the top bar's list. Rows in guide order, each with Go, Note and Remove; the keys in the footer. */
-#slot-bookmarks{position:relative;flex:none}
+/* Notes: the top bar's button opens a side sheet like Stuck?'s (#20): Here, All notes, the scratchpad. */
+#slot-bookmarks{flex:none}
 #bm-btn .bm-n{font-weight:400}
-.bm-pop{width:400px;max-height:min(72vh,600px);overflow-y:auto;overscroll-behavior:contain;padding:10px 0 8px}
-.bm-pop .bm-h{margin:0 16px 4px;font:600 11.5px/1.45 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.bm-pop .bm-none,.bm-pop .hint{margin:6px 16px}
-#bm-list{list-style:none;margin:0;padding:0}
-#bm-list li{padding:8px 16px;border-top:1px solid var(--line)}
-#bm-list .bm-place{display:block;font-weight:600;overflow-wrap:anywhere}
-#bm-list .bm-note{display:block;font-size:14px;overflow-wrap:anywhere}
-#bm-list .bm-hid{display:block;font-size:13px;font-weight:600;color:var(--accent)}
-#bm-list .bm-gone{display:block;font-size:13.5px;color:var(--muted)}
-#bm-list .bm-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-#bm-list .bm-acts button{min-height:28px}
-#bm-list input{display:block;width:100%;margin-top:4px;font:14px/1.4 var(--sans);padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text)}
-#bm-list .hint{margin:2px 0 0}
-.bm-pop .bm-foot{margin:8px 0 0;padding:8px 16px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+#notes{position:fixed;top:var(--bar-h);right:0;bottom:0;width:min(380px,100vw);overflow-y:auto;overscroll-behavior:contain;z-index:8;
+  background:var(--surface);color:var(--text);border-left:1px solid var(--line);box-shadow:-8px 0 24px rgba(0,0,0,.18);
+  padding:14px 18px 32px;font-size:15px;line-height:1.5;animation:abl-slide .2s ease-out}
+@media (prefers-reduced-motion:reduce){#notes{animation:none}}
+#notes button{white-space:normal}
+#notes h2{margin:0;padding:0;border:0;font-size:19px;line-height:1.3;font-weight:700}
+#notes h2:focus,#notes h3:focus{outline:none}
+#notes h2:focus-visible,#notes h3:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#notes h3{margin:22px 0 6px;font:600 11.5px/1.45 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+#notes p{margin:6px 0}
+#notes-close{flex:none;min-width:32px;justify-content:center}
+#notes .notes-jump{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+#notes .notes-at{margin:0 0 8px;font-weight:700;font-size:15.5px;line-height:1.35;color:var(--heading)}
+.notes-list{list-style:none;margin:6px 0 8px;padding:0;display:flex;flex-direction:column;gap:8px}
+.note-card{padding:9px 11px;border:1px solid var(--line);border-left:3px solid var(--accent-fill);border-radius:8px;background:var(--surface)}
+.note-step{padding:9px 11px;border:1px solid var(--line);border-left:3px solid var(--line);border-radius:8px;background:var(--surface)}
+.note-step.bmk{border-left-color:var(--blue-line)}
+.notes-sub{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.notes-sub:empty{display:none}
+.notes-sub .note-card{background:var(--bg);padding:7px 10px}
+.pin-ico{width:15px;height:15px;flex:none}
+.pin-ico path{fill:currentColor}
+.note-card.lit{box-shadow:0 0 0 2px var(--accent)}
+.note-where{display:block;font-weight:700;font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.note-kind{display:block;font-size:13px;line-height:1.4;color:var(--muted);overflow-wrap:anywhere}
+#notes .note-text{margin:4px 0 0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14.5px;line-height:1.45}
+.note-flag{display:block;margin-top:2px;font-size:13px;font-weight:600;color:var(--accent)}
+.note-acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+#notes .note-acts button{min-height:28px;padding:4px 10px}
+.note-edit{margin:6px 0 8px}
+.note-edit .note-kind{margin-bottom:3px}
+.note-edit textarea,#notes-scratch{display:block;width:100%;min-width:0;font:14.5px/1.45 var(--sans);padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--text);resize:vertical}
+.note-edit .hint{display:block;margin-top:3px}
+.notes-adds{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+#notes-pin{background:var(--accent-fill);color:var(--on-accent);border-color:var(--accent-fill);gap:5px}
+#notes-bm{gap:5px;padding:4px 10px;color:var(--text)}
+#notes-bm[aria-pressed="true"]{color:var(--accent)}
+#notes .notes-page{margin:16px 0 4px;font:700 14px/1.35 var(--sans);color:var(--heading)}
+#notes-all>.notes-page:first-child{margin-top:4px}
+#notes .notes-save{min-height:1.2em;margin:3px 0 0;font-size:12.5px;color:var(--muted)}
+.notes-foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+.notes-foot .hint{font-size:13px}
+#notes-dl{background:var(--hero);color:#FFFFFF;border-color:var(--hero)}
+#notes .bm-foot{margin:10px 0 0;font-size:12.5px;color:var(--muted)}
 .bm-foot kbd{font:12px/1.3 var(--mono);border:1px solid var(--line);border-radius:3px;padding:0 4px;background:var(--bg)}
-@media (forced-colors:active){.bm[aria-pressed="true"]{border:2px solid Highlight}#bm-list li:focus-within{outline:1px solid Highlight}}
+@media (max-width:640px){#notes{left:0;width:auto;border-left:0;padding:12px 14px 28px}}
+@media screen and (min-width:641px){body.notes-open main{padding-right:calc(380px + 24px)}}
+@media (forced-colors:active){#notes{border-left:2px solid CanvasText}.note-card{border:1px solid CanvasText}#notes-bm[aria-pressed="true"]{border:2px solid Highlight}}
+/* A note pinned to a spot: a marker in the page's margin (for a pointer; the panel's Here lists the same notes), and
+   the block lit while the pointer is on it. Pinning: the page's blocks become targets, outlined as they're chosen. */
+#pin-layer{position:absolute;top:0;left:0;width:0;height:0;z-index:5}
+.pin-mark{position:absolute;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:12px 12px 12px 3px;
+  background:var(--accent-fill);color:var(--on-accent);font:700 12px/1 var(--sans);box-shadow:0 1px 4px rgba(3,45,66,.35);cursor:pointer}
+.pin-mark:hover{transform:scale(1.12)}
+.pin-mark .bm-ico{width:14px;height:14px}
+.pin-lit,.pin-cand{outline:2px dashed var(--accent);outline-offset:4px;border-radius:4px}
+.pin-cand{scroll-margin:calc(var(--bar-h) + 80px) 0 60px}
+.pin-flash{animation:pin-flash 2s ease-out}
+@keyframes pin-flash{0%,45%{outline:3px solid var(--accent-fill);outline-offset:4px}100%{outline:3px solid transparent;outline-offset:4px}}
+@media (prefers-reduced-motion:reduce){.pin-flash{animation:none;outline:3px solid var(--accent-fill);outline-offset:4px}}
+body.pin-picking main,body.pin-picking main *{cursor:crosshair!important}
+.pin-tip{position:fixed;top:calc(var(--bar-h) + 10px);left:50%;transform:translateX(-50%);z-index:20;width:max-content;max-width:min(560px,calc(100vw - 24px));
+  display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;padding:10px 14px;border-radius:10px;background:var(--hero);color:#FFFFFF;
+  box-shadow:0 8px 24px rgba(3,45,66,.3);font:600 14px/1.4 var(--sans)}
+.pin-tip[hidden]{display:none}
+.pin-tip:focus{outline:2px solid var(--accent-fill);outline-offset:2px}
+.pin-tip-k{font-weight:400;font-size:13px;color:#C9D8DF}
+.pin-tip button{background:transparent;color:#FFFFFF;border-color:#7FB3CC}
+html[data-abl-survey] #pin-layer{display:none}
+@media (forced-colors:active){.pin-mark{border:1px solid CanvasText}.pin-lit,.pin-cand{outline-color:Highlight}}
+@media (forced-colors:active){.bm[aria-pressed="true"]{border:2px solid Highlight}}
 fieldset{border:0;margin:0;padding:0;min-width:0}
 legend{font-weight:700;padding:0;margin-bottom:4px}
 .hint{display:block;color:var(--muted);font-size:13.5px;line-height:1.45;font-weight:400}
@@ -519,12 +576,11 @@ html[data-abl-pending] main{visibility:hidden;animation:abl-failsafe 0s linear 1
   #topbar.searching .search-box{display:flex;position:absolute;left:56px;right:8px;top:calc((var(--bar-h) - 38px) / 2);height:38px;z-index:2}
   #topbar.searching #search-open{visibility:hidden}
   .search-pop{position:fixed;top:calc(var(--bar-h) + 4px);left:8px;right:8px;width:auto;max-height:calc(100vh - var(--bar-h) - 16px)}
-  /* #37: room for 🔖 without squeezing the setup chip: no carets, and the count bare ("🔖 5", named "Bookmarks 5"). */
+  /* #37: room for Notes without squeezing the setup chip: no carets, and the count bare (its icon and "5", named "Notes 5"). */
   #topbar .bar{gap:5px}
   #topbar .caret,.bm-p{display:none}
   #topbar #bm-btn{padding-left:7px;padding-right:7px;gap:3px}
   #slot-bookmarks{position:static}
-  .bm-pop{max-height:calc(100vh - var(--bar-h) - 16px)}
   #nav header{padding-top:54px}
   h1{font-size:27px}
 }
@@ -550,7 +606,7 @@ html[data-abl-pending] main{visibility:hidden;animation:abl-failsafe 0s linear 1
   .sv-rows dt{grid-column:1/-1;padding-bottom:0;border-bottom:0}
 }
 @media print{
-  #nav,#menu,pre .copy,.navcopy,#topbar,#slot-stuck,.skip,#setup,.survey,.abl-for .abl-change,.term-tip,.abl-peek,.cbbar,.lmarks,.lpeek,.resume,.step-tools,.copymsg,.bm,.rb,.bm-undo{display:none}
+  #nav,#menu,pre .copy,.navcopy,#topbar,#slot-stuck,.skip,#setup,.survey,.abl-for .abl-change,.term-tip,.abl-peek,.cbbar,.lmarks,.lpeek,.resume,.step-tools,.copymsg,.bm,.rb,.bm-undo,#pin-layer,.pin-tip{display:none}
   .codeblock.terminal>ol.lnotes,.codeblock.claude>ol.lnotes{background:none;color:var(--text);border-color:var(--line)}
   .lnote{background:none}
   .codeblock>.psum[hidden]{display:block!important}  /* a prompt's summary prints, open or closed on screen */
@@ -570,7 +626,7 @@ html[data-abl-pending] main{visibility:hidden;animation:abl-failsafe 0s linear 1
 </style>
 </head>
 <body>
-<script type="application/json" id="abl-manifest">{"v":1,"schema":{"os":["mac","win"],"surface":["terminal","desktop"],"github":["personal","company","none"],"level":["guided","standard","expert"],"topics":["terminal","claude","git","github","servicenow"],"values":["instance","scope","repo","name"],"theme":["light","dark"]},"labels":{"os":{"mac":"Mac","win":"Windows"},"surface":{"terminal":"Terminal","desktop":"Code tab"},"github":{"personal":"Personal account","company":"Company account","none":"No account yet"},"level":{"guided":"Explain more","standard":"Standard","expert":"Just the steps"},"topics":{"terminal":"Terminal","claude":"Claude Code","git":"git","github":"GitHub","servicenow":"ServiceNow"}},"phrases":{"surface":{"terminal":"the terminal","desktop":"the Code tab"}},"topics":["terminal","claude","git","github","servicenow"],"asks":[{"id":"m0-hr-demo","setup":false,"options":["yes","no"],"labels":["Yes, it's listed","No"],"question":"Is hr.demo listed?","anchor":"m0--2-check-your-instance","doc":"m0","where":"Module 0, step 2"},{"id":"m0-tools-ok","setup":false,"options":["yes","no"],"labels":["Yes, all of them","No, one is missing or too old"],"question":"Did every version pass?","anchor":"m0--3-install-the-tools","doc":"m0","where":"Module 0, step 3"},{"id":"github","setup":true,"options":["personal","company","none"],"labels":["Yes, a personal one","Only a company one","Not yet"],"question":"Do you have a GitHub account you can use for the lab?","anchor":"m0--4-sign-in-to-github-and-get-this-guide","doc":"m0","where":"Module 0, step 4"},{"id":"gh-company","setup":false,"options":["managed","other","unsure"],"labels":["Yes, it ends like that","No","Not sure"],"question":"Does its user name end in _ and a short code, such as jsmith_acme?","anchor":"m0--4-sign-in-to-github-and-get-this-guide","doc":"m0","where":"Module 0, step 4"},{"id":"m0-gh-invite","setup":false,"options":["yes","no"],"labels":["Yes, accepted","Not yet"],"question":"Have you accepted your instructor's invite to this guide's repo?","anchor":"m0--4-sign-in-to-github-and-get-this-guide","doc":"m0","where":"Module 0, step 4"},{"id":"m0-cc-before","setup":false,"options":["yes","no"],"labels":["Yes","No, this is my first time"],"question":"Have you used Claude Code on this computer before?","anchor":"m0--5-add-the-labs-claude-code-settings","doc":"m0","where":"Module 0, step 5"}],"stops":[{"ask":"m0-hr-demo","values":["no"],"anchor":"m0--2-check-your-instance","text":"Stop here until your instructor has prepared your instance."},{"ask":"m0-gh-invite","values":["no"],"anchor":"m0--4-sign-in-to-github-and-get-this-guide","text":"Stop here until you've accepted it."}],"glossary":[{"key":"repo","term":"Repo","topic":"git","def":"a folder whose history git keeps. Your app's repo is ~/projects/hr-case-router/app."},{"key":"commit","term":"Commit","topic":"git","def":"one saved snapshot in a repo's history."},{"key":"branch","term":"Branch","topic":"git","def":"a separate line of commits. main changes only through pull requests."},{"key":"pull-request","term":"Pull request","topic":"github","def":"a request on GitHub to merge a branch into main. It's reviewed first."},{"key":"story","term":"Story","topic":null,"def":"one small piece of work, filed as a GitHub issue."},{"key":"gate","term":"Gate","topic":null,"def":"a milestone that stories hold up: MERGE, INSTALL, DEMO, HANDOFF."},{"key":"design-term","term":"Design term","topic":null,"def":"one numbered rule in your design record, such as C3. Every test names the term it proves."},{"key":"catch","term":"Catch","topic":null,"def":"a real problem the process found and that got fixed, or that changed a decision. A check firing on something you planted to test it isn't a catch."}],"steps":[{"k":"home","d":"home","n":null,"t":"Agentic Build Lab","id":"home","x":0,"log":0,"p":null,"w":"How this lab works"},{"k":"home/the-day","d":"home","n":null,"t":"The day","id":"home--the-day","x":0,"log":0,"p":null,"w":"How this lab works, The day"},{"k":"home/what-you-need","d":"home","n":null,"t":"What you need","id":"home--what-you-need","x":0,"log":0,"p":null,"w":"How this lab works, What you need"},{"k":"home/what-you-should-be-able-to-do","d":"home","n":null,"t":"What you should be able to do","id":"home--what-you-should-be-able-to-do","x":0,"log":0,"p":null,"w":"How this lab works, What you should be able to do"},{"k":"home/where-you-act","d":"home","n":null,"t":"Where you act","id":"home--where-you-act","x":0,"log":0,"p":null,"w":"How this lab works, Where you act"},{"k":"home/rules-for-the-whole-lab","d":"home","n":null,"t":"Rules for the whole lab","id":"home--rules-for-the-whole-lab","x":0,"log":0,"p":null,"w":"How this lab works, Rules for the whole lab"},{"k":"home/when-claude-asks-permission","d":"home","n":null,"t":"When Claude asks permission","id":"home--when-claude-asks-permission","x":0,"log":0,"p":null,"w":"How this lab works, When Claude asks permission"},{"k":"home/words-you-ll-meet","d":"home","n":null,"t":"Words you'll meet","id":"home--words-youll-meet","x":0,"log":0,"p":null,"w":"How this lab works, Words you'll meet"},{"k":"home/your-folders-and-your-catches","d":"home","n":null,"t":"Your folders and your catches","id":"home--your-folders-and-your-catches","x":0,"log":0,"p":null,"w":"How this lab works, Your folders and your catches"},{"k":"m0","d":"m0","n":null,"t":"Module 0 — Pre-work: get your bench ready","id":"m0","x":0,"log":0,"p":null,"w":"Module 0"},{"k":"m0/your-instance","d":"m0","n":null,"t":"Your instance","id":"m0--part-1--your-instance","x":0,"log":0,"p":null,"w":"Module 0, Part 1 — Your instance"},{"k":"m0/get-your-instance","d":"m0","n":"1","t":"Get your instance","id":"m0--1-get-your-instance","x":1,"log":0,"p":null,"w":"Module 0, step 1"},{"k":"m0/check-your-instance","d":"m0","n":"2","t":"Check your instance","id":"m0--2-check-your-instance","x":1,"log":0,"p":null,"w":"Module 0, step 2"},{"k":"m0/your-tools","d":"m0","n":null,"t":"Your tools","id":"m0--part-2--your-tools","x":0,"log":0,"p":null,"w":"Module 0, Part 2 — Your tools"},{"k":"m0/install-the-tools","d":"m0","n":"3","t":"Install the tools","id":"m0--3-install-the-tools","x":1,"log":0,"p":null,"w":"Module 0, step 3"},{"k":"m0/sign-in-to-github-and-get-this-guide","d":"m0","n":"4","t":"Sign in to GitHub and get this guide","id":"m0--4-sign-in-to-github-and-get-this-guide","x":1,"log":0,"p":null,"w":"Module 0, step 4"},{"k":"m0/add-the-lab-s-claude-code-settings","d":"m0","n":"5","t":"Add the lab's Claude Code settings","id":"m0--5-add-the-labs-claude-code-settings","x":1,"log":0,"p":null,"w":"Module 0, step 5"},{"k":"m0/sign-in-to-claude-code","d":"m0","n":"6","t":"Sign in to Claude Code","id":"m0--6-sign-in-to-claude-code","x":1,"log":0,"p":null,"w":"Module 0, step 6"},{"k":"m0/connect-the-sdk-to-your-instance","d":"m0","n":"7","t":"Connect the SDK to your instance","id":"m0--7-connect-the-sdk-to-your-instance","x":1,"log":0,"p":null,"w":"Module 0, step 7"},{"k":"m0/the-kit-and-a-clean-bench","d":"m0","n":null,"t":"The kit and a clean bench","id":"m0--part-3--the-kit-and-a-clean-bench","x":0,"log":0,"p":null,"w":"Module 0, Part 3 — The kit and a clean bench"},{"k":"m0/install-the-kit-and-the-sdk-plugin","d":"m0","n":"8","t":"Install the kit and the SDK plugin","id":"m0--8-install-the-kit-and-the-sdk-plugin","x":1,"log":0,"p":null,"w":"Module 0, step 8"},{"k":"m0/make-your-folders","d":"m0","n":"9","t":"Make your folders","id":"m0--9-make-your-folders","x":1,"log":0,"p":null,"w":"Module 0, step 9"},{"k":"m0/check-nothing-else-is-loaded","d":"m0","n":"10","t":"Check nothing else is loaded","id":"m0--10-check-nothing-else-is-loaded","x":1,"log":0,"p":null,"w":"Module 0, step 10"},{"k":"m0/your-app-s-repo","d":"m0","n":null,"t":"Your app's repo","id":"m0--part-4--your-apps-repo","x":0,"log":0,"p":null,"w":"Module 0, Part 4 — Your app's repo"},{"k":"m0/look-up-your-scope","d":"m0","n":"11","t":"Look up your scope","id":"m0--11-look-up-your-scope","x":1,"log":0,"p":null,"w":"Module 0, step 11"},{"k":"m0/create-the-app","d":"m0","n":"12","t":"Create the app","id":"m0--12-create-the-app","x":1,"log":0,"p":null,"w":"Module 0, step 12"},{"k":"m0/let-claude-set-up-the-repo","d":"m0","n":"13","t":"Let Claude set up the repo","id":"m0--13-let-claude-set-up-the-repo","x":1,"log":0,"p":null,"w":"Module 0, step 13"},{"k":"m0/try-to-beat-the-guard","d":"m0","n":"14","t":"🔮 Try to beat the guard","id":"m0--14--try-to-beat-the-guard","x":1,"log":0,"p":null,"w":"Module 0, step 14"},{"k":"m0/commit-for-real","d":"m0","n":"15","t":"Commit for real","id":"m0--15-commit-for-real","x":1,"log":0,"p":null,"w":"Module 0, step 15"},{"k":"m0/your-repo-s-rules-and-github","d":"m0","n":null,"t":"Your repo's rules, and GitHub","id":"m0--part-5--your-repos-rules-and-github","x":0,"log":0,"p":null,"w":"Module 0, Part 5 — Your repo's rules, and GitHub"},{"k":"m0/give-the-repo-its-rules","d":"m0","n":"16","t":"Give the repo its rules","id":"m0--16-give-the-repo-its-rules","x":1,"log":0,"p":null,"w":"Module 0, step 16"},{"k":"m0/read-every-name","d":"m0","n":"17","t":"Read every name","id":"m0--17-read-every-name","x":1,"log":0,"p":null,"w":"Module 0, step 17"},{"k":"m0/commit-and-go-private-on-github","d":"m0","n":"18","t":"Commit, and go private on GitHub","id":"m0--18-commit-and-go-private-on-github","x":1,"log":0,"p":null,"w":"Module 0, step 18"},{"k":"m0/before-the-day","d":"m0","n":null,"t":"Before the day","id":"m0--part-6--before-the-day","x":0,"log":0,"p":null,"w":"Module 0, Part 6 — Before the day"},{"k":"m0/read-the-inputs-and-guess","d":"m0","n":"19","t":"Read the inputs, and 🔮 guess","id":"m0--19-read-the-inputs-and--guess","x":1,"log":0,"p":null,"w":"Module 0, step 19"},{"k":"m0/you-now-have","d":"m0","n":null,"t":"You now have","id":"m0--you-now-have","x":0,"log":0,"p":null,"w":"Module 0, You now have"},{"k":"m1","d":"m1","n":null,"t":"Module 1 — From inputs to a PRD","id":"m1","x":0,"log":0,"p":null,"w":"Module 1"},{"k":"m1/get-today-s-guide","d":"m1","n":"1","t":"Get today's guide","id":"m1--1-get-todays-guide","x":1,"log":0,"p":null,"w":"Module 1, step 1"},{"k":"m1/have-claude-trace-the-prd","d":"m1","n":"2","t":"Have Claude trace the PRD","id":"m1--2-have-claude-trace-the-prd","x":1,"log":0,"p":null,"w":"Module 1, step 2"},{"k":"m1/decide-the-gaps-in-one-table","d":"m1","n":"3","t":"Decide the gaps, in one table","id":"m1--3-decide-the-gaps-in-one-table","x":1,"log":0,"p":null,"w":"Module 1, step 3"},{"k":"m1/log-it","d":"m1","n":"4","t":"Log it","id":"m1--4-log-it","x":1,"log":1,"p":null,"w":"Module 1, step 4"},{"k":"m1/get-the-customer-s-acceptance","d":"m1","n":"5","t":"Get the customer's acceptance","id":"m1--5-get-the-customers-acceptance","x":1,"log":0,"p":null,"w":"Module 1, step 5"},{"k":"m1/you-now-have","d":"m1","n":null,"t":"You now have","id":"m1--you-now-have","x":0,"log":0,"p":null,"w":"Module 1, You now have"},{"k":"m2","d":"m2","n":null,"t":"Module 2 — Consult","id":"m2","x":0,"log":0,"p":null,"w":"Module 2"},{"k":"m2/guess-first","d":"m2","n":"1","t":"🔮 Guess first","id":"m2--1--guess-first","x":1,"log":0,"p":null,"w":"Module 2, step 1"},{"k":"m2/start-the-consult","d":"m2","n":"2","t":"Start the consult","id":"m2--2-start-the-consult","x":1,"log":0,"p":null,"w":"Module 2, step 2"},{"k":"m2/answer-its-questions-then-confirm","d":"m2","n":"3","t":"Answer its questions, then confirm","id":"m2--3-answer-its-questions-then-confirm","x":1,"log":0,"p":null,"w":"Module 2, step 3"},{"k":"m2/let-it-run","d":"m2","n":"4","t":"Let it run","id":"m2--4-let-it-run","x":1,"log":0,"p":null,"w":"Module 2, step 4"},{"k":"m2/read-it-like-a-reviewer","d":"m2","n":"5","t":"Read it like a reviewer","id":"m2--5-read-it-like-a-reviewer","x":1,"log":0,"p":null,"w":"Module 2, step 5"},{"k":"m2/push-back","d":"m2","n":"6","t":"Push back","id":"m2--6-push-back","x":1,"log":0,"p":null,"w":"Module 2, step 6"},{"k":"m2/log-it","d":"m2","n":"7","t":"Log it","id":"m2--7-log-it","x":1,"log":1,"p":null,"w":"Module 2, step 7"},{"k":"m2/you-now-have","d":"m2","n":null,"t":"You now have","id":"m2--you-now-have","x":0,"log":0,"p":null,"w":"Module 2, You now have"},{"k":"m3","d":"m3","n":null,"t":"Module 3 — Research, then the LLD","id":"m3","x":0,"log":0,"p":null,"w":"Module 3"},{"k":"m3/guess-then-ask-claude-for-the-facts","d":"m3","n":"1","t":"🔮 Guess, then ask Claude for the facts","id":"m3--1--guess-then-ask-claude-for-the-facts","x":1,"log":0,"p":null,"w":"Module 3, step 1"},{"k":"m3/have-claude-check-them-on-your-instance","d":"m3","n":"2","t":"Have Claude check them on your instance","id":"m3--2-have-claude-check-them-on-your-instance","x":1,"log":0,"p":null,"w":"Module 3, step 2"},{"k":"m3/audit-each-mark-against-its-rows","d":"m3","n":"3","t":"Audit each mark against its rows","id":"m3--3-audit-each-mark-against-its-rows","x":1,"log":0,"p":null,"w":"Module 3, step 3"},{"k":"m3/draft-the-lld","d":"m3","n":"4","t":"Draft the LLD","id":"m3--4-draft-the-lld","x":1,"log":0,"p":null,"w":"Module 3, step 4"},{"k":"m3/log-it","d":"m3","n":"5","t":"Log it","id":"m3--5-log-it","x":1,"log":1,"p":null,"w":"Module 3, step 5"},{"k":"m3/you-now-have","d":"m3","n":null,"t":"You now have","id":"m3--you-now-have","x":0,"log":0,"p":null,"w":"Module 3, You now have"},{"k":"m4","d":"m4","n":null,"t":"Module 4 — Design challenge","id":"m4","x":0,"log":0,"p":null,"w":"Module 4"},{"k":"m4/start-the-challenge","d":"m4","n":"1","t":"Start the challenge","id":"m4--1-start-the-challenge","x":1,"log":0,"p":null,"w":"Module 4, step 1"},{"k":"m4/answer-each-question","d":"m4","n":"2","t":"Answer each question","id":"m4--2-answer-each-question","x":1,"log":0,"p":null,"w":"Module 4, step 2"},{"k":"m4/check-the-read-back","d":"m4","n":"3","t":"Check the read-back","id":"m4--3-check-the-read-back","x":1,"log":0,"p":null,"w":"Module 4, step 3"},{"k":"m4/confirm","d":"m4","n":"4","t":"Confirm","id":"m4--4-confirm","x":1,"log":0,"p":null,"w":"Module 4, step 4"},{"k":"m4/log-it","d":"m4","n":"5","t":"Log it","id":"m4--5-log-it","x":1,"log":1,"p":null,"w":"Module 4, step 5"},{"k":"m4/you-now-have","d":"m4","n":null,"t":"You now have","id":"m4--you-now-have","x":0,"log":0,"p":null,"w":"Module 4, You now have"},{"k":"m5","d":"m5","n":null,"t":"Module 5 — Check and plan","id":"m5","x":0,"log":0,"p":null,"w":"Module 5"},{"k":"m5/bring-the-design-in-and-check-it-s-ready","d":"m5","n":"1","t":"Bring the design in, and check it's ready","id":"m5--1-bring-the-design-in-and-check-its-ready","x":1,"log":0,"p":null,"w":"Module 5, step 1"},{"k":"m5/preview-the-plan-and-answer-five-questions","d":"m5","n":"2","t":"Preview the plan, and answer five questions","id":"m5--2-preview-the-plan-and-answer-five-questions","x":1,"log":0,"p":null,"w":"Module 5, step 2"},{"k":"m5/file-the-plan-and-take-your-first-count","d":"m5","n":"3","t":"File the plan, and take your first count","id":"m5--3-file-the-plan-and-take-your-first-count","x":1,"log":0,"p":null,"w":"Module 5, step 3"},{"k":"m5/close-the-session-and-ship-the-plan","d":"m5","n":"4","t":"Close the session, and ship the plan","id":"m5--4-close-the-session-and-ship-the-plan","x":1,"log":0,"p":null,"w":"Module 5, step 4"},{"k":"m5/log-it","d":"m5","n":"5","t":"Log it","id":"m5--5-log-it","x":1,"log":1,"p":null,"w":"Module 5, step 5"},{"k":"m5/you-now-have","d":"m5","n":null,"t":"You now have","id":"m5--you-now-have","x":0,"log":0,"p":null,"w":"Module 5, You now have"},{"k":"m6","d":"m6","n":null,"t":"Module 6 — The build loop","id":"m6","x":0,"log":0,"p":null,"w":"Module 6"},{"k":"m6/your-first-story-by-hand","d":"m6","n":null,"t":"Your first story, by hand","id":"m6--part-1--your-first-story-by-hand","x":0,"log":0,"p":null,"w":"Module 6, Part 1 — Your first story, by hand"},{"k":"m6/open-the-session","d":"m6","n":"1","t":"Open the session","id":"m6--1-open-the-session","x":1,"log":0,"p":null,"w":"Module 6, step 1"},{"k":"m6/guess-then-take-the-top-story","d":"m6","n":"2","t":"🔮 Guess, then take the top story","id":"m6--2--guess-then-take-the-top-story","x":1,"log":0,"p":null,"w":"Module 6, step 2"},{"k":"m6/check-the-failing-tests","d":"m6","n":"3","t":"Check the failing tests","id":"m6--3-check-the-failing-tests","x":1,"log":0,"p":null,"w":"Module 6, step 3"},{"k":"m6/make-them-pass-and-check-the-shape","d":"m6","n":"4","t":"Make them pass, and check the shape","id":"m6--4-make-them-pass-and-check-the-shape","x":1,"log":0,"p":null,"w":"Module 6, step 4"},{"k":"m6/ship-it","d":"m6","n":"5","t":"Ship it","id":"m6--5-ship-it","x":1,"log":0,"p":null,"w":"Module 6, step 5"},{"k":"m6/the-batch-over-lunch","d":"m6","n":null,"t":"The batch, over lunch (start at 13:25)","id":"m6--part-2--the-batch-over-lunch-start-at-1325","x":0,"log":0,"p":null,"w":"Module 6, Part 2 — The batch, over lunch (start at 13:25)"},{"k":"m6/start-the-batch","d":"m6","n":"6","t":"Start the batch","id":"m6--6-start-the-batch","x":1,"log":0,"p":null,"w":"Module 6, step 6"},{"k":"m6/read-the-evidence","d":"m6","n":"7","t":"Read the evidence, from 14:15","id":"m6--7-read-the-evidence-from-1415","x":1,"log":0,"p":null,"w":"Module 6, step 7"},{"k":"m6/install-and-try-it-live","d":"m6","n":null,"t":"Install and try it live (by 14:30)","id":"m6--part-3--install-and-try-it-live-by-1430","x":0,"log":0,"p":null,"w":"Module 6, Part 3 — Install and try it live (by 14:30)"},{"k":"m6/build-and-install","d":"m6","n":"8","t":"Build and install","id":"m6--8-build-and-install","x":1,"log":0,"p":null,"w":"Module 6, step 8"},{"k":"m6/switch-it-on","d":"m6","n":"9","t":"Switch it on","id":"m6--9-switch-it-on","x":1,"log":0,"p":null,"w":"Module 6, step 9"},{"k":"m6/warm-it-up","d":"m6","n":"10","t":"Warm it up","id":"m6--10-warm-it-up","x":1,"log":0,"p":null,"w":"Module 6, step 10"},{"k":"m6/watch-it-route-as-hr-demo","d":"m6","n":"11","t":"Watch it route, as hr.demo","id":"m6--11-watch-it-route-as-hrdemo","x":1,"log":0,"p":null,"w":"Module 6, step 11"},{"k":"m6/log-it","d":"m6","n":"12","t":"Log it","id":"m6--12-log-it","x":1,"log":1,"p":null,"w":"Module 6, step 12"},{"k":"m6/you-now-have","d":"m6","n":null,"t":"You now have","id":"m6--you-now-have","x":0,"log":0,"p":null,"w":"Module 6, You now have"},{"k":"m7","d":"m7","n":null,"t":"Module 7 — Grade: could someone else own this?","id":"m7","x":0,"log":0,"p":null,"w":"Module 7"},{"k":"m7/guess-the-grade","d":"m7","n":"1","t":"🔮 Guess the grade","id":"m7--1--guess-the-grade","x":1,"log":0,"p":null,"w":"Module 7, step 1"},{"k":"m7/start-from-a-clean-main","d":"m7","n":"2","t":"Start from a clean main","id":"m7--2-start-from-a-clean-main","x":1,"log":0,"p":null,"w":"Module 7, step 2"},{"k":"m7/run-the-grade-in-a-fresh-session","d":"m7","n":"3","t":"Run the grade, in a fresh session","id":"m7--3-run-the-grade-in-a-fresh-session","x":1,"log":0,"p":null,"w":"Module 7, step 3"},{"k":"m7/answer-its-questions","d":"m7","n":"4","t":"Answer its questions","id":"m7--4-answer-its-questions","x":1,"log":0,"p":null,"w":"Module 7, step 4"},{"k":"m7/read-it-like-a-stranger-would","d":"m7","n":"5","t":"Read it like a stranger would","id":"m7--5-read-it-like-a-stranger-would","x":1,"log":0,"p":null,"w":"Module 7, step 5"},{"k":"m7/file-its-findings","d":"m7","n":"6","t":"File its findings","id":"m7--6-file-its-findings","x":1,"log":0,"p":null,"w":"Module 7, step 6"},{"k":"m7/merge-the-grade","d":"m7","n":"7","t":"Merge the grade","id":"m7--7-merge-the-grade","x":1,"log":0,"p":null,"w":"Module 7, step 7"},{"k":"m7/you-now-have","d":"m7","n":null,"t":"You now have","id":"m7--you-now-have","x":0,"log":0,"p":null,"w":"Module 7, You now have"},{"k":"m8","d":"m8","n":null,"t":"Module 8 — What the process caught","id":"m8","x":0,"log":0,"p":null,"w":"Module 8"},{"k":"m8/count-your-catches","d":"m8","n":"1","t":"Count your catches","id":"m8--1-count-your-catches","x":1,"log":0,"p":null,"w":"Module 8, step 1"},{"k":"m8/add-yours-to-the-room-s-board","d":"m8","n":"2","t":"Add yours to the room's board","id":"m8--2-add-yours-to-the-rooms-board","x":1,"log":0,"p":null,"w":"Module 8, step 2"},{"k":"m8/sort-out-what-s-real","d":"m8","n":"3","t":"Sort out what's real","id":"m8--3-sort-out-whats-real","x":1,"log":0,"p":null,"w":"Module 8, step 3"},{"k":"m8/take-it-home","d":"m8","n":"4","t":"Take it home","id":"m8--4-take-it-home","x":1,"log":0,"p":null,"w":"Module 8, step 4"},{"k":"m8/close-the-session","d":"m8","n":"5","t":"Close the session","id":"m8--5-close-the-session","x":1,"log":0,"p":null,"w":"Module 8, step 5"},{"k":"m8/the-three-things-to-remember","d":"m8","n":null,"t":"The three things to remember","id":"m8--the-three-things-to-remember","x":0,"log":0,"p":null,"w":"Module 8, The three things to remember"},{"k":"m8/after-the-lab-put-your-machine-back","d":"m8","n":null,"t":"After the lab: put your machine back","id":"m8--after-the-lab-put-your-machine-back","x":0,"log":0,"p":null,"w":"Module 8, After the lab: put your machine back"},{"k":"m8/put-your-settings-back","d":"m8","n":"6","t":"Put your settings back","id":"m8--6-put-your-settings-back","x":1,"log":0,"p":null,"w":"Module 8, step 6"},{"k":"m8/switch-back-on-what-module-0-switched-off","d":"m8","n":"7","t":"Switch back on what Module 0 switched off","id":"m8--7-switch-back-on-what-module-0-switched-off","x":1,"log":0,"p":null,"w":"Module 8, step 7"},{"k":"m8/remove-the-plugins-and-the-sdk-login","d":"m8","n":"8","t":"Remove the plugins and the SDK login","id":"m8--8-remove-the-plugins-and-the-sdk-login","x":1,"log":0,"p":null,"w":"Module 8, step 8"},{"k":"m8/you-now-have","d":"m8","n":null,"t":"You now have","id":"m8--you-now-have","x":0,"log":0,"p":null,"w":"Module 8, You now have"},{"k":"after","d":"after","n":null,"t":"After the workshop — finish the app","id":"after","x":0,"log":0,"p":null,"w":"After the workshop"},{"k":"after/finish-the-build","d":"after","n":null,"t":"Finish the build","id":"after--part-1--finish-the-build","x":0,"log":0,"p":null,"w":"After the workshop, Part 1 — Finish the build"},{"k":"after/review-the-lld","d":"after","n":"1","t":"Review the LLD","id":"after--1-review-the-lld","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 1"},{"k":"after/rule-the-register-then-find-the-next-gate","d":"after","n":"2","t":"Rule the register, then find the next gate","id":"after--2-rule-the-register-then-find-the-next-gate","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 2"},{"k":"after/build-with-sub-agents","d":"after","n":"3","t":"Build with sub-agents","id":"after--3-build-with-sub-agents","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 3"},{"k":"after/build-and-install","d":"after","n":"4","t":"Build and install","id":"after--4-build-and-install","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 4"},{"k":"after/check-it-live","d":"after","n":"5","t":"Check it live","id":"after--5-check-it-live","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 5"},{"k":"after/close-what-s-proved-then-the-session","d":"after","n":"6","t":"Close what's proved, then the session","id":"after--6-close-whats-proved-then-the-session","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 6"},{"k":"after/break-it-for-real","d":"after","n":null,"t":"Break it, for real","id":"after--part-2--break-it-for-real","x":0,"log":0,"p":null,"w":"After the workshop, Part 2 — Break it, for real"},{"k":"after/guess-the-attacks","d":"after","n":"1","t":"🔮 Guess the attacks","id":"after--1--guess-the-attacks","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 1"},{"k":"after/start-a-fresh-reviewer","d":"after","n":"2","t":"Start a fresh reviewer","id":"after--2-start-a-fresh-reviewer","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 2"},{"k":"after/list-what-got-through","d":"after","n":"3","t":"List what got through","id":"after--3-list-what-got-through","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 3"},{"k":"after/fix-what-got-through","d":"after","n":"4","t":"Fix what got through","id":"after--4-fix-what-got-through","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 4"},{"k":"after/swap-seats","d":"after","n":"5","t":"Swap seats","id":"after--5-swap-seats","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 5"},{"k":"after/change-the-design-when-a-fix-needs-it","d":"after","n":null,"t":"Change the design, when a fix needs it","id":"after--part-3--change-the-design-when-a-fix-needs-it","x":0,"log":0,"p":null,"w":"After the workshop, Part 3 — Change the design, when a fix needs it"},{"k":"after/amend-the-design","d":"after","n":"1","t":"Amend the design","id":"after--1-amend-the-design","x":1,"log":0,"p":"Part 3","w":"After the workshop, Part 3, step 1"},{"k":"after/file-the-new-stories","d":"after","n":"2","t":"File the new stories","id":"after--2-file-the-new-stories","x":1,"log":0,"p":"Part 3","w":"After the workshop, Part 3, step 2"},{"k":"after/merge-it-then-build-it","d":"after","n":"3","t":"Merge it, then build it","id":"after--3-merge-it-then-build-it","x":1,"log":0,"p":"Part 3","w":"After the workshop, Part 3, step 3"},{"k":"after/grade-and-hand-over","d":"after","n":null,"t":"Grade and hand over","id":"after--part-4--grade-and-hand-over","x":0,"log":0,"p":null,"w":"After the workshop, Part 4 — Grade and hand over"},{"k":"after/grade-at-demo","d":"after","n":"1","t":"🔮 Grade at DEMO","id":"after--1--grade-at-demo","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 1"},{"k":"after/freeze-a-runbook","d":"after","n":"2","t":"Freeze a runbook","id":"after--2-freeze-a-runbook","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 2"},{"k":"after/your-partner-plants","d":"after","n":"3","t":"Your partner plants","id":"after--3-your-partner-plants","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 3"},{"k":"after/diagnose-from-the-runbook","d":"after","n":"4","t":"Diagnose from the runbook","id":"after--4-diagnose-from-the-runbook","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 4"},{"k":"after/restore-then-verdict","d":"after","n":"5","t":"Restore, then verdict","id":"after--5-restore-then-verdict","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 5"},{"k":"after/close-handoff-stories","d":"after","n":"6","t":"Close HANDOFF stories","id":"after--6-close-handoff-stories","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 6"},{"k":"after/grade-at-handoff","d":"after","n":"7","t":"Grade at HANDOFF","id":"after--7-grade-at-handoff","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 7"},{"k":"after/log-it","d":"after","n":"8","t":"Log it","id":"after--8-log-it","x":1,"log":1,"p":"Part 4","w":"After the workshop, Part 4, step 8"},{"k":"after/put-your-computer-back","d":"after","n":null,"t":"Put your computer back","id":"after--part-5--put-your-computer-back","x":0,"log":0,"p":null,"w":"After the workshop, Part 5 — Put your computer back"},{"k":"after/put-your-settings-back","d":"after","n":"1","t":"Put your settings back","id":"after--1-put-your-settings-back","x":1,"log":0,"p":"Part 5","w":"After the workshop, Part 5, step 1"},{"k":"after/switch-back-on-what-the-lab-switched-off","d":"after","n":"2","t":"Switch back on what the lab switched off","id":"after--2-switch-back-on-what-the-lab-switched-off","x":1,"log":0,"p":"Part 5","w":"After the workshop, Part 5, step 2"},{"k":"after/remove-the-plugins-and-the-sdk-login","d":"after","n":"3","t":"Remove the plugins and the SDK login","id":"after--3-remove-the-plugins-and-the-sdk-login","x":1,"log":0,"p":"Part 5","w":"After the workshop, Part 5, step 3"},{"k":"after/you-now-have","d":"after","n":null,"t":"You now have","id":"after--you-now-have","x":0,"log":0,"p":null,"w":"After the workshop, You now have"},{"k":"own","d":"own","n":null,"t":"Your own PRD track — build your own app with the same method","id":"own","x":0,"log":0,"p":null,"w":"Your own PRD"},{"k":"own/how-it-differs-from-the-workshop","d":"own","n":"1","t":"How it differs from the workshop","id":"own--1-how-it-differs-from-the-workshop","x":0,"log":0,"p":null,"w":"Your own PRD, step 1"},{"k":"own/before-you-start","d":"own","n":"2","t":"Before you start","id":"own--2-before-you-start","x":0,"log":0,"p":null,"w":"Your own PRD, step 2"},{"k":"own/is-your-use-case-ready","d":"own","n":null,"t":"Is your use case ready?","id":"own--is-your-use-case-ready","x":0,"log":0,"p":null,"w":"Your own PRD, Is your use case ready?"},{"k":"own/book-now","d":"own","n":null,"t":"Book now","id":"own--book-now","x":0,"log":0,"p":null,"w":"Your own PRD, Book now"},{"k":"own/your-app-s-placeholders","d":"own","n":null,"t":"Your app's placeholders","id":"own--your-apps-placeholders","x":0,"log":0,"p":null,"w":"Your own PRD, Your app's placeholders"},{"k":"own/your-workspace-and-the-lab-set-up-again","d":"own","n":null,"t":"Your workspace, and the lab set up again","id":"own--your-workspace-and-the-lab-set-up-again","x":0,"log":0,"p":null,"w":"Your own PRD, Your workspace, and the lab set up again"},{"k":"own/when-claude-asks-permission","d":"own","n":null,"t":"When Claude asks permission","id":"own--when-claude-asks-permission","x":0,"log":0,"p":null,"w":"Your own PRD, When Claude asks permission"},{"k":"own/your-prd","d":"own","n":"3","t":"Your PRD","id":"own--3-your-prd","x":0,"log":0,"p":null,"w":"Your own PRD, step 3"},{"k":"own/size-it","d":"own","n":null,"t":"Size it","id":"own--size-it","x":0,"log":0,"p":null,"w":"Your own PRD, Size it"},{"k":"own/format-it","d":"own","n":null,"t":"Format it","id":"own--format-it","x":0,"log":0,"p":null,"w":"Your own PRD, Format it"},{"k":"own/review-it-module-1-on-your-inputs","d":"own","n":null,"t":"Review it: Module 1, on your inputs","id":"own--review-it-module-1-on-your-inputs","x":0,"log":0,"p":null,"w":"Your own PRD, Review it: Module 1, on your inputs"},{"k":"own/get-the-owner-s-answers-instead","d":"own","n":null,"t":"Get the owner's answers: Module 1, step 5, instead","id":"own--get-the-owners-answers-module-1-step-5-instead","x":0,"log":0,"p":null,"w":"Your own PRD, Get the owner's answers: Module 1, step 5, instead"},{"k":"own/module-by-module","d":"own","n":"4","t":"Module by module","id":"own--4-module-by-module","x":0,"log":0,"p":null,"w":"Your own PRD, step 4"},{"k":"own/module-2-consult","d":"own","n":null,"t":"Module 2 — Consult","id":"own--module-2--consult","x":0,"log":0,"p":null,"w":"Your own PRD, Module 2 — Consult"},{"k":"own/after-module-2-choose-one-slice","d":"own","n":null,"t":"After Module 2 — Choose one slice","id":"own--after-module-2--choose-one-slice","x":0,"log":0,"p":null,"w":"Your own PRD, After Module 2 — Choose one slice"},{"k":"own/before-module-3-write-your-positions-list","d":"own","n":null,"t":"Before Module 3 — Write your positions list","id":"own--before-module-3--write-your-positions-list","x":0,"log":0,"p":null,"w":"Your own PRD, Before Module 3 — Write your positions list"},{"k":"own/module-3-research-and-lld","d":"own","n":null,"t":"Module 3 — Research and LLD","id":"own--module-3--research-and-lld","x":0,"log":0,"p":null,"w":"Your own PRD, Module 3 — Research and LLD"},{"k":"own/module-4-challenge-and-confirm-with-the-real-owner","d":"own","n":null,"t":"Module 4 — Challenge and confirm, with the real owner","id":"own--module-4--challenge-and-confirm-with-the-real-owner","x":0,"log":0,"p":null,"w":"Your own PRD, Module 4 — Challenge and confirm, with the real owner"},{"k":"own/module-5-check-and-plan","d":"own","n":null,"t":"Module 5 — Check and plan","id":"own--module-5--check-and-plan","x":0,"log":0,"p":null,"w":"Your own PRD, Module 5 — Check and plan"},{"k":"own/module-6-the-build-loop","d":"own","n":null,"t":"Module 6 — The build loop","id":"own--module-6--the-build-loop","x":0,"log":0,"p":null,"w":"Your own PRD, Module 6 — The build loop"},{"k":"own/after-the-workshop-part-2-break-it","d":"own","n":null,"t":"After the workshop, Part 2 — Break it","id":"own--after-the-workshop-part-2--break-it","x":0,"log":0,"p":null,"w":"Your own PRD, After the workshop, Part 2 — Break it"},{"k":"own/after-the-workshop-on-your-app","d":"own","n":null,"t":"After the workshop, on your app","id":"own--after-the-workshop-on-your-app","x":0,"log":0,"p":null,"w":"Your own PRD, After the workshop, on your app"},{"k":"own/module-8-what-the-process-caught","d":"own","n":null,"t":"Module 8 — What the process caught","id":"own--module-8--what-the-process-caught","x":0,"log":0,"p":null,"w":"Your own PRD, Module 8 — What the process caught"},{"k":"own/finishing-the-slice","d":"own","n":"5","t":"Finishing the slice","id":"own--5-finishing-the-slice","x":0,"log":0,"p":null,"w":"Your own PRD, step 5"},{"k":"own/the-gates-in-order","d":"own","n":null,"t":"The gates, in order","id":"own--the-gates-in-order","x":0,"log":0,"p":null,"w":"Your own PRD, The gates, in order"},{"k":"own/done-means","d":"own","n":null,"t":"Done means","id":"own--done-means","x":0,"log":0,"p":null,"w":"Your own PRD, Done means"},{"k":"own/check-ins-with-your-instructor","d":"own","n":null,"t":"Check-ins with your instructor","id":"own--check-ins-with-your-instructor","x":0,"log":0,"p":null,"w":"Your own PRD, Check-ins with your instructor"},{"k":"own/if-the-slice-won-t-finish","d":"own","n":null,"t":"If the slice won't finish","id":"own--if-the-slice-wont-finish","x":0,"log":0,"p":null,"w":"Your own PRD, If the slice won't finish"},{"k":"own/the-next-slice","d":"own","n":"6","t":"The next slice","id":"own--6-the-next-slice","x":0,"log":0,"p":null,"w":"Your own PRD, step 6"},{"k":"own/prompts-to-edit","d":"own","n":"7","t":"Prompts to edit","id":"own--7-prompts-to-edit","x":0,"log":0,"p":null,"w":"Your own PRD, step 7"},{"k":"promote","d":"promote","n":null,"t":"Getting it to production","id":"promote","x":0,"log":0,"p":null,"w":"To production"},{"k":"promote/the-bar-before-you-ask","d":"promote","n":"1","t":"The bar before you ask","id":"promote--1-the-bar-before-you-ask","x":0,"log":0,"p":null,"w":"To production, step 1"},{"k":"promote/agree-how-it-moves","d":"promote","n":"2","t":"Agree how it moves","id":"promote--2-agree-how-it-moves","x":0,"log":0,"p":null,"w":"To production, step 2"},{"k":"promote/test-with-the-runbook-only","d":"promote","n":"3","t":"Test, with the runbook only","id":"promote--3-test-with-the-runbook-only","x":0,"log":0,"p":null,"w":"To production, step 3"},{"k":"promote/the-change-request","d":"promote","n":"4","t":"The change request","id":"promote--4-the-change-request","x":0,"log":0,"p":null,"w":"To production, step 4"},{"k":"promote/production","d":"promote","n":"5","t":"Production","id":"promote--5-production","x":0,"log":0,"p":null,"w":"To production, step 5"},{"k":"promote/after-go-live","d":"promote","n":"6","t":"After go-live","id":"promote--6-after-go-live","x":0,"log":0,"p":null,"w":"To production, step 6"},{"k":"labels","d":"labels","n":null,"t":"Appendix — Labels in Claude's output","id":"labels","x":0,"log":0,"p":null,"w":"Labels in Claude's output"},{"k":"labels/capabilities-1-to-9-no-letter","d":"labels","n":null,"t":"Capabilities 1 to 9, no letter","id":"labels--capabilities-1-to-9-no-letter","x":0,"log":0,"p":null,"w":"Labels in Claude's output, Capabilities 1 to 9, no letter"},{"k":"labels/r2-r8-the-customer-s-requirements","d":"labels","n":null,"t":"R2, R8…: the customer's requirements","id":"labels--r2-r8-the-customers-requirements","x":0,"log":0,"p":null,"w":"Labels in Claude's output, R2, R8…: the customer's requirements"},{"k":"labels/p1-to-p15-platform-rules","d":"labels","n":null,"t":"P1 to P15: platform rules","id":"labels--p1-to-p15-platform-rules","x":0,"log":0,"p":null,"w":"Labels in Claude's output, P1 to P15: platform rules"},{"k":"labels/d1-d2-open-decisions-in-your-lld","d":"labels","n":null,"t":"D1, D2…: open decisions in your LLD","id":"labels--d1-d2-open-decisions-in-your-lld","x":0,"log":0,"p":null,"w":"Labels in Claude's output, D1, D2…: open decisions in your LLD"},{"k":"labels/c1-c2-design-terms","d":"labels","n":null,"t":"C1, C2…: design terms","id":"labels--c1-c2-design-terms","x":0,"log":0,"p":null,"w":"Labels in Claude's output, C1, C2…: design terms"},{"k":"labels/1-7-sections-of-a-document","d":"labels","n":null,"t":"§1, §7…: sections of a document","id":"labels--1-7-sections-of-a-document","x":0,"log":0,"p":null,"w":"Labels in Claude's output, §1, §7…: sections of a document"},{"k":"labels/m1-merge-milestones","d":"labels","n":null,"t":"M1 · merge…: milestones","id":"labels--m1--merge-milestones","x":0,"log":0,"p":null,"w":"Labels in Claude's output, M1 · merge…: milestones"},{"k":"labels/p0-p1-p2-priority-labels","d":"labels","n":null,"t":"p0, p1, p2: priority labels","id":"labels--p0-p1-p2-priority-labels","x":0,"log":0,"p":null,"w":"Labels in Claude's output, p0, p1, p2: priority labels"},{"k":"labels/design-terms-tested-the-grade-s-checks","d":"labels","n":null,"t":"design.terms-tested…: the grade's checks","id":"labels--designterms-tested-the-grades-checks","x":0,"log":0,"p":null,"w":"Labels in Claude's output, design.terms-tested…: the grade's checks"}],"progress":{"renames":{"m0/check-the-demo-data":"m0/check-your-instance","m0/act-as-an-ordinary-hr-fulfiller":"m0/check-your-instance","m7/guess-the-attacks":"after/guess-the-attacks","m7/start-a-fresh-reviewer":"after/start-a-fresh-reviewer","m7/compare-with-yours":"after/start-a-fresh-reviewer","m7/go-back-to-a-clean-main":"after/list-what-got-through","after/run-the-attacks-and-list-what-got-through":"after/list-what-got-through","own/module-7-break-it":"own/after-the-workshop-part-2-break-it","own/module-9-what-the-process-caught":"own/module-8-what-the-process-caught","m9":"m8","m8/guess-the-grade":"m7/guess-the-grade","m8/start-from-a-clean-main":"m7/start-from-a-clean-main","m8/run-the-grade-in-a-fresh-session":"m7/run-the-grade-in-a-fresh-session","m8/answer-its-questions":"m7/answer-its-questions","m8/read-it-like-a-stranger-would":"m7/read-it-like-a-stranger-would","m8/file-its-findings":"m7/file-its-findings","m8/merge-the-grade":"m7/merge-the-grade","m9/count-your-catches":"m8/count-your-catches","m9/add-yours-to-the-room-s-board":"m8/add-yours-to-the-room-s-board","m9/sort-out-what-s-real":"m8/sort-out-what-s-real","m9/take-it-home":"m8/take-it-home","m9/close-the-session":"m8/close-the-session","m9/the-three-things-to-remember":"m8/the-three-things-to-remember","m9/after-the-lab-put-your-machine-back":"m8/after-the-lab-put-your-machine-back","m9/put-your-settings-back":"m8/put-your-settings-back","m9/switch-back-on-what-module-0-switched-off":"m8/switch-back-on-what-module-0-switched-off","m9/remove-the-plugins-and-the-sdk-login":"m8/remove-the-plugins-and-the-sdk-login","m9/you-now-have":"m8/you-now-have"},"docs":{"home":["How this lab works","README","How this lab works"],"m0":["Module 0","M0","Module 0, Pre-work"],"m1":["Module 1","M1","Module 1, Inputs to PRD"],"m2":["Module 2","M2","Module 2, Consult"],"m3":["Module 3","M3","Module 3, Research and LLD"],"m4":["Module 4","M4","Module 4, Design challenge"],"m5":["Module 5","M5","Module 5, Check and plan"],"m6":["Module 6","M6","Module 6, Build loop"],"m7":["Module 7","M7","Module 7, Grade"],"m8":["Module 8","M8","Module 8, Debrief"],"after":["After the workshop","After","After the workshop"],"own":["Your own PRD","Own PRD","Your own PRD"],"promote":["To production","Production","To production"],"labels":["Labels in Claude's output","Labels","Labels in Claude's output"]}},"build":"cb278f40a3"}</script>
+<script type="application/json" id="abl-manifest">{"v":1,"schema":{"os":["mac","win"],"surface":["terminal","desktop"],"github":["personal","company","none"],"level":["guided","standard","expert"],"topics":["terminal","claude","git","github","servicenow"],"values":["instance","scope","repo","name"],"theme":["light","dark"]},"labels":{"os":{"mac":"Mac","win":"Windows"},"surface":{"terminal":"Terminal","desktop":"Code tab"},"github":{"personal":"Personal account","company":"Company account","none":"No account yet"},"level":{"guided":"Explain more","standard":"Standard","expert":"Just the steps"},"topics":{"terminal":"Terminal","claude":"Claude Code","git":"git","github":"GitHub","servicenow":"ServiceNow"}},"phrases":{"surface":{"terminal":"the terminal","desktop":"the Code tab"}},"topics":["terminal","claude","git","github","servicenow"],"asks":[{"id":"m0-hr-demo","setup":false,"options":["yes","no"],"labels":["Yes, it's listed","No"],"question":"Is hr.demo listed?","anchor":"m0--2-check-your-instance","doc":"m0","where":"Module 0, step 2"},{"id":"m0-tools-ok","setup":false,"options":["yes","no"],"labels":["Yes, all of them","No, one is missing or too old"],"question":"Did every version pass?","anchor":"m0--3-install-the-tools","doc":"m0","where":"Module 0, step 3"},{"id":"github","setup":true,"options":["personal","company","none"],"labels":["Yes, a personal one","Only a company one","Not yet"],"question":"Do you have a GitHub account you can use for the lab?","anchor":"m0--4-sign-in-to-github-and-get-this-guide","doc":"m0","where":"Module 0, step 4"},{"id":"gh-company","setup":false,"options":["managed","other","unsure"],"labels":["Yes, it ends like that","No","Not sure"],"question":"Does its user name end in _ and a short code, such as jsmith_acme?","anchor":"m0--4-sign-in-to-github-and-get-this-guide","doc":"m0","where":"Module 0, step 4"},{"id":"m0-gh-invite","setup":false,"options":["yes","no"],"labels":["Yes, accepted","Not yet"],"question":"Have you accepted your instructor's invite to this guide's repo?","anchor":"m0--4-sign-in-to-github-and-get-this-guide","doc":"m0","where":"Module 0, step 4"},{"id":"m0-cc-before","setup":false,"options":["yes","no"],"labels":["Yes","No, this is my first time"],"question":"Have you used Claude Code on this computer before?","anchor":"m0--5-add-the-labs-claude-code-settings","doc":"m0","where":"Module 0, step 5"}],"stops":[{"ask":"m0-hr-demo","values":["no"],"anchor":"m0--2-check-your-instance","text":"Stop here until your instructor has prepared your instance."},{"ask":"m0-gh-invite","values":["no"],"anchor":"m0--4-sign-in-to-github-and-get-this-guide","text":"Stop here until you've accepted it."}],"glossary":[{"key":"repo","term":"Repo","topic":"git","def":"a folder whose history git keeps. Your app's repo is ~/projects/hr-case-router/app."},{"key":"commit","term":"Commit","topic":"git","def":"one saved snapshot in a repo's history."},{"key":"branch","term":"Branch","topic":"git","def":"a separate line of commits. main changes only through pull requests."},{"key":"pull-request","term":"Pull request","topic":"github","def":"a request on GitHub to merge a branch into main. It's reviewed first."},{"key":"story","term":"Story","topic":null,"def":"one small piece of work, filed as a GitHub issue."},{"key":"gate","term":"Gate","topic":null,"def":"a milestone that stories hold up: MERGE, INSTALL, DEMO, HANDOFF."},{"key":"design-term","term":"Design term","topic":null,"def":"one numbered rule in your design record, such as C3. Every test names the term it proves."},{"key":"catch","term":"Catch","topic":null,"def":"a real problem the process found and that got fixed, or that changed a decision. A check firing on something you planted to test it isn't a catch."}],"steps":[{"k":"home","d":"home","n":null,"t":"Agentic Build Lab","id":"home","x":0,"log":0,"p":null,"w":"How this lab works"},{"k":"home/the-day","d":"home","n":null,"t":"The day","id":"home--the-day","x":0,"log":0,"p":null,"w":"How this lab works, The day"},{"k":"home/what-you-need","d":"home","n":null,"t":"What you need","id":"home--what-you-need","x":0,"log":0,"p":null,"w":"How this lab works, What you need"},{"k":"home/what-you-should-be-able-to-do","d":"home","n":null,"t":"What you should be able to do","id":"home--what-you-should-be-able-to-do","x":0,"log":0,"p":null,"w":"How this lab works, What you should be able to do"},{"k":"home/where-you-act","d":"home","n":null,"t":"Where you act","id":"home--where-you-act","x":0,"log":0,"p":null,"w":"How this lab works, Where you act"},{"k":"home/rules-for-the-whole-lab","d":"home","n":null,"t":"Rules for the whole lab","id":"home--rules-for-the-whole-lab","x":0,"log":0,"p":null,"w":"How this lab works, Rules for the whole lab"},{"k":"home/when-claude-asks-permission","d":"home","n":null,"t":"When Claude asks permission","id":"home--when-claude-asks-permission","x":0,"log":0,"p":null,"w":"How this lab works, When Claude asks permission"},{"k":"home/words-you-ll-meet","d":"home","n":null,"t":"Words you'll meet","id":"home--words-youll-meet","x":0,"log":0,"p":null,"w":"How this lab works, Words you'll meet"},{"k":"home/your-folders-and-your-catches","d":"home","n":null,"t":"Your folders and your catches","id":"home--your-folders-and-your-catches","x":0,"log":0,"p":null,"w":"How this lab works, Your folders and your catches"},{"k":"m0","d":"m0","n":null,"t":"Module 0 — Pre-work: get your bench ready","id":"m0","x":0,"log":0,"p":null,"w":"Module 0"},{"k":"m0/your-instance","d":"m0","n":null,"t":"Your instance","id":"m0--part-1--your-instance","x":0,"log":0,"p":null,"w":"Module 0, Part 1 — Your instance"},{"k":"m0/get-your-instance","d":"m0","n":"1","t":"Get your instance","id":"m0--1-get-your-instance","x":1,"log":0,"p":null,"w":"Module 0, step 1"},{"k":"m0/check-your-instance","d":"m0","n":"2","t":"Check your instance","id":"m0--2-check-your-instance","x":1,"log":0,"p":null,"w":"Module 0, step 2"},{"k":"m0/your-tools","d":"m0","n":null,"t":"Your tools","id":"m0--part-2--your-tools","x":0,"log":0,"p":null,"w":"Module 0, Part 2 — Your tools"},{"k":"m0/install-the-tools","d":"m0","n":"3","t":"Install the tools","id":"m0--3-install-the-tools","x":1,"log":0,"p":null,"w":"Module 0, step 3"},{"k":"m0/sign-in-to-github-and-get-this-guide","d":"m0","n":"4","t":"Sign in to GitHub and get this guide","id":"m0--4-sign-in-to-github-and-get-this-guide","x":1,"log":0,"p":null,"w":"Module 0, step 4"},{"k":"m0/add-the-lab-s-claude-code-settings","d":"m0","n":"5","t":"Add the lab's Claude Code settings","id":"m0--5-add-the-labs-claude-code-settings","x":1,"log":0,"p":null,"w":"Module 0, step 5"},{"k":"m0/sign-in-to-claude-code","d":"m0","n":"6","t":"Sign in to Claude Code","id":"m0--6-sign-in-to-claude-code","x":1,"log":0,"p":null,"w":"Module 0, step 6"},{"k":"m0/connect-the-sdk-to-your-instance","d":"m0","n":"7","t":"Connect the SDK to your instance","id":"m0--7-connect-the-sdk-to-your-instance","x":1,"log":0,"p":null,"w":"Module 0, step 7"},{"k":"m0/the-kit-and-a-clean-bench","d":"m0","n":null,"t":"The kit and a clean bench","id":"m0--part-3--the-kit-and-a-clean-bench","x":0,"log":0,"p":null,"w":"Module 0, Part 3 — The kit and a clean bench"},{"k":"m0/install-the-kit-and-the-sdk-plugin","d":"m0","n":"8","t":"Install the kit and the SDK plugin","id":"m0--8-install-the-kit-and-the-sdk-plugin","x":1,"log":0,"p":null,"w":"Module 0, step 8"},{"k":"m0/make-your-folders","d":"m0","n":"9","t":"Make your folders","id":"m0--9-make-your-folders","x":1,"log":0,"p":null,"w":"Module 0, step 9"},{"k":"m0/check-nothing-else-is-loaded","d":"m0","n":"10","t":"Check nothing else is loaded","id":"m0--10-check-nothing-else-is-loaded","x":1,"log":0,"p":null,"w":"Module 0, step 10"},{"k":"m0/your-app-s-repo","d":"m0","n":null,"t":"Your app's repo","id":"m0--part-4--your-apps-repo","x":0,"log":0,"p":null,"w":"Module 0, Part 4 — Your app's repo"},{"k":"m0/look-up-your-scope","d":"m0","n":"11","t":"Look up your scope","id":"m0--11-look-up-your-scope","x":1,"log":0,"p":null,"w":"Module 0, step 11"},{"k":"m0/create-the-app","d":"m0","n":"12","t":"Create the app","id":"m0--12-create-the-app","x":1,"log":0,"p":null,"w":"Module 0, step 12"},{"k":"m0/let-claude-set-up-the-repo","d":"m0","n":"13","t":"Let Claude set up the repo","id":"m0--13-let-claude-set-up-the-repo","x":1,"log":0,"p":null,"w":"Module 0, step 13"},{"k":"m0/try-to-beat-the-guard","d":"m0","n":"14","t":"🔮 Try to beat the guard","id":"m0--14--try-to-beat-the-guard","x":1,"log":0,"p":null,"w":"Module 0, step 14"},{"k":"m0/commit-for-real","d":"m0","n":"15","t":"Commit for real","id":"m0--15-commit-for-real","x":1,"log":0,"p":null,"w":"Module 0, step 15"},{"k":"m0/your-repo-s-rules-and-github","d":"m0","n":null,"t":"Your repo's rules, and GitHub","id":"m0--part-5--your-repos-rules-and-github","x":0,"log":0,"p":null,"w":"Module 0, Part 5 — Your repo's rules, and GitHub"},{"k":"m0/give-the-repo-its-rules","d":"m0","n":"16","t":"Give the repo its rules","id":"m0--16-give-the-repo-its-rules","x":1,"log":0,"p":null,"w":"Module 0, step 16"},{"k":"m0/read-every-name","d":"m0","n":"17","t":"Read every name","id":"m0--17-read-every-name","x":1,"log":0,"p":null,"w":"Module 0, step 17"},{"k":"m0/commit-and-go-private-on-github","d":"m0","n":"18","t":"Commit, and go private on GitHub","id":"m0--18-commit-and-go-private-on-github","x":1,"log":0,"p":null,"w":"Module 0, step 18"},{"k":"m0/before-the-day","d":"m0","n":null,"t":"Before the day","id":"m0--part-6--before-the-day","x":0,"log":0,"p":null,"w":"Module 0, Part 6 — Before the day"},{"k":"m0/read-the-inputs-and-guess","d":"m0","n":"19","t":"Read the inputs, and 🔮 guess","id":"m0--19-read-the-inputs-and--guess","x":1,"log":0,"p":null,"w":"Module 0, step 19"},{"k":"m0/you-now-have","d":"m0","n":null,"t":"You now have","id":"m0--you-now-have","x":0,"log":0,"p":null,"w":"Module 0, You now have"},{"k":"m1","d":"m1","n":null,"t":"Module 1 — From inputs to a PRD","id":"m1","x":0,"log":0,"p":null,"w":"Module 1"},{"k":"m1/get-today-s-guide","d":"m1","n":"1","t":"Get today's guide","id":"m1--1-get-todays-guide","x":1,"log":0,"p":null,"w":"Module 1, step 1"},{"k":"m1/have-claude-trace-the-prd","d":"m1","n":"2","t":"Have Claude trace the PRD","id":"m1--2-have-claude-trace-the-prd","x":1,"log":0,"p":null,"w":"Module 1, step 2"},{"k":"m1/decide-the-gaps-in-one-table","d":"m1","n":"3","t":"Decide the gaps, in one table","id":"m1--3-decide-the-gaps-in-one-table","x":1,"log":0,"p":null,"w":"Module 1, step 3"},{"k":"m1/log-it","d":"m1","n":"4","t":"Log it","id":"m1--4-log-it","x":1,"log":1,"p":null,"w":"Module 1, step 4"},{"k":"m1/get-the-customer-s-acceptance","d":"m1","n":"5","t":"Get the customer's acceptance","id":"m1--5-get-the-customers-acceptance","x":1,"log":0,"p":null,"w":"Module 1, step 5"},{"k":"m1/you-now-have","d":"m1","n":null,"t":"You now have","id":"m1--you-now-have","x":0,"log":0,"p":null,"w":"Module 1, You now have"},{"k":"m2","d":"m2","n":null,"t":"Module 2 — Consult","id":"m2","x":0,"log":0,"p":null,"w":"Module 2"},{"k":"m2/guess-first","d":"m2","n":"1","t":"🔮 Guess first","id":"m2--1--guess-first","x":1,"log":0,"p":null,"w":"Module 2, step 1"},{"k":"m2/start-the-consult","d":"m2","n":"2","t":"Start the consult","id":"m2--2-start-the-consult","x":1,"log":0,"p":null,"w":"Module 2, step 2"},{"k":"m2/answer-its-questions-then-confirm","d":"m2","n":"3","t":"Answer its questions, then confirm","id":"m2--3-answer-its-questions-then-confirm","x":1,"log":0,"p":null,"w":"Module 2, step 3"},{"k":"m2/let-it-run","d":"m2","n":"4","t":"Let it run","id":"m2--4-let-it-run","x":1,"log":0,"p":null,"w":"Module 2, step 4"},{"k":"m2/read-it-like-a-reviewer","d":"m2","n":"5","t":"Read it like a reviewer","id":"m2--5-read-it-like-a-reviewer","x":1,"log":0,"p":null,"w":"Module 2, step 5"},{"k":"m2/push-back","d":"m2","n":"6","t":"Push back","id":"m2--6-push-back","x":1,"log":0,"p":null,"w":"Module 2, step 6"},{"k":"m2/log-it","d":"m2","n":"7","t":"Log it","id":"m2--7-log-it","x":1,"log":1,"p":null,"w":"Module 2, step 7"},{"k":"m2/you-now-have","d":"m2","n":null,"t":"You now have","id":"m2--you-now-have","x":0,"log":0,"p":null,"w":"Module 2, You now have"},{"k":"m3","d":"m3","n":null,"t":"Module 3 — Research, then the LLD","id":"m3","x":0,"log":0,"p":null,"w":"Module 3"},{"k":"m3/guess-then-ask-claude-for-the-facts","d":"m3","n":"1","t":"🔮 Guess, then ask Claude for the facts","id":"m3--1--guess-then-ask-claude-for-the-facts","x":1,"log":0,"p":null,"w":"Module 3, step 1"},{"k":"m3/have-claude-check-them-on-your-instance","d":"m3","n":"2","t":"Have Claude check them on your instance","id":"m3--2-have-claude-check-them-on-your-instance","x":1,"log":0,"p":null,"w":"Module 3, step 2"},{"k":"m3/audit-each-mark-against-its-rows","d":"m3","n":"3","t":"Audit each mark against its rows","id":"m3--3-audit-each-mark-against-its-rows","x":1,"log":0,"p":null,"w":"Module 3, step 3"},{"k":"m3/draft-the-lld","d":"m3","n":"4","t":"Draft the LLD","id":"m3--4-draft-the-lld","x":1,"log":0,"p":null,"w":"Module 3, step 4"},{"k":"m3/log-it","d":"m3","n":"5","t":"Log it","id":"m3--5-log-it","x":1,"log":1,"p":null,"w":"Module 3, step 5"},{"k":"m3/you-now-have","d":"m3","n":null,"t":"You now have","id":"m3--you-now-have","x":0,"log":0,"p":null,"w":"Module 3, You now have"},{"k":"m4","d":"m4","n":null,"t":"Module 4 — Design challenge","id":"m4","x":0,"log":0,"p":null,"w":"Module 4"},{"k":"m4/start-the-challenge","d":"m4","n":"1","t":"Start the challenge","id":"m4--1-start-the-challenge","x":1,"log":0,"p":null,"w":"Module 4, step 1"},{"k":"m4/answer-each-question","d":"m4","n":"2","t":"Answer each question","id":"m4--2-answer-each-question","x":1,"log":0,"p":null,"w":"Module 4, step 2"},{"k":"m4/check-the-read-back","d":"m4","n":"3","t":"Check the read-back","id":"m4--3-check-the-read-back","x":1,"log":0,"p":null,"w":"Module 4, step 3"},{"k":"m4/confirm","d":"m4","n":"4","t":"Confirm","id":"m4--4-confirm","x":1,"log":0,"p":null,"w":"Module 4, step 4"},{"k":"m4/log-it","d":"m4","n":"5","t":"Log it","id":"m4--5-log-it","x":1,"log":1,"p":null,"w":"Module 4, step 5"},{"k":"m4/you-now-have","d":"m4","n":null,"t":"You now have","id":"m4--you-now-have","x":0,"log":0,"p":null,"w":"Module 4, You now have"},{"k":"m5","d":"m5","n":null,"t":"Module 5 — Check and plan","id":"m5","x":0,"log":0,"p":null,"w":"Module 5"},{"k":"m5/bring-the-design-in-and-check-it-s-ready","d":"m5","n":"1","t":"Bring the design in, and check it's ready","id":"m5--1-bring-the-design-in-and-check-its-ready","x":1,"log":0,"p":null,"w":"Module 5, step 1"},{"k":"m5/preview-the-plan-and-answer-five-questions","d":"m5","n":"2","t":"Preview the plan, and answer five questions","id":"m5--2-preview-the-plan-and-answer-five-questions","x":1,"log":0,"p":null,"w":"Module 5, step 2"},{"k":"m5/file-the-plan-and-take-your-first-count","d":"m5","n":"3","t":"File the plan, and take your first count","id":"m5--3-file-the-plan-and-take-your-first-count","x":1,"log":0,"p":null,"w":"Module 5, step 3"},{"k":"m5/close-the-session-and-ship-the-plan","d":"m5","n":"4","t":"Close the session, and ship the plan","id":"m5--4-close-the-session-and-ship-the-plan","x":1,"log":0,"p":null,"w":"Module 5, step 4"},{"k":"m5/log-it","d":"m5","n":"5","t":"Log it","id":"m5--5-log-it","x":1,"log":1,"p":null,"w":"Module 5, step 5"},{"k":"m5/you-now-have","d":"m5","n":null,"t":"You now have","id":"m5--you-now-have","x":0,"log":0,"p":null,"w":"Module 5, You now have"},{"k":"m6","d":"m6","n":null,"t":"Module 6 — The build loop","id":"m6","x":0,"log":0,"p":null,"w":"Module 6"},{"k":"m6/your-first-story-by-hand","d":"m6","n":null,"t":"Your first story, by hand","id":"m6--part-1--your-first-story-by-hand","x":0,"log":0,"p":null,"w":"Module 6, Part 1 — Your first story, by hand"},{"k":"m6/open-the-session","d":"m6","n":"1","t":"Open the session","id":"m6--1-open-the-session","x":1,"log":0,"p":null,"w":"Module 6, step 1"},{"k":"m6/guess-then-take-the-top-story","d":"m6","n":"2","t":"🔮 Guess, then take the top story","id":"m6--2--guess-then-take-the-top-story","x":1,"log":0,"p":null,"w":"Module 6, step 2"},{"k":"m6/check-the-failing-tests","d":"m6","n":"3","t":"Check the failing tests","id":"m6--3-check-the-failing-tests","x":1,"log":0,"p":null,"w":"Module 6, step 3"},{"k":"m6/make-them-pass-and-check-the-shape","d":"m6","n":"4","t":"Make them pass, and check the shape","id":"m6--4-make-them-pass-and-check-the-shape","x":1,"log":0,"p":null,"w":"Module 6, step 4"},{"k":"m6/ship-it","d":"m6","n":"5","t":"Ship it","id":"m6--5-ship-it","x":1,"log":0,"p":null,"w":"Module 6, step 5"},{"k":"m6/the-batch-over-lunch","d":"m6","n":null,"t":"The batch, over lunch (start at 13:25)","id":"m6--part-2--the-batch-over-lunch-start-at-1325","x":0,"log":0,"p":null,"w":"Module 6, Part 2 — The batch, over lunch (start at 13:25)"},{"k":"m6/start-the-batch","d":"m6","n":"6","t":"Start the batch","id":"m6--6-start-the-batch","x":1,"log":0,"p":null,"w":"Module 6, step 6"},{"k":"m6/read-the-evidence","d":"m6","n":"7","t":"Read the evidence, from 14:15","id":"m6--7-read-the-evidence-from-1415","x":1,"log":0,"p":null,"w":"Module 6, step 7"},{"k":"m6/install-and-try-it-live","d":"m6","n":null,"t":"Install and try it live (by 14:30)","id":"m6--part-3--install-and-try-it-live-by-1430","x":0,"log":0,"p":null,"w":"Module 6, Part 3 — Install and try it live (by 14:30)"},{"k":"m6/build-and-install","d":"m6","n":"8","t":"Build and install","id":"m6--8-build-and-install","x":1,"log":0,"p":null,"w":"Module 6, step 8"},{"k":"m6/switch-it-on","d":"m6","n":"9","t":"Switch it on","id":"m6--9-switch-it-on","x":1,"log":0,"p":null,"w":"Module 6, step 9"},{"k":"m6/warm-it-up","d":"m6","n":"10","t":"Warm it up","id":"m6--10-warm-it-up","x":1,"log":0,"p":null,"w":"Module 6, step 10"},{"k":"m6/watch-it-route-as-hr-demo","d":"m6","n":"11","t":"Watch it route, as hr.demo","id":"m6--11-watch-it-route-as-hrdemo","x":1,"log":0,"p":null,"w":"Module 6, step 11"},{"k":"m6/log-it","d":"m6","n":"12","t":"Log it","id":"m6--12-log-it","x":1,"log":1,"p":null,"w":"Module 6, step 12"},{"k":"m6/you-now-have","d":"m6","n":null,"t":"You now have","id":"m6--you-now-have","x":0,"log":0,"p":null,"w":"Module 6, You now have"},{"k":"m7","d":"m7","n":null,"t":"Module 7 — Grade: could someone else own this?","id":"m7","x":0,"log":0,"p":null,"w":"Module 7"},{"k":"m7/guess-the-grade","d":"m7","n":"1","t":"🔮 Guess the grade","id":"m7--1--guess-the-grade","x":1,"log":0,"p":null,"w":"Module 7, step 1"},{"k":"m7/start-from-a-clean-main","d":"m7","n":"2","t":"Start from a clean main","id":"m7--2-start-from-a-clean-main","x":1,"log":0,"p":null,"w":"Module 7, step 2"},{"k":"m7/run-the-grade-in-a-fresh-session","d":"m7","n":"3","t":"Run the grade, in a fresh session","id":"m7--3-run-the-grade-in-a-fresh-session","x":1,"log":0,"p":null,"w":"Module 7, step 3"},{"k":"m7/answer-its-questions","d":"m7","n":"4","t":"Answer its questions","id":"m7--4-answer-its-questions","x":1,"log":0,"p":null,"w":"Module 7, step 4"},{"k":"m7/read-it-like-a-stranger-would","d":"m7","n":"5","t":"Read it like a stranger would","id":"m7--5-read-it-like-a-stranger-would","x":1,"log":0,"p":null,"w":"Module 7, step 5"},{"k":"m7/file-its-findings","d":"m7","n":"6","t":"File its findings","id":"m7--6-file-its-findings","x":1,"log":0,"p":null,"w":"Module 7, step 6"},{"k":"m7/merge-the-grade","d":"m7","n":"7","t":"Merge the grade","id":"m7--7-merge-the-grade","x":1,"log":0,"p":null,"w":"Module 7, step 7"},{"k":"m7/you-now-have","d":"m7","n":null,"t":"You now have","id":"m7--you-now-have","x":0,"log":0,"p":null,"w":"Module 7, You now have"},{"k":"m8","d":"m8","n":null,"t":"Module 8 — What the process caught","id":"m8","x":0,"log":0,"p":null,"w":"Module 8"},{"k":"m8/count-your-catches","d":"m8","n":"1","t":"Count your catches","id":"m8--1-count-your-catches","x":1,"log":0,"p":null,"w":"Module 8, step 1"},{"k":"m8/add-yours-to-the-room-s-board","d":"m8","n":"2","t":"Add yours to the room's board","id":"m8--2-add-yours-to-the-rooms-board","x":1,"log":0,"p":null,"w":"Module 8, step 2"},{"k":"m8/sort-out-what-s-real","d":"m8","n":"3","t":"Sort out what's real","id":"m8--3-sort-out-whats-real","x":1,"log":0,"p":null,"w":"Module 8, step 3"},{"k":"m8/take-it-home","d":"m8","n":"4","t":"Take it home","id":"m8--4-take-it-home","x":1,"log":0,"p":null,"w":"Module 8, step 4"},{"k":"m8/close-the-session","d":"m8","n":"5","t":"Close the session","id":"m8--5-close-the-session","x":1,"log":0,"p":null,"w":"Module 8, step 5"},{"k":"m8/the-three-things-to-remember","d":"m8","n":null,"t":"The three things to remember","id":"m8--the-three-things-to-remember","x":0,"log":0,"p":null,"w":"Module 8, The three things to remember"},{"k":"m8/after-the-lab-put-your-machine-back","d":"m8","n":null,"t":"After the lab: put your machine back","id":"m8--after-the-lab-put-your-machine-back","x":0,"log":0,"p":null,"w":"Module 8, After the lab: put your machine back"},{"k":"m8/put-your-settings-back","d":"m8","n":"6","t":"Put your settings back","id":"m8--6-put-your-settings-back","x":1,"log":0,"p":null,"w":"Module 8, step 6"},{"k":"m8/switch-back-on-what-module-0-switched-off","d":"m8","n":"7","t":"Switch back on what Module 0 switched off","id":"m8--7-switch-back-on-what-module-0-switched-off","x":1,"log":0,"p":null,"w":"Module 8, step 7"},{"k":"m8/remove-the-plugins-and-the-sdk-login","d":"m8","n":"8","t":"Remove the plugins and the SDK login","id":"m8--8-remove-the-plugins-and-the-sdk-login","x":1,"log":0,"p":null,"w":"Module 8, step 8"},{"k":"m8/you-now-have","d":"m8","n":null,"t":"You now have","id":"m8--you-now-have","x":0,"log":0,"p":null,"w":"Module 8, You now have"},{"k":"after","d":"after","n":null,"t":"After the workshop — finish the app","id":"after","x":0,"log":0,"p":null,"w":"After the workshop"},{"k":"after/finish-the-build","d":"after","n":null,"t":"Finish the build","id":"after--part-1--finish-the-build","x":0,"log":0,"p":null,"w":"After the workshop, Part 1 — Finish the build"},{"k":"after/review-the-lld","d":"after","n":"1","t":"Review the LLD","id":"after--1-review-the-lld","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 1"},{"k":"after/rule-the-register-then-find-the-next-gate","d":"after","n":"2","t":"Rule the register, then find the next gate","id":"after--2-rule-the-register-then-find-the-next-gate","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 2"},{"k":"after/build-with-sub-agents","d":"after","n":"3","t":"Build with sub-agents","id":"after--3-build-with-sub-agents","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 3"},{"k":"after/build-and-install","d":"after","n":"4","t":"Build and install","id":"after--4-build-and-install","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 4"},{"k":"after/check-it-live","d":"after","n":"5","t":"Check it live","id":"after--5-check-it-live","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 5"},{"k":"after/close-what-s-proved-then-the-session","d":"after","n":"6","t":"Close what's proved, then the session","id":"after--6-close-whats-proved-then-the-session","x":1,"log":0,"p":"Part 1","w":"After the workshop, Part 1, step 6"},{"k":"after/break-it-for-real","d":"after","n":null,"t":"Break it, for real","id":"after--part-2--break-it-for-real","x":0,"log":0,"p":null,"w":"After the workshop, Part 2 — Break it, for real"},{"k":"after/guess-the-attacks","d":"after","n":"1","t":"🔮 Guess the attacks","id":"after--1--guess-the-attacks","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 1"},{"k":"after/start-a-fresh-reviewer","d":"after","n":"2","t":"Start a fresh reviewer","id":"after--2-start-a-fresh-reviewer","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 2"},{"k":"after/list-what-got-through","d":"after","n":"3","t":"List what got through","id":"after--3-list-what-got-through","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 3"},{"k":"after/fix-what-got-through","d":"after","n":"4","t":"Fix what got through","id":"after--4-fix-what-got-through","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 4"},{"k":"after/swap-seats","d":"after","n":"5","t":"Swap seats","id":"after--5-swap-seats","x":1,"log":0,"p":"Part 2","w":"After the workshop, Part 2, step 5"},{"k":"after/change-the-design-when-a-fix-needs-it","d":"after","n":null,"t":"Change the design, when a fix needs it","id":"after--part-3--change-the-design-when-a-fix-needs-it","x":0,"log":0,"p":null,"w":"After the workshop, Part 3 — Change the design, when a fix needs it"},{"k":"after/amend-the-design","d":"after","n":"1","t":"Amend the design","id":"after--1-amend-the-design","x":1,"log":0,"p":"Part 3","w":"After the workshop, Part 3, step 1"},{"k":"after/file-the-new-stories","d":"after","n":"2","t":"File the new stories","id":"after--2-file-the-new-stories","x":1,"log":0,"p":"Part 3","w":"After the workshop, Part 3, step 2"},{"k":"after/merge-it-then-build-it","d":"after","n":"3","t":"Merge it, then build it","id":"after--3-merge-it-then-build-it","x":1,"log":0,"p":"Part 3","w":"After the workshop, Part 3, step 3"},{"k":"after/grade-and-hand-over","d":"after","n":null,"t":"Grade and hand over","id":"after--part-4--grade-and-hand-over","x":0,"log":0,"p":null,"w":"After the workshop, Part 4 — Grade and hand over"},{"k":"after/grade-at-demo","d":"after","n":"1","t":"🔮 Grade at DEMO","id":"after--1--grade-at-demo","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 1"},{"k":"after/freeze-a-runbook","d":"after","n":"2","t":"Freeze a runbook","id":"after--2-freeze-a-runbook","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 2"},{"k":"after/your-partner-plants","d":"after","n":"3","t":"Your partner plants","id":"after--3-your-partner-plants","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 3"},{"k":"after/diagnose-from-the-runbook","d":"after","n":"4","t":"Diagnose from the runbook","id":"after--4-diagnose-from-the-runbook","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 4"},{"k":"after/restore-then-verdict","d":"after","n":"5","t":"Restore, then verdict","id":"after--5-restore-then-verdict","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 5"},{"k":"after/close-handoff-stories","d":"after","n":"6","t":"Close HANDOFF stories","id":"after--6-close-handoff-stories","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 6"},{"k":"after/grade-at-handoff","d":"after","n":"7","t":"Grade at HANDOFF","id":"after--7-grade-at-handoff","x":1,"log":0,"p":"Part 4","w":"After the workshop, Part 4, step 7"},{"k":"after/log-it","d":"after","n":"8","t":"Log it","id":"after--8-log-it","x":1,"log":1,"p":"Part 4","w":"After the workshop, Part 4, step 8"},{"k":"after/put-your-computer-back","d":"after","n":null,"t":"Put your computer back","id":"after--part-5--put-your-computer-back","x":0,"log":0,"p":null,"w":"After the workshop, Part 5 — Put your computer back"},{"k":"after/put-your-settings-back","d":"after","n":"1","t":"Put your settings back","id":"after--1-put-your-settings-back","x":1,"log":0,"p":"Part 5","w":"After the workshop, Part 5, step 1"},{"k":"after/switch-back-on-what-the-lab-switched-off","d":"after","n":"2","t":"Switch back on what the lab switched off","id":"after--2-switch-back-on-what-the-lab-switched-off","x":1,"log":0,"p":"Part 5","w":"After the workshop, Part 5, step 2"},{"k":"after/remove-the-plugins-and-the-sdk-login","d":"after","n":"3","t":"Remove the plugins and the SDK login","id":"after--3-remove-the-plugins-and-the-sdk-login","x":1,"log":0,"p":"Part 5","w":"After the workshop, Part 5, step 3"},{"k":"after/you-now-have","d":"after","n":null,"t":"You now have","id":"after--you-now-have","x":0,"log":0,"p":null,"w":"After the workshop, You now have"},{"k":"own","d":"own","n":null,"t":"Your own PRD track — build your own app with the same method","id":"own","x":0,"log":0,"p":null,"w":"Your own PRD"},{"k":"own/how-it-differs-from-the-workshop","d":"own","n":"1","t":"How it differs from the workshop","id":"own--1-how-it-differs-from-the-workshop","x":0,"log":0,"p":null,"w":"Your own PRD, step 1"},{"k":"own/before-you-start","d":"own","n":"2","t":"Before you start","id":"own--2-before-you-start","x":0,"log":0,"p":null,"w":"Your own PRD, step 2"},{"k":"own/is-your-use-case-ready","d":"own","n":null,"t":"Is your use case ready?","id":"own--is-your-use-case-ready","x":0,"log":0,"p":null,"w":"Your own PRD, Is your use case ready?"},{"k":"own/book-now","d":"own","n":null,"t":"Book now","id":"own--book-now","x":0,"log":0,"p":null,"w":"Your own PRD, Book now"},{"k":"own/your-app-s-placeholders","d":"own","n":null,"t":"Your app's placeholders","id":"own--your-apps-placeholders","x":0,"log":0,"p":null,"w":"Your own PRD, Your app's placeholders"},{"k":"own/your-workspace-and-the-lab-set-up-again","d":"own","n":null,"t":"Your workspace, and the lab set up again","id":"own--your-workspace-and-the-lab-set-up-again","x":0,"log":0,"p":null,"w":"Your own PRD, Your workspace, and the lab set up again"},{"k":"own/when-claude-asks-permission","d":"own","n":null,"t":"When Claude asks permission","id":"own--when-claude-asks-permission","x":0,"log":0,"p":null,"w":"Your own PRD, When Claude asks permission"},{"k":"own/your-prd","d":"own","n":"3","t":"Your PRD","id":"own--3-your-prd","x":0,"log":0,"p":null,"w":"Your own PRD, step 3"},{"k":"own/size-it","d":"own","n":null,"t":"Size it","id":"own--size-it","x":0,"log":0,"p":null,"w":"Your own PRD, Size it"},{"k":"own/format-it","d":"own","n":null,"t":"Format it","id":"own--format-it","x":0,"log":0,"p":null,"w":"Your own PRD, Format it"},{"k":"own/review-it-module-1-on-your-inputs","d":"own","n":null,"t":"Review it: Module 1, on your inputs","id":"own--review-it-module-1-on-your-inputs","x":0,"log":0,"p":null,"w":"Your own PRD, Review it: Module 1, on your inputs"},{"k":"own/get-the-owner-s-answers-instead","d":"own","n":null,"t":"Get the owner's answers: Module 1, step 5, instead","id":"own--get-the-owners-answers-module-1-step-5-instead","x":0,"log":0,"p":null,"w":"Your own PRD, Get the owner's answers: Module 1, step 5, instead"},{"k":"own/module-by-module","d":"own","n":"4","t":"Module by module","id":"own--4-module-by-module","x":0,"log":0,"p":null,"w":"Your own PRD, step 4"},{"k":"own/module-2-consult","d":"own","n":null,"t":"Module 2 — Consult","id":"own--module-2--consult","x":0,"log":0,"p":null,"w":"Your own PRD, Module 2 — Consult"},{"k":"own/after-module-2-choose-one-slice","d":"own","n":null,"t":"After Module 2 — Choose one slice","id":"own--after-module-2--choose-one-slice","x":0,"log":0,"p":null,"w":"Your own PRD, After Module 2 — Choose one slice"},{"k":"own/before-module-3-write-your-positions-list","d":"own","n":null,"t":"Before Module 3 — Write your positions list","id":"own--before-module-3--write-your-positions-list","x":0,"log":0,"p":null,"w":"Your own PRD, Before Module 3 — Write your positions list"},{"k":"own/module-3-research-and-lld","d":"own","n":null,"t":"Module 3 — Research and LLD","id":"own--module-3--research-and-lld","x":0,"log":0,"p":null,"w":"Your own PRD, Module 3 — Research and LLD"},{"k":"own/module-4-challenge-and-confirm-with-the-real-owner","d":"own","n":null,"t":"Module 4 — Challenge and confirm, with the real owner","id":"own--module-4--challenge-and-confirm-with-the-real-owner","x":0,"log":0,"p":null,"w":"Your own PRD, Module 4 — Challenge and confirm, with the real owner"},{"k":"own/module-5-check-and-plan","d":"own","n":null,"t":"Module 5 — Check and plan","id":"own--module-5--check-and-plan","x":0,"log":0,"p":null,"w":"Your own PRD, Module 5 — Check and plan"},{"k":"own/module-6-the-build-loop","d":"own","n":null,"t":"Module 6 — The build loop","id":"own--module-6--the-build-loop","x":0,"log":0,"p":null,"w":"Your own PRD, Module 6 — The build loop"},{"k":"own/after-the-workshop-part-2-break-it","d":"own","n":null,"t":"After the workshop, Part 2 — Break it","id":"own--after-the-workshop-part-2--break-it","x":0,"log":0,"p":null,"w":"Your own PRD, After the workshop, Part 2 — Break it"},{"k":"own/after-the-workshop-on-your-app","d":"own","n":null,"t":"After the workshop, on your app","id":"own--after-the-workshop-on-your-app","x":0,"log":0,"p":null,"w":"Your own PRD, After the workshop, on your app"},{"k":"own/module-8-what-the-process-caught","d":"own","n":null,"t":"Module 8 — What the process caught","id":"own--module-8--what-the-process-caught","x":0,"log":0,"p":null,"w":"Your own PRD, Module 8 — What the process caught"},{"k":"own/finishing-the-slice","d":"own","n":"5","t":"Finishing the slice","id":"own--5-finishing-the-slice","x":0,"log":0,"p":null,"w":"Your own PRD, step 5"},{"k":"own/the-gates-in-order","d":"own","n":null,"t":"The gates, in order","id":"own--the-gates-in-order","x":0,"log":0,"p":null,"w":"Your own PRD, The gates, in order"},{"k":"own/done-means","d":"own","n":null,"t":"Done means","id":"own--done-means","x":0,"log":0,"p":null,"w":"Your own PRD, Done means"},{"k":"own/check-ins-with-your-instructor","d":"own","n":null,"t":"Check-ins with your instructor","id":"own--check-ins-with-your-instructor","x":0,"log":0,"p":null,"w":"Your own PRD, Check-ins with your instructor"},{"k":"own/if-the-slice-won-t-finish","d":"own","n":null,"t":"If the slice won't finish","id":"own--if-the-slice-wont-finish","x":0,"log":0,"p":null,"w":"Your own PRD, If the slice won't finish"},{"k":"own/the-next-slice","d":"own","n":"6","t":"The next slice","id":"own--6-the-next-slice","x":0,"log":0,"p":null,"w":"Your own PRD, step 6"},{"k":"own/prompts-to-edit","d":"own","n":"7","t":"Prompts to edit","id":"own--7-prompts-to-edit","x":0,"log":0,"p":null,"w":"Your own PRD, step 7"},{"k":"promote","d":"promote","n":null,"t":"Getting it to production","id":"promote","x":0,"log":0,"p":null,"w":"To production"},{"k":"promote/the-bar-before-you-ask","d":"promote","n":"1","t":"The bar before you ask","id":"promote--1-the-bar-before-you-ask","x":0,"log":0,"p":null,"w":"To production, step 1"},{"k":"promote/agree-how-it-moves","d":"promote","n":"2","t":"Agree how it moves","id":"promote--2-agree-how-it-moves","x":0,"log":0,"p":null,"w":"To production, step 2"},{"k":"promote/test-with-the-runbook-only","d":"promote","n":"3","t":"Test, with the runbook only","id":"promote--3-test-with-the-runbook-only","x":0,"log":0,"p":null,"w":"To production, step 3"},{"k":"promote/the-change-request","d":"promote","n":"4","t":"The change request","id":"promote--4-the-change-request","x":0,"log":0,"p":null,"w":"To production, step 4"},{"k":"promote/production","d":"promote","n":"5","t":"Production","id":"promote--5-production","x":0,"log":0,"p":null,"w":"To production, step 5"},{"k":"promote/after-go-live","d":"promote","n":"6","t":"After go-live","id":"promote--6-after-go-live","x":0,"log":0,"p":null,"w":"To production, step 6"},{"k":"labels","d":"labels","n":null,"t":"Appendix — Labels in Claude's output","id":"labels","x":0,"log":0,"p":null,"w":"Labels in Claude's output"},{"k":"labels/capabilities-1-to-9-no-letter","d":"labels","n":null,"t":"Capabilities 1 to 9, no letter","id":"labels--capabilities-1-to-9-no-letter","x":0,"log":0,"p":null,"w":"Labels in Claude's output, Capabilities 1 to 9, no letter"},{"k":"labels/r2-r8-the-customer-s-requirements","d":"labels","n":null,"t":"R2, R8…: the customer's requirements","id":"labels--r2-r8-the-customers-requirements","x":0,"log":0,"p":null,"w":"Labels in Claude's output, R2, R8…: the customer's requirements"},{"k":"labels/p1-to-p15-platform-rules","d":"labels","n":null,"t":"P1 to P15: platform rules","id":"labels--p1-to-p15-platform-rules","x":0,"log":0,"p":null,"w":"Labels in Claude's output, P1 to P15: platform rules"},{"k":"labels/d1-d2-open-decisions-in-your-lld","d":"labels","n":null,"t":"D1, D2…: open decisions in your LLD","id":"labels--d1-d2-open-decisions-in-your-lld","x":0,"log":0,"p":null,"w":"Labels in Claude's output, D1, D2…: open decisions in your LLD"},{"k":"labels/c1-c2-design-terms","d":"labels","n":null,"t":"C1, C2…: design terms","id":"labels--c1-c2-design-terms","x":0,"log":0,"p":null,"w":"Labels in Claude's output, C1, C2…: design terms"},{"k":"labels/1-7-sections-of-a-document","d":"labels","n":null,"t":"§1, §7…: sections of a document","id":"labels--1-7-sections-of-a-document","x":0,"log":0,"p":null,"w":"Labels in Claude's output, §1, §7…: sections of a document"},{"k":"labels/m1-merge-milestones","d":"labels","n":null,"t":"M1 · merge…: milestones","id":"labels--m1--merge-milestones","x":0,"log":0,"p":null,"w":"Labels in Claude's output, M1 · merge…: milestones"},{"k":"labels/p0-p1-p2-priority-labels","d":"labels","n":null,"t":"p0, p1, p2: priority labels","id":"labels--p0-p1-p2-priority-labels","x":0,"log":0,"p":null,"w":"Labels in Claude's output, p0, p1, p2: priority labels"},{"k":"labels/design-terms-tested-the-grade-s-checks","d":"labels","n":null,"t":"design.terms-tested…: the grade's checks","id":"labels--designterms-tested-the-grades-checks","x":0,"log":0,"p":null,"w":"Labels in Claude's output, design.terms-tested…: the grade's checks"}],"progress":{"renames":{"m0/check-the-demo-data":"m0/check-your-instance","m0/act-as-an-ordinary-hr-fulfiller":"m0/check-your-instance","m7/guess-the-attacks":"after/guess-the-attacks","m7/start-a-fresh-reviewer":"after/start-a-fresh-reviewer","m7/compare-with-yours":"after/start-a-fresh-reviewer","m7/go-back-to-a-clean-main":"after/list-what-got-through","after/run-the-attacks-and-list-what-got-through":"after/list-what-got-through","own/module-7-break-it":"own/after-the-workshop-part-2-break-it","own/module-9-what-the-process-caught":"own/module-8-what-the-process-caught","m9":"m8","m8/guess-the-grade":"m7/guess-the-grade","m8/start-from-a-clean-main":"m7/start-from-a-clean-main","m8/run-the-grade-in-a-fresh-session":"m7/run-the-grade-in-a-fresh-session","m8/answer-its-questions":"m7/answer-its-questions","m8/read-it-like-a-stranger-would":"m7/read-it-like-a-stranger-would","m8/file-its-findings":"m7/file-its-findings","m8/merge-the-grade":"m7/merge-the-grade","m9/count-your-catches":"m8/count-your-catches","m9/add-yours-to-the-room-s-board":"m8/add-yours-to-the-room-s-board","m9/sort-out-what-s-real":"m8/sort-out-what-s-real","m9/take-it-home":"m8/take-it-home","m9/close-the-session":"m8/close-the-session","m9/the-three-things-to-remember":"m8/the-three-things-to-remember","m9/after-the-lab-put-your-machine-back":"m8/after-the-lab-put-your-machine-back","m9/put-your-settings-back":"m8/put-your-settings-back","m9/switch-back-on-what-module-0-switched-off":"m8/switch-back-on-what-module-0-switched-off","m9/remove-the-plugins-and-the-sdk-login":"m8/remove-the-plugins-and-the-sdk-login","m9/you-now-have":"m8/you-now-have"},"docs":{"home":["How this lab works","README","How this lab works"],"m0":["Module 0","M0","Module 0, Pre-work"],"m1":["Module 1","M1","Module 1, Inputs to PRD"],"m2":["Module 2","M2","Module 2, Consult"],"m3":["Module 3","M3","Module 3, Research and LLD"],"m4":["Module 4","M4","Module 4, Design challenge"],"m5":["Module 5","M5","Module 5, Check and plan"],"m6":["Module 6","M6","Module 6, Build loop"],"m7":["Module 7","M7","Module 7, Grade"],"m8":["Module 8","M8","Module 8, Debrief"],"after":["After the workshop","After","After the workshop"],"own":["Your own PRD","Own PRD","Your own PRD"],"promote":["To production","Production","To production"],"labels":["Labels in Claude's output","Labels","Labels in Claude's output"]}},"build":"a5165ab615"}</script>
 <script id="abl-core">
 /* The personalization core (#16): the abl-state store and the visibility rule.
    Pure: it never touches window, document or localStorage itself, so tests/test-abl.js runs it in Node.
@@ -616,7 +672,7 @@ var ABLCore=(function(){
     M.topics.forEach(function(t){topics[t]=null;});
     M.schema.values.forEach(function(k){values[k]='';});
     return {v:1,setup:{os:null,surface:null,github:null,level:'standard',topics:topics,showAll:false,done:false,shortcuts:true},
-      choices:{},progress:{},values:values,theme:null,bookmarks:[]};
+      choices:{},progress:{},values:values,theme:null,bookmarks:[],notes:[],scratch:''};
   }
 
   // --- Bookmarks (#37): [{key, note, at}], a step key each, a note of up to 140 characters, and when it was added.
@@ -626,7 +682,7 @@ var ABLCore=(function(){
   function fixBookmarks(v){
     var out=[],seen={};
     (Array.isArray(v)?v:[]).forEach(function(b){
-      if(!isObj(b)||!isStr(b.key)||!BM_KEY.test(b.key)||has(seen,b.key))return;
+      if(!isObj(b)||!isStr(b.key)||!BM_KEY.test(b.key)||(b.key in Object.prototype)||has(seen,b.key))return;
       seen[b.key]=1;
       out.push({key:b.key,note:isStr(b.note)?b.note.slice(0,BM_MAX):'',at:isStr(b.at)?b.at:''});
     });
@@ -648,6 +704,43 @@ var ABLCore=(function(){
       if(has(seen,b.key))throw new Error(at+': "'+b.key+'" is bookmarked twice');
       seen[b.key]=1;
       if(!has(steps,b.key)&&!has(R,b.key)&&!(known&&has(known,b.key)))throw new Error(at+': "'+b.key+'" is not a step in this guide');
+    });
+  }
+
+  // --- Notes: [{id, key, t, f, text, at}]: a step key each; the spot (t, the block's tag, and f, its first words, both
+  // '' for the step itself); the words, 1 to 1,000 characters; when it was written. 100 at most. The scratchpad: text
+  // of up to 10,000 characters.
+  var NT_ID=/^[a-z0-9]{1,16}$/,NT_TAG=/^([A-Z][A-Z0-9]{0,9})?$/,NT_MAX=1000,NT_N=100,NT_SPOT=120,NT_AT=40,SCRATCH_MAX=10000;
+  // Lenient, for what was stored: a malformed note is dropped, never the list; a key the guide no longer has is kept.
+  function fixNotes(v){
+    var out=[],seen={};
+    (Array.isArray(v)?v:[]).forEach(function(n){
+      if(out.length>=NT_N||!isObj(n)||!isStr(n.id)||!NT_ID.test(n.id)||has(seen,n.id)||!isStr(n.key)||!BM_KEY.test(n.key)||(n.key in Object.prototype)||!isStr(n.text))return;
+      var text=n.text.slice(0,NT_MAX);if(!text.trim())return;
+      seen[n.id]=1;
+      out.push({id:n.id,key:n.key,t:isStr(n.t)&&NT_TAG.test(n.t)?n.t:'',f:isStr(n.f)?n.f.slice(0,NT_SPOT):'',text:text,at:isStr(n.at)?n.at.slice(0,NT_AT):''});
+    });
+    return out;
+  }
+  // Strict, for ABL.set: as checkBookmarks, with known the same keys.
+  function checkNotes(v,M,known){
+    if(!Array.isArray(v))throw new Error('ABL.set: notes takes a list');
+    if(v.length>NT_N)throw new Error('ABL.set: '+NT_N+' notes at most');
+    var steps={},R=(M.progress&&M.progress.renames)||{},seen={};
+    (M.steps||[]).forEach(function(s){steps[s.k]=1;});
+    v.forEach(function(n,i){
+      var at='ABL.set: notes['+i+']';
+      if(!isObj(n))throw new Error(at+' must be {id, key, t, f, text, at}');
+      Object.keys(n).forEach(function(k){if(['id','key','t','f','text','at'].indexOf(k)<0)throw new Error(at+': unknown field "'+k+'"');});
+      if(!isStr(n.id)||!NT_ID.test(n.id))throw new Error(at+': bad id '+JSON.stringify(n.id));
+      if(has(seen,n.id))throw new Error(at+': the id "'+n.id+'" is used twice');
+      seen[n.id]=1;
+      if(!isStr(n.key)||!BM_KEY.test(n.key))throw new Error(at+': bad key '+JSON.stringify(n.key));
+      if(!isStr(n.t)||!NT_TAG.test(n.t))throw new Error(at+': bad tag '+JSON.stringify(n.t));
+      if(!isStr(n.f)||n.f.length>NT_SPOT)throw new Error(at+': the spot must be text of up to '+NT_SPOT+' characters');
+      if(!isStr(n.text)||!n.text.trim()||n.text.length>NT_MAX)throw new Error(at+': the note must be text of 1 to '+NT_MAX+' characters');
+      if(!isStr(n.at)||n.at.length>NT_AT)throw new Error(at+': the time must be text of up to '+NT_AT+' characters');
+      if(!has(steps,n.key)&&!has(R,n.key)&&!(known&&has(known,n.key)))throw new Error(at+': "'+n.key+'" is not a step in this guide');
     });
   }
 
@@ -699,12 +792,16 @@ var ABLCore=(function(){
     ['setup','choices','progress','values'].forEach(function(k){out[k]=fix(k,out[k],d[k],M);});
     out.theme=fix('theme',out.theme,null,M);
     out.bookmarks=fixBookmarks(out.bookmarks);
+    out.notes=fixNotes(out.notes);
+    out.scratch=isStr(out.scratch)?out.scratch.slice(0,SCRATCH_MAX):'';
     return out;
   }
-  // Strict, for ABL.set: throws on an unknown key or a bad value. known: for bookmarks only (checkBookmarks).
+  // Strict, for ABL.set: throws on an unknown key or a bad value. known: for bookmarks and notes only.
   function check(path,value,M,known){
     if(typeof path!=='string'||!path)throw new Error('ABL.set: no key given');
     if(path==='bookmarks')return checkBookmarks(value,M,known);
+    if(path==='notes')return checkNotes(value,M,known);
+    if(path==='scratch'){if(!isStr(value)||value.length>SCRATCH_MAX)throw new Error('ABL.set: the scratchpad takes text of up to '+SCRATCH_MAX+' characters');return;}
     if(isObjPath(path)){
       if(!isObj(value))throw new Error('ABL.set: '+path+' takes an object');
       Object.keys(value).forEach(function(k){check(path+'.'+k,value[k],M);});
@@ -1003,7 +1100,7 @@ var ABLText=(function(){
       var c=chip(state,M);
       return c.text==='Your setup'?'Showing steps for your setup.':'Showing steps for '+c.text+'.';
     }
-    if(k==='setup.shortcuts')return s.shortcuts===false?'Keyboard shortcuts off.':'Keyboard shortcuts on: / search, ] and [ move between bookmarks.';
+    if(k==='setup.shortcuts')return s.shortcuts===false?'Keyboard shortcuts off.':'Keyboard shortcuts on: / search, n notes, ] and [ move between bookmarks.';
     if(k.indexOf('choices.')===0)return answerMessage(k.slice(8),state,M);
     return null;
   }
@@ -1026,7 +1123,15 @@ var ABLText=(function(){
       if(has(at,k)){if(!bookmarks[at[k]].note&&b.note)bookmarks[at[k]].note=b.note;return;}
       at[k]=bookmarks.length;bookmarks.push({key:k,note:b.note,at:b.at});
     });
-    return [['setup',setup],['values',values],['choices',choices],['progress',progress],['theme',s.theme],['bookmarks',bookmarks]];
+    // Notes too, each key through STEP_RENAMES; one on a step this guide no longer has stays out (ABL.set would refuse it).
+    var steps={},notes=[];(M.steps||[]).forEach(function(x){steps[x.k]=1;});
+    s.notes.forEach(function(n){
+      var k=n.key,seen={};
+      while(has(R,k)&&!has(seen,k)){seen[k]=1;k=R[k];}
+      if(has(steps,k))notes.push({id:n.id,key:k,t:n.t,f:n.f,text:n.text,at:n.at});
+    });
+    return [['setup',setup],['values',values],['choices',choices],['progress',progress],['theme',s.theme],['bookmarks',bookmarks],
+      ['notes',notes],['scratch',s.scratch]];
   }
   // Line notes (#13). A noted block follows its topic's effective level: the block's data-lntopic, else its label's
   // (terminal or claude). With no store (storage blocked, or the engine down), Standard.
@@ -1440,6 +1545,122 @@ var ABLBookmarks=(function(){
     none:"No bookmarks yet. Click the bookmark button next to any step's title to save it here."};
 })();
 </script>
+<script id="abl-notes-core">
+/* Notes: a note on a step, or pinned to a spot in it; the panel's groups; the Markdown download. Pure, like
+   ABLBookmarks: tests/test-abl.js runs it in Node. A note is {id, key, t, f, text, at}: key its step; t and f its spot
+   (the block's tag and its first words), both '' for the step itself. Every string is plain text: put it in the page
+   with textContent. */
+var ABLNotes=(function(){
+  'use strict';
+  var P=ABLProgress,MAX=1000,MAXN=100,SPOT=120,SCRATCH=10000;
+  function copy(o){return JSON.parse(JSON.stringify(o));}
+  function has(o,k){return Object.prototype.hasOwnProperty.call(o||{},k);}
+  function idx(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return i;return -1;}
+  // A block's words as its spot keeps them: one line, at most 120 characters.
+  function spot(text){return String(text||'').replace(/\s+/g,' ').trim().slice(0,SPOT);}
+  // A note's words: its lines kept (one blank line in a row at most), no control characters, at most 1,000 characters.
+  function clean(text){
+    return String(text||'').replace(/\r\n?/g,'\n').replace(/[\u0000-\u0008\u000b-\u001f\u007f]/g,'')
+      .replace(/[ \t]+$/gm,'').replace(/\n{3,}/g,'\n\n').trim().slice(0,MAX);
+  }
+  // A new note's id: from the time and a random number, unique in the list.
+  function newId(list,now,rand){
+    var base=Math.floor(now).toString(36).slice(-6)+Math.floor(rand*1679616).toString(36),id=base,n=0;
+    while(idx(list||[],id)>-1)id=base+(++n).toString(36);
+    return id;
+  }
+  // Added at the end (order comes from the guide, at render time). null when there are no words, or the list is full.
+  function add(list,n){
+    var text=clean(n.text);list=copy(list||[]);
+    if(!text||list.length>=MAXN)return null;
+    list.push({id:n.id,key:n.key,t:n.f?(n.t||''):'',f:spot(n.f),text:text,at:n.at||''});
+    return list;
+  }
+  // Removed, and the note kept for Undo (restore).
+  function remove(list,id){list=copy(list||[]);var i=idx(list,id);return {list:list,gone:i>-1?list.splice(i,1)[0]:null};}
+  function restore(list,entry){list=copy(list||[]);if(entry&&idx(list,entry.id)<0&&list.length<MAXN)list.push(copy(entry));return list;}
+  // New words for a note. No words removes it: {list, gone}, as remove.
+  function edit(list,id,text){
+    var t=clean(text);
+    if(!t)return remove(list,id);
+    list=copy(list||[]);var i=idx(list,id);if(i>-1)list[i].text=t;
+    return {list:list,gone:null};
+  }
+  // On load: each key through STEP_RENAMES.
+  function migrate(list,R){
+    var changed=false,out=(list||[]).map(function(n){var o=copy(n);o.key=P.resolve(n.key,R||{});if(o.key!==n.key)changed=true;return o;});
+    return {list:out,changed:changed};
+  }
+  // A bookmark's note (written before Notes, in the bookmarks list) becomes a note on its step. Returns
+  // {notes, bookmarks} once there's one to move, else null. A note that doesn't fit (the list is full) stays put.
+  function adopt(bookmarks,notes,now,rand){
+    var moved=false,ns=copy(notes||[]),bs=copy(bookmarks||[]);
+    bs.forEach(function(b){
+      if(!b.note)return;
+      var next=add(ns,{id:newId(ns,now,rand),key:b.key,t:'',f:'',text:b.note,at:b.at});
+      if(!next)return;
+      ns=next;b.note='';moved=true;
+    });
+    return moved?{notes:ns,bookmarks:bs}:null;
+  }
+  // The panel's groups: every bookmark and note, page by page in the guide's order. In a step: its bookmark, its notes
+  // on the step, then its spots in page order (pos: a note's place in the page by id, when the page has found it).
+  // Steps the guide no longer has come last, in a group of their own (doc null): never dropped.
+  function groups(bookmarks,notes,steps,pos){
+    var at={},items=[],gone=[];pos=pos||{};
+    steps.forEach(function(s,i){at[s.k]=i;});
+    function put(it){
+      if(has(at,it.key)){it.i=at[it.key];it.step=steps[it.i];it.missing=false;items.push(it);}
+      else{it.i=-1;it.step=null;it.missing=true;gone.push(it);}
+    }
+    (bookmarks||[]).forEach(function(b,n){put({kind:'bm',key:b.key,bm:b,o:-1,n:n});});
+    (notes||[]).forEach(function(x,n){put({kind:'note',key:x.key,note:x,o:x.f?1+(has(pos,x.id)?pos[x.id]:1e6):0,n:n});});
+    items.sort(function(a,b){return a.i-b.i||a.o-b.o||a.n-b.n;});
+    var out=[],cur=null;
+    items.forEach(function(it){if(!cur||cur.doc!==it.step.d){cur={doc:it.step.d,items:[]};out.push(cur);}cur.items.push(it);});
+    if(gone.length)out.push({doc:null,items:gone});
+    return out;
+  }
+  function pageName(doc,names){return doc===null?'No longer in the guide':has(names,doc)?names[doc][0]:doc;}
+  // A step's words inside its page's group: "3. Log it", "Part 1 · 2. Get the files", or the page's own title.
+  function stepName(s){return s.k.indexOf('/')<0?s.t:(s.p?s.p+' · ':'')+(s.n?s.n+'. ':'')+s.t;}
+  // Words cut at a word, for a list: "Run npm install in the…".
+  function excerpt(text,n){
+    text=String(text||'').replace(/\s+/g,' ').trim();n=n||64;
+    if(text.length<=n)return text;
+    var c=text.slice(0,n-1),sp=c.lastIndexOf(' ');
+    return (/\s/.test(text.charAt(n-1))||sp<=n/2?c:c.slice(0,sp))+'…';
+  }
+  function spotLabel(f){return f?'On “'+excerpt(f,56)+'”':'On this step';}
+  function count(bookmarks,notes){return (bookmarks||[]).length+(notes||[]).length;}
+  function label(n){return 'Notes ('+n+')';}
+  // Download my notes: every group, then the scratchpad, as Markdown. o: {bookmarks, notes, scratch, steps, names,
+  // pos, title, when}. A note's lines are quoted under its spot, so nothing a reader typed turns into a heading.
+  function markdown(o){
+    var out=['# '+o.title,''],gs=groups(o.bookmarks,o.notes,o.steps,o.pos);
+    if(o.when)out.push(o.when,'');
+    if(!gs.length&&!o.scratch)out.push('No notes yet.','');
+    gs.forEach(function(g){
+      out.push('## '+pageName(g.doc,o.names),'');
+      var last=null;
+      g.items.forEach(function(it){
+        var k=it.step?it.step.k:it.key;
+        if(k!==last){if(last!==null)out.push('');out.push('### '+(it.step?stepName(it.step):k),'');last=k;}
+        if(it.kind==='bm'){out.push('- Bookmarked'+(it.bm.note?': '+it.bm.note.replace(/\s+/g,' '):''));return;}
+        out.push('- '+(it.note.f?'On “'+excerpt(it.note.f,80)+'”':'On this step')+':');
+        it.note.text.split(/\r\n?|\n/).forEach(function(l){out.push('  > '+l);});
+      });
+      out.push('');
+    });
+    if(o.scratch)out.push('## Scratchpad','',o.scratch,'');
+    return out.join('\n');
+  }
+  return {MAX:MAX,MAXN:MAXN,SPOT:SPOT,SCRATCH:SCRATCH,spot:spot,clean:clean,newId:newId,add:add,remove:remove,restore:restore,
+    edit:edit,migrate:migrate,adopt:adopt,groups:groups,pageName:pageName,stepName:stepName,excerpt:excerpt,spotLabel:spotLabel,
+    count:count,label:label,markdown:markdown,
+    none:'No notes yet. Add one to a step, pin one to a spot, or bookmark a step with the bookmark button beside its title.'};
+})();
+</script>
 <script id="abl-survey-core">
 /* The first-run survey and the setup code (#16, PR 3). Pure, like ABLCore: tests/test-abl.js runs both in Node.
    ABLSurvey: where the survey opens, what each Continue writes (as [path, value] pairs for ABL.set), the gating, Skip,
@@ -1600,9 +1821,9 @@ var ABLCode=(function(){
     garbage:"That setup code can't be read: part of it is missing or changed. Copy it again, the whole line from ABL1-.",
     long:"That's longer than any setup code. Paste just the line that starts with ABL1-."
   };
-  // The longest text a paste box takes (its maxlength too): a code with every step ticked and twenty bookmarks with
-  // full notes is about half of it.
-  var MAX_TEXT=24000;
+  // The longest text a paste box takes (its maxlength too): a code with every step ticked, twenty bookmarks, a hundred
+  // full notes and a full scratchpad is about half of it.
+  var MAX_TEXT=400000;
   function has(o,k){return o!==null&&o!==undefined&&Object.prototype.hasOwnProperty.call(o,k);}
   function isObj(o){return o!==null&&typeof o==='object'&&!Array.isArray(o);}
   function lab(t,v){return has(t,v)?t[v]:v;}
@@ -1631,7 +1852,7 @@ var ABLCode=(function(){
     }
     return b;
   }
-  // What the code carries: {v, setup, choices, progress, values, bookmarks}. Not the theme (#16: the device's).
+  // What the code carries: {v, setup, choices, progress, values, bookmarks, notes, scratch}. Not the theme (#16: the device's).
   function pack(state,M){
     var s=state.setup,setup={},topics={},values={},progress={};
     SETUP.forEach(function(k){setup[k]=s[k];});
@@ -1640,7 +1861,8 @@ var ABLCode=(function(){
     M.schema.values.forEach(function(k){values[k]=state.values&&typeof state.values[k]==='string'?state.values[k]:'';});
     ['last','lastAt','done'].forEach(function(k){if(state.progress&&has(state.progress,k))progress[k]=state.progress[k];});
     return {v:1,setup:setup,choices:JSON.parse(JSON.stringify(state.choices||{})),progress:progress,values:values,
-      bookmarks:JSON.parse(JSON.stringify(state.bookmarks||[]))};
+      bookmarks:JSON.parse(JSON.stringify(state.bookmarks||[])),notes:JSON.parse(JSON.stringify(state.notes||[])),
+      scratch:typeof state.scratch==='string'?state.scratch:''};
   }
   function encode(state,M){return PREFIX+enc(utf8(JSON.stringify(pack(state,M))));}
   function stepOf(M,key){
@@ -1691,7 +1913,9 @@ var ABLCode=(function(){
   // values that fails ABLCore's check after the usual clean-up (they go into commands), and a bad progress record.
   function one(n,raw,M){
     if(n!==V)return fail('version','ABL'+n+'-');
-    var body=raw.replace(/[.,;:!?)\]}'"]+$/,''),bytes=dec(body),obj;
+    // Punctuation after the code is dropped one character at a time: as one regex, a long wrong paste took minutes.
+    var end=raw.length;while(end>0&&/[.,;:!?)\]}'"]/.test(raw.charAt(end-1)))end--;
+    var body=raw.slice(0,end),bytes=dec(body),obj;
     var head='{"v":',cut=function(s){return s.slice(0,head.length)===head.slice(0,s.length);};
     if(bytes===null)return fail(/^[A-Za-z0-9_-]*$/.test(body)?'truncated':'garbage');
     var tx=text8(bytes);
@@ -1702,7 +1926,7 @@ var ABLCode=(function(){
     if(!isObj(obj.setup))return fail('garbage');
     var bad=false,ignored=[],D=ABLCore.defaults(M),maxSteps=(M.steps||[]).length;
     function ok(path,v){try{ABLCore.check(path,v,M);return true;}catch(e){return false;}}
-    Object.keys(obj).forEach(function(k){if(['v','setup','choices','progress','values','bookmarks'].indexOf(k)<0)ignored.push(k);});
+    Object.keys(obj).forEach(function(k){if(['v','setup','choices','progress','values','bookmarks','notes','scratch'].indexOf(k)<0)ignored.push(k);});
     var setup={},topics={};
     Object.keys(obj.setup).forEach(function(k){if(SETUP.indexOf(k)<0&&k!=='topics'&&k!=='shortcuts')ignored.push('setup.'+k);});
     SETUP.forEach(function(k){
@@ -1750,12 +1974,25 @@ var ABLCode=(function(){
     if(!Array.isArray(ob))bad=true;
     else ob.forEach(function(b){
       if(!isObj(b)||typeof b.key!=='string'){bad=true;return;}
-      var e={key:follow(b.key),note:typeof b.note==='string'?b.note.slice(0,140):'',at:typeof b.at==='string'?b.at:''};
+      var e={key:follow(b.key),note:typeof b.note==='string'?b.note.slice(0,140):'',at:typeof b.at==='string'?b.at.slice(0,40):''};
       if(has(bseen,e.key)||bookmarks.length>=maxSteps)return;
       if(ok('bookmarks',[e])){bseen[e.key]=1;bookmarks.push(e);}else ignored.push('bookmarks.'+b.key);
     });
+    // Notes and the scratchpad: only when the code holds them (one from before Notes leaves the reader's alone).
+    var notes=[],nseen={},on=has(obj,'notes')?obj.notes:[];
+    if(!Array.isArray(on))bad=true;
+    else on.forEach(function(x){
+      if(!isObj(x)||typeof x.key!=='string'||typeof x.id!=='string'||typeof x.text!=='string'){bad=true;return;}
+      var e={id:x.id,key:follow(x.key),t:typeof x.t==='string'?x.t:'',f:typeof x.f==='string'?x.f.slice(0,120):'',text:x.text.slice(0,1000),at:typeof x.at==='string'?x.at.slice(0,40):''};
+      if(has(nseen,e.id)||notes.length>=100)return;
+      if(ok('notes',[e])){nseen[e.id]=1;notes.push(e);}else ignored.push('notes.'+x.id);
+    });
+    var scratch='';
+    if(has(obj,'scratch')){if(typeof obj.scratch!=='string')bad=true;else scratch=obj.scratch.slice(0,10000);}
     if(bad)return fail('garbage');
     var pairs=[['setup',setup],['choices',choices],['progress',progress],['values',values],['bookmarks',bookmarks]];
+    if(has(obj,'notes'))pairs.push(['notes',notes]);
+    if(has(obj,'scratch'))pairs.push(['scratch',scratch]);
     for(var i=0;i<pairs.length;i++)if(!ok(pairs[i][0],pairs[i][1]))return fail('garbage');  // belt and braces: what ABL.set will check
     return {ok:true,pairs:pairs,ignored:ignored};
   }
@@ -1788,8 +2025,9 @@ var ABLCode=(function(){
     out.push('Your values: '+(v.length?v.join(', '):'none yet'));
     var last=typeof s.progress.last==='string'?stepOf(M,s.progress.last):null,n=Array.isArray(s.progress.done)?s.progress.done.length:0;
     out.push('Your place: '+(last&&last.w?last.w:'none yet')+(n?' · '+plural(n,'step','steps')+' ticked':''));
-    var a=Object.keys(s.choices).length,b=s.bookmarks.length;
-    out.push((a?plural(a,'answer','answers')+' in steps':'No answers in steps')+', '+(b?plural(b,'bookmark','bookmarks'):'no bookmarks'));
+    var a=Object.keys(s.choices).length,b=s.bookmarks.length,nn=s.notes.length;
+    out.push((a?plural(a,'answer','answers')+' in steps':'No answers in steps')+', '+(b?plural(b,'bookmark','bookmarks'):'no bookmarks')+
+      (nn?', '+plural(nn,'note','notes'):'')+(s.scratch?', your scratchpad':''));
     if(res.ignored.length)out.push('Left out: '+plural(res.ignored.length,'thing','things')+" from a newer copy of the guide that this one doesn't have.");
     return out;
   }
@@ -1884,14 +2122,35 @@ var ABLCode=(function(){
       </div>
     </div>
     <div id="slot-bookmarks" class="slot">
-      <button id="bm-btn" type="button" aria-expanded="false" aria-controls="bm-pop"><svg class="bm-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 1.75h8c.41 0 .75.34.75.75v11.6L8 11l-4.75 3.1V2.5c0-.41.34-.75.75-.75z"/></svg><span class="lbl"> Bookmarks</span> <span class="bm-n"><span class="bm-p">(</span><span class="bm-c">0</span><span class="bm-p">)</span></span><span class="caret" aria-hidden="true">▾</span></button>
-      <div id="bm-pop" class="pop bm-pop" hidden>
-        <p id="bm-h" class="bm-h">Bookmarks</p>
-        <p id="bm-none" class="bm-none">No bookmarks yet. Click the bookmark button <svg class="bm-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 1.75h8c.41 0 .75.34.75.75v11.6L8 11l-4.75 3.1V2.5c0-.41.34-.75.75-.75z"/></svg> next to any step's title to save it here.</p>
-        <ul id="bm-list" aria-labelledby="bm-h"></ul>
-        <p id="bm-nosave" class="hint" hidden>This copy can't save them: they last until you close this tab.</p>
-        <p class="bm-foot"><span id="bm-keys"><kbd>]</kbd> next · <kbd>[</kbd> previous</span><span id="bm-keys-off" hidden>Keyboard shortcuts are off (Setup)</span></p>
-      </div>
+      <button id="bm-btn" type="button" aria-expanded="false" aria-controls="notes"><svg class="bm-ico nb-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.25 1.75h9.5c.41 0 .75.34.75.75v11c0 .41-.34.75-.75.75h-9.5zM6 1.75v12.5M8.25 5.25h3M8.25 8h3"/></svg><span class="lbl"> Notes</span> <span class="bm-n"><span class="bm-p">(</span><span class="bm-c">0</span><span class="bm-p">)</span></span></button>
+      <section id="notes" role="region" aria-labelledby="notes-name" hidden>
+        <div class="stuck-head">
+          <h2 id="notes-title" tabindex="-1"><span id="notes-name">Notes</span></h2>
+          <button type="button" id="notes-close" aria-label="Close notes"><span aria-hidden="true">✕</span></button>
+        </div>
+        <p class="notes-jump"><button type="button" class="linkish" data-to="notes-here-h">Here</button> · <button type="button" class="linkish" data-to="notes-all-h">All notes</button> · <button type="button" class="linkish" data-to="notes-scratch">Scratchpad <span aria-hidden="true">↓</span></button></p>
+        <p id="notes-undo" class="notice" hidden><span id="notes-undo-t"></span> <button type="button" class="linkish" id="notes-undo-b">Undo</button></p>
+        <p id="notes-nosave" class="notice" hidden>This copy can't save notes: they last until you close this tab. <strong>Download my notes</strong> keeps a copy.</p>
+        <h3 id="notes-here-h" tabindex="-1">Here</h3>
+        <p class="notes-at" id="notes-at"></p>
+        <p id="notes-now" class="stuck-line" hidden><span id="notes-now-text"></span> · <button type="button" class="linkish" id="notes-switch">Switch</button></p>
+        <ul id="notes-here" class="notes-list" aria-labelledby="notes-here-h" hidden></ul>
+        <div id="notes-new"></div>
+        <div class="notes-adds">
+          <button type="button" id="notes-pin"><svg class="pin-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 1.5a4.5 4.5 0 0 0-4.5 4.5c0 3.3 4.5 8.5 4.5 8.5s4.5-5.2 4.5-8.5A4.5 4.5 0 0 0 8 1.5zm0 6.3a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6z"/></svg> Pin a note to a spot</button>
+          <button type="button" id="notes-add">Note on this step</button>
+          <button type="button" id="notes-bm" class="bm" aria-pressed="false"><svg class="bm-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 1.75h8c.41 0 .75.34.75.75v11.6L8 11l-4.75 3.1V2.5c0-.41.34-.75.75-.75z"/></svg> Bookmark</button>
+        </div>
+        <h3 id="notes-all-h" tabindex="-1">All notes<span id="notes-all-n"></span></h3>
+        <p id="notes-none" class="hint">No notes yet. Add one to a step, pin one to a spot, or bookmark a step with the bookmark button <svg class="bm-ico" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 1.75h8c.41 0 .75.34.75.75v11.6L8 11l-4.75 3.1V2.5c0-.41.34-.75.75-.75z"/></svg> beside its title.</p>
+        <div id="notes-all"></div>
+        <h3 id="notes-scratch-h">Scratchpad</h3>
+        <p class="hint" id="notes-scratch-d">For anything else: questions for later, ideas, links. Saved as you type.</p>
+        <textarea id="notes-scratch" rows="7" maxlength="10000" spellcheck="true" aria-labelledby="notes-scratch-h" aria-describedby="notes-scratch-d"></textarea>
+        <p class="notes-save" id="notes-scratch-s" aria-hidden="true"></p>
+        <div class="notes-foot"><button type="button" id="notes-dl">Download my notes</button><span class="hint">A Markdown file with every note, page by page, and your scratchpad.</span></div>
+        <p class="bm-foot"><span id="bm-keys"><kbd>n</kbd> notes · <kbd>]</kbd> next bookmark · <kbd>[</kbd> previous</span><span id="bm-keys-off" hidden>Keyboard shortcuts are off (Setup)</span></p>
+      </section>
     </div>
     <div id="slot-stuck" class="slot" hidden>
       <button id="stuck-btn" type="button" aria-expanded="false" aria-controls="stuck"><span aria-hidden="true">🛟</span><span class="stuck-word"> Stuck?</span></button>
@@ -2009,7 +2268,7 @@ var ABLCode=(function(){
     <div id="sv-paste" class="paste" hidden>
       <label for="sv-code">Your setup code</label>
       <span class="hint" id="sv-code-d">Paste both lines, or just the one that starts with ABL1-.</span>
-      <textarea id="sv-code" rows="3" maxlength="24000" aria-describedby="sv-code-d sv-code-err" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+      <textarea id="sv-code" rows="3" maxlength="400000" aria-describedby="sv-code-d sv-code-err" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
       <p class="sv-error" id="sv-code-err" role="alert"></p>
       <button type="button" id="sv-check">Check this code</button>
       <div id="sv-preview" class="preview" role="group" aria-labelledby="sv-preview-h" hidden>
@@ -11071,7 +11330,7 @@ limits the whole score when one serious check fails.</p>
       <div id="setup-paste" class="paste" hidden>
         <label for="setup-code">Your setup code</label>
         <span class="hint" id="setup-code-d">Paste both lines, or just the one that starts with ABL1-.</span>
-        <textarea id="setup-code" rows="3" maxlength="24000" aria-describedby="setup-code-d setup-code-err" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+        <textarea id="setup-code" rows="3" maxlength="400000" aria-describedby="setup-code-d setup-code-err" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
         <p class="sv-error" id="setup-code-err" role="alert"></p>
         <button type="button" id="setup-check">Check this code</button>
         <div id="setup-preview" class="preview" role="group" aria-labelledby="setup-preview-h" hidden>
@@ -11084,7 +11343,7 @@ limits the whole score when one serious check fails.</p>
     </section>
     <section id="setup-device" class="sep" aria-labelledby="setup-device-h">
       <h3 id="setup-device-h">Keys and theme</h3>
-      <div class="opt needs-abl"><input type="checkbox" id="shortcuts" aria-describedby="shortcuts-d"><label for="shortcuts">Keyboard shortcuts</label><span class="hint" id="shortcuts-d"><kbd>/</kbd> search · <kbd>]</kbd> next bookmark · <kbd>[</kbd> previous</span></div>
+      <div class="opt needs-abl"><input type="checkbox" id="shortcuts" aria-describedby="shortcuts-d"><label for="shortcuts">Keyboard shortcuts</label><span class="hint" id="shortcuts-d"><kbd>/</kbd> search · <kbd>n</kbd> notes · <kbd>]</kbd> next bookmark · <kbd>[</kbd> previous</span></div>
       <div class="opt"><input type="checkbox" id="theme-dark"><label for="theme-dark">Dark theme</label></div>
     </section>
     <section id="setup-instructor" class="sep needs-abl" aria-labelledby="setup-instructor-h">
@@ -11102,10 +11361,10 @@ limits the whole score when one serious check fails.</p>
         <p class="hint" id="r-place-d">Your ticks and your place. Saved in this browser, for this copy of the guide only.</p>
         <p id="r-place-undo" class="notice" hidden>Progress cleared. <button type="button" class="linkish" id="r-place-back">Undo</button></p></div>
       <div class="reset needs-abl"><button type="button" id="r-bookmarks" aria-describedby="r-bookmarks-d">Clear bookmarks</button>
-        <p class="hint" id="r-bookmarks-d">Your bookmarks and their notes, in this browser only.</p>
+        <p class="hint" id="r-bookmarks-d">Your bookmarks, in this browser only. Your notes stay.</p>
         <p id="r-bookmarks-undo" class="notice" hidden>Bookmarks cleared. <button type="button" class="linkish" id="r-bookmarks-back">Undo</button></p></div>
       <div class="reset needs-abl"><button type="button" id="r-all" aria-expanded="false" aria-controls="r-all-c">Start over</button>
-        <div class="confirm" id="r-all-c" role="group" aria-labelledby="r-all-t" hidden><p id="r-all-t">This clears your setup, your values, your ticks, your place, your bookmarks and your answers in steps, in this browser only. Your theme and keyboard shortcuts stay. Your files, your instance and GitHub aren't touched.</p><button type="button" data-yes>Start over</button> <button type="button" data-no>Cancel</button></div></div>
+        <div class="confirm" id="r-all-c" role="group" aria-labelledby="r-all-t" hidden><p id="r-all-t">This clears your setup, your values, your ticks, your place, your bookmarks, your notes and your answers in steps, in this browser only. Your theme and keyboard shortcuts stay. Your files, your instance and GitHub aren't touched.</p><button type="button" data-yes>Start over</button> <button type="button" data-no>Cancel</button></div></div>
     </section>
   </div>
 </dialog>
@@ -11229,10 +11488,10 @@ limits the whole score when one serious check fails.</p>
   document.addEventListener('pointerdown',function(e){if(openTip&&!openTip.btn.parentNode.contains(e.target))closeTip(false);});
   window.addEventListener('scroll',function(){if(openTip)placeTip(openTip);},{passive:true});
   window.addEventListener('resize',function(){if(openTip)placeTip(openTip);});
-  // #37: every bookmark key this page has held (on load, and since). ABL.set lets a later write keep one the guide no
-  // longer has (Undo, a note edited beside it), but never add a new one.
+  // #37: every bookmark and note key this page has held (on load, and since). ABL.set lets a later write keep one the
+  // guide no longer has (Undo, a note edited beside it), but never add a new one.
   var bmKnown={};
-  function knowBookmarks(s){(s.bookmarks||[]).forEach(function(b){if(b&&typeof b.key==='string')bmKnown[b.key]=1;});}
+  function knowBookmarks(s){(s.bookmarks||[]).concat(s.notes||[]).forEach(function(b){if(b&&typeof b.key==='string')bmKnown[b.key]=1;});}
   knowBookmarks(state);
   // remote: the change came from another tab of this copy (a storage event): abl:change says so, so an Undo offered
   // here for the old state can end (it would undo the other tab's change).
@@ -12483,11 +12742,10 @@ var ABLLand=(function(){
 })();
 </script>
 <script id="abl-bookmarks">
-/* Bookmarks (#37): a 🔖 toggle in every keyed heading's tools box, the top bar's list (a disclosure with a list of
-   buttons), the rail's marks, ] and [, and Clear bookmarks with Undo. Every write goes through ABL.set (in memory when
-   the browser won't save), every message through ABL.announce. Names and notes go in with textContent only. Focus moves
-   only when the reader acts: into the list when they open it, to the heading Go or ] lands on. Without the engine
-   there's nowhere to keep them: the button and the toggles stay out. */
+/* Bookmarks (#37): a 🔖 toggle in every keyed heading's tools box, the rail's marks, ] and [, and Clear bookmarks with
+   Undo. Their list is the Notes panel's (abl-notes). Every write goes through ABL.set (in memory when the browser won't
+   save), every message through ABL.announce. Names go in with textContent only. Focus moves only when the reader
+   acts: to the heading ] or [ lands on. Without the engine there's nowhere to keep them: the toggles stay out. */
 (function(){
   'use strict';
   var A=window.ABL||null,P=window.ABLProgress||null,BM=window.ABLBookmarks||null,L=window.ABLLand||null;
@@ -12497,19 +12755,17 @@ var ABLLand=(function(){
   function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
   function shown(e){return !!e&&e.getClientRects().length>0;}
   var M=A.manifest(),R=(M.progress&&M.progress.renames)||{},names=(M.progress&&M.progress.docs)||{};
-  var btn=$('bm-btn'),pop=$('bm-pop'),list=$('bm-list'),none=$('bm-none'),count=btn.querySelector('.bm-c'),bar=$('topbar');
+  var btn=$('bm-btn'),bar=$('topbar');
   // Stored keys go through the renames, and are written back (as #15's progress is).
   try{var mg=BM.migrate(A.get().bookmarks,R);if(mg.changed)A.set('bookmarks',mg.list);}catch(e){console.error(e);}
   function get(){return A.get().bookmarks||[];}
-  var hold=false;  // a write whose row is updated in place: the list isn't rebuilt under the reader's pointer
   function put(next,src){try{A.set('bookmarks',next,src?{source:src}:undefined);return true;}catch(e){console.error(e);return false;}}
   var els={};document.querySelectorAll('main [data-step]').forEach(function(h){els[h.getAttribute('data-step')]=h;});
   var steps=(M.steps||[]).filter(function(s){return els[s.k];}).map(function(s){var o={};for(var k in s)o[k]=s[k];o.el=els[s.k];return o;});
   function rows(){return BM.rows(get(),steps);}
-  function longName(r){return r.step?P.longName(r.step,names):BM.place(r,names);}
 
   // --- The toggles: a button in each keyed heading's tools box, after the tick. Outline off, filled on. The same icon
-  // marks the rail and sits in the top bar's button and the list's empty state.
+  // marks the rail.
   function icon(){
     var ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),p=document.createElementNS(ns,'path');
     svg.setAttribute('class','bm-ico');svg.setAttribute('viewBox','0 0 16 16');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
@@ -12559,159 +12815,20 @@ var ABLLand=(function(){
     if(!a.ablRb){if(!on)return;var m=el('span','rb'),sr=el('span','sr-only',', bookmarked');m.appendChild(icon());m.setAttribute('aria-hidden','true');a.appendChild(m);a.appendChild(sr);a.ablRb=[m,sr];}
     a.ablRb[0].hidden=a.ablRb[1].hidden=!on;
   }
-
-  // --- The list: rows in guide order, each with Go, a note, and Remove. Rebuilt only when it's open and changes, and
-  // never while a note is being typed; focus is put back on the same button of the same row.
-  var editing=false,gone=null;
-  function act(key,role,text,label,fn){
-    var b=el('button',null,text);b.type='button';b.setAttribute('aria-label',label);
-    b.setAttribute('data-bmk',key);b.setAttribute('data-bmr',role);b.addEventListener('click',fn);return b;
-  }
-  function hiddenWhy(r){try{return r.step&&!A.visible(r.step.el)?(A.why(r.step.el)||'Not for your setup'):null;}catch(e){return null;}}
-  function row(r){
-    var li=el('li'),name=longName(r),hid=hiddenWhy(r),acts=el('span','bm-acts');
-    li.appendChild(el('span','bm-place',BM.place(r,names)));
-    var note=el('span','bm-note',r.note?'“'+r.note+'”':'');note.hidden=!r.note;li.appendChild(note);
-    if(r.missing)li.appendChild(el('span','bm-gone','This step is no longer in the guide.'));
-    else if(hid)li.appendChild(el('span','bm-hid','Hidden for your setup · '+hid));
-    if(!r.missing){
-      acts.appendChild(act(r.key,'go',hid?'Show':'Go',(hid?'Show and go to: ':'Go to: ')+name,function(){goTo(r);}));
-      acts.appendChild(act(r.key,'note',r.note?'Edit note':'Add note',(r.note?'Edit note: ':'Add note: ')+name,function(){editNote(li,r,name);}));
-    }
-    acts.appendChild(act(r.key,'rm','Remove','Remove bookmark: '+name,function(){removeRow(r,name);}));
-    li.appendChild(acts);
-    return li;
-  }
-  function goneRow(){
-    var li=el('li','bm-undone');
-    li.appendChild(document.createTextNode('Removed: '+gone.place+'. '));
-    li.appendChild(act(gone.entry.key,'undo','Undo','Undo remove: '+gone.name,function(){
-      var g=gone;endGone(true,true);
-      put(BM.restore(get(),g.entry));
-      render();
-      var t=list.querySelector('[data-bmk="'+g.entry.key+'"]');if(t)t.focus();
-      A.announce('Bookmark back: '+g.name+'.');
-    }));
-    return li;
-  }
-  function render(){
-    var a=document.activeElement,fk=null,fr=null;
-    if(a&&list.contains(a)){fk=a.getAttribute('data-bmk');fr=a.getAttribute('data-bmr');}
-    var rs=rows(),items=rs.map(row);
-    if(gone)items.splice(Math.min(gone.pos,items.length),0,goneRow());
-    list.textContent='';items.forEach(function(li){list.appendChild(li);});
-    none.hidden=items.length>0;
-    if(fk){var t=list.querySelector('[data-bmk="'+fk+'"][data-bmr="'+fr+'"]')||list.querySelector('[data-bmk="'+fk+'"]');if(t)t.focus();}
-  }
   function sync(){
-    var mine=get(),on={};
-    mine.forEach(function(b){on[b.key]=1;});
+    var on={};
+    get().forEach(function(b){on[b.key]=1;});
     Object.keys(toggles).forEach(function(k){toggles[k].b.setAttribute('aria-pressed',on[k]?'true':'false');if(rail[k])railMark(rail[k],!!on[k]);});
-    count.textContent=String(mine.length);
-    $('bm-nosave').hidden=A.info().saving;
-    var keysOn=A.get().setup.shortcuts!==false;  // the footer says when Setup has turned ] and [ off
-    $('bm-keys').hidden=!keysOn;$('bm-keys-off').hidden=keysOn;
-    if(!pop.hidden&&!editing&&!hold)render();
   }
   sync();
-  document.addEventListener('abl:change',function(e){
-    // Not on #15's place saving (progress.*), which writes while the reader types a note.
-    if(e.detail.keys.some(function(k){return k==='bookmarks'||/^(setup|choices)\./.test(k);}))sync();
-  });
-  // Removed from the list: "Removed: … Undo" stands in its place for 10 seconds (longer while Undo has focus).
-  function endGone(force,quiet){
-    if(!gone)return;
-    clearTimeout(gone.timer);
-    var a=document.activeElement,had=!!(a&&list.contains(a)&&a.getAttribute('data-bmr')==='undo');
-    if(!force&&had){gone.timer=setTimeout(function(){endGone(false);},1000);return;}
-    gone=null;
-    if(quiet)return;
-    if(!pop.hidden)render();
-    if(had){var f=list.querySelector('button');(f||btn).focus();}
-  }
-  function removeRow(r,name){
-    var rs=rows(),pos=0,res=BM.remove(get(),r.key);
-    rs.forEach(function(x,i){if(x.key===r.key)pos=i;});
-    if(!res.gone)return;
-    endGone(true,true);
-    hold=true;var ok=put(res.list);hold=false;
-    if(!ok)return;
-    gone={entry:res.gone,pos:pos,name:name,place:BM.place(r,names),timer:setTimeout(function(){endGone(false);},10000)};
-    render();
-    var u=list.querySelector('button[data-bmr="undo"]');if(u)u.focus();
-    A.announce('Bookmark removed: '+name+'. Undo is in its place, for 10 seconds.');
-  }
-  // A note, edited in its row: Enter or leaving the box saves it, Esc puts it back. The row is updated in place.
-  function editNote(li,r,name){
-    editing=true;
-    var note=li.querySelector('.bm-note'),acts=li.querySelector('.bm-acts'),inp=el('input'),hint=el('span','hint','Up to '+BM.MAX+' characters. Enter saves, Esc cancels.');
-    inp.type='text';inp.maxLength=BM.MAX;inp.value=r.note;inp.autocomplete='off';
-    inp.setAttribute('aria-label','Note: '+name);hint.id='bm-note-hint';inp.setAttribute('aria-describedby','bm-note-hint');
-    note.hidden=true;acts.hidden=true;
-    li.insertBefore(inp,acts);li.insertBefore(hint,acts);
-    inp.focus();
-    var done=false;
-    function finish(save,back){
-      if(done)return;done=true;
-      var text=inp.value.replace(/\s+/g,' ').trim().slice(0,BM.MAX),said=null;
-      if(save&&text!==r.note){
-        hold=true;var ok=put(BM.setNote(get(),r.key,text));hold=false;
-        if(ok){r.note=text;said=text?'Note saved.':'Note removed.';}
-      }
-      editing=false;
-      inp.remove();hint.remove();
-      note.textContent=r.note?'“'+r.note+'”':'';note.hidden=!r.note;acts.hidden=false;
-      var nb=acts.querySelector('[data-bmr="note"]');
-      if(nb){nb.textContent=r.note?'Edit note':'Add note';nb.setAttribute('aria-label',(r.note?'Edit note: ':'Add note: ')+name);}
-      if(back&&nb)nb.focus();
-      if(said)A.announce(said);
-    }
-    inp.addEventListener('keydown',function(e){
-      if(e.key==='Enter'){e.preventDefault();finish(true,true);}
-      else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();finish(false,true);}
-    });
-    inp.addEventListener('blur',function(){finish(true,false);});
-  }
-  // Up and Down move between rows, on the same button; Home and End go to the first and last row.
-  list.addEventListener('keydown',function(e){
-    if(editing)return;
-    var b=e.target.closest&&e.target.closest('button[data-bmr]');if(!b)return;
-    var lis=[].slice.call(list.children),i=lis.indexOf(b.closest('li')),j;
-    if(e.key==='ArrowDown')j=Math.min(i+1,lis.length-1);else if(e.key==='ArrowUp')j=Math.max(i-1,0);
-    else if(e.key==='Home')j=0;else if(e.key==='End')j=lis.length-1;else return;
-    e.preventDefault();
-    var t=lis[j].querySelector('button[data-bmr="'+b.getAttribute('data-bmr')+'"]')||lis[j].querySelector('button');if(t)t.focus();
-  });
-
-  // --- The popover: non-modal, straight after its button, like Detail. Esc, a click outside, or tabbing out closes it.
-  function openPop(){
-    gone=null;render();pop.hidden=false;btn.setAttribute('aria-expanded','true');
-    var f=list.querySelector('button');
-    if(f)f.focus();else A.announce(BM.none);
-  }
-  function closePop(focusBtn){
-    if(pop.hidden)return;
-    if(editing&&document.activeElement)document.activeElement.blur();  // saves the note being typed
-    pop.hidden=true;btn.setAttribute('aria-expanded','false');
-    if(gone){clearTimeout(gone.timer);gone=null;}
-    if(focusBtn)btn.focus();
-  }
-  btn.addEventListener('click',function(){if(pop.hidden)openPop();else closePop(true);});
-  slot.addEventListener('keydown',function(e){if(e.key==='Escape'&&!pop.hidden){e.preventDefault();closePop(true);}});
-  slot.addEventListener('focusout',function(e){if(e.relatedTarget&&!slot.contains(e.relatedTarget))closePop(false);});
-  document.addEventListener('pointerdown',function(e){if(!pop.hidden&&!slot.contains(e.target))closePop(false);});
+  document.addEventListener('abl:change',function(e){if(e.detail.keys.indexOf('bookmarks')>-1)sync();});
 
   // --- Going to a bookmark: search's landing (ABLLand), so closed boxes open and a step hidden for the reader's setup
   // is shown for this visit (ABL.peek), never changing the setup.
-  var jumped=null;  // the bookmark ] or [ (or Go) last went to, and where the page was then
+  var jumped=null;  // the bookmark ] or [ last went to, and where the page was then
   function land(r){
     L.land(r.step.el,r.step.id,{from:'your bookmarks',source:btn,hide:function(){btn.focus();}});
     jumped={i:r.i,y:window.scrollY};
-  }
-  function goTo(r){
-    closePop(false);
-    land(r);
-    A.announce('Bookmark: '+BM.place(r,names)+'.'+(r.note?' Note: '+r.note+(/[.!?]$/.test(r.note)?'':'.'):''));
   }
   // The reading position: the last heading above the scroll spy's line (abl-ui's inView, which Stuck? uses too, #20).
   var heads=steps.map(function(s){return s.el;});
@@ -12739,7 +12856,6 @@ var ABLLand=(function(){
     if(jumped&&Math.abs(window.scrollY-jumped.y)>2)jumped=null;  // the reader has moved since
     var rs=rows(),j=BM.next(rs,BM.position(view(),jumped?jumped.i:null),e.key===']'?1:-1);
     if(!j){A.announce(rs.length?'None of your bookmarks is in this version of the guide.':BM.none);return;}
-    closePop(false);
     land(j.row);
     A.announce(BM.jump(j,names));
   });
@@ -12765,8 +12881,552 @@ var ABLLand=(function(){
   document.addEventListener('abl:change',function(e){
     if(!e.detail.remote)return;
     endBubble(true);
-    endGone(true);  // its row goes, and focus with it moves to the list's first button
     clearTimeout(rbT);rbPrev=null;if(rbU)rbU.hidden=true;
+  });
+})();
+</script>
+<script id="abl-notes">
+/* Notes: the top bar's Notes button opens a side sheet, like Stuck? (#20). Here: the step at the top of the screen,
+   following the reader as they scroll, with its notes, a note to add, a spot to pin one to, and its bookmark. All
+   notes: page by page, each with Go, Edit and Remove. The scratchpad, for anything else. Download my notes saves the
+   lot as Markdown. A note pinned to a spot shows a marker in the page's margin: a pointer's way back to it (the
+   keyboard's and a screen reader's is Here). Every write goes through ABL.set, every message through ABL.announce;
+   the reader's words go in with textContent only. Focus moves only when the reader acts. */
+(function(){
+  'use strict';
+  var A=window.ABL||null,P=window.ABLProgress||null,BM=window.ABLBookmarks||null,N=window.ABLNotes||null,L=window.ABLLand||null,U=window.ABLUI||null;
+  function $(id){return document.getElementById(id);}
+  var slot=$('slot-bookmarks'),btn=$('bm-btn'),panel=$('notes'),mainEl=$('main');
+  if(!A||!P||!BM||!N||!L||!U||!slot||!btn||!panel||!mainEl){if(slot)slot.hidden=true;return;}
+  var M=A.manifest(),R=(M.progress&&M.progress.renames)||{},names=(M.progress&&M.progress.docs)||{};
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
+  function shown(e){return !!e&&e.getClientRects().length>0;}
+  function vis(e){try{return A.visible(e);}catch(x){return true;}}
+  function why(e){try{return A.why(e)||'Not for your setup';}catch(x){return 'Not for your setup';}}
+  var heads={};mainEl.querySelectorAll('[data-step]').forEach(function(h){heads[h.getAttribute('data-step')]=h;});
+  var steps=(M.steps||[]).filter(function(s){return heads[s.k];}).map(function(s){var o={};for(var k in s)o[k]=s[k];o.el=heads[s.k];return o;});
+  if(!steps.length){slot.hidden=true;return;}
+  var byKey={};steps.forEach(function(s,i){s.i=i;byKey[s.k]=s;});
+  var headEls=steps.map(function(s){return s.el;});
+  function bms(){return A.get().bookmarks||[];}
+  function list(){return A.get().notes||[];}
+  function put(path,v){try{A.set(path,v);return true;}catch(e){console.error(e);return false;}}
+  function longName(s){return P.longName(s,names);}
+  var title=$('notes-title'),count=btn.querySelector('.bm-c'),phone=window.matchMedia('(max-width:640px)'),uid=0;
+
+  // Stored keys go through the renames; a bookmark's note from before Notes becomes a note on its step.
+  try{var mg=N.migrate(A.get().notes,R);if(mg.changed)A.set('notes',mg.list);}catch(e){console.error(e);}
+  function adopt(){
+    var r=N.adopt(bms(),list(),Date.now(),Math.random());
+    if(!r)return;
+    try{A.set('notes',r.notes);A.set('bookmarks',r.bookmarks);}catch(e){console.error(e);}
+  }
+  adopt();
+
+  // --- Spots: the blocks a note can pin to, found by their step and their first words, so a guide rebuilt around
+  // them still finds them. A code block is its whole box; a block the page's own controls are part of isn't one.
+  var SPOTS='p,li,.codeblock,pre,table,blockquote,h3,h4,h5,dt,dd,summary';
+  var SKIP='.cbbar,.lmarks,.lpeek,.abl-peek,.step-tools,.term-tip,.copymsg,.resume';
+  var STRIP='.copy,.copymsg,.cbbar,.lmarks,.lpeek,.abl-for,.abl-peek,.abl-topic,.step-tools,.term-tip,.bm,.rb,.bm-undo,.sr-only,.tag,[data-value]';
+  function blockOf(node){
+    var e=node&&(node.nodeType===1?node:node.parentElement);
+    if(!e||!e.closest||!mainEl.contains(e)||e.closest(SKIP))return null;
+    var cb=e.closest('.codeblock');if(cb)return cb;
+    var b=e.closest(SPOTS);
+    return b&&mainEl.contains(b)?b:null;
+  }
+  // A block's words, without the page's controls or the reader's values (which change): what its spot keeps.
+  var said=new WeakMap();
+  function words(b){
+    if(said.has(b))return said.get(b);
+    var src=b.classList.contains('codeblock')?(b.querySelector(':scope>pre')||b):b,c=src.cloneNode(true);
+    c.querySelectorAll(STRIP).forEach(function(x){x.remove();});
+    var w=N.spot(c.textContent);said.set(b,w);return w;
+  }
+  // Every block, by step, in page order (built once, when first needed: line notes and questions have run by then).
+  var index=null,order=null,owner=null,flat=null;
+  function build(){
+    if(index)return;
+    index={};order=new WeakMap();owner=new WeakMap();flat=[];var cur=null;
+    mainEl.querySelectorAll('[data-step],'+SPOTS).forEach(function(e){
+      var k=e.getAttribute('data-step');
+      if(k&&byKey[k]){cur=k;owner.set(e,k);order.set(e,flat.length);flat.push(e);return;}
+      if(!cur||blockOf(e)!==e)return;
+      (index[cur]=index[cur]||[]).push(e);owner.set(e,cur);order.set(e,flat.length);flat.push(e);
+    });
+  }
+  // Where a note is: its block (the one that shows for the reader's setup, else the first), or its step's heading,
+  // for a note on the step or one whose words the guide no longer has (moved).
+  function where(n){
+    var s=byKey[n.key];if(!s)return null;
+    if(!n.f)return {step:s,el:s.el,moved:false};
+    build();
+    var bs=index[n.key]||[],first=null,i,b;
+    for(i=0;i<bs.length;i++){b=bs[i];if(n.t&&b.tagName!==n.t)continue;if(words(b)!==n.f)continue;if(vis(b))return {step:s,el:b,moved:false};if(!first)first=b;}
+    if(!first&&n.f.length>=40)for(i=0;i<bs.length&&!first;i++)if(words(bs[i]).slice(0,40)===n.f.slice(0,40))first=bs[i];  // reworded at its end
+    return first?{step:s,el:first,moved:false}:{step:s,el:s.el,moved:true};
+  }
+  function positions(){
+    var pos={};build();
+    list().forEach(function(n){if(!n.f)return;var w=where(n);if(w&&!w.moved&&order.has(w.el))pos[n.id]=order.get(w.el);});
+    return pos;
+  }
+
+  // --- The margin's markers: one per block that holds a note, aria-hidden (the panel's Here lists the same notes).
+  var layer=el('div');layer.id='pin-layer';layer.setAttribute('aria-hidden','true');document.body.appendChild(layer);
+  var icon=btn.querySelector('svg'),markRaf=false;
+  function marks(){if(markRaf)return;markRaf=true;requestAnimationFrame(function(){markRaf=false;draw();});}
+  function draw(){
+    layer.textContent='';
+    if(document.documentElement.hasAttribute('data-abl-survey'))return;
+    var at=new Map(),lr=layer.getBoundingClientRect(),mr=mainEl.getBoundingClientRect();
+    list().forEach(function(n){
+      if(!n.f)return;var w=where(n);if(!w||w.moved||!shown(w.el))return;
+      if(!at.has(w.el))at.set(w.el,[]);at.get(w.el).push(n);
+    });
+    at.forEach(function(ns,b){
+      var r=b.getBoundingClientRect();if(!r.width&&!r.height)return;
+      var x=r.left,l=b.tagName==='LI'&&b.parentElement?b.parentElement.getBoundingClientRect():null;if(l)x=Math.min(x,l.left);
+      var m=el('div','pin-mark'+(ns.length>1?' many':'')),left=x-32,top=r.top+1;
+      if(left<mr.left+2){left=r.right-20;top=r.top-12;}  // no margin (a phone): on the block's top right corner
+      m.style.left=(left-lr.left)+'px';m.style.top=(top-lr.top)+'px';
+      m.title=ns.length===1?'Your note: '+N.excerpt(ns[0].text,90):ns.length+' notes here';
+      if(ns.length>1)m.appendChild(el('span','pin-n',String(ns.length)));else if(icon)m.appendChild(icon.cloneNode(true));
+      m.addEventListener('mouseenter',function(){b.classList.add('pin-lit');});
+      m.addEventListener('mouseleave',function(){b.classList.remove('pin-lit');});
+      m.addEventListener('click',function(){b.classList.remove('pin-lit');openAt(ns[0].key,ns[0].id);});
+      layer.appendChild(m);
+    });
+  }
+  window.addEventListener('resize',marks);
+  window.addEventListener('load',function(){index=null;marks();});
+  document.addEventListener('toggle',marks,true);
+  if(window.ResizeObserver)new ResizeObserver(marks).observe(mainEl);
+  marks();
+
+  // --- The panel's cards. A note: where it is, its words, Go, Edit and Remove. A bookmark: Go, Add note, Remove.
+  function act(text,label,fn,cls){var b=el('button',cls||null,text);b.type='button';if(label)b.setAttribute('aria-label',label);b.setAttribute('data-act',text);b.addEventListener('click',fn);return b;}
+  function bmIcon(){var s=$('notes-bm').querySelector('svg');return s?s.cloneNode(true):document.createTextNode('');}
+  function noteName(n){var s=byKey[n.key];return (n.f?N.spotLabel(n.f):'On this step')+', '+(s?longName(s):'a step no longer in the guide');}
+  function card(n){
+    var li=el('li','note-card'),w=where(n),hid=w&&!vis(w.el)?why(w.el):null,short=N.excerpt(n.text,40);
+    li.setAttribute('data-nid',n.id);
+    li.appendChild(el('span','note-kind',w&&w.moved?'On this step':N.spotLabel(n.f)));
+    li.appendChild(el('p','note-text',n.text));
+    if(w&&w.moved)li.appendChild(el('span','note-flag','Its spot has changed in the guide, so it sits on its step now.'));
+    else if(w&&n.f&&hid)li.appendChild(el('span','note-flag','Hidden for your setup · '+hid));
+    var acts=el('span','note-acts');
+    if(w&&n.f&&!w.moved)acts.appendChild(act(hid?'Show':'Go',(hid?'Show and go to: ':'Go to: ')+noteName(n),function(){go(n);}));
+    acts.appendChild(act('Edit','Edit note: '+short,function(){editCard(li,n);}));
+    acts.appendChild(act('Remove','Remove note: '+short,function(){removeNote(n);}));
+    li.appendChild(acts);
+    return li;
+  }
+  // A step in All notes: its name, Bookmarked when it is, Go and Add note, then its notes. One block per step.
+  function stepBlock(key,b,ns){
+    var s=byKey[key],li=el('li','note-step'+(b?' bmk':'')),hid=s&&!vis(s.el)?why(s.el):null,name=s?longName(s):key;
+    var head=el('div','note-step-h'),acts=el('span','note-acts'),sub=el('ul','notes-sub');
+    li.setAttribute('data-bk',key);
+    head.appendChild(el('span','note-where',s?N.stepName(s):key));
+    if(b){var k=el('span','note-kind');k.appendChild(bmIcon());k.appendChild(document.createTextNode(' Bookmarked'));head.appendChild(k);}
+    if(!s)head.appendChild(el('span','note-flag','This step is no longer in the guide.'));
+    else if(hid)head.appendChild(el('span','note-flag','Hidden for your setup · '+hid));
+    if(s){
+      acts.appendChild(act(hid?'Show':'Go',(hid?'Show and go to: ':'Go to: ')+name,function(){goStep(s);}));
+      acts.appendChild(act('Add note','Add note: '+name,function(){acts.hidden=true;newNote(li,sub,s.k,null,function(){acts.hidden=false;});}));
+    }
+    if(b)acts.appendChild(act('Remove bookmark','Remove bookmark: '+name,function(){removeBm(b);}));
+    head.appendChild(acts);li.appendChild(head);
+    ns.forEach(function(n){sub.appendChild(card(n));});
+    li.appendChild(sub);
+    return li;
+  }
+
+  // --- Rendering. Never while a note is being typed (editing); focus goes back to the same button of the same card.
+  var here=null,editing=0,hereEdit=false;
+  var hereList=$('notes-here'),hereBm=$('notes-bm'),nowP=$('notes-now'),nowT=$('notes-now-text');
+  function viewKey(){var i=U.inView(headEls);return (i<0?steps[0]:steps[i]).k;}
+  function renderHere(){
+    var s=byKey[here]||steps[0];here=s.k;
+    $('notes-at').textContent=P.name(s,names);
+    hereList.textContent='';
+    var mine=list().filter(function(n){return n.key===s.k;}),g=N.groups([],mine,steps,positions());
+    (g[0]?g[0].items:[]).forEach(function(it){hereList.appendChild(card(it.note));});
+    hereList.hidden=!hereList.children.length;
+    hereBm.setAttribute('aria-pressed',BM.has(bms(),s.k)?'true':'false');
+    hereBm.setAttribute('aria-label',BM.toggleName(s,names));
+    nowP.hidden=true;
+  }
+  function renderAll(){
+    var gs=N.groups(bms(),list(),steps,positions()),box=$('notes-all');
+    box.textContent='';
+    gs.forEach(function(g,i){
+      var h=el('h4','notes-page',N.pageName(g.doc,names)),ul=el('ul','notes-list');
+      h.id='notes-pg-'+i;ul.setAttribute('aria-labelledby',h.id);
+      var by={},order=[];  // one block per step: its bookmark and its notes, in the groups' order
+      g.items.forEach(function(it){
+        if(!by[it.key]){by[it.key]={b:null,ns:[]};order.push(it.key);}
+        if(it.kind==='bm')by[it.key].b=it.bm;else by[it.key].ns.push(it.note);
+      });
+      order.forEach(function(k){ul.appendChild(stepBlock(k,by[k].b,by[k].ns));});
+      box.appendChild(h);box.appendChild(ul);
+    });
+    $('notes-none').hidden=gs.length>0;
+    var n=N.count(bms(),list());$('notes-all-n').textContent=n?' ('+n+')':'';
+  }
+  function render(){
+    if(editing)return;
+    var a=document.activeElement,c=a&&panel.contains(a)&&a.closest?a.closest('[data-nid],[data-bk]'):null,inH=c&&hereList.contains(c);
+    var id=c?(c.getAttribute('data-nid')||c.getAttribute('data-bk')):null,what=c?a.getAttribute('data-act'):null;
+    renderHere();renderAll();
+    if(id)focusCard(id,what,inH);
+  }
+  function focusCard(id,what,inHere){
+    var sel='[data-nid="'+id+'"],[data-bk="'+id+'"]',root=inHere?hereList:panel,c=root.querySelector(sel)||panel.querySelector(sel);
+    if(!c)return false;
+    var b=(what&&c.querySelector('button[data-act="'+what+'"]'))||c.querySelector('button');
+    if(b)b.focus();
+    return !!b;
+  }
+
+  // --- Writing a note: a box in its place. Save, Ctrl+Enter or Esc, or leaving the box, keeps it; Cancel drops it.
+  function editor(host,before,o){
+    editing++;
+    var box=el('div','note-edit'),ta=el('textarea'),acts=el('span','note-acts'),hint=el('span','hint','Saved when you press Save or leave the box.');
+    if(o.head)box.appendChild(el('span','note-kind',o.head));
+    ta.rows=4;ta.maxLength=N.MAX;ta.value=o.text||'';ta.spellcheck=true;ta.setAttribute('aria-label',o.label);
+    hint.id='notes-ed-'+(++uid);ta.setAttribute('aria-describedby',hint.id);
+    box.appendChild(ta);box.appendChild(hint);
+    var done=false,pressing=false;
+    function finish(save,refocus){
+      if(done)return;done=true;editing--;
+      if(box.contains(document.activeElement)&&!refocus)document.activeElement.blur();
+      box.remove();
+      if(save)o.save(ta.value,refocus);else o.cancel(refocus);
+    }
+    acts.appendChild(act('Save',null,function(){finish(true,true);}));
+    acts.appendChild(act('Cancel',null,function(){finish(false,true);}));
+    box.appendChild(acts);
+    ta.addEventListener('keydown',function(e){
+      if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();finish(true,true);}
+      else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();finish(true,true);}
+    });
+    // Leaving the box saves. A press on its own buttons isn't leaving (Safari doesn't focus a button it clicks).
+    box.addEventListener('pointerdown',function(){pressing=true;setTimeout(function(){pressing=false;},600);});
+    box.addEventListener('focusout',function(e){
+      if(e.relatedTarget&&box.contains(e.relatedTarget))return;
+      setTimeout(function(){if(!done&&!pressing&&!box.contains(document.activeElement))finish(true,false);},0);
+    });
+    host.insertBefore(box,before||null);
+    ta.focus();
+    return box;
+  }
+  function editCard(li,n){
+    li.querySelector('.note-text').hidden=true;li.querySelector('.note-acts').hidden=true;
+    editor(li,null,{text:n.text,label:'Note: '+noteName(n),save:function(v,refocus){
+      var r=N.edit(list(),n.id,v);
+      if(JSON.stringify(r.list)!==JSON.stringify(list())&&put('notes',r.list)){
+        if(r.gone){offer('Note removed: it had no words left.',restoreNote(r.gone));render();return;}
+        A.announce('Note saved.');
+      }
+      render();if(refocus)focusCard(n.id,'Edit');
+    },cancel:function(refocus){render();if(refocus)focusCard(n.id,'Edit');}});
+  }
+  // A new note, on a step (sp null) or a spot ({t, f, el}). back: where focus goes if nothing is saved.
+  var FULL='You have '+N.MAXN+' notes, the most this guide keeps. Remove one to add another.';
+  function newNote(host,before,key,sp,back){
+    var s=byKey[key];
+    if(list().length>=N.MAXN){
+      var nw=$('notes-new'),old=nw.querySelector('.notes-full'),msg=el('p','hint notes-full',FULL);
+      if(old)old.remove();
+      nw.appendChild(msg);setTimeout(function(){msg.remove();},10000);
+      A.announce(FULL);
+      if(typeof back==='function')back();else if(back&&back.focus)back.focus();
+      return;
+    }
+    if(sp&&sp.el)sp.el.classList.add('pin-lit');
+    if(key===here)hereEdit=true;
+    function end(){if(sp&&sp.el)sp.el.classList.remove('pin-lit');if(key===here)hereEdit=false;}
+    editor(host,before,{head:sp?N.spotLabel(sp.f):'New note on this step',label:'New note: '+(sp?N.spotLabel(sp.f)+', ':'')+longName(s),
+      save:function(v,refocus){
+        end();
+        var cur=list(),next=N.add(cur,{id:N.newId(cur,Date.now(),Math.random()),key:key,t:sp?sp.t:'',f:sp?sp.f:'',text:v,at:P.stamp(new Date())});
+        if(!next){
+          if(N.clean(v))A.announce(FULL);
+          if(typeof back==='function')back();render();if(refocus&&typeof back!=='function'&&back)back.focus();return;
+        }
+        if(put('notes',next))A.announce(sp?'Note pinned to its spot.':'Note saved.');
+        if(typeof back==='function')back();
+        render();if(refocus)focusCard(next[next.length-1].id,'Edit',key===here);
+        marks();
+      },
+      cancel:function(refocus){end();if(typeof back==='function')back();render();if(refocus&&back&&back.focus)back.focus();}});
+  }
+
+  // --- Removing: at once, with Undo at the top of the panel for 10 seconds (longer while it has focus).
+  var uP=$('notes-undo'),uT=$('notes-undo-t'),uB=$('notes-undo-b'),undoFn=null,undoT=0;
+  function offer(text,fn){
+    clearTimeout(undoT);undoFn=fn;uT.textContent=text;uP.hidden=false;uB.focus();
+    A.announce(text+' Undo is at the top of the panel, for 10 seconds.');
+    undoT=setTimeout(function(){endUndo(false);},10000);
+  }
+  function endUndo(force){
+    clearTimeout(undoT);
+    var had=uP.contains(document.activeElement);
+    if(!force&&had){undoT=setTimeout(function(){endUndo(false);},1000);return;}
+    uP.hidden=true;undoFn=null;
+    if(had&&isOpen())title.focus({preventScroll:true});
+  }
+  uB.addEventListener('click',function(){var f=undoFn;endUndo(true);if(f)f();});
+  function restoreNote(gone){return function(){
+    var next=N.restore(list(),gone);
+    if(!next.some(function(x){return x.id===gone.id;})){A.announce("The note couldn't come back: you have "+N.MAXN+' notes.');return;}
+    if(put('notes',next)){A.announce('Note back.');focusCard(gone.id,'Edit');}
+  };}
+  function removeNote(n){
+    var r=N.remove(list(),n.id);if(!r.gone||!put('notes',r.list))return;
+    render();marks();
+    offer('Note removed.',restoreNote(r.gone));
+  }
+  function removeBm(b){
+    var r=BM.remove(bms(),b.key),s=byKey[b.key];if(!r.gone||!put('bookmarks',r.list))return;
+    render();
+    offer('Bookmark removed: '+(s?P.name(s,names):b.key)+'.',function(){if(put('bookmarks',BM.restore(bms(),r.gone))){A.announce('Bookmark back.');focusCard(b.key,'Go');}});
+  }
+
+  // --- Going to a note: search's landing (ABLLand), so closed boxes open and a block hidden for the reader's setup
+  // shows for this visit. The block flashes, so the eye finds it.
+  function flash(e){e.classList.remove('pin-flash');void e.offsetWidth;e.classList.add('pin-flash');setTimeout(function(){e.classList.remove('pin-flash');},2100);}
+  function go(n){
+    var w=where(n);if(!w)return;
+    var t=L.land(w.el,w.step.id,{from:'your notes',source:btn,hide:function(){btn.focus();}});
+    if(t)flash(t);
+    A.announce((w.moved?'Its spot has changed, so here is its step. ':'')+'Your note: '+N.excerpt(n.text,140));
+  }
+  function goStep(s){
+    L.land(s.el,s.id,{from:'your notes',source:btn,hide:function(){btn.focus();}});
+    A.announce('Bookmark: '+P.name(s,names)+'.');
+  }
+
+  // --- Pinning to a spot: the page turns into a target. A pointer clicks a block; the keyboard moves through the
+  // blocks on screen with Up and Down, and Enter pins. Esc, Cancel, or a click outside the guide stops it.
+  var tip=el('div','pin-tip'),tipT=el('span','pin-tip-t','Click the spot to pin your note to.');
+  var tipK=el('span','pin-tip-k','Or ↑ ↓ to choose, Enter to pin · Esc cancels');
+  tip.id='pin-tip';tip.hidden=true;tip.tabIndex=-1;tip.setAttribute('role','group');tip.setAttribute('aria-label','Pin a note to a spot');
+  tip.appendChild(tipT);tip.appendChild(tipK);tip.appendChild(act('Cancel','Cancel pinning',function(){endPick(true);}));
+  document.body.appendChild(tip);
+  var pick=null;  // {cand, reopen}
+  function setCand(b,say){
+    if(!pick||b===pick.cand)return;
+    if(pick.cand)pick.cand.classList.remove('pin-cand');
+    pick.cand=b;if(!b)return;
+    b.classList.add('pin-cand');
+    if(say){b.scrollIntoView({block:'nearest'});A.announce(N.excerpt(b.hasAttribute('data-step')?b.textContent:words(b),110)||'A block with no words');}
+  }
+  function startPick(){
+    if(pick)return;
+    build();
+    var reopen=false;
+    if(phone.matches&&isOpen()){reopen=true;close(false);}  // on a phone the panel covers the page
+    pick={cand:null,reopen:reopen};
+    document.body.classList.add('pin-picking');tip.hidden=false;
+    var col=mainEl.querySelector('.doc')||mainEl,cr=col.getBoundingClientRect();tip.style.left=(cr.left+cr.width/2)+'px';  // over the guide's column, clear of the panel
+    tip.focus();
+    A.announce('Pin a note: click the block to pin it to. Or use the Up and Down arrows to choose one, and Enter to pin it. Escape cancels.');
+  }
+  function endPick(cancelled){
+    if(!pick)return;
+    var p=pick;pick=null;
+    if(p.cand)p.cand.classList.remove('pin-cand');
+    document.body.classList.remove('pin-picking');tip.hidden=true;
+    if(cancelled){
+      A.announce('Pinning cancelled.');
+      if(p.reopen||isOpen()){open(here,true);$('notes-pin').focus();}
+      else btn.focus();
+    }
+  }
+  function onScreen(){
+    var top=$('topbar').getBoundingClientRect().bottom,out=[];
+    flat.forEach(function(b){if(!shown(b))return;var r=b.getBoundingClientRect();if(r.bottom>top&&r.top<window.innerHeight)out.push(b);});
+    return out;
+  }
+  function choose(b){
+    var key=owner.get(b);if(!key)return;
+    endPick(false);
+    var head=b.hasAttribute('data-step'),f=head?'':words(b);
+    open(key,true);
+    newNote($('notes-new'),null,key,f?{t:b.tagName,f:f,el:b}:null,$('notes-pin'));
+  }
+  mainEl.addEventListener('mouseover',function(e){if(pick)setCand(blockOf(e.target)||(e.target.closest&&e.target.closest('[data-step]')),false);});
+  document.addEventListener('mousedown',function(e){if(pick&&mainEl.contains(e.target))e.preventDefault();},true);
+  document.addEventListener('click',function(e){
+    if(!pick||tip.contains(e.target))return;
+    if(mainEl.contains(e.target)){
+      e.preventDefault();e.stopPropagation();
+      var b=blockOf(e.target)||(e.target.closest&&e.target.closest('[data-step]'));
+      if(b&&owner.get(b))choose(b);
+      return;
+    }
+    endPick(false);  // the bar, the rail, the panel: pinning stops, and the click goes on
+  },true);
+  document.addEventListener('keydown',function(e){
+    if(!pick)return;
+    if(e.key==='Escape'){e.preventDefault();e.stopPropagation();endPick(true);return;}
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      e.preventDefault();
+      var all=flat.filter(shown),i=pick.cand?all.indexOf(pick.cand):-1;
+      if(i<0){var vis=onScreen();setCand(vis.length?vis[0]:all[0],true);return;}
+      setCand(all[Math.max(0,Math.min(all.length-1,i+(e.key==='ArrowDown'?1:-1)))],true);
+      return;
+    }
+    if(e.key==='Enter'&&pick.cand&&!(e.target.tagName==='BUTTON'&&tip.contains(e.target))){e.preventDefault();choose(pick.cand);}
+  },true);
+
+  // --- Opening and closing, as Stuck? does: wide screens make room beside the panel, keeping the reader's place.
+  function keep(fn){
+    var a=window.scrollY>0?A.anchor():null,top=a?a.getBoundingClientRect().top:0;fn();
+    if(a&&document.contains(a)){var d=a.getBoundingClientRect().top-top;if(d)window.scrollBy(0,d);}
+  }
+  function isOpen(){return !panel.hidden;}
+  function open(key,quiet){
+    var st=$('stuck'),sc=$('stuck-close');if(st&&!st.hidden&&sc)sc.click();  // one side sheet at a time
+    here=key||viewKey();render();
+    if(!isOpen()){
+      keep(function(){panel.hidden=false;document.body.classList.add('notes-open');});
+      btn.setAttribute('aria-expanded','true');panel.scrollTop=0;
+    }
+    if(!quiet)title.focus({preventScroll:true});
+    marks();
+  }
+  function close(focusButton){
+    if(!isOpen())return;
+    var a=document.activeElement;if(editing&&a&&panel.contains(a))a.blur();  // saves the note being typed
+    keep(function(){panel.hidden=true;document.body.classList.remove('notes-open');});
+    btn.setAttribute('aria-expanded','false');endUndo(true);
+    if(focusButton)btn.focus({preventScroll:true});
+    marks();
+  }
+  // From a margin marker: the panel on that step, the note's card lit and focused.
+  function openAt(key,id){
+    open(key,true);
+    var c=hereList.querySelector('[data-nid="'+id+'"]');
+    if(c){c.classList.add('lit');c.scrollIntoView({block:'nearest'});focusCard(id,'Edit',true);setTimeout(function(){c.classList.remove('lit');},1600);}
+  }
+  btn.addEventListener('click',function(){if(isOpen())close(false);else open();});
+  $('notes-close').addEventListener('click',function(){close(true);});
+  slot.addEventListener('keydown',function(e){if(e.key==='Escape'&&!e.defaultPrevented&&isOpen()&&!pick){e.preventDefault();close(true);}});
+  var sb=$('stuck-btn');if(sb)sb.addEventListener('click',function(){var st=$('stuck');if(isOpen()&&st&&st.hidden)close(false);});
+  // The panel's own links: Here, All notes, and the scratchpad (straight into its box).
+  panel.querySelectorAll('[data-to]').forEach(function(b){b.addEventListener('click',function(){
+    var t=$(b.getAttribute('data-to'));if(!t)return;t.scrollIntoView({block:'start'});t.focus({preventScroll:true});
+  });});
+  $('notes-add').addEventListener('click',function(){
+    var ex=$('notes-new').querySelector('textarea');if(ex){ex.focus();return;}
+    newNote($('notes-new'),null,here,null,$('notes-add'));
+  });
+  $('notes-pin').addEventListener('click',startPick);
+  hereBm.addEventListener('click',function(){
+    var s=byKey[here],on=!BM.has(bms(),here);
+    if(put('bookmarks',BM.toggle(bms(),here,on,P.stamp(new Date()))))A.announce(on?BM.added(s,names):BM.removed(s,names));
+  });
+  $('notes-switch').addEventListener('click',function(){here=viewKey();renderHere();$('notes-here-h').focus();});
+  // While the panel is open, Here follows the step at the top of the screen. Not while a note there is being written,
+  // or focus is on one of its cards: then it offers to switch.
+  var raf=false;
+  window.addEventListener('scroll',function(){
+    if(!isOpen()||raf)return;raf=true;
+    requestAnimationFrame(function(){
+      raf=false;var k=viewKey();
+      if(k===here){nowP.hidden=true;return;}
+      if(hereEdit||hereList.contains(document.activeElement)){nowT.textContent="You're now at "+P.name(byKey[k],names);nowP.hidden=false;}
+      else{here=k;renderHere();}
+    });
+  },{passive:true});
+
+  // --- The scratchpad: saved as the reader types (a moment after they stop), and when they leave it.
+  var sc=$('notes-scratch'),scS=$('notes-scratch-s'),scT=0;
+  sc.value=A.get().scratch||'';
+  function saveScratch(){
+    clearTimeout(scT);
+    var v=sc.value.slice(0,N.SCRATCH);
+    if(v===(A.get().scratch||''))return;
+    if(put('scratch',v))scS.textContent=A.info().saving?'Saved.':'Kept until you close this tab.';
+  }
+  sc.addEventListener('input',function(){scS.textContent='';clearTimeout(scT);scT=setTimeout(saveScratch,700);});
+  sc.addEventListener('blur',saveScratch);
+  window.addEventListener('pagehide',saveScratch);
+  sc.addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();saveScratch();}});
+
+  // --- Download my notes: a Markdown file, made here (nothing leaves the browser).
+  $('notes-dl').addEventListener('click',function(){
+    saveScratch();
+    var st=A.get(),md=N.markdown({bookmarks:st.bookmarks,notes:st.notes,scratch:st.scratch,steps:steps,names:names,pos:positions(),
+      title:'My notes · '+document.title,when:'Downloaded '+new Date().toLocaleString()+'.'});
+    try{
+      var url=URL.createObjectURL(new Blob([md],{type:'text/markdown;charset=utf-8'})),a=el('a');
+      a.href=url;a.download='my-lab-notes.md';document.body.appendChild(a);a.click();a.remove();
+      setTimeout(function(){URL.revokeObjectURL(url);},5000);
+      A.announce('Downloaded my-lab-notes.md.');
+    }catch(e){console.error(e);A.announce("This browser wouldn't save the file.");}
+  });
+
+  // --- The button's count, the footer's keys, the no-save notice; the panel and the markers follow every change.
+  function sync(){
+    count.textContent=String(N.count(bms(),list()));
+    $('notes-nosave').hidden=A.info().saving;
+    var keysOn=A.get().setup.shortcuts!==false;$('bm-keys').hidden=!keysOn;$('bm-keys-off').hidden=keysOn;
+  }
+  sync();
+  document.addEventListener('abl:change',function(e){
+    var k=e.detail.keys;
+    if(e.detail.remote)endUndo(true);
+    if(k.indexOf('bookmarks')>-1)setTimeout(adopt,0);  // after the writes that came with it (a setup code, Put my setup back)
+    if(!k.some(function(x){return x==='bookmarks'||x==='notes'||x==='scratch'||/^(setup|choices)\./.test(x);}))return;  // not #15's place
+    sync();marks();
+    if(k.indexOf('scratch')>-1&&document.activeElement!==sc)sc.value=A.get().scratch||'';
+    if(isOpen())render();
+  });
+
+  // --- Keys. n opens and closes the panel (Setup can turn single keys off, WCAG 2.1.4); not while typing, not over a
+  // dialog or Stuck?, and not with a modifier.
+  function typing(t){
+    if(!t||!t.tagName)return false;
+    if(t.isContentEditable||t.tagName==='TEXTAREA'||t.tagName==='SELECT')return true;
+    return t.tagName==='INPUT'&&!/^(button|checkbox|radio|submit|reset|range|color|file|image)$/i.test(t.type);
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='n'&&e.key!=='N')return;
+    if(e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey||pick||typing(e.target)||document.querySelector('dialog[open]'))return;
+    var st=$('stuck');if(st&&!st.hidden&&st.contains(e.target))return;
+    if(A.get().setup.shortcuts===false||document.documentElement.hasAttribute('data-abl-survey'))return;
+    e.preventDefault();
+    if(isOpen())close(true);else open();
+  });
+  // As Stuck? does (#46, #51): on a phone the panel covers the page, so going to a place in the page puts it away,
+  // focus moving into the page does too, and Tab past its last control gives focus back to Notes.
+  function covered(e){
+    if(!e||!mainEl.contains(e))return false;
+    var r=e.getBoundingClientRect(),p=panel.getBoundingClientRect();
+    return r.width>0&&r.right>p.left&&r.left<p.right&&r.bottom>p.top&&r.top<p.bottom;
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape'||e.defaultPrevented||!isOpen()||pick||slot.contains(document.activeElement))return;
+    if(document.querySelector('dialog[open]')||!$('detail-pop').hidden||!$('search-pop').hidden)return;
+    if(covered(document.activeElement))close(false);
+  });
+  function landed(){if(isOpen()&&phone.matches)close(panel.contains(document.activeElement));}
+  window.addEventListener('hashchange',landed);
+  document.addEventListener('abl:navigate',landed);
+  document.addEventListener('focusin',function(e){if(isOpen()&&phone.matches&&mainEl.contains(e.target))close(false);});
+  function lastStop(){
+    var c=panel.querySelectorAll('a[href],button,input,select,textarea,summary,[tabindex]');
+    for(var i=c.length-1;i>=0;i--){if(c[i].tabIndex>=0&&!c[i].disabled&&shown(c[i]))return c[i];}
+    return null;
+  }
+  panel.addEventListener('keydown',function(e){
+    if(e.key!=='Tab'||e.shiftKey||e.altKey||e.ctrlKey||e.metaKey||e.defaultPrevented||!isOpen()||!phone.matches)return;
+    if(document.activeElement!==lastStop())return;
+    e.preventDefault();close(true);
   });
 })();
 </script>
