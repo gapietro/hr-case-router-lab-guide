@@ -179,7 +179,8 @@ Settle these at the kick-off. The prompts and commands below use them.
    ✅ The list shows `[<alias>]`, and no `[lab-pdi]`.
 5. ⌨️ `gh auth status`. ✅ The active account can create repos in `<org>`.
    If not: `gh auth switch --user <that account>`.
-6. In `LAB.html`, open **Your values** (the setup chip, top right), click
+6. In `LAB.html`, open **Your values** (the setup chip, the first button in the top
+   bar), click
    **Clear my values** at the bottom of the panel, and confirm, so the
    steps you reuse show placeholders for section 7's swaps.
 7. Run Module 0 step 10, from `~/projects/<app>`. Then Module 0 steps 12

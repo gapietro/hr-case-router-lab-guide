@@ -1062,7 +1062,7 @@ Your instance must be awake. Type the password only here, never in Claude.
 
 ⌨️ **Terminal:** replace `dev123456` with your instance's name, from its
 address in step 1 (already done if it's in **Your values**: the setup
-chip, top right):
+chip, the first button in the top bar):
 
 ```
 now-sdk auth --add https://dev123456.service-now.com --type basic --alias lab-pdi
@@ -1773,7 +1773,7 @@ not the Code tab.
 
 ⌨️ **Terminal**, in your window. Replace `dev123456` with
 your instance's name (already done if it's in **Your values**: the setup
-chip, top right): that line
+chip, the first button in the top bar): that line
 teaches the guard to block any commit that names your instance. `-n` makes `git add` a dry run:
 
 ```

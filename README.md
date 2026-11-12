@@ -43,8 +43,8 @@ To read this guide as one page, after Module 0 step 4:
 <span data-show="os:win">**On Windows:** open File Explorer, click its
 address bar, type
 `%USERPROFILE%\projects\hr-case-router-lab-guide\LAB.html`, and press
-**Enter**.</span> **Copy my setup**, under the setup chip at the top right,
-brings your answers across.
+**Enter**.</span> **Copy my setup**, under the setup chip (the first button in the top
+bar), brings your answers across.
 
 You work alone on the day. Your partner joins you after the workshop, to
 attack your app and to test your runbook.
