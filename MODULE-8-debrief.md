@@ -2,16 +2,17 @@
 
 *⏱ 15 min · 16:05*
 
-Count your catches from the file, not memory, decide what to take home, and
-close the day's session.
+Count your catches from the file, not from memory. Decide what to take
+home. Then close the day's session.
 
 <details><summary>ℹ️ Why are we doing this?</summary>
 
 - **In real work:** after a build, the team counts what the process caught,
-  and where, to see which steps earned their time.
-- **Why it matters:** the count, not opinion, is the case for working this
-  way, or against it.
-- **Your mindset:** evidence, not memory, and honesty about what's real.
+  and where. That shows which steps earned their time.
+- **Why it matters:** the count makes the case for working this way, or
+  against it. Opinion doesn't.
+- **Your mindset:** trust evidence over memory, and be honest about what's
+  real.
 
 </details>
 
@@ -19,14 +20,14 @@ close the day's session.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The count comes from `catches.md`, the lines you kept in each module, so it
-rests on what was written down at the time, not on memory. It shows which
-parts of the method caught the most.
+The count comes from `catches.md`, the file you added a line to in each
+module. So it rests on what you wrote down at the time, not on memory. It
+also shows which parts of the method caught the most.
 
 </details>
 
-⌨️ **Terminal**, in your window: first check that the earlier modules left
-what this one needs.
+⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps: first
+check that the earlier modules left what this one needs.
 
 ```
 git -C ~/projects/hr-case-router-lab-guide pull -q
@@ -36,10 +37,11 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 8
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
 1. `git -C ~/projects/hr-case-router-lab-guide pull -q`: Gets the newest
-   copy of this guide, the check's script included. `-q` prints only errors.
+   copy of this guide, including the check's script. `-q` means it prints
+   only errors.
 2. `bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 8`:
-   Checks that each earlier module left what its checks promise, such as
-   your files, your GitHub repo and a clean `main`. It changes nothing. Each
+   Checks that each earlier module left what it promised, such as your
+   files, your GitHub repo and a clean `main`. It changes nothing. Each
    failed line names the step that fixes it.
 
 </details>
@@ -48,9 +50,10 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 8
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names, then run the check again. Can't fix one? Tell your
-instructor before you go on: every later step builds on it. They can help you
-fix it, or give you a checkpoint to start this module from.
+Do the step each ❌ names. Then run the check again. If you can't fix one,
+tell your instructor before you go on. Every later step builds on it. They
+can help you fix it. Or they can give you a checkpoint, the work so far
+ready made, to start this module from.
 
 </details>
 
@@ -65,31 +68,32 @@ grep '|' ~/projects/hr-case-router/catches.md | cut -d'|' -f2 | tr -d ' ' | sort
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
 1. `grep -c '|' ~/projects/hr-case-router/catches.md`: Counts the lines in
-   `catches.md` that hold a `|`. Each catch is one such line, so this is your
-   total.
+   `catches.md` that hold a `|`. Each catch is one such line. So the count
+   is your total.
 2. `grep '|' … | cut -d'|' -f2 | tr -d ' ' | sort | uniq -c`: Takes the same
-   lines and keeps only what caught each one, the part between the first and
-   second `|`, such as `design`. It then removes the spaces, sorts them, and
-   counts each kind. Each `|` between two commands passes what the first
-   prints to the next.
+   lines and keeps only what caught each mistake: the part between the
+   first and second `|`, such as `design`. Then it removes the spaces, sorts
+   the words and counts each kind. Each `|` between two commands passes what
+   the first prints to the next.
 
 </details>
 
-✅ Your total, then a count per kind, such as `3 design`.
+✅ It prints your total. Then it prints a count for each kind, such as
+`3 design`.
 
 ### 2. Add yours to the room's board
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 Your count alone is small. Added up across the room, it shows which parts of
-the day caught the most mistakes: that's the evidence for working this way,
+the day caught the most mistakes. That's the evidence for working this way,
 or against it.
 
 </details>
 
 Your instructor has a board with one column for each kind of catch. The
-kinds are the words in step 1's second list, such as `design` or `review`:
-each one names what caught the mistake.
+kinds are the words your second command in step 1 printed, such as
+`design` or `review`. Each one names what caught the mistake.
 
 1. Add your numbers to the board's columns, as your instructor asks.
 2. Then talk it through with the room:
@@ -99,59 +103,72 @@ each one names what caught the mistake.
      `consult`, `research` and `design`. A mistake caught there costs a
      sentence to fix, not a rebuild.
    - **How many came from someone checking finished work?** Today that's
-     `review`: Claude's code review found them after your own tests had
-     already passed. `grade`, `partner` and `drill` come after the
-     workshop.
+     `review`. Claude's code review found those mistakes after your own
+     tests had already passed. The `grade`, `partner` and `drill` catches
+     come after the workshop.
 
 ### 3. Sort out what's real
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-A demo can make unfinished work look done. Saying honestly which parts you've
-actually seen work tells you, and anyone you show the app to, what's left
-before it's real.
+A demo can make unfinished work look done. Be honest about which parts
+you've actually seen work. Then you, and anyone you show the app to, know
+what's left before it's real.
 
 </details>
 
-Go through your app's parts and put each one in one of three groups. Jot
-them down, or say them with the room:
+Go through the parts of your app. Put each one in one of three groups.
+Write them down, or say them with the room:
 
 - **Proven:** you watched it work live on your instance, as `hr.demo`. For
-  example, a new case routed to `Lab HR Team`, with its work note.
-- **Only tested:** your tests or the grade say it works, but you haven't
-  seen it happen live yet.
+  example, you saw a new case routed to `Lab HR Team`, with its work note.
+- **Only tested:** your tests or the grade say it works. You haven't seen
+  it happen live yet.
 - **Not built yet:** anything that isn't merged, and anything your grade
-  left open. For example, the weekly numbers, the rule that records when a
-  person overrides the router, the runbook, the failure drill and the
-  handover verdict. After the workshop builds these.
+  left open. For example:
+  - the weekly numbers;
+  - the rule that records when a person overrides the router;
+  - the runbook, the steps for running and fixing the app;
+  - the failure drill, where your partner breaks the app and you fix it
+    from the runbook;
+  - the handover verdict, the kit's ruling on whether someone else could
+    take the app over.
 
-Your app is a practice copy, on a lab instance. To build the customer's real
-one, you use the same method again: [your own PRD](OWN-PRD.md) on the customer's
-dev instance, then [to production](PROMOTE.md).
+  You build these in [After the workshop](AFTER-THE-WORKSHOP.md).
+
+Your app is a practice copy on a lab instance. To build your company's real
+one, use the same method again. Start with [your own PRD](OWN-PRD.md), the
+document that says what your app must do, on your company's dev instance.
+Then take the app [to production](PROMOTE.md), the instance real people
+use.
 
 ### 4. Take it home
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The day only pays off if you use the method again. One sentence each turns it
-into a next step you can act on at work.
+The day only pays off if you use the method again. One sentence for each
+answer turns it into a next step you can act on at work.
 
 </details>
 
-Decide, in one sentence each: the next real work you'll build this way, the
-one stage you'd keep, and the building block you're missing at work. Short
-of time? Do it at home.
+Decide three things, in one sentence each:
 
-Ask your instructor for your instance's end date: After the workshop
-needs the instance until then.
+- the next real work you'll build this way;
+- the one stage of the method you'd keep;
+- the building block you're missing at work.
+
+Short of time? Do it at home.
+
+Ask your instructor when your instance ends. You need it for
+[After the workshop](AFTER-THE-WORKSHOP.md) until that date.
 
 ### 5. Close the session
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The session note is how the next session, or the next person, picks up without
-guessing. Shipping it puts it on `main`, where whoever opens the repo next
-will find it.
+The session note lets the next session, or the next person, pick up without
+guessing. Shipping it puts it on `main`. Whoever opens the repo next will
+find it there.
 
 </details>
 
@@ -159,9 +176,11 @@ Claude closed? <span data-show="surface:terminal">**In the terminal:** ⌨️
 in the Claude window: `cd ~/projects/hr-case-router/app && claude`</span>
 <span data-show="surface:desktop">**In the Code tab:** 🤖 start a new
 session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>)
-on `~/projects/hr-case-router/app`, with the top **Local** entry and
-**Open folder…** under the prompt box, then **Verbose** (**Ctrl+O**).</span>
+(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+In the row under the prompt box, pick the top entry under **Local**. Click
+the folder control, choose **Open folder…** and pick
+`~/projects/hr-case-router/app`. Then press **Ctrl+O** until the view is
+**Verbose**.</span>
 
 1. 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
@@ -173,8 +192,8 @@ on `~/projects/hr-case-router/app`, with the top **Local** entry and
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-   Claude writes down where the work stands in SESSION-NOTE.md, so a fresh
-   session, or you after a break, can pick up exactly here.
+   Claude writes down in SESSION-NOTE.md where the work stands. A fresh
+   session, or you after a break, can then pick up exactly here.
 
    </details>
 
@@ -193,10 +212,10 @@ on `~/projects/hr-case-router/app`, with the top **Local** entry and
 
    <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-   Claude pushes your branch, opens a pull request, reviews its own
-   diff without checking it out, posts the review on it, fixes real findings once and files the rest,
-   then merges when the build and tests pass. You get the pull request link
-   and one line per finding.
+   Claude pushes your branch and opens a pull request. It reviews its own
+   diff without checking it out, and posts the review on the pull request.
+   It fixes real findings once, files the rest, and merges when the build
+   and tests pass. You get the pull request link and one line per finding.
 
    </details>
 
@@ -228,17 +247,17 @@ tell your instructor.
 
 ## After the lab: put your machine back
 
-Used a separate user account? Skip this part. Going straight on to
-[After the workshop](AFTER-THE-WORKSHOP.md) in the buffer? Skip steps 6 to
-8 until you've finished it.
+Used a separate user account for the lab? Skip this part. Going straight on
+to [After the workshop](AFTER-THE-WORKSHOP.md) in the catch-up time, 16:20
+to 17:00? Skip steps 6 to 8 until you've finished it.
 
 ### 6. Put your settings back
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The lab added its own Claude Code settings, which limit what Claude may do,
-and kept a backup of yours. This puts yours back, so Claude works for you as
-it did before the lab.
+The lab added its own Claude Code settings, which limit what Claude may do.
+It also kept a backup of yours. This step puts yours back, so Claude works
+for you as it did before the lab.
 
 </details>
 
@@ -260,35 +279,36 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs --check
 
 1. `git -C ~/projects/hr-case-router-lab-guide pull`: Downloads the newest
    version of this guide from GitHub into its folder,
-   `hr-case-router-lab-guide`. `-C` runs git as if you were inside that
-   folder, so you don't have to go there first.
+   `hr-case-router-lab-guide`. `-C` runs git as if you were in that folder.
+   You don't have to go there first.
 2. `node …/merge-claude-settings.mjs --restore`: Runs the lab's settings
-   script to put your own Claude Code settings back: your backup exactly, or,
-   if you had no settings file before the lab, yours without the lab's
-   settings.
-3. `node …/merge-claude-settings.mjs --check`: Runs the same script to check,
-   changing nothing, whether the lab's settings are in place. Now you want
+   script to put your own Claude Code settings back. If you had a settings
+   file before the lab, you get your backup exactly. If you didn't, you
+   keep your settings without the lab's.
+3. `node …/merge-claude-settings.mjs --check`: Runs the same script to check
+   whether the lab's settings are in place. It changes nothing. Now you want
    them gone.
 
 </details>
 
 ✅ The last command says `Lab settings NOT in place:`. That's what you want.
 
-### 7. Switch back on what Module 0 switched off
+### 7. Switch back on what the pre-work switched off
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-Module 0 set aside your own instructions, plugins, MCP servers and GitHub
-sign-in, so they couldn't steer the lab. Each sub-step puts one back, only
-where Module 0 saved how it was, and leaves alone anything you never switched
-off.
+The pre-work set aside your own instructions, plugins, MCP servers and
+GitHub sign-in, so they couldn't steer the lab. MCP servers are connections
+that give Claude extra tools. Each sub-step puts one of these back, but only
+where the pre-work saved how it was. Anything you never switched off is
+left alone.
 
 </details>
 
-⌨️ **Terminal:** only what Module 0 saved, in
-`~/projects/hr-case-router-notes`.
+⌨️ **Terminal:** put back only what the pre-work saved. It's in
+`~/projects/hr-case-router-notes`, your notes folder.
 
-1. Rename back each file or folder Module 0 gave an `.off`:
+1. Rename back each file or folder that the pre-work gave an `.off` ending:
 
    ```
    for f in ~/CLAUDE.md ~/projects/CLAUDE.md ~/.claude/CLAUDE.md \
@@ -299,23 +319,25 @@ off.
 
    <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
-   1. `for f in ~/CLAUDE.md … \`: Starts a loop over your own instruction
-      files and folders, the ones Claude reads in every session. The `\` at
+   1. `for f in ~/CLAUDE.md … \`: Starts a loop, which runs the same command
+      once for each item in a list. The list starts with your own
+      instruction files, the ones Claude reads in every session. The `\` at
       the end carries the list on to the next line.
    2. `~/.claude/skills ~/.claude/agents ~/.claude/commands; do`: Ends the
-      list with your own skills, agents and commands folders. `do` starts what
-      runs for each one, which the loop calls `$f`.
+      list with your own skills, agents and commands folders. `do` starts
+      what runs for each one. The loop calls each one `$f`.
    3. `[ -e "$f.off" ] && [ ! -e "$f" ] && mv "$f.off" "$f"`: Renames the
-      `.off` copy back to its own name, but only if the `.off` one is there
-      and nothing has taken the name since. Anything you never switched off is
-      left alone.
+      `.off` copy back to its own name. It does this only if the `.off` copy
+      is there and nothing has taken the name since. Anything you never
+      switched off is left alone.
    4. `done`: Ends the loop.
 
    </details>
 
-2. Each plugin `plugins-before-lab.txt` shows `✔ enabled`:
-   `claude plugin enable <name>`, with its line after `❯` as `<name>`.
-3. Only if `mcp-before-lab.json` is there, add its servers back:
+2. Turn back on each plugin that `plugins-before-lab.txt` shows as
+   `✔ enabled`. Run `claude plugin enable <name>` for each one. For
+   `<name>`, use what follows `❯` on that plugin's line.
+3. Only if `mcp-before-lab.json` is there, add its MCP servers back:
 
    ```
    cd ~/projects/hr-case-router-notes
@@ -329,20 +351,21 @@ off.
    <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
    1. `cd ~/projects/hr-case-router-notes`: Goes into your notes folder,
-      `hr-case-router-notes`, where Module 0 saved how things were before the
-      lab. Claude never reads it.
+      `hr-case-router-notes`, where the pre-work saved how things were
+      before the lab. Claude never reads it.
    2. `node -e '`: Runs the next three lines as a small Node.js script. The
-      `'` here and the one at the end of the script's last line wrap it.
+      `'` here and the one at the end of the script's last line mark where
+      it starts and ends.
    3. `for (const [n, c] of Object.entries(require("./mcp-before-lab.json")))`:
-      Reads `mcp-before-lab.json`, the MCP servers you had before the lab, and
-      goes through them one by one: `n` is a server's name and `c` its
-      settings.
+      Reads `mcp-before-lab.json`, the list of MCP servers you had before
+      the lab. It goes through them one by one. `n` is a server's name and
+      `c` its settings.
    4. `require("child_process").execFileSync("claude", ["mcp", "add-json",`:
-      Runs `claude mcp add-json` for each server, which adds a server to
-      Claude Code from its settings.
+      Runs `claude mcp add-json` for each server. That command adds a server
+      to Claude Code from its settings.
    5. `"--scope", "user", n, JSON.stringify(c)], { stdio: "inherit" })'`: Ends
-      that command: `--scope user` adds the server in every folder, as it was
-      before, under its name and with its settings. `stdio: "inherit"` shows
+      that command. `--scope user` adds each server for every folder, as it
+      was before, with its own name and settings. `stdio: "inherit"` shows
       you what `claude` prints.
    6. `claude mcp list`: Lists the MCP servers Claude Code can use now, so you
       can see yours are back.
@@ -350,11 +373,12 @@ off.
    </details>
 
    ✅ It lists your servers again.
-4. `cat ~/projects/hr-case-router-notes/gh-before-lab.txt`. Is the account
-   above `Active account: true` not your lab one? Switch back to it:
-   `gh auth switch --user <that account>`. Does it say you weren't logged
-   in to any GitHub hosts? Sign the lab account out: `gh auth logout`.
-5. Put back how git signed in to GitHub. Module 0's `gh auth setup-git`
+4. Run `cat ~/projects/hr-case-router-notes/gh-before-lab.txt`. Is the
+   account above `Active account: true` someone other than your lab
+   account? Switch back to it with `gh auth switch --user <that account>`.
+   Does it say you weren't logged in to any GitHub hosts? Then sign the lab
+   account out with `gh auth logout`.
+5. Put back how git signed in to GitHub. The pre-work's `gh auth setup-git`
    changed it for every repo on this computer:
 
    ```
@@ -370,24 +394,25 @@ off.
    <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
 
    1. `cd ~/projects/hr-case-router-notes`: Goes into your notes folder,
-      `hr-case-router-notes`, where Module 0 saved how things were before the
-      lab. Claude never reads it.
-   2. `for h in …; do`: Starts a loop over GitHub's two web addresses, GitHub
-      itself and its gists: Module 0's `gh auth setup-git` set how git signs
-      in to both.
-   3. `git config --global --unset-all "credential.$h.helper"`: Removes every
-      sign-in helper git has for that address, `gh` included, from the
-      settings for every repo on this computer.
+      `hr-case-router-notes`, where the pre-work saved how things were
+      before the lab. Claude never reads it.
+   2. `for h in …; do`: Starts a loop over GitHub's two web addresses:
+      GitHub itself and its gists, GitHub's site for sharing short files.
+      The pre-work's `gh auth setup-git` set how git signs in to both.
+   3. `git config --global --unset-all "credential.$h.helper"`: Removes
+      every sign-in helper git has for that address, `gh` included. A
+      sign-in helper is the program that gives git your GitHub sign-in. They
+      go from git's settings for every repo on this computer.
    4. `done`: Ends the loop.
-   5. `grep -E '^credential\.… git-credentials-before-lab.txt |`: Picks out,
-      from the file Module 0 saved, the sign-in helpers git had for GitHub
-      before the lab. The `|` at the end passes them to the next line.
+   5. `grep -E '^credential\.… git-credentials-before-lab.txt |`: Reads the
+      file the pre-work saved. It picks out the sign-in helpers git had for
+      GitHub before the lab. The `|` at the end passes them to the next line.
    6. `while read -r k v; do git config --global --add "$k" "$v"; done`: Adds
-      each of those helpers back, one at a time: `k` is the setting's name and
-      `v` its value.
+      each of those helpers back, one at a time. `k` is the setting's name
+      and `v` its value.
    7. `git config --global --get-regexp '^credential\.' | diff - … && echo same`:
       Compares how git signs in now with the saved file. `diff` prints each
-      line that differs; when none does, `echo same` prints `same`.
+      line that differs. When none does, `echo same` prints `same`.
 
    </details>
 
@@ -395,19 +420,20 @@ off.
 
    <details><summary>🛟 It says No such file or directory</summary>
 
-   Module 0 didn't save how git signed in, so git now signs in to GitHub
-   the way it does for every site: the Keychain on a Mac, Credential
-   Manager on Windows. Used something else for GitHub before the lab?
-   Add it back: `git config --global --add credential.https://github.com.helper <it>`.
+   The pre-work didn't save how git signed in. So git now signs in to GitHub
+   the way it does for every other site. That's the Keychain on a Mac and
+   Credential Manager on Windows. Used something else for GitHub before the
+   lab? Add it back:
+   `git config --global --add credential.https://github.com.helper <it>`.
 
    </details>
 
    <details><summary>🛟 It prints lines starting with &lt; or &gt;</summary>
 
-   Those lines are what differs from before the lab. Same lines in another
-   order, or a `credential` setting you changed yourself during the lab?
-   That's fine. It says `could not lock config file`? Close VS Code and run
-   the block again: running it twice is safe.
+   Those lines are what differs from before the lab. Are they the same lines
+   in another order? Or a `credential` setting you changed yourself during
+   the lab? That's fine. Does it say `could not lock config file`? Close VS
+   Code and run the block again. Running it twice is safe.
 
    </details>
 
@@ -415,15 +441,16 @@ off.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-Once you're done with the lab, its kit and your instance's sign-in have no
-more use on this computer. Removing them leaves nothing that can reach the lab
-instance, and deletes a saved file that can hold keys.
+Once you're done with the lab, you no longer need its kit, the prove-it
+plugin, or your instance's sign-in on this computer. Removing them leaves
+nothing that can reach the lab instance. It also deletes a saved file that
+can hold keys, the secret codes some MCP servers sign in with.
 
 </details>
 
-⌨️ **Terminal**, once you're done with the lab for good, After the workshop
-included. The `rm` line deletes the MCP settings Module 0 saved, as they
-can hold keys:
+⌨️ **Terminal**, once you're done with the lab for good, including After
+the workshop. The `rm` line deletes the MCP settings the pre-work saved,
+because they can hold keys:
 
 ```
 claude plugin uninstall prove-it@prove-it
@@ -442,8 +469,8 @@ claude plugin list
 3. `now-sdk auth --delete lab-pdi`: Deletes the SDK's saved sign-in to your
    lab instance, `lab-pdi`, from this computer.
 4. `rm -f ~/projects/hr-case-router-notes/mcp-before-lab.json`: Deletes the
-   copy of your MCP server settings that Module 0 saved, as it can hold keys.
-   `-f` means no complaint if the file isn't there.
+   copy of your MCP server settings that the pre-work saved, because it can
+   hold keys. `-f` means it doesn't complain if the file isn't there.
 5. `claude plugin list`: Lists the plugins Claude Code still has, so you can
    see the kit is gone.
 
@@ -451,7 +478,8 @@ claude plugin list
 
 ✅ The list no longer shows `prove-it@prove-it`.
 
-Won't build with the SDK again? Remove ServiceNow's plugin too:
+Won't build ServiceNow apps with the SDK again? Remove ServiceNow's plugin
+too:
 
 ```
 claude plugin uninstall servicenow-sdk@claude-plugins-official
@@ -462,4 +490,4 @@ claude plugin uninstall servicenow-sdk@claude-plugins-official
 - Your catches counted, the day's session note merged, and your settings
   put back.
 - Coming back for [After the workshop](AFTER-THE-WORKSHOP.md)? Start at the
-  top of that page: it sets the lab up again.
+  top of that page. It sets the lab up again.

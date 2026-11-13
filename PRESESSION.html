@@ -162,7 +162,7 @@ aside.speaker{display:none}
 
 <!-- This deck is a participant handout: it ships in the participant pack, and N shows the presenter
      notes to anyone. Write every note as if the room can read it. Every fact on a slide is in the
-     README or Module 0, and data-* quotes stay word for word. Check with: python3 tests/check-presession.py
+     README or the pre-work, and data-* quotes stay word for word. Check with: python3 tests/check-presession.py
      Placeholders the lab author fills before the session are spans marked data-todo: replace the
      whole span, tags included, with a link, such as <a href="https://example.com/form">the anonymous form</a>.
      The pack refuses any span left. -->
@@ -223,7 +223,7 @@ aside.speaker{display:none}
     </div>
   </div>
   <p class="next">Next: how the day runs</p>
-  <aside class="speaker">This is the README's table, as it is in the guide. Walk it top to bottom in a minute: reading and deciding in the morning, building from 12:55, and at 14:15 the app installed with its AI agent working live. Break it comes after the workshop, in After the workshop Part 2. The times are a plan, not a promise. Before all of this comes Module 0, the pre-work: the last part of this session walks through it.</aside>
+  <aside class="speaker">This is the README's table, as it is in the guide. Walk it top to bottom in a minute: reading and deciding in the morning, building from 12:55, and at 14:15 the app installed with its AI agent working live. Break it comes after the workshop, in After the workshop Part 2. The times are a plan, not a promise. Before all of this comes the pre-work: the last part of this session walks through it.</aside>
 </section>
 
 <!-- 3 How the day runs -->
@@ -236,21 +236,21 @@ aside.speaker{display:none}
     <div class="cols cols-2 stretch">
       <div class="card card--accent">
         <p class="k">The method</p>
-        <p data-quote="README">Claude Code writes the code. You make the decisions, and checks decide whether work may go on.</p>
-        <p data-quote="README">Modules 1 to 7 each have one <strong>catch</strong>, a moment where the process stops a mistake. Those moments are the lesson.</p>
+        <p data-quote="README">You tell Claude Code how the app should work and which checks it must pass. Claude Code writes the code.</p>
+        <p data-quote="README">Each time the process stops a real mistake, that's a <strong>catch</strong>. You'll count yours at the end of the day.</p>
       </div>
       <div class="card">
         <p class="k">Log it</p>
-        <p data-quote="README">You write no notes. At the end of each module, a <strong>Log it</strong> prompt has Claude draft that module's catches, one line each. Reply <code>keep</code>, or say what to change:</p>
+        <p data-quote="README">You don't write notes yourself. At the end of each module, a <strong>Log it</strong> prompt has Claude draft that module's catches, one line each. Reply <code>keep</code>, or say what to change:</p>
         <p class="logline"><code>&lt;module&gt; | &lt;what caught it&gt; | &lt;what it caught, and what was done&gt;</code></p>
       </div>
       <div class="card">
         <p class="k">Behind?</p>
-        <p data-quote="README">The buffer, 16:20–17:00, is for catching up. Behind? Ask your instructor for a checkpoint to start the next module from.</p>
+        <p data-quote="README">If you fall behind, ask your instructor for a checkpoint. A checkpoint is the work so far, ready made, so you can start the next module from it.</p>
       </div>
       <div class="card">
         <p class="k">Alone, then with a partner</p>
-        <p data-quote="README">You work alone on the day. Your partner joins you after the workshop, to attack your app and to test your runbook.</p>
+        <p data-quote="README">You work alone on the day. Your partner joins you after the workshop. They attack your app and test your runbook, the steps for running and fixing it.</p>
       </div>
     </div>
   </div>
@@ -309,7 +309,7 @@ aside.speaker{display:none}
       </div>
       <div class="card">
         <p class="k">Windows: being tested</p>
-        <p>The guide says Windows (WSL) by arrangement, for now. Git Bash, shown here, is being tested. Check with your instructor before Module 0.</p>
+        <p>The guide says Windows (WSL) by arrangement, for now. Git Bash, shown here, is being tested. Check with your instructor before the pre-work.</p>
       </div>
     </div>
   </div>
@@ -335,12 +335,12 @@ aside.speaker{display:none}
       </ol>
       <div class="card card--accent">
         <p class="k">command not found</p>
-        <p>The tool isn't installed yet. Module 0 step 3 installs it.</p>
+        <p>The tool isn't installed yet. Pre-work step 3 installs it.</p>
         <p>Nothing is broken, and it isn't your fault.</p>
       </div>
     </div>
   </div>
-  <aside class="speaker">Both presenters share screens, Mac and Windows, each in a throwaway practice folder (mkdir practice, then cd practice), on an account without the lab settings, so Claude asks the way it does out of the box. Before step 2, say: "I've set this machine up so the next command fails, to show you what it looks like." When it fails, say in plain words: "command not found means this computer doesn't have that tool yet. It's nothing you did wrong. Module 0 step 3 installs it. If it still says this just after installing, the 🛟 box under that step says to open a new terminal window and check again." Show that box in the guide. At the prompt, read the command out loud. Choose No first and ask Claude what it was for: not sure? No, then ask. Then ask again, and choose Yes. Point at the line starting with ⏺, the command, and the lines under it starting with ⎿, its output: that's what you trust, not Claude's summary. On the Windows screen, say which steps looked different. The Windows path is still being tested, so say so if anything differs from the slide.</aside>
+  <aside class="speaker">Both presenters share screens, Mac and Windows, each in a throwaway practice folder (mkdir practice, then cd practice), on an account without the lab settings, so Claude asks the way it does out of the box. Before step 2, say: "I've set this machine up so the next command fails, to show you what it looks like." When it fails, say in plain words: "command not found means this computer doesn't have that tool yet. It's nothing you did wrong. Pre-work step 3 installs it. If it still says this just after installing, the 🛟 box under that step says to open a new terminal window and check again." Show that box in the guide. At the prompt, read the command out loud. Choose No first and ask Claude what it was for: not sure? No, then ask. Then ask again, and choose Yes. Point at the line starting with ⏺, the command, and the lines under it starting with ⎿, its output: that's what you trust, not Claude's summary. On the Windows screen, say which steps looked different. The Windows path is still being tested, so say so if anything differs from the slide.</aside>
 </section>
 
 <!-- 7 Where you act · 0:27–0:32 -->
@@ -365,16 +365,16 @@ aside.speaker{display:none}
         <div class="card">
           <p class="k">Sending to Claude</p>
           <p data-quote="README"><strong>Sending:</strong> paste a 🤖 box, type <code>go</code> after it, press <strong>Enter</strong>.</p>
-          <p data-quote="README">A line starting with <code>/</code>, and one-word replies such as <code>yes</code>, <code>keep</code>, <code>approve</code>, <code>apply</code> and <code>ship it</code> (alone), are typed on their own, with no <code>go</code>.</p>
+          <p data-quote="README">Type these on their own, with no <code>go</code>: a line starting with <code>/</code>, and short replies such as <code>yes</code>, <code>keep</code>, <code>approve</code>, <code>apply</code> and <code>ship it</code>.</p>
         </div>
         <div class="card card--accent">
           <p class="k">Reading what happened</p>
-          <p data-quote="README">When Claude runs a command, Claude Code shows it on a line starting with ⏺, and its output under it, on lines starting with ⎿. Read that output, not Claude's summary.</p>
+          <p data-quote="README">When Claude runs a command, Claude Code shows it on a line starting with ⏺. The command's output is under it, on lines starting with ⎿. Read that output, not Claude's summary.</p>
         </div>
       </div>
     </div>
   </div>
-  <aside class="speaker">Read the label before you act. A 🤖 box goes into Claude, with go typed after it. A ⌨️ box never goes into Claude: it goes into your own terminal. The ⏺ and ⎿ lines are what you just saw in the demo. Under some checks there's a closed 🛟 box: it's normal, expected help, there for the moment what you see is different.</aside>
+  <aside class="speaker">Read the label before you act. A 🤖 box goes into Claude, with go typed after it. A ⌨️ box never goes into Claude: it goes into your own terminal. The ⏺ and ⎿ lines are what you just saw in the demo. Some checks have a closed 🛟 box under them. That's normal, expected help, for the moment you see something different.</aside>
 </section>
 
 <!-- 8 Rules 1 to 3 · 0:32–0:40 -->
@@ -385,9 +385,9 @@ aside.speaker{display:none}
   </div>
   <div class="body">
     <ol class="rules" data-rules>
-      <li><strong>Never paste this guide into Claude.</strong> Only the text in 🤖 boxes goes in. <em>Why:</em> if Claude sees the checks, it can write to pass them, and they stop being checks.</li>
-      <li><strong>Passwords stay out of Claude.</strong> Type them only into your own terminal or your browser. Claude never runs <code>now-sdk auth</code>, the command that asks for your instance's password. <em>Why:</em> everything typed into Claude goes to the model and stays in the conversation's history.</li>
-      <li><strong>You decide when your instance changes.</strong> You install the app yourself. The only install Claude runs is the grade's, to <code>lab-pdi</code>, and it asks you first. <em>Why:</em> an install changes a live system, so a person decides when, as in real work.</li>
+      <li><strong>Never paste this guide into Claude.</strong> Only the text in 🤖 boxes goes in. <em>Why:</em> if Claude sees the checks, it can write work that just passes them. Then they stop being checks.</li>
+      <li><strong>Passwords stay out of Claude.</strong> Type them only into your own terminal or your browser. Claude never runs <code>now-sdk auth</code>, the command that asks for your instance's password. <em>Why:</em> everything you type into Claude is sent to the AI model. It also stays in the conversation's history.</li>
+      <li><strong>You decide when your instance changes.</strong> You install the app yourself. Claude runs only one install: the grade's, in Module 7, to <code>lab-pdi</code>, your instance's short name. It asks you first. <em>Why:</em> an install changes a live system. As in real work, a person decides when.</li>
     </ol>
   </div>
   <aside class="speaker">Read each reason out: a rule people understand is one they keep under time pressure. If people keep one rule, it's the first: the checks only work if Claude can't see them. Rule 2 is about history: anything typed into Claude stays in the conversation, so passwords go only into your own terminal or your browser.</aside>
@@ -401,9 +401,9 @@ aside.speaker{display:none}
   </div>
   <div class="body">
     <ol class="rules" start="4" data-rules>
-      <li><strong>Never use a production instance.</strong> <em>Why:</em> the agent you build moves HR cases and writes notes on them; on production, those are real people's cases.</li>
-      <li><strong>Trust what a command prints</strong>, not what Claude says about it. <em>Why:</em> Claude's summary is a likely answer and can be wrong; the output is evidence you can check, or run again.</li>
-      <li><strong>Follow what really happens.</strong> Don't re-run a prompt to get a nicer answer. Write down what happened, and carry on. <em>Why:</em> Claude can answer differently each time, and re-running until it looks right hides the mistakes the lab is built to catch.</li>
+      <li><strong>Never use a production instance.</strong> <em>Why:</em> the agent you build moves HR cases and writes notes on them. On production, those are real people's cases.</li>
+      <li><strong>Trust what a command prints</strong>, not what Claude says about it. <em>Why:</em> Claude's summary is its best guess, and it can be wrong. The output is evidence. You can check it, or run the command again.</li>
+      <li><strong>Follow what really happens.</strong> Don't re-run a prompt to get a nicer answer. Write down what happened, and carry on. <em>Why:</em> Claude can answer differently each time. Re-running until it looks right hides the mistakes the lab is built to catch.</li>
     </ol>
   </div>
   <aside class="speaker">Rule 5 is the ⏺ and ⎿ habit from the demo. Rule 6: if a step really went wrong, don't re-run it; ask your instructor for a checkpoint. Before you move on, launch the three-question anonymous poll from the next slide, so people answer before they see the answers.</aside>
@@ -426,7 +426,7 @@ aside.speaker{display:none}
             <li>Claude asks to run a command you don't recognise.</li>
           </ol>
         </div>
-        <p class="small" data-quote="README">In auto mode, the lab's default, Claude rarely asks: it blocks risky commands instead, showing <code>Denied by auto mode classifier</code>.</p>
+        <p class="small" data-quote="README">In auto mode, the lab's default, a safety check decides for Claude. Claude rarely asks you. It blocks risky commands instead, and shows <code>Denied by auto mode classifier</code>.</p>
       </div>
       <div class="col">
         <table class="perm" data-permissions>
@@ -434,10 +434,10 @@ aside.speaker{display:none}
           <tbody>
             <tr><td><code>now-sdk install</code>, <code>deploy</code>, <code>exec</code>, <code>execute</code>, <code>run</code>, <code>move</code> or <code>cicd</code>, in any form, or <code>npm run deploy</code></td><td>No</td><td>They change your instance, and you decide when (rule 3)</td></tr>
             <tr><td>The grade asks to run <code>now-sdk install --auth lab-pdi</code> (Module 7, and the grades after the workshop)</td><td>Yes, for that command only</td><td>The one install Claude runs, after asking</td></tr>
-            <tr><td>Anything else, or you're not sure</td><td>No, then ask Claude what it was for</td><td>A No costs a minute; a wrong Yes may not undo</td></tr>
+            <tr><td>Anything else, or you're not sure</td><td>No, then ask Claude what it was for</td><td>A No costs a minute. A wrong Yes may not be undone</td></tr>
           </tbody>
         </table>
-        <p data-quote="README">The only install Claude runs is the grade's, to <code>lab-pdi</code>, and it asks you first.</p>
+        <p data-quote="README">Claude runs only one install: the grade's, in Module 7, to <code>lab-pdi</code>, your instance's short name. It asks you first.</p>
         <p data-quote="README"><strong>Never choose "Yes, and don't ask again".</strong> The asking is the check.</p>
       </div>
     </div>
@@ -455,14 +455,14 @@ aside.speaker{display:none}
     <ul class="words" data-words>
       <li><strong>Repo:</strong> a folder whose history git keeps. Your app's repo is <code>~/projects/hr-case-router/app</code>.</li>
       <li><strong>Commit:</strong> one saved snapshot in a repo's history.</li>
-      <li><strong>Branch:</strong> a separate line of commits. <code>main</code> changes only through pull requests.</li>
-      <li><strong>Pull request:</strong> a request on GitHub to merge a branch into <code>main</code>. It's reviewed first.</li>
-      <li><strong>Story:</strong> one small piece of work, filed as a GitHub issue.</li>
-      <li><strong>Gate:</strong> a milestone that stories hold up: MERGE, INSTALL, DEMO, HANDOFF.</li>
+      <li><strong>Branch:</strong> a separate line of commits. Work happens on a branch, so <code>main</code>, the repo's main line, changes only through pull requests.</li>
+      <li><strong>Pull request:</strong> a request on GitHub to merge a branch into <code>main</code>. It's reviewed before it merges.</li>
+      <li><strong>Story:</strong> one small piece of work, filed as a GitHub issue. An issue is a to-do item on GitHub.</li>
+      <li><strong>Gate:</strong> a milestone that waits for its stories to finish. There are four: MERGE, INSTALL, DEMO and HANDOFF.</li>
       <li><strong>Design term:</strong> one numbered rule in your design record, such as <code>C3</code>. Every test names the term it proves.</li>
-      <li><strong>Catch:</strong> a real problem the process found <strong>and that got fixed</strong>, or that changed a decision. A check firing on something you planted to test it isn't a catch.</li>
+      <li><strong>Catch:</strong> a real problem the process found <strong>and that got fixed</strong>, or that changed a decision. If you plant a problem to test a check, the check firing on it isn't a catch.</li>
     </ul>
-    <p class="small" data-quote="README">Claude writes the code and runs git; you read and decide.</p>
+    <p class="small" data-quote="README">Claude writes the code and runs git. You read and decide.</p>
   </div>
   <aside class="speaker">You'll meet these words; nobody needs to know them today. One picture for the first four: your app's repo is a folder on your computer, and git keeps its history. Each commit is a snapshot in that history. Claude works on a branch, then opens a pull request, and the branch joins main only once the pull request is reviewed. Story, gate and design term arrive in Modules 4 to 6, and each module explains them when they do.</aside>
 </section>
@@ -476,35 +476,35 @@ aside.speaker{display:none}
   <div class="body">
     <div class="cols cols-32">
       <ol data-bar>
-        <li>Log in to a ServiceNow instance as admin, open a list such as the HR cases, and impersonate a user when you're given the menu path.</li>
-        <li>Open a terminal, paste a command into it, run it, and read what it prints.</li>
-        <li>Start Claude Code, send it a message, and answer when it asks permission to run a command.</li>
-        <li>Say in a sentence what a repo, a commit and a pull request are.</li>
+        <li>Log in to a ServiceNow instance as an admin. Open a list, such as the HR cases. Impersonate a user, which means acting as them, when you're given the menu path.</li>
+        <li>Open a terminal. Paste a command into it, run it, and read what it prints.</li>
+        <li>Start Claude Code and send it a message. Answer it when it asks permission to run a command.</li>
+        <li>Say in one sentence each what a repo, a commit and a pull request are.</li>
         <li>Install software on your computer, or get it installed in time.</li>
       </ol>
       <div class="col">
         <div class="card card--accent">
-          <p data-quote="README"><strong>New to any of these?</strong> That's normal: most people are new to at least one.</p>
+          <p data-quote="README"><strong>New to any of these?</strong> That's normal. Most people are new to at least one.</p>
         </div>
         <div class="card">
-          <p><strong>Unsure? Start at Explain more:</strong> click <strong>Detail</strong>, top right of the guide. Help boxes open, and the guide's words are explained where you first meet them. You can change it at any time.</p>
+          <p><strong>Unsure? Start at Explain more:</strong> click <strong>Detail level</strong>, in the guide's top bar. Help boxes open, and the guide's words are explained where you first meet them. You can change it at any time.</p>
         </div>
         <div class="card">
-          <p data-quote="README">You don't need to write code, know git's commands, or have used the ServiceNow SDK.</p>
+          <p data-quote="README">You don't need to write code or know git's commands.</p>
         </div>
         <div class="card">
-          <p data-quote="README">Under some checks there's a closed 🛟 box. Open it only if what you see is different. ℹ️ boxes say why, if you want to know.</p>
+          <p data-quote="README">Some checks have a closed 🛟 box under them. Open it only if you see something different. ℹ️ boxes explain why, if you want to know.</p>
         </div>
       </div>
     </div>
   </div>
-  <aside class="speaker">Items 2 and 3 are what the demo just showed. The last slide lists four ways to practise them this week. Any item still a "not yet"? That's what the week is for: the bench clinic, and a private message to your instructor. Nobody else needs to know. Now open the guide's link and show its top bar live. The chip at the top right holds the setup: your computer, and where you run Claude Code. Beside it, click Detail and choose Explain more: help boxes open, and the guide's words are explained where you first meet them. Unsure? Start at Explain more. It never resets your answers or loses your place. Going the other way is fine too: Just the steps hides the newcomer help, and keeps every check and fix. Nobody needs to know you switched. Then the rest of the bar, one move each. Search: type could not resolve and choose the result: it opens that fix in Module 0 step 4. Notes: click the bookmark beside a step's title, and it's in the Notes panel; write a note on the step there, and Download my notes keeps a copy. Stuck?: it opens the fixes for the step on your screen, and a message to copy for your instructor, never for Claude. Back in the chip, Copy my setup carries your answers between the link and your downloaded copy.</aside>
+  <aside class="speaker">Items 2 and 3 are what the demo just showed. The last slide lists four ways to practise them this week. Any item still a "not yet"? That's what the week is for: the bench clinic, and a private message to your instructor. Nobody else needs to know. Now open the guide's link and show its top bar live. The Setup button, first in the top bar, holds the setup: your computer, and where you run Claude Code. Beside it, click Detail level and choose Explain more: help boxes open, and the guide's words are explained where you first meet them. Unsure? Start at Explain more. It never resets your answers or loses your place. Going the other way is fine too: Just the steps hides the newcomer help, and keeps every check and fix. Nobody needs to know you switched. Then the rest of the bar, one move each. Search: type could not resolve and choose the result: it opens that fix in Pre-work step 4. Notes: click the bookmark beside a step's title, and it's in the Notes panel; write a note on the step there, and Download my notes keeps a copy. Stuck?: it opens the fixes for the step on your screen, and a message to copy for your instructor, never for Claude. Back in Setup, Copy my setup carries your answers between the link and your downloaded copy.</aside>
 </section>
 
 <!-- 13 Your pre-work · 0:47–0:53 -->
 <section class="slide slide--light" data-chrome="light">
   <div class="head">
-    <p class="eyebrow">Your pre-work · Module 0</p>
+    <p class="eyebrow">Your pre-work</p>
     <h2>About 2 hours, at least two days before</h2>
   </div>
   <div class="body">
@@ -541,15 +541,15 @@ aside.speaker{display:none}
         <p class="k">When you're done, you have</p>
         <ul data-ready>
           <li>An instance set up for the lab, and <code>hr.demo</code> to impersonate.</li>
-          <li>The tools, signed in, with the lab settings, the kit <code>v0.1.4</code> and the SDK plugin.</li>
+          <li>Your tools, signed in. Claude Code has the lab's settings, the kit <code>v0.1.4</code> and the SDK plugin.</li>
           <li><code>~/projects/hr-case-router</code>, holding only <code>app/</code>, an empty <code>brief/</code> and an empty <code>catches.md</code>.</li>
-          <li>In <code>app/</code>: the allow list (<code>.gitignore</code>: <code>ls -a</code> shows it), the guard, an SDK project that builds and its <code>CLAUDE.md</code>, in two commits, pushed to your private <code>hr-case-router</code> repo on GitHub.</li>
-          <li>The inputs, read, and your guess at what the PRD needs.</li>
+          <li>In <code>app/</code>: the allow list, the guard, an SDK project that builds, and its <code>CLAUDE.md</code>. The allow list is the hidden file <code>.gitignore</code>: <code>ls -a</code> shows it. Your two commits are pushed to your private <code>hr-case-router</code> repo on GitHub.</li>
+          <li>The customer's inputs, read, and your guess at what the PRD needs.</li>
         </ul>
       </div>
     </div>
   </div>
-  <aside class="speaker">Open the hosted guide and show where it starts: the README, then Module 0. Walk the six parts in order, at a glance; don't do them now. Your instructor gives you your instance. You bring a Claude plan that includes Claude Code, and a GitHub account: the README's "What you need" has the details. Send your instructor your GitHub user name, and accept their invite to the guide. The 🛟 boxes are normal, expected help. "Tell your instructor" is the right move, not a failure. When you're done, check the "You now have" list at the end of Module 0, at least two days before the workshop.</aside>
+  <aside class="speaker">Open the hosted guide and show where it starts: the README, then the pre-work. Walk the six parts in order, at a glance; don't do them now. Your instructor gives you your instance. You bring a Claude plan that includes Claude Code, and a GitHub account: the README's "What you need" has the details. Send your instructor your GitHub user name, and accept their invite to the guide. The 🛟 boxes are normal, expected help. "Tell your instructor" is the right move, not a failure. When you're done, check the "You now have" list at the end of the pre-work, at least two days before the workshop.</aside>
 </section>
 
 <!-- 14 Questions, and this week · 0:53–1:00 -->
@@ -565,7 +565,7 @@ aside.speaker{display:none}
         <ol>
           <li>Open a terminal and run <code>git --version</code>.</li>
           <li>Open a second one.</li>
-          <li>Start <code>claude</code> in an empty practice folder. Ask it to run <code>mkdir notes</code>. Answer one prompt No and one Yes. Try it before Module 0 step 5. After that, Claude starts in auto mode and rarely asks: that's expected.</li>
+          <li>Start <code>claude</code> in an empty practice folder. Ask it to run <code>mkdir notes</code>. Answer one prompt No and one Yes. Try it before Pre-work step 5. After that, Claude starts in auto mode and rarely asks: that's expected.</li>
           <li>Type <code>/exit</code>.</li>
         </ol>
       </div>
@@ -577,7 +577,7 @@ aside.speaker{display:none}
           <li>The recording, with chapters: <span class="todo" data-todo>TO FILL: recording link</span></li>
           <li>Anonymous questions, until two days before the workshop: <span class="todo" data-todo>TO FILL: anonymous form link</span></li>
           <li>Bench clinic, 30 minutes, drop in: <span class="todo" data-todo>TO FILL: bench clinic date and link</span></li>
-          <li>Module 0 done: at least two days before the workshop</li>
+          <li>The pre-work done: at least two days before the workshop</li>
         </ul>
       </div>
     </div>

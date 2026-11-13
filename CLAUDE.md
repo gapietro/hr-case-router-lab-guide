@@ -8,7 +8,7 @@ can't route, the case stays where it is, with a note.
 
 ## How to use it
 
-- **Start at `README.md`**, then follow Module 0 to Module 8 in order.
+- **Start at `README.md`**, then follow the pre-work, then Modules 1 to 8, in order.
   `LAB.html` is the same guide as one page, to open in a browser.
 - `files/` holds the inputs the modules copy into your app's repo: the PRD,
   `DECISIONS.md`, the customer's answers, `inputs/`, the platform-rules test
@@ -22,7 +22,7 @@ can't route, the case stays where it is, with a note.
 ## Rules
 
 - **Don't edit this repo, and don't build in it.** You build your app in its
-  own repo, `~/projects/hr-case-router/app`, which Module 0 makes. Run Claude
+  own repo, `~/projects/hr-case-router/app`, which the pre-work makes. Run Claude
   Code there, not here.
 - This guide is generated from its source and replaced on every update, so
   local changes are lost. To get the latest, run `git pull` here.

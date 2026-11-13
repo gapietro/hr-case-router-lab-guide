@@ -2,18 +2,20 @@
 
 *⏱ 40 min · 09:00*
 
-You review a PRD drafted from three inputs, and the customer accepts it.
-**The catch:** an agent run makes many AI calls, and an agent with poor
-information guesses. Does the accepted PRD keep both?
+You review a draft PRD, the product requirements document that says what
+the app must do. It was written from three inputs. Then the customer accepts
+it. **The catch:** an agent run makes many AI calls. An agent with poor
+information guesses. Does the accepted PRD still warn of both?
 
 <details><summary>ℹ️ Why are we doing this?</summary>
 
 - **In real work:** a PRD turns what the customer said into what gets built.
-  Someone checks it says what they asked for: no more, no less.
-- **Why it matters:** everything later is built from it. A line nobody asked
-  for gets built anyway; a request it lost never does.
-- **Your mindset:** trace it, don't trust it. Every line needs an input behind
-  it, however sensible it sounds.
+  Someone checks that it says what they asked for, no more and no less.
+- **Why it matters:** everything later is built from it. A line nobody
+  asked for gets built anyway. A request the PRD lost never gets built.
+- **Your mindset:** trace each line back to the input that asked for it.
+  Don't just trust it. Every line needs an input behind it, however sensible
+  it sounds.
 
 </details>
 
@@ -21,9 +23,9 @@ information guesses. Does the accepted PRD keep both?
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-Your instructor works from the newest copy of this guide. Pulling it now means
-the steps you read match theirs, and so do the files later modules copy from
-it.
+Your instructor works from the newest copy of this guide. Download it now,
+so the steps you read match theirs. The files that later modules copy from
+the guide will match too.
 
 </details>
 
@@ -38,17 +40,16 @@ git -C ~/projects/hr-case-router-lab-guide log -1 --format='%cd %s' --date=short
 
 1. `git -C ~/projects/hr-case-router-lab-guide pull`: Downloads the newest
    version of this guide from GitHub into its folder,
-   `hr-case-router-lab-guide`. `-C` runs git as if you were inside that
-   folder, so you don't have to go there first.
+   `hr-case-router-lab-guide`. `-C` runs git as if you were in that
+   folder. You don't have to go there first.
 2. `git -C ~/projects/hr-case-router-lab-guide log -1 --format='%cd %s' --date=short`:
-   Prints the date and subject of the guide's newest saved change, its newest
-   commit, so you can check you have today's version. `-1` shows only the
-   newest one.
+   Prints the date and subject of the guide's newest commit. They show
+   whether you have today's version. `-1` shows only the newest one.
 
 </details>
 
-✅ The last line, a date and a subject, matches what your instructor shows
-on the screen. If `LAB.html` is open, reload it.
+✅ The last line shows a date and a subject. They match what your
+instructor shows on the screen. If `LAB.html` is open, reload it.
 
 <details><summary>🛟 It prints an error, or another date or subject</summary>
 
@@ -56,7 +57,7 @@ Tell your instructor before you go on.
 
 </details>
 
-Then ⌨️ check that Module 0 left what this lab needs:
+Then ⌨️ check that the pre-work left everything this lab needs:
 
 ```
 bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 1
@@ -66,9 +67,10 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 1
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names, then run the check again. Can't fix one? Tell your
-instructor before you go on: every later step builds on it. They can help you
-fix it, or give you a checkpoint to start this module from.
+Do the step each ❌ names. Then run the check again. If you can't fix one,
+tell your instructor before you go on. Every later step builds on it. They
+can help you fix it. Or they can give you a checkpoint, the work so far
+ready made, to start this module from.
 
 </details>
 
@@ -76,18 +78,19 @@ fix it, or give you a checkpoint to start this module from.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The draft PRD, the product requirements document, was written from three
-inputs: the use case, the workshop notes and a change request. Tracing it ties
-each PRD line to the input sentence that asked for it, so you can see what has
-no source and what got left out. Claude works on copies in a folder of its
-own, so this guide's files stay untouched.
+The draft PRD was written from three inputs: the use case, the notes from
+your company's onsite workshop on Oct 20, and a change request sent after
+it. Tracing ties each
+PRD line to the input sentence that asked for it. Then you can see which
+lines have no source, and what got left out. Claude works on copies in a
+folder of its own, so this guide's files stay untouched.
 
 </details>
 
 <div data-show="surface:terminal">
 
-**In the terminal:** ⌨️ start Claude in a review folder. Pick **Yes** to
-trust it.
+**In the terminal:** ⌨️ start Claude in a review folder. When Claude asks
+whether to trust the folder, pick **Yes**.
 
 ```
 mkdir -p ~/projects/hr-case-router-prd-review
@@ -104,11 +107,11 @@ cd ~/projects/hr-case-router-prd-review && claude
 2. `cd ~/projects/hr-case-router-lab-guide/files`: Goes into this guide's
    `files` folder, which holds the three inputs and the draft PRD.
 3. `cp -n inputs/USE-CASE.md … ~/projects/hr-case-router-prd-review/`: Copies
-   the three input files and the draft PRD into the review folder, so Claude
-   works on its own copies and never reads this guide. `-n` never overwrites a
+   the three input files and the draft PRD into the review folder. Claude
+   works on these copies and never reads this guide. `-n` never overwrites a
    copy that's already there, so running the line again keeps any changes.
 4. `cd ~/projects/hr-case-router-prd-review && claude`: Goes into the review
-   folder and starts Claude Code there, so it works on those four files. `&&`
+   folder and starts Claude Code there, to work on those four files. `&&`
    starts Claude only if the `cd` worked.
 
 </details>
@@ -117,7 +120,8 @@ cd ~/projects/hr-case-router-prd-review && claude
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** ⌨️ in your window, make a review folder:
+**In the Code tab:** ⌨️ in your window, the terminal you keep for ⌨️ steps,
+make a review folder:
 
 ```
 mkdir -p ~/projects/hr-case-router-prd-review
@@ -133,16 +137,16 @@ cp -n inputs/USE-CASE.md inputs/WORKSHOP-NOTES.md inputs/CHANGE-REQUEST.md PRD-H
 2. `cd ~/projects/hr-case-router-lab-guide/files`: Goes into this guide's
    `files` folder, which holds the three inputs and the draft PRD.
 3. `cp -n inputs/USE-CASE.md … ~/projects/hr-case-router-prd-review/`: Copies
-   the three input files and the draft PRD into the review folder, so Claude
-   works on its own copies and never reads this guide. `-n` never overwrites a
+   the three input files and the draft PRD into the review folder. Claude
+   works on these copies and never reads this guide. `-n` never overwrites a
    copy that's already there, so running the line again keeps any changes.
 
 </details>
 
 Then 🤖 start a new session
 (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**, click
-the folder control, choose **Open folder…**, and pick
+In the row under the prompt box, pick the top entry under **Local**. Click
+the folder control, choose **Open folder…** and pick
 `~/projects/hr-case-router-prd-review`.
 Then press **Ctrl+O** until the view is **Verbose**.
 
@@ -161,20 +165,22 @@ Don't edit any file.
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 Claude reads the PRD and the three inputs. For each capability and
-requirement, it quotes the input sentence behind it or says "no source"; then
-it lists what the inputs ask for that the PRD leaves out. It quotes rather
-than paraphrases, so you can check each claim yourself, and it edits nothing.
+requirement, it quotes the input sentence behind it, or says "no source".
+Then it lists what the inputs ask for that the PRD leaves out. It quotes
+rather than paraphrases, so you can check each claim yourself, and it edits
+nothing.
 
 </details>
 
-Compare its list with your pre-work guess.
+Compare its list with the guess you made in the pre-work.
 
 <details><summary>ℹ️ What R2, R8… mean</summary>
 
-Claude quotes the customer's use case, which numbers its requirements:
-`R8 (Must)` is requirement 8, a must-have; **Should** is wanted but not
-essential. The PRD's own capabilities have no letter: Claude writes them out,
-"capability 3". [All the labels](APPENDIX.md#r2-r8-the-customers-requirements).
+Claude quotes the customer's use case, which numbers its requirements.
+`R8 (Must)` is requirement 8, a must-have. **Should** is wanted but not
+essential. The PRD's capabilities, the things it asks the app to do, have
+no letter. Claude writes them out, as "capability 3".
+[All the labels](APPENDIX.md#r2-r8-the-customers-requirements).
 
 </details>
 
@@ -182,9 +188,11 @@ essential. The PRD's own capabilities have no letter: Claude writes them out,
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-A gap is only useful once someone decides what to do about it. One table lets
-you judge every gap side by side, in one reply. Anything only the customer can
-settle becomes an open decision: a question for them, not a guess in the PRD.
+A gap is a PRD line with no source, or an input the PRD left out. It's only
+useful once someone decides what to do about it. One table lets you judge
+every gap side by side and answer in one reply. Anything only the customer
+can settle becomes an open decision. That's a question for the customer,
+not a guess in the PRD.
 
 </details>
 
@@ -207,21 +215,24 @@ when I reply "Make the changes."
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
 Claude puts every unsourced line and every left-out statement into one
-numbered table: the PRD line, the closest input sentence, the gap, and its
-recommendation, Leave or Open decision. An open decision only adds a question
-under 7. Open decisions, so the PRD never grows a capability nobody asked for.
-Claude then waits, and edits the PRD only when you reply "Make the changes."
+numbered table. Each row has the PRD line, the closest input sentence, the
+gap and Claude's recommendation: Leave or Open decision. An open decision
+only adds a question under 7. Open decisions, so the PRD never grows a
+capability nobody asked for. Claude then waits, and edits the PRD only when
+you reply "Make the changes."
 
 </details>
 
-✅ One numbered table, usually 10 to 40 rows, most of them Leave.
+✅ Claude shows one numbered table, usually 10 to 40 rows. Most rows say
+Leave.
 
-Read each row's two quotes: does the input really say that? To change
-rows, reply once with their numbers and what to do instead, such as
-`4: Leave. 9: Open decision.` Then type `Make the changes.` alone.
+Read each row's two quotes. Does the input really say that? If you want to
+change rows, do it in one reply. Give each row's number and what to do
+instead, such as `4: Leave. 9: Open decision.` Then type
+`Make the changes.` alone.
 
-✅ Claude reports the lines it added under 7. Open decisions, after its
-nine, and no other change.
+✅ Claude reports the lines it added under 7. Open decisions, after the nine
+already there. It reports no other change.
 
 <details><summary>🛟 It asks about the rows one at a time anyway</summary>
 
@@ -238,7 +249,7 @@ the same rule for your recommendations, then wait.
 
 <div data-show="surface:terminal">
 
-**In the terminal:** ⌨️
+**In the terminal:** ⌨️ run
 `cd ~/projects/hr-case-router-prd-review && claude --continue`. It reopens
 the conversation where it stopped.
 
@@ -246,8 +257,8 @@ the conversation where it stopped.
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** open the desktop app again, and click the session in
-the sidebar. It holds the conversation.
+**In the Code tab:** open the desktop app again and click the session in
+the sidebar. The session still holds the conversation.
 
 </div>
 
@@ -257,9 +268,8 @@ the sidebar. It holds the conversation.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-A catch is a real problem the process found that got fixed or changed a
-decision. Logging this module's catches now, while you remember them, starts
-the record Module 8 counts: what each check was worth.
+Log this module's catches now, while you remember them. They start the
+record you count at the end of the day, to see what each check was worth.
 
 </details>
 
@@ -278,32 +288,35 @@ and when I reply keep, append them to
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-Claude drafts this module's catches as one line each, in the catch log's
-format, from what happened in this session. You read them and reply `keep`, or
-say what to change. They go in your catch log, the record of what the process
+Claude drafts this module's catches from what happened in this session, one
+line each, in the catch log's format. You read them and reply `keep`, or say
+what to change. They go in your catch log, the record of what the process
 caught.
 
 </details>
 
-Keep a line for each gap that changed the PRD in step 3. Then reply
-`keep`.
+Check that there's a line for each gap that changed the PRD in step 3.
+Then reply `keep`.
 
-✅ ⌨️ In your window,
-`tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you kept,
-each starting `1 | `, this module's number, never a count.
+✅ ⌨️ In your window, the terminal you keep for ⌨️ steps, run
+`tail -n 5 ~/projects/hr-case-router/catches.md`. It shows the lines you
+kept. Each one starts with `1 | `. The 1 is this module's number, never a
+count.
 
 ### 5. Get the customer's acceptance
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The customer has answered the open decisions you raised. Putting each answer
-into the PRD and recording their acceptance turns the draft into the agreed
-version that every later module builds from. Claude copies it into your
-workspace's `brief` folder, where the next module reads it.
+The customer has answered the open decisions you raised. Claude puts each
+answer into the PRD and records the customer's acceptance. That turns the
+draft into the agreed version, which every later module builds from.
+Claude copies it into the `brief` folder of your workspace,
+`hr-case-router`. The next module reads it there.
 
 </details>
 
-⌨️ **Terminal**, in that window, get the customer's answers:
+⌨️ **Terminal**, in your window, copy the customer's answers into the
+review folder:
 
 ```
 cp ~/projects/hr-case-router-lab-guide/files/CUSTOMER-ANSWERS.md ~/projects/hr-case-router-prd-review/
@@ -323,17 +336,18 @@ Then copy the PRD into ~/projects/hr-case-router/brief/.
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-Claude puts each of the customer's answers into every PRD section it affects,
-replacing each "is an open decision". Where they gave no answer, it follows
-their Anything else row and tells you what it chose. It sets 7. Open decisions
-to "None.", fills in 8. Acceptance, marks the PRD Accepted with today's date,
-and copies it to `~/projects/hr-case-router/brief/`, the copy later modules
-build from.
+Claude puts each of the customer's answers into every PRD section it
+affects, in place of each "is an open decision". Where the customer gave no
+answer, Claude follows their Anything else row and tells you what it chose.
+It sets 7. Open decisions to "None.", fills in 8. Acceptance and marks the
+PRD Accepted with today's date. Then it copies the PRD to
+`~/projects/hr-case-router/brief/`, the copy later modules build from.
 
 </details>
 
-When it's done: <span data-show="surface:terminal">**In the terminal:**
-type `/exit` alone.</span> ⌨️ **Terminal**, in your window:
+When Claude is done: <span data-show="surface:terminal">**In the terminal:**
+type `/exit` alone to close Claude.</span> Then ⌨️ **Terminal**, in your
+window:
 
 ```
 ls ~/projects/hr-case-router/brief
@@ -343,11 +357,11 @@ grep -c -e 'is an open decision' -e 'Draft 2' ~/projects/hr-case-router/brief/PR
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
 1. `ls ~/projects/hr-case-router/brief`: Lists what's in your workspace's
-   `brief` folder, to show Claude copied the accepted PRD there. The later
-   modules build from that copy.
+   `brief` folder. It shows whether Claude copied the accepted PRD there.
+   Later modules build from that copy.
 2. `grep -c -e 'is an open decision' -e 'Draft 2' …`: Counts the lines of that
    copy that still say "is an open decision" or "Draft 2". Each `-e` gives
-   `grep` one phrase to look for. `0` means every answer went in, and the PRD
+   `grep` one phrase to look for. `0` means every answer went in and the PRD
    no longer says it's a draft.
 
 </details>
@@ -355,9 +369,10 @@ grep -c -e 'is an open decision' -e 'Draft 2' ~/projects/hr-case-router/brief/PR
 ✅ It prints `PRD-HRCaseRouter.md`, then `0`.
 
 ✏️ **Editor:** open `hr-case-router/brief/PRD-HRCaseRouter.md`.
-✅ The line that said Draft 2 says Accepted; 4. still warns of a run's many
-AI calls and of an agent's guesses; 7. reads `None.`; 8. names the product
-manager, with today's date.
+✅ The line that said Draft 2 now says Accepted. Section 4 still warns that
+a run makes many AI calls, and that an agent with poor information guesses.
+Section 7 reads `None.` Section 8 names the product manager, with today's
+date.
 
 <details><summary>🛟 Claude asks you a business question</summary>
 
@@ -368,7 +383,7 @@ manager, with today's date.
 
 <details><summary>🛟 It prints a number above 0, or a check fails</summary>
 
-<span data-show="surface:terminal">**In the terminal:** ⌨️
+<span data-show="surface:terminal">**In the terminal:** ⌨️ run
 `cd ~/projects/hr-case-router-prd-review && claude --continue`.</span>
 <span data-show="surface:desktop">**In the Code tab:** click the review
 session in the sidebar.</span> Then 🤖 **Claude:** type `Recheck sections 4, 6, 7 and 8 and the Draft 2 line
@@ -378,5 +393,6 @@ against my request, fix them, then copy the PRD again.`
 
 ## You now have
 
-- `~/projects/hr-case-router/brief/PRD-HRCaseRouter.md`,
-  accepted, and this module's catches in `catches.md`.
+- The accepted PRD, in
+  `~/projects/hr-case-router/brief/PRD-HRCaseRouter.md`.
+- This module's catches, in `catches.md`.

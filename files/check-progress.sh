@@ -28,16 +28,16 @@ not_exists() { [ ! -e "$1" ]; }
 
 echo "Checking that you're ready for Module $N…"
 
-# --- Module 0 ----------------------------------------------------------------
-check "The guide is in ~/projects/hr-case-router-lab-guide" "Module 0 step 4" test -d "$G/.git"
-check "Your workspace has brief/ and catches.md" "Module 0 step 9" \
+# --- Pre-work ----------------------------------------------------------------
+check "The guide is in ~/projects/hr-case-router-lab-guide" "Pre-work step 4" test -d "$G/.git"
+check "Your workspace has brief/ and catches.md" "Pre-work step 9" \
   test -d "$W/brief" -a -f "$W/catches.md"
-check "app/ is a git repo with now.config.json" "Module 0 steps 12 and 13" \
+check "app/ is a git repo with now.config.json" "Pre-work steps 12 and 13" \
   test -d "$A/.git" -a -f "$A/now.config.json"
-check "app/ has the kit's allow list (.gitignore)" "Module 0 step 13" \
+check "app/ has the kit's allow list (.gitignore)" "Pre-work step 13" \
   grep -q '^# Allowlist' "$A/.gitignore"
-check "app/ has the guard (the pre-commit hook)" "Module 0 step 14" test -f "$A/.git/hooks/pre-commit"
-check "app/'s main holds CLAUDE.md" "Module 0 steps 16 and 18" on_main CLAUDE.md
+check "app/ has the guard (the pre-commit hook)" "Pre-work step 14" test -f "$A/.git/hooks/pre-commit"
+check "app/'s main holds CLAUDE.md" "Pre-work steps 16 and 18" on_main CLAUDE.md
 
 remote=$(git -C "$A" remote get-url origin 2>/dev/null)
 if [ -n "$remote" ]; then
@@ -53,10 +53,10 @@ if [ -n "$remote" ]; then
   fi
   default=$(cd "$A" && gh repo view --json defaultBranchRef -q .defaultBranchRef.name 2>/dev/null)
   if [ "$default" = "main" ]; then ok "Your repo's main branch on GitHub is main"
-  elif [ -z "$default" ]; then bad "gh can't read your repo" "run: gh auth status, then Module 0 step 4 if it says you're not logged in"
+  elif [ -z "$default" ]; then bad "gh can't read your repo" "run: gh auth status, then Pre-work step 4 if it says you're not logged in"
   else bad "Your repo's main branch on GitHub is $default, not main" "in app/, run: git push -u origin main && gh repo edit --default-branch main"; fi
 else
-  bad "app/ has no GitHub remote" "Module 0 step 18"
+  bad "app/ has no GitHub remote" "Pre-work step 18"
 fi
 
 branch=$(git -C "$A" branch --show-current 2>/dev/null)
