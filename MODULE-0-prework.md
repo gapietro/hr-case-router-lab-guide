@@ -49,8 +49,9 @@ also has AI Agent Studio, where AI agents are built. Save the instance's
 admin password in your password manager. Note its address, such as
 `https://dev123456.service-now.com`.
 
-Note the instance's name too. It's the first part of the address, such as
-`dev123456`.
+Note the instance's name too. It's the part of the address between
+`https://` and `.service-now.com`, such as `dev123456`. A lab instance's
+name can have a dot in it, such as `lab-0001.lab`: keep the dot.
 
 <div data-value="instance"></div>
 
