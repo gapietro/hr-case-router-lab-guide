@@ -113,6 +113,32 @@ table.day td:first-child{font-family:var(--mono);font-size:.88em;white-space:now
 table.perm{font-size:calc(var(--u)*1.2)}
 table.perm td:nth-child(2){font-weight:700;width:22%}
 table.keys td:first-child{font-weight:700;width:24%}
+/* The why, the what and the how (#281): the stages, the habits, and each module's why */
+table.process td:first-child{font-weight:700;white-space:nowrap}
+.slide--light table.process td:last-child{color:var(--accent-text);font-weight:700}
+.habit{display:block;font-weight:400;color:var(--accent-text);margin-top:.25em}
+table.ideas{font-size:calc(var(--u)*1.3)}
+table.ideas td:first-child{font-weight:700}
+.slide--dark table.ideas td:last-child{color:var(--blue)}
+/* Stage details on demand (#281): a stage name on the stage table is a button, and opens that stage's module rows
+   in a panel over the slide. The rows live once, on the handout slides at the back. */
+button.more{font:inherit;font-weight:700;color:inherit;background:none;border:0;padding:0;margin:0;cursor:pointer;text-align:left;text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:.14em;text-underline-offset:.22em}
+.more-panel{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:rgba(3,45,66,.8)}
+.more-card{width:88%;max-height:86%;overflow:auto;background:var(--paper);color:var(--text);border-radius:12px;border-top:calc(var(--u)*.4) solid var(--accent);padding:calc(var(--u)*1.8) calc(var(--u)*2.2);display:flex;flex-direction:column;gap:calc(var(--u)*1)}
+.more-title{font-family:var(--display);font-weight:700;font-size:calc(var(--u)*2.4);line-height:1.1;color:var(--ink)}
+.more-card p{color:var(--text)}
+.more-card td,.more-card th{border-bottom:1px solid var(--line);color:var(--text)}
+.more-card thead th{color:var(--muted)}
+.more-close{align-self:flex-end;font-family:var(--eyebrow);font-size:calc(var(--u)*.95);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--card);border:2px solid var(--accent-text);border-radius:6px;padding:.5em 1em;cursor:pointer}
+.more-panel *:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+/* The day, in two halves: a green rule between them, so a row on the left doesn't read on into the right */
+.day-split{gap:calc(var(--u)*2.6)}
+.day-split .col+.col{border-left:calc(var(--u)*.22) solid var(--accent);padding-left:calc(var(--u)*2.6)}
+table.tools{font-size:calc(var(--u)*1.3);line-height:1.34}
+table.tools td:first-child{font-weight:700}
+.slide--dark table.tools td:nth-child(2){color:var(--blue)}
+table.how{font-size:calc(var(--u)*1.22);line-height:1.36}
+table.how td:first-child{font-weight:700;width:18%}
 
 /* Slide parts */
 ol.rules{gap:calc(var(--u)*1)}
@@ -159,7 +185,10 @@ aside.speaker{display:none}
   .sub{font-size:18px} p,li,.card p,.card li,ol.rules li,ul.words li{font-size:15px}
   ul.words{columns:1}
   .k{font-size:11px} .eyebrow{font-size:11px} .bigline{font-size:22px} .say{font-size:18px}
-  table,table.day,table.perm{font-size:14px} thead th{font-size:11px}
+  table,table.day,table.perm,table.ideas,table.how,table.tools{font-size:14px} thead th{font-size:11px}
+  table.process td{white-space:normal!important}
+  .day-split .col+.col{border-left:0;padding-left:0}
+  .more-panel{display:none!important}
   .todo{white-space:normal}
   .slide *{min-width:0}
   .chrome,.notes,.help,.progress{display:none!important}
@@ -171,7 +200,8 @@ aside.speaker{display:none}
   .stage{position:static;display:block}
   .deck{width:297mm;height:auto;overflow:visible;container-type:inline-size;margin:0}
   .deck .slide{display:flex!important;position:relative;width:297mm;height:167mm;page-break-after:always;break-after:page}
-  .chrome,.notes,.help,.progress{display:none!important}
+  .chrome,.notes,.help,.progress,.more-panel{display:none!important}
+  button.more{text-decoration:none}
 }
 </style>
 </head>
@@ -183,42 +213,190 @@ aside.speaker{display:none}
 <template id="slides">
 
 <!-- This deck is a participant handout: it ships in the participant pack, and N shows the presenter
-     notes to anyone. Write every note as if the room can read it. Every fact on a slide is in the
-     README or the pre-work, and data-* quotes stay word for word. Check with: python3 tests/check-presession.py
+     notes to anyone. Write every note as if the room can read it. Slides 2 to 5, the why, are the lab
+     author's own argument. Every other fact on a slide is in the README, the pre-work or a module, and data-* quotes
+     stay word for word. No slide or note may hint at what a module is there to catch. Check with: python3 tests/check-presession.py
      Placeholders the lab author fills before the session are spans marked data-todo: replace the
-     whole span, tags included, with a link, such as <a href="https://example.com/form">the anonymous form</a>.
+     whole span, tags included, with a link, such as <a href="https://example.com/guide">the guide</a>.
      The pack refuses any span left. -->
 
-<!-- 1 Welcome, and the anonymous poll · 0:00–0:05 -->
+<!-- 1 Title -->
 <section class="slide slide--dark" data-chrome="dark">
   <div class="head"><p class="eyebrow">Agentic Build Lab · Pre-session · 60 minutes</p></div>
   <div class="body" style="justify-content:center">
-    <h1>Everyone here is new to <span class="hl">something.</span></h1>
-    <p class="sub">A week before the lab day: how the day runs, the terminal, where you act, the rules and their reasons, the words, and your pre-work.</p>
+    <h1>The speed of AI.<br><span class="hl">The quality of a senior developer.</span></h1>
+    <p class="sub">That's the goal of this method. This session walks us through the process of building responsibly with AI, and prepares us for the upcoming lab.</p>
     <div class="cols cols-2 stretch">
       <div class="card">
-        <p class="k">Anonymous poll</p>
-        <p>How comfortable are you with a terminal? With Claude Code? With git?</p>
-        <p>We show the spread, never who answered.</p>
+        <p class="k">The next hour</p>
+        <p><strong>In the first half,</strong> we cover the why, the what and the how of building this way.</p>
+        <p><strong>In the second half,</strong> we get practical: setting up for the lab, and getting the pre-work done.</p>
       </div>
       <div class="card">
-        <p class="k">Ask anything, any time</p>
-        <p>Type <code>?</code> in the chat, or use the anonymous form: <span class="todo" data-todo>TO FILL: anonymous form link</span></p>
-        <p>We read questions out as "Someone asked…", never with a name.</p>
+        <p class="k">Questions</p>
+        <p>Put them in the Teams chat at any time, or speak up and interrupt us.</p>
+        <p>This session is for you. If something isn't clear, say so: understanding it matters more than getting through the slides.</p>
       </div>
     </div>
   </div>
-  <aside class="speaker">Start the recording, with captions on. Welcome. The lab day asks a lot at once, and nobody should meet a terminal, a rule or a new word for the first time at 09:00 on the day: that's why this session exists. Each presenter names one thing in the lab they had to look up themselves. Then launch the anonymous poll: three questions, each from "never used it" to "use it every day". Show the results and read out the spread, never names: "Some of us use a terminal every day, some never have. Both are fine here." The method is new to every one of us, seniors included. After each part, pause for 30 seconds: "Anything unclear so far? Type a question mark in the chat, or use the anonymous form." Never ask for hands.</aside>
+  <aside class="speaker">Start the recording, with captions on. Welcome. One line holds this session, and the lab: the speed of AI, with the quality of a senior developer. AI gives us the speed on its own. The quality comes from how we work with it, and that's what the lab teaches. The first half of this hour is the why, the what and the how. The second half is practical: the terminal, the rules and the pre-work, so nobody meets them for the first time at 09:00 on the day. Say this at the start, and mean it: interrupt us at any time. This session is for you, so there's no point in staying quiet when something isn't clear. Understanding is the part that matters most. The Teams chat works too. After each part, pause for 30 seconds: "Anything unclear so far?" Invite questions, but never call on anyone or ask for hands.</aside>
 </section>
 
-<!-- 2 The day · 0:05–0:10 -->
+<!-- 2 Why: the problem -->
 <section class="slide slide--light" data-chrome="light">
   <div class="head">
-    <p class="eyebrow">The day</p>
-    <h2>Eight modules on the day. Each one leaves you with something.</h2>
+    <p class="eyebrow">Why · The problem</p>
+    <h2>AI gives us the speed. <span class="hl">The quality isn't guaranteed.</span></h2>
   </div>
   <div class="body">
-    <div class="cols cols-2">
+    <div class="cols cols-3 stretch">
+      <div class="card">
+        <p class="k">Fast, and often better</p>
+        <p>AI can write code far faster than a person can, and in most cases better.</p>
+        <p>Agentic coding tends to go wrong somewhere else: when the AI makes its own decisions, with no input from a person.</p>
+      </div>
+      <div class="card">
+        <p class="k">A likely answer</p>
+        <p>When an AI decides for itself, it picks a likely answer. A likely answer can be wrong and still sound right.</p>
+        <p data-quote="README">Claude's summary is its best guess, and it can be wrong.</p>
+        <p>That's why a person stays in the loop: to decide, and to check.</p>
+      </div>
+      <div class="card card--accent">
+        <p class="k">It runs in production</p>
+        <p>In real work, what we build ends up running on a production instance.</p>
+        <p>So we have to understand how the code works, and the logic behind it. That's how we keep problems off a live system.</p>
+      </div>
+    </div>
+    <p class="say">The question isn't whether AI can build it. It's whether we can trust what it built.</p>
+  </div>
+  <aside class="speaker">Start with the problem. AI writes code far faster than a person can, and in most cases better. But writing the code was never the hard part of a ServiceNow build: the decisions are. Left to make them on its own, with no input from a person, an AI picks a likely answer and keeps going. That's where agentic coding goes wrong. A likely answer can be wrong and still sound right. It will tell us the work is done, and it isn't lying: it's guessing. So a person stays in the loop, to decide and to check. On ServiceNow that matters more than in most places, because what we build acts on real records. In the lab we each use our own instance, never production. In real work this code runs in production, so the people responsible for it have to understand how it works, and the logic behind it. If nobody does, nobody can say what it will do to a live system. So the question for this hour isn't whether AI can build the app. It's whether we can trust what it built, and how we'd know.</aside>
+</section>
+
+<!-- 3 Why: the standard -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">Why · The standard</p>
+    <h2>Senior quality comes from six habits, <span class="hl">not from writing the code.</span></h2>
+  </div>
+  <div class="body">
+    <table class="ideas">
+      <thead><tr><th style="width:27%">The habit</th><th>What it means</th><th style="width:31%">Where we'll see it on the day</th></tr></thead>
+      <tbody>
+        <tr><td>A person decides at each milestone</td><td>A person decides whether the work may go further.</td><td>MERGE, INSTALL, DEMO, HANDOFF</td></tr>
+        <tr><td>A design agreed first</td><td>What will be built, how and why, agreed and understood before any code.</td><td>The design record, from Module 4</td></tr>
+        <tr><td>A check that can fail</td><td>It must pass before work moves on, and it runs the same way every time.</td><td>The guard on every commit, the tests on every story</td></tr>
+        <tr><td>Evidence, not someone's word</td><td>Evidence is something anyone can look at or run again. A claim is someone's word.</td><td>A command's output, not Claude's summary of it</td></tr>
+        <tr><td>A written record</td><td>Plans, decisions and progress live in files, not in someone's head.</td><td><code>catches.md</code>, the backlog, the session note</td></tr>
+        <tr><td>An AI's answer, treated as a draft</td><td>An AI gives a likely answer, not a certain one. It's a draft until a check passes.</td><td>Claude itself: a likely answer, until a check says otherwise</td></tr>
+      </tbody>
+    </table>
+    <p>None of this is new: it's what good dev teams already do. An AI won't keep these habits on its own, so the process makes each one a step.</p>
+  </div>
+  <aside class="speaker">The last slide left a question: can we trust what the AI built? So ask what makes a senior developer's work trusted. It isn't writing the code: AI does that faster, and often better. It's these six habits, and each one is about deciding, understanding or checking. The first two keep a person in the loop: a person decides, and the design is agreed and understood before any code. If we keep two more, we keep the check and the evidence: a check only counts if it could have failed, and evidence is something we can run again ourselves, not someone's word, Claude's included. An AI won't keep these habits on its own. The process has to give them to it, and that's the next slide.</aside>
+</section>
+
+<!-- 4 Why: the method -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Why · The method</p>
+    <h2>The AI assists. <span class="hl">Engineers make the final call.</span></h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-23 stretch">
+      <div class="card card--accent">
+        <p class="k">People stay in the loop</p>
+        <p>AI helps with every part: the app's requirements, its design and architecture, and the key decisions before it reaches an instance.</p>
+        <p>An engineer makes the final call on each. So we read what the AI produces, question it, and decide.</p>
+        <p>We approve the design before any code is written, so we know how the app works, and why.</p>
+      </div>
+      <div class="card">
+        <p class="k">The six habits, as steps nobody can skip</p>
+        <ul>
+          <li><strong>A person decides at every milestone.</strong> An instance changes only when its owner says so.</li>
+          <li><strong>The design is agreed before anything is built.</strong> Then it's split into small stories, so a wrong turn costs one story.</li>
+          <li><strong>We write the test before the code, and watch it fail.</strong> That proves the test can catch a mistake, so the AI can't pass it with code that only looks finished. This is test-driven development.</li>
+          <li><strong>We read what a command printed,</strong> not a summary of it.</li>
+          <li><strong>Decisions and progress go in files as we go,</strong> so anyone can pick the work up.</li>
+          <li><strong>The builder doesn't grade the build.</strong> Someone else reviews it, and that goes for Claude too.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">This is the method in one line: the AI assists; engineers make the final call. This isn't engineers doing the thinking by hand while AI only writes the code. AI helps with every part: it drafts the requirements, advises on the design, and questions it. But an engineer makes the final call on each: the requirements, the design and architecture, and the key decisions before the app reaches an instance. So we read what the AI produces, question it, and decide. Then the AI does the typing, and it's very good at it. On the right are the last slide's six habits, in the same order, each one now a step in the process, so none depends on anyone remembering. Take the tests. Writing a test before the code sounds backwards, and that's the usual first reaction. But if the AI writes the code and then its tests, the tests pass because they were written to pass. Written first, a test has to fail, because the code isn't there yet. Seeing it fail proves it can catch a mistake. The name for this is test-driven development. And we approve the design before any code is written, so we know how the app works, and why: that's what lets us put it on a live system. Nobody is expected to write code on the day.</aside>
+</section>
+
+<!-- 5 Why: what we get -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">Why · What we get</p>
+    <h2>AI's speed, a senior developer's quality, <span class="hl">whoever is prompting.</span></h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-3 stretch">
+      <div class="card">
+        <p class="k">The speed, kept</p>
+        <p>The AI writes fast, and less gets rebuilt.</p>
+        <p>A gap found in the design costs a sentence to fix. Found in code, it costs a rebuild.</p>
+      </div>
+      <div class="card">
+        <p class="k">Consistent quality</p>
+        <p>The result rests on the process, not on who was prompting that day.</p>
+      </div>
+      <div class="card">
+        <p class="k">Ready for production</p>
+        <p>We know how the app works, and why, before it reaches a live system.</p>
+      </div>
+      <div class="card">
+        <p class="k">A trail anyone can follow</p>
+        <p>The design, the decisions and the grade live in files. A customer can read them, and another team can pick the work up.</p>
+      </div>
+      <div class="card">
+        <p class="k">Our job changes</p>
+        <p>AI helps us with every part, and writes the code. We read, question and make the final call.</p>
+      </div>
+      <div class="card card--accent">
+        <p class="k">See for ourselves</p>
+        <p>On the day, a grade judges each build the way a demanding senior engineer would. Then we count what the process caught.</p>
+      </div>
+    </div>
+    <p class="say">This is how the AI Foundry builds with AI. The lab is that method, in one day.</p>
+  </div>
+  <aside class="speaker">This is what we get, and why the AI Foundry builds this way. We keep the AI's speed. That sounds wrong at first, with a morning of reading before any code, but the time goes where mistakes are cheap, so less gets rebuilt later. The quality is consistent: the result rests on the process, so it doesn't depend on who was prompting that day. The app is ready for production, because we approved its design and know how it works, and why. And there's a trail: a design a person signed, the decisions made along the way, and a grade, all in files that a customer can read and another team can pick up. Our job changes too. AI helps us with every part, and we read, question and make the final call: those are the skills the lab practises. Don't take our word for any of it. On the day a grade judges each build, the way a demanding senior engineer would, and then we count what the process caught. The guide says it well: the count makes the case for working this way, or against it. Opinion doesn't.</aside>
+</section>
+
+<!-- 6 What: the five stages -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">What · The method's five stages</p>
+    <h2>Five stages. Each ends with an engineer's decision, written down.</h2>
+  </div>
+  <div class="body">
+    <table class="process" data-stages>
+      <thead><tr><th style="width:15%">Stage · click one</th><th style="width:17%">On the day</th><th>What we do</th><th style="width:24%">The habit at work</th></tr></thead>
+      <tbody>
+        <tr><td><button type="button" class="more" data-more="consult">1 · Consult</button></td><td>Modules 1 and 2</td><td>We settle what the app must do, and how each part should be built. AI drafts and advises; we question it.</td><td>An AI's answer, treated as a draft</td></tr>
+        <tr><td><button type="button" class="more" data-more="design">2 · Design</button></td><td>Modules 3 to 5</td><td>We check the facts on our own instance, agree the design, and split it into small stories. Nothing is built yet.</td><td>A design agreed first</td></tr>
+        <tr><td><button type="button" class="more" data-more="build">3 · Build</button></td><td>Module 6</td><td>The AI writes the code, one story at a time. Each test is written first, and a review follows.</td><td>A check that can fail</td></tr>
+        <tr><td><button type="button" class="more" data-more="review">4 · Quality review</button></td><td>Module 7, and after the workshop</td><td>Someone who didn't build it grades it, then tries to break it.</td><td>Evidence, not someone's word</td></tr>
+        <tr><td>5 · Handover</td><td>After the workshop</td><td>We write down how to run the app, and test that another team could.</td><td>A written record</td></tr>
+      </tbody>
+    </table>
+    <p><strong>The sixth habit runs through all five:</strong> a person decides at each milestone.</p>
+    <p><strong>Module 8 closes the day:</strong> we count the mistakes each stage stopped, to see what working this way was worth.</p>
+  </div>
+  <aside class="speaker">That was the why. Now the what. This is the method the AI Foundry uses on real builds, squeezed into one day. The six habits from the last slides are built into five stages, and the last column says which habit each stage puts to work. Five stages, five habits. The sixth runs through all of them: AI helps in every stage, and each ends with an engineer's decision, written down. Each underlined stage name is a button: click one and a panel shows that stage's modules, with what happens in real work, why it matters and the mindset to bring. Esc closes it. Open one when someone asks, and skip it otherwise. That's the final call, made five times, and each time it goes into a document: the requirements, the design, the plan, the grade, the runbook. Whoever picks the work up next can read what was decided, and why. The earlier the stage, the cheaper its catch: that's why the day starts with reading, not code. Stages 1 and 2 fill the morning. Stage 3 is the build. Stage 4 starts on the day with the grade, and finishes after the workshop, with stage 5.</aside>
+</section>
+
+<!-- 7 What: the day -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">What · The day</p>
+    <h2>Eight modules on the day. Each one leaves us with something.</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-2 day-split">
+      <div class="col">
+      <p class="k">Morning · Stages 1 and 2 · We decide</p>
       <table class="day" data-day>
         <thead><tr><th style="width:27%">When</th><th style="width:33%">Module</th><th>Result</th></tr></thead>
         <tbody>
@@ -231,6 +409,9 @@ aside.speaker{display:none}
           <tr><td>12:30 · 25 min</td><td>5 · Check and plan</td><td>A plan on GitHub</td></tr>
         </tbody>
       </table>
+      </div>
+      <div class="col">
+      <p class="k">Afternoon · Stages 3 and 4 · We build</p>
       <table class="day" data-day>
         <thead><tr><th style="width:27%">When</th><th style="width:33%">Module</th><th>Result</th></tr></thead>
         <tbody>
@@ -243,133 +424,430 @@ aside.speaker{display:none}
           <tr><td>16:20 · 40 min</td><td>Catch-up time</td><td>Any module you're behind on, finished</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
-  <p class="next">Next: how the day runs</p>
-  <aside class="speaker">This is the README's table, as it is in the guide. Walk it top to bottom in a minute: reading and deciding in the morning, building from 12:55, and at 14:15 the app installed with its AI agent working live. Break it comes after the workshop, in After the workshop Part 2. The times are a plan, not a promise. Before all of this comes the pre-work: the last part of this session walks through it.</aside>
+  <p class="next">Next: the guide</p>
+  <aside class="speaker">This is the day's timetable, as it is in the guide, set against the five stages. The morning is stages 1 and 2: we decide what to build, and how, and nothing is built. The module names are the guide's: a PRD is the requirements document, and an LLD is the low-level design. The afternoon is stages 3 and 4: the AI builds from 12:55, and at 14:15 the app installed with its AI agent working live. Then the grade, and the count. Break it comes after the workshop, in After the workshop Part 2. The times are a plan, not a promise. We each work alone on the day; after the workshop, a partner attacks each app. Two things to say now, a week ahead. Falling behind is expected on a day like this: a checkpoint from an instructor is the normal fix, not a failure. And the day counts catches, the real mistakes the process stops: don't hunt for them, and don't invent them. Before all of this comes the pre-work: the last part of this session walks through it.</aside>
 </section>
 
-<!-- 3 How the day runs -->
-<section class="slide slide--light" data-chrome="light">
+<!-- 8 What: the guide, shown live -->
+<section class="slide slide--dark" data-chrome="dark">
   <div class="head">
-    <p class="eyebrow">How the day runs</p>
-    <h2>The AI types. <span class="hl">People and checks decide.</span></h2>
+    <p class="eyebrow">What · The guide</p>
+    <h2>One guide for the whole lab. Every module has the same shape.</h2>
   </div>
   <div class="body">
     <div class="cols cols-2 stretch">
+      <div class="card">
+        <p class="k">Every module, top to bottom</p>
+        <ol>
+          <li><strong>How long it takes,</strong> and a short summary of what we'll do.</li>
+          <li><strong>Why are we doing this?</strong> A short box: what happens in real work, why it matters, and the mindset to bring.</li>
+          <li><strong>The steps,</strong> numbered. Each one is labelled with where to do it: 🤖 in Claude, ⌨️ in our own terminal.</li>
+          <li><strong>A ✅ check after a step,</strong> so we know it worked. If it didn't, a 🛟 box under it has the fix.</li>
+          <li><strong>You now have:</strong> a list of what we finished in that module.</li>
+        </ol>
+      </div>
       <div class="card card--accent">
-        <p class="k">The method</p>
-        <p data-quote="README">You'll tell Claude Code how the app should work and which checks it must pass, and it will write the code.</p>
-        <p data-quote="README">Each time the process stops a real mistake, that's a <strong>catch</strong>. You'll total your catches up at the end of the day.</p>
+        <p class="k">The bar at the top of the guide</p>
+        <ul>
+          <li><strong>Setup:</strong> tell the guide which computer we use, and where we run Claude Code. It then shows only the steps that fit.</li>
+          <li><strong>Detail level:</strong> how much the guide explains. Choose <strong>Explain more</strong>, and its help boxes open.</li>
+          <li><strong>Search:</strong> find any step, or type an error message to find its fix.</li>
+          <li><strong>Notes:</strong> keep our own notes and bookmarks as we go.</li>
+          <li><strong>Stuck?:</strong> opens the fixes for the step we're on.</li>
+        </ul>
       </div>
-      <div class="card">
-        <p class="k">Log it</p>
-        <p data-quote="README"><strong>You don't write your catches down yourself:</strong> at the end of each module, a <strong>Log it</strong> prompt has Claude draft one line for each of that module's catches. Reply <code>keep</code> or say what to change:</p>
-        <p class="logline"><code>&lt;module&gt; | &lt;what caught it&gt; | &lt;what it caught, and what was done&gt;</code></p>
-      </div>
-      <div class="card">
-        <p class="k">Behind?</p>
-        <p data-quote="README">If you fall behind, ask your instructor for a checkpoint.</p>
-      </div>
-      <div class="card">
-        <p class="k">Alone, then with a partner</p>
-        <p data-quote="README">You'll work alone through every module on lab day. After the workshop, a partner will attack your app and test your runbook.</p>
+    </div>
+    <p>The guide follows the habits it teaches: steps end with a check that can fail, and modules end with a written record.</p>
+  </div>
+  <aside class="speaker">Open the guide's link and show it live. First the shape, on the pre-work: its time, a numbered step with its label, a check, and a closed fix box. Every module on the day has the same shape, and opens with a short box: why are we doing this? Slide 6's stage buttons show those boxes, stage by stage. The guide follows the habits it teaches: its steps end with a check that can fail, and every module ends with a written record of what we finished. Then the top bar. The Setup button, first in the top bar, holds the setup: the computer, and where Claude Code runs. Beside it, click Detail level and choose Explain more: help boxes open, and the guide's words are explained where we first meet them. Unsure? Start at Explain more. It never resets anyone's answers or loses their place. Going the other way is fine too: Show steps only hides the newcomer help, and keeps every check and fix. Nobody needs to know who switched. Then the rest of the bar, one move each. Search: type could not resolve and choose the result: it opens that fix in Pre-work step 4. Notes: click the bookmark beside a step's title, and it's in the Notes panel; write a note on the step there, and Download my notes keeps a copy. Stuck?: it opens the fixes for the step on screen, and a message to copy for an instructor, never for Claude. Back in Setup, Copy my setup carries the answers between the link and a downloaded copy. Short of time? Keep Detail level and Stuck?, and drop the rest. That's the first half. Pause here for questions before the practical part.</aside>
+</section>
+
+<!-- 9 The practical part: the tools, and what each one is for -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">The practical part · The tools</p>
+    <h2>The tools we'll use, and what each one is for</h2>
+  </div>
+  <div class="body">
+    <table class="tools">
+      <thead><tr><th style="width:19%">Tool</th><th style="width:36%">In plain English</th><th>Why the lab needs it</th></tr></thead>
+      <tbody>
+        <tr><td>A ServiceNow instance</td><td>Our own copy of ServiceNow, for the lab only</td><td>It's where the app runs. Each of us gets one, with demo data.</td></tr>
+        <tr><td>A terminal</td><td>A window where we type commands</td><td>Claude Code runs in it, and so do our own checks.</td></tr>
+        <tr><td>Claude Code</td><td>Claude, working in our project folder</td><td>It reads and writes the files, and runs the commands. We make the decisions.</td></tr>
+        <tr><td>The kit</td><td>An add-on for Claude Code</td><td>It gives Claude the lab's stages: consult, design, plan, build and grade.</td></tr>
+        <tr><td>ServiceNow SDK</td><td>ServiceNow's tool for building an app from files</td><td>It builds the app, and installs it on the instance.</td></tr>
+        <tr><td>git and GitHub</td><td>git keeps the project's history. GitHub keeps a copy online</td><td>The plan, the stories and the reviews live there. It's our written record.</td></tr>
+        <tr><td>VS Code</td><td>A free code editor</td><td>We open and read the files Claude writes in it.</td></tr>
+        <tr><td>Node.js</td><td>Runs JavaScript programs on a computer</td><td>The SDK and the app's tests run on it.</td></tr>
+      </tbody>
+    </table>
+    <p>Nothing to install today. The pre-work checks what each computer already has, and installs the rest, step by step.</p>
+  </div>
+  <aside class="speaker">Now the practical half. We've seen what we'll do; this is what we'll do it with. Eight tools, and nobody needs to know them yet. Take them in three groups. Where the app lives: a ServiceNow instance, one each, for the lab only. Who does the work: Claude Code, in a terminal, with the kit, an add-on that gives it the lab's five stages. And what builds and records it: the ServiceNow SDK turns files into an app on the instance, git and GitHub keep the history and the plan, VS Code is for reading what Claude wrote, and Node.js runs underneath. Nothing to install today: the pre-work checks what each computer has and installs only what's missing. One of these tools needs a closer look, because it's where people go wrong: Claude Code. We come to it after the skills and the rules.</aside>
+</section>
+
+<!-- 10 Skills to have before the lab -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">The practical part · Skills to have</p>
+    <h2>With those tools, before the lab, we should each be able to:</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-32">
+      <ol data-bar>
+        <li>Log in to a ServiceNow instance as an admin. Open a list, such as the HR cases. Impersonate a user, which means acting as them, when you're given the menu path.</li>
+        <li>Open a terminal. Paste a command into it, run it, and read what it prints.</li>
+        <li>Start Claude Code and send it a message. Answer it when it asks permission to run a command.</li>
+        <li>Say in one sentence each what a repo, a commit and a pull request are.</li>
+        <li>Install software on your computer, or get it installed in time.</li>
+      </ol>
+      <div class="col">
+        <div class="card card--accent">
+          <p class="k">New to any of these?</p>
+          <p data-quote="MODULE-0">That's normal. Most people are new to at least one.</p>
+          <p>The pre-work walks us through each one, step by step. <span data-quote="MODULE-0">You don't need to write code or know git's commands.</span></p>
+        </div>
+        <div class="card">
+          <p class="k">Help before the day</p>
+          <ul>
+            <li><strong>The bench clinic:</strong> a 30-minute drop-in session, a few days before the lab.</li>
+            <li><strong>An instructor:</strong> a private message, at any time.</li>
+            <li><strong>The guide:</strong> set <strong>Detail level</strong> to <strong>Explain more</strong>, and it explains each step.</li>
+            <li><strong>A company laptop that blocks installs?</strong> Tell an instructor now. It's the one thing that takes days to fix.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-  <aside class="speaker">One line on the method: the AI types; people and checks decide. Nobody is expected to write code. Catches: don't hunt for them, and don't invent them. Follow what really happens, and Log it drafts the lines for you. Falling behind is expected on a day like this: a checkpoint is the normal fix, not a failure, and it keeps you learning the method.</aside>
+  <aside class="speaker">This slide goes with the last one: it's what we do with those tools. It's the bar for the day, and it's a low one on purpose. Nobody needs to write code, or know git's commands. Items 2 and 3 are the ones to try before the pre-work. The closing slide lists four ways to practise them this week. Any item still a "not yet"? That's what the week is for: the bench clinic, and a private message to an instructor. Nobody else needs to know. Unsure how much help to ask of the guide? Start at Explain more, as we saw in the tour. Nobody needs to know who switched.</aside>
 </section>
 
-<!-- 4 Three ways to use Claude · 0:10–0:15 -->
+<!-- 11 The rules, as headlines -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">The practical part · Lab rules</p>
+    <h2>Seven rules. <span class="hl">Four are the habits. Three keep us safe.</span></h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-32">
+      <ol class="rules" data-rule-heads>
+        <li><strong>Never paste this guide into Claude.</strong></li>
+        <li><strong>Keep passwords out of Claude.</strong></li>
+        <li><strong>Keep two terminal windows open: one for Claude Code and one for you.</strong></li>
+        <li><strong>You decide when your instance changes.</strong></li>
+        <li><strong>Never use a production instance.</strong></li>
+        <li><strong>Read what a command printed. Don't rely on Claude's summary of it.</strong></li>
+        <li><strong>Keep the answer Claude gives you. Don't ask again to get a better one.</strong></li>
+      </ol>
+      <div class="col">
+        <div class="card card--accent">
+          <p class="k">Four are the habits, as rules</p>
+          <ul>
+            <li><strong>Rule 1:</strong> a check only counts if Claude can't see it coming.</li>
+            <li><strong>Rule 4:</strong> a person decides at each milestone.</li>
+            <li><strong>Rule 6:</strong> evidence, not someone's word.</li>
+            <li><strong>Rule 7:</strong> an AI's answer is a draft. We keep the one we got, and check it.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p class="k">Three keep us safe</p>
+          <ul>
+            <li><strong>Rules 2 and 3:</strong> passwords go in our own terminal or browser, never to Claude.</li>
+            <li><strong>Rule 5:</strong> the lab never touches real people's records.</li>
+          </ul>
+        </div>
+        <p class="small">The README gives each rule's reason in full, under <strong>Lab rules</strong>.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Seven rules for the day. Four of them are the habits from the first half, written as rules, so their reasons are already familiar: don't read them all out. The other three keep passwords and real records safe. If people keep one rule, it's the first: the checks only work if Claude can't see them. Rule 2 is about history: anything typed into Claude stays in the conversation, so passwords go only into our own terminal or browser. Rule 6 is the evidence habit: when Claude runs a command, the line starting ⏺ is the command, and the lines starting ⎿ are what it printed. Rule 7: if a step really went wrong, don't re-run it; ask an instructor for a checkpoint. The README gives every rule its reason: a rule people understand is one they keep under time pressure.</aside>
+</section>
+
+<!-- 12 The practical part: the poll, and where the lab runs: Claude Code, never chat -->
 <section class="slide slide--light" data-chrome="light">
   <div class="head">
-    <p class="eyebrow">Three ways to use Claude</p>
-    <h2>Three ways to use Claude. The lab uses two.</h2>
+    <p class="eyebrow">The practical part · Where the lab runs</p>
+    <h2>The lab runs in Claude Code. <span class="hl">Chat can't do it.</span></h2>
   </div>
   <div class="body">
     <div class="cols cols-3 stretch">
-      <div class="card">
-        <p class="k">Chat · claude.ai</p>
-        <p>Talks with you. It can't see or change the files on your computer.</p>
-        <p class="small">Handy on the side: to ask how to install a tool.</p>
-      </div>
-      <div class="card">
-        <p class="k">The desktop app's Code tab · The lab</p>
-        <p>Works in a folder you pick, with buttons.</p>
-        <p class="small">Fine for the lab: the guide shows its own steps where they differ. A few steps still need a terminal.</p>
-      </div>
       <div class="card card--accent">
-        <p class="k">Claude Code in a terminal · The lab, recommended</p>
-        <p>Works in the folder you start it in: it reads files and runs commands there.</p>
-        <p class="small">This guide is written for Claude Code in a terminal window.</p>
+        <p class="k">Terminal · Recommended</p>
+        <p>Claude Code in a terminal window. It works in our project folder, where it can read files and run commands.</p>
+        <p class="small">This is the main way to run the lab, and the one the guide is written for.</p>
+      </div>
+      <div class="card">
+        <p class="k">Desktop app, Code tab · Also works</p>
+        <p>The same Claude Code, inside the Claude desktop app. It works in our project folder too, in a window with buttons.</p>
+        <p class="small">The guide shows the Code tab's own steps where they differ. A few steps still need a terminal, and the guide says which.</p>
+      </div>
+      <div class="card">
+        <p class="k">Chat · Not for the lab</p>
+        <p>Chat can't see our project folder. It can't read or change files, or run commands, and the lab needs all three.</p>
+        <p class="small">This goes for claude.ai and for the desktop app's Chat tab. Chat is still handy on the side, for a quick question.</p>
       </div>
     </div>
-    <p class="say">Not sure which you've used? That's what this slide is for.</p>
+    <p class="say">Anonymous poll: how comfortable are you with a terminal? With Claude Code?</p>
   </div>
-  <aside class="speaker">Ask nobody to say which one they use. Many people think the desktop app's chat is Claude Code: it isn't, but its Code tab is. The Code tab is fine for the lab: choose it in the guide's setup, and the guide shows the Code tab's own steps where they differ. A few steps still need a terminal, such as installing the kit and every password step, and the guide says which. The Code-tab steps follow Anthropic's docs; anyone who sees a screen that doesn't match tells us. Chat stays useful on the side, for questions.</aside>
+  <aside class="speaker">Now the tool that needs a closer look: Claude Code. First, where we're starting from. Launch the anonymous poll: two questions, each from "never used it" to "use it every day". Show the results and read out the spread, never names: "Some of us use a terminal every day, some never have. Both are fine here." The method is new to every one of us, seniors included. Each presenter names one thing in the lab they had to look up themselves. Then where the lab runs. It runs in Claude Code, and there are two ways to get it: in a terminal, which the guide is written for, or in the desktop app's Code tab. Say this plainly: the lab can't be done in chat. Chat can't read or change files on a computer, and the lab reads and writes files from the first module to the last. Many people think the desktop app's chat is Claude Code: it isn't, but its Code tab is. Ask nobody to say which one they use. The Code tab is fine for the lab: choose it in the guide's setup, and the guide shows the Code tab's own steps where they differ. A few steps still need a terminal, such as installing the kit and every password step, and the guide says which. The Code-tab steps follow Anthropic's docs; anyone who sees a screen that doesn't match tells us. Chat stays useful on the side, for questions.</aside>
 </section>
 
-<!-- 5 The terminal, Mac and Windows -->
+<!-- 13 The terminal: two windows, and the keys for anyone new to it -->
 <section class="slide slide--dark" data-chrome="dark">
   <div class="head">
-    <p class="eyebrow">The terminal</p>
-    <h2>Type a command, press Enter, read what it prints</h2>
+    <p class="eyebrow">The practical part · The terminal</p>
+    <h2>Two terminal windows: one for Claude Code, one for us</h2>
   </div>
   <div class="body">
+    <div class="cols cols-2 stretch">
+      <div class="card">
+        <p class="k">Why two windows</p>
+        <p>We keep two terminal windows open: one for Claude Code, and one for our own commands.</p>
+        <p>Anything typed in Claude's window goes to Claude. Our own window keeps passwords, and the checks we run ourselves, separate.</p>
+      </div>
+      <div class="card">
+        <p class="k">On Windows</p>
+        <p>The Windows steps shown here, with Git Bash, are still being tested. For now the guide supports Windows by arrangement. Check with an instructor before starting the pre-work.</p>
+      </div>
+    </div>
+    <p class="k">New to a terminal? Three things to know</p>
     <table class="keys">
       <thead><tr><th></th><th>Mac · Terminal</th><th>Windows · Git Bash (being tested)</th></tr></thead>
       <tbody>
         <tr><td>Open it</td><td><kbd>Cmd+Space</kbd>, type <code>Terminal</code>, press <kbd>Enter</kbd></td><td>Press the <kbd>Windows</kbd> key, type <code>Terminal</code>, press <kbd>Enter</kbd> (after setting Git Bash as Windows Terminal's default profile)</td></tr>
         <tr><td>Paste a command</td><td><kbd>Cmd+V</kbd></td><td><kbd>Ctrl+V</kbd></td></tr>
-        <tr><td>A second one</td><td><kbd>Cmd+N</kbd>: a second window</td><td><kbd>Ctrl+Shift+T</kbd>: a new tab</td></tr>
+        <tr><td>Open a second one</td><td><kbd>Cmd+N</kbd>: a second window</td><td><kbd>Ctrl+Shift+T</kbd>: a new tab</td></tr>
       </tbody>
     </table>
-    <div class="cols cols-2 stretch">
-      <div class="card">
-        <p class="k">Why two</p>
-        <p data-quote="README">Keep two terminal windows open: one for Claude Code and one for you.</p>
-        <p>Your own commands go in the second one.</p>
-      </div>
-      <div class="card">
-        <p class="k">Windows: being tested</p>
-        <p>The guide says Windows (WSL) by arrangement, for now. Git Bash, shown here, is being tested. Check with your instructor before the pre-work.</p>
-      </div>
-    </div>
   </div>
-  <aside class="speaker">A terminal is a window where you type a command and the computer prints an answer. The line where you type is the prompt: it ends in % on a Mac and $ in Git Bash. You can't click to move the cursor in it; use the arrow keys. On Windows the lab plans to use Git Bash, which comes with Git for Windows, opened in Windows Terminal. Ctrl+V to paste and Ctrl+Shift+T for a new tab are Windows Terminal's documented keys. Not yet tested on Windows for this lab: that Windows Terminal opens Git Bash once it's set as the default profile, the Windows install steps, and Claude Code's keys there. Say so plainly if anything on the Windows screen differs. Why two: while Claude runs, its window is Claude's, so your own commands go in the second one.</aside>
+  <aside class="speaker">The last slide said the terminal is the main way to run the lab. Let the poll set the pace here. If most of the room uses a terminal every day, make the one point that's particular to this lab, two windows and why, and move on. If not, take the table too, without hurry: plenty of ServiceNow work never needs a terminal, so nobody should feel behind. There's no live demo at this point: one is at the back of the deck, for the end, if time allows. A terminal is a window where we type a command and the computer prints an answer. The line where we type is the prompt: it ends in % on a Mac and $ in Git Bash. We can't click to move the cursor in it; the arrow keys move it. On Windows the lab plans to use Git Bash, which comes with Git for Windows, opened in Windows Terminal. Ctrl+V to paste and Ctrl+Shift+T for a new tab are Windows Terminal's documented keys. Not yet tested on Windows for this lab: that Windows Terminal opens Git Bash once it's set as the default profile, the Windows install steps, and Claude Code's keys there. Say so plainly if anything on the Windows screen differs. Why two windows: while Claude runs, its window is Claude's, and anything typed there goes to Claude. Our own window is where passwords go, and where we run a check ourselves. That's the evidence habit: we can run it again, and read what it printed. Before moving on, launch the three-question anonymous poll from the next slide, so people answer before they see the answers.</aside>
 </section>
 
-<!-- 6 The live demo · 0:15–0:27 -->
-<section class="slide slide--dark" data-chrome="dark">
-  <div class="head">
-    <p class="eyebrow">Live · Mac and Windows, side by side</p>
-    <h2>Watch it once, slowly</h2>
-  </div>
-  <div class="body">
-    <div class="cols cols-32">
-      <ol>
-        <li>Open a terminal.</li>
-        <li>Run <code>node --version</code>. This machine is set up so it fails.</li>
-        <li>Run <code>git --version</code>. It prints a version.</li>
-        <li>Open a second one.</li>
-        <li>In an empty <code>practice</code> folder, start <code>claude</code>. Ask it to run <code>mkdir notes</code>.</li>
-        <li>A permission prompt: answer <strong>No</strong>, ask what it was for, then <strong>Yes</strong>. Read the ⏺ and ⎿ lines.</li>
-        <li>Type <code>/exit</code> to close Claude.</li>
-      </ol>
-      <div class="card card--accent">
-        <p class="k">command not found</p>
-        <p>The tool isn't installed yet. Pre-work step 3 installs it.</p>
-        <p>Nothing is broken, and it isn't your fault.</p>
-      </div>
-    </div>
-  </div>
-  <aside class="speaker">Both presenters share screens, Mac and Windows, each in a throwaway practice folder (mkdir practice, then cd practice), on an account without the lab settings, so Claude asks the way it does out of the box. Before step 2, say: "I've set this machine up so the next command fails, to show you what it looks like." When it fails, say in plain words: "command not found means this computer doesn't have that tool yet. It's nothing you did wrong. Pre-work step 3 installs it. If it still says this just after installing, the 🛟 box under that step says to open a new terminal window and check again." Show that box in the guide. At the prompt, read the command out loud. Choose No first and ask Claude what it was for: not sure? No, then ask. Then ask again, and choose Yes. Point at the line starting with ⏺, the command, and the lines under it starting with ⎿, its output: that's what you trust, not Claude's summary. On the Windows screen, say which steps looked different. The Windows path is still being tested, so say so if anything differs from the slide.</aside>
-</section>
-
-<!-- 7 What each step's label means · 0:27–0:32 -->
+<!-- 14 Permission requests: the anonymous quiz -->
 <section class="slide slide--light" data-chrome="light">
   <div class="head">
-    <p class="eyebrow">What each step's label means</p>
+    <p class="eyebrow">Answering Claude's permission requests · Anonymous quiz</p>
+    <h2>A person decides: read the command, then answer</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-23">
+      <div class="col">
+        <div class="card">
+          <p class="k">Yes or No?</p>
+          <ol>
+            <li>During the build, Claude asks to install the app on our instance: <code>now-sdk install --auth lab-pdi</code>.</li>
+            <li>At the end of the day, the grade asks to run the same install.</li>
+            <li>Claude asks to run a command we don't recognise.</li>
+          </ol>
+        </div>
+        <p class="small" data-quote="README">In auto mode, a safety check decides whether Claude can run each command. It blocks risky commands and shows <code>Denied by auto mode classifier</code>, so Claude rarely needs to ask you.</p>
+      </div>
+      <div class="col">
+        <table class="perm" data-permissions>
+          <thead><tr><th>The request</th><th>Answer</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td><code>now-sdk install</code>, <code>deploy</code>, <code>exec</code>, <code>execute</code>, <code>run</code>, <code>move</code> or <code>cicd</code>, in any form, or <code>npm run deploy</code></td><td>No</td><td>They change your instance, and you decide when (rule 4)</td></tr>
+            <tr><td>The grade asks to run <code>now-sdk install --auth lab-pdi</code> (near the end of the lab day and again after the workshop)</td><td>Yes, for that command only</td><td>The one install Claude runs, after asking</td></tr>
+            <tr><td>Anything else, or you're not sure</td><td>No, then ask Claude what it was for</td><td>A No costs a minute. You might not be able to undo a wrong Yes</td></tr>
+          </tbody>
+        </table>
+        <p data-quote="README"><strong>Never choose "Yes, and don't ask again".</strong> Each time Claude asks, you get to check what it's about to do. That choice stops it asking for good.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">This is the first habit in practice: a person decides. When Claude asks permission, we read the command before we answer. The poll is already running from the last slide. In its questions, lab-pdi is the short name for each person's lab instance, and the grade is the check at the end of the day. Show the spread, then the answers, and discuss the answers, never who gave them. One: No. We each install it ourselves, in our own terminal (rule 3). Two: Yes, for that command only. The grade's install is the one exception to the install row: it's the one install Claude runs, and it asks first. Three: No, then ask Claude what it was for. A No costs a minute. These are three rows of the README's table, "Answering Claude's permission requests": on the day, when Claude does ask, find the command there.</aside>
+</section>
+
+<!-- 15 The pre-work -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">The practical part · The pre-work</p>
+    <h2>The pre-work: about 2 hours, at least two days before the lab</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-3">
+      <div class="card">
+        <p class="k">Six parts</p>
+        <ol data-parts>
+          <li>Your instance</li>
+          <li>Your tools</li>
+          <li>The kit and a clean bench</li>
+          <li>Your app's repo</li>
+          <li>Your repo's rules, and GitHub</li>
+          <li>Before the day</li>
+        </ol>
+      </div>
+      <div class="col">
+        <div class="card">
+          <p class="k">Each of us gets</p>
+          <p>An instance, with admin on it, from an instructor.</p>
+        </div>
+        <div class="card">
+          <p class="k">We each bring</p>
+          <ul>
+            <li data-quote="MODULE-0">A Claude plan that includes Claude Code</li>
+            <li data-quote="MODULE-0">A GitHub account</li>
+          </ul>
+        </div>
+        <div class="card card--accent">
+          <p class="k">We each send</p>
+          <p>A GitHub user name, to an instructor.</p>
+        </div>
+      </div>
+      <div class="card">
+        <p class="k">When we're done, we each have</p>
+        <ul>
+          <li>A lab instance, checked, with a test user to act as.</li>
+          <li>The tools, installed and signed in.</li>
+          <li>A project folder, with an app that builds.</li>
+          <li>That app, saved to a private repo on GitHub.</li>
+          <li>The customer's inputs, read.</li>
+        </ul>
+        <p class="small">The pre-work ends with this list in full, under <strong>You now have</strong>.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Open the hosted guide and show where it starts: the README, then the pre-work. Walk the six parts in order, at a glance; don't do them now. Parts 1 to 3 set up the tools we met earlier: the instance, then the tools on each computer, then the kit. Parts 4 and 5 make the project folder and its repo. Part 6 is reading what the customer sent. Each of us gets an instance from an instructor. We each bring a Claude plan that includes Claude Code, and a GitHub account: the README's "What you need" has the details. We each send an instructor a GitHub user name, and accept the invite to the guide. The 🛟 boxes are normal, expected help. "Tell your instructor" is the right move, not a failure. When we're done, we check the "You now have" list at the end of the pre-work, at least two days before the workshop.</aside>
+</section>
+
+<!-- 16 Questions, and this week -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">Questions · Then this week</p>
+    <h2>Questions first. <span class="hl">Then try it this week.</span></h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-2 stretch">
+      <div class="card card--accent">
+        <p class="k">Try it this week: the lab in miniature</p>
+        <ol>
+          <li>Open a terminal and run <code>git --version</code>.</li>
+          <li>Open a second terminal window.</li>
+          <li>Start <code>claude</code> in an empty practice folder, and ask it to run <code>mkdir notes</code>.</li>
+          <li>Read the command it wants to run. Answer <strong>No</strong> once, then <strong>Yes</strong>.</li>
+          <li>Type <code>/exit</code>.</li>
+        </ol>
+        <p class="small">Try it once the pre-work has installed the tools, and before Pre-work step 5. After that step, Claude starts in auto mode and rarely asks: that's expected.</p>
+      </div>
+      <div class="card">
+        <p class="k">Ours to keep</p>
+        <ul>
+          <li>The guide: <span class="todo" data-todo>TO FILL: hosted guide link</span></li>
+          <li>This deck: <code>PRESESSION.html</code>, in the guide's folder. The slides after this one are for later: a live demo to follow along, each stage's modules, the labels and the words</li>
+          <li>The recording, with chapters: <span class="todo" data-todo>TO FILL: recording link</span></li>
+          <li>Questions this week: a private message to an instructor</li>
+          <li>Bench clinic, 30 minutes, drop in: <span class="todo" data-todo>TO FILL: bench clinic date and link</span></li>
+          <li>The pre-work done: at least two days before the workshop</li>
+        </ul>
+      </div>
+    </div>
+    <p class="say">The speed of AI. The quality of a senior developer. See you on the day.</p>
+  </div>
+  <aside class="speaker">Questions from the Teams chat first. The presenter who isn't answering reads them out. Then the open floor. Close with the help that stays open all week: the bench clinic, and a private message to an instructor. Everything here is also in the follow-up email, within the hour. Six slides follow this one. The first is a live demo: run it now if there's time, and skip it if there isn't. The other five are for reading later: each stage's modules, what each step's label means, and the first words we'll meet. Name them; don't present them. End where we began: the speed of AI, with the quality of a senior developer. Thank everyone, then stop the recording.</aside>
+</section>
+
+<!-- 17 If time allows: a live demo, its running order and three things to notice -->
+<section class="slide slide--dark" data-chrome="dark">
+  <div class="head">
+    <p class="eyebrow">If time allows · A live demo</p>
+    <h2>Live demo: Claude Code asks, acts, and shows its work</h2>
+  </div>
+  <div class="body">
+    <div class="cols cols-2 stretch">
+      <div class="card">
+        <p class="k">What we'll do, live</p>
+        <ol>
+          <li>Open a terminal and run two commands: <code>git --version</code> works, and <code>node --version</code> fails, on purpose.</li>
+          <li>Open a second terminal window.</li>
+          <li>Start <code>claude</code> in an empty <code>practice</code> folder, and ask it to run <code>mkdir notes</code>.</li>
+          <li>Answer its permission request: <strong>No</strong> first, then <strong>Yes</strong>.</li>
+          <li>Read what it ran, and what came back. Then type <code>/exit</code> to close it.</li>
+        </ol>
+      </div>
+      <div class="col">
+        <div class="card card--accent">
+          <p class="k">Notice: Claude asks first</p>
+          <p>Before it runs a command, it shows us the command. Not sure? Answer No, and ask what it was for.</p>
+        </div>
+        <div class="card">
+          <p class="k">Notice: the output is the evidence</p>
+          <p>The line that starts with ⏺ is the command. The lines that start with ⎿ are what it printed. We trust those, not the summary.</p>
+        </div>
+        <div class="card">
+          <p class="k">Notice: command not found</p>
+          <p>It means a tool isn't installed yet. The pre-work installs it. Nothing is broken.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="speaker">Optional: run this only when the rest of the deck is done and there's time left. Nobody misses out if it's skipped, because the lab day is this, all day, and the closing slide gives the same steps to try alone. This slide is the running order for the demo, and the three things to notice in it. It's the lab in miniature: Claude asks, a person decides, and we read the evidence. Both presenters share screens, Mac and Windows, each in a throwaway practice folder (mkdir practice, then cd practice), on an account without the lab settings, so Claude asks the way it does out of the box. In step 1, before node --version, say: "I've set this machine up so the next command fails, to show what it looks like." When it fails, say in plain words: "command not found means this computer doesn't have that tool yet. It's nothing anyone did wrong. Pre-work step 3 installs it. If it still says this just after installing, the 🛟 box under that step says to open a new terminal window and check again." Show that box in the guide. At the prompt, read the command out loud. Choose No first and ask Claude what it was for: not sure? No, then ask. Then ask again, and choose Yes. Point at the line starting with ⏺, the command, and the lines under it starting with ⎿, its output: that's what we trust, not Claude's summary. On the Windows screen, say which steps looked different. The Windows path is still being tested, so say so if anything differs from the slide.</aside>
+</section>
+
+<!-- 18 Handout: how: stage 1, Consult -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Handout · How · Stage 1, Consult</p>
+    <h2>Consult: settle what to build, before anything is built</h2>
+  </div>
+  <div class="body">
+    <table class="how">
+      <thead><tr><th>Module, and its habit</th><th style="width:29%">In real work</th><th style="width:29%">Why it matters</th><th>Your mindset</th></tr></thead>
+      <tbody>
+        <tr data-stage="consult"><td>1 · Inputs to PRD<span class="habit">An AI's answer, treated as a draft</span></td><td data-quote="MODULE-1">A PRD turns what the customer said into what gets built. Someone checks that it says what they asked for, no more and no less.</td><td data-quote="MODULE-1">Everything later is built from it. A line nobody asked for gets built anyway. A request the PRD lost never gets built.</td><td data-quote="MODULE-1">Trace each line back to the input that asked for it. Don't just trust it.</td></tr>
+        <tr data-stage="consult"><td>2 · Consult<span class="habit">An AI's answer, treated as a draft</span></td><td data-quote="MODULE-2">An architect advises how to build each request before anyone writes code.</td><td data-quote="MODULE-2">The choice decides what the app costs to run, how predictable it is, and what can go wrong. Now is when it's cheapest to change.</td><td data-quote="MODULE-2">You're the reviewer, not the author. Question each recommendation as if you'll have to defend it to the customer.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">These are the guide's own words. On the day, each module opens with these three lines, in its <strong>Why are we doing this?</strong> box.</p>
+  </div>
+  <aside class="speaker">A handout slide. Slide 6 shows this detail in a panel when a stage is clicked. Now the how: each module, why it's there, and under its name, the habit it puts to work. Every module opens with the same three lines: what happens in real work, why it matters, and the mindset to bring. These are the guide's own words. Stage 1 is two modules, and nothing is built in either. In Module 1 we review a draft PRD, the product requirements document, against what the customer said. In Module 2 we get an architect's advice on how to build each request, and we question it. In both, our job is to check, not to write. Read the mindset column out: it's the one people skip.</aside>
+</section>
+
+<!-- 19 Handout: how: stage 2, Design -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Handout · How · Stage 2, Design</p>
+    <h2>Design: check the facts, question the design, then plan</h2>
+  </div>
+  <div class="body">
+    <table class="how">
+      <thead><tr><th>Module, and its habit</th><th style="width:29%">In real work</th><th style="width:29%">Why it matters</th><th>Your mindset</th></tr></thead>
+      <tbody>
+        <tr data-stage="design"><td>3 · Research and LLD<span class="habit">Evidence, not someone's word</span></td><td data-quote="MODULE-3">Before anyone designs, someone checks what the platform really does. They check on the customer's own instance, not from memory.</td><td data-quote="MODULE-3">Claude's facts are confident guesses. One wrong fact breaks the build at install time, after the work is done.</td><td data-quote="MODULE-3">You're the auditor. A claim is true only when your instance shows it, in rows you've read yourself.</td></tr>
+        <tr data-stage="design"><td>4 · Design challenge<span class="habit">A design agreed first</span></td><td data-quote="MODULE-4">Before anyone writes code, the design is questioned hard. Then it's agreed as the contract between the builder and the customer.</td><td data-quote="MODULE-4">A gap found by a question costs a sentence to fix. Found in code, it costs a rebuild.</td><td data-quote="MODULE-4">Answer as the owner, who'll have to defend each decision.</td></tr>
+        <tr data-stage="design"><td>5 · Check and plan<span class="habit">A person decides at each milestone</span></td><td data-quote="MODULE-5">The signed design is split into small stories. Each one belongs to a milestone, the group of stories that one gate needs.</td><td data-quote="MODULE-5">A plan that puts first what holds up the next milestone shows real progress.</td><td data-quote="MODULE-5">You're the last check before the plan is filed.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="speaker">A handout slide. Slide 6 shows this detail in a panel when a stage is clicked. Stage 2 is the longest part of the morning: three modules, and still no code. Module 3 checks Claude's facts about the platform on our own instances. Module 4 questions the design until a person agrees it. Module 5 turns the agreed design into small stories on GitHub. If the morning feels slow on the day, this slide is why: a mistake found here costs a sentence.</aside>
+</section>
+
+<!-- 20 Handout: how: stages 3 and 4, Build and quality review -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Handout · How · Stages 3 and 4, Build and quality review</p>
+    <h2>Build, grade and count: tests decide, and a stranger judges</h2>
+  </div>
+  <div class="body">
+    <table class="how">
+      <thead><tr><th>Module, and its habit</th><th style="width:29%">In real work</th><th style="width:29%">Why it matters</th><th>Your mindset</th></tr></thead>
+      <tbody>
+        <tr data-stage="build"><td>6 · Build loop<span class="habit">A check that can fail</span></td><td data-quote="MODULE-6">Every story is built the same way. The tests come first, and you watch them fail. Then code is written until they pass. Then the work is reviewed.</td><td data-quote="MODULE-6">A test you never saw fail proves nothing. The builder is also the worst judge of their own code, and that includes Claude.</td><td data-quote="MODULE-6">Claude types. Tests and reviews decide. Read the evidence, not Claude's summary of it.</td></tr>
+        <tr data-stage="review"><td>7 · Grade<span class="habit">Evidence, not someone's word</span></td><td data-quote="MODULE-7">Before a team hands an app over, someone who's never seen it judges it. Could a stranger run it, fix it and trust it?</td><td data-quote="MODULE-7">The builder can't see what's missing. A grader who runs everything can.</td><td data-quote="MODULE-7">A low, honest score beats a high one you can't back up.</td></tr>
+        <tr data-stage="review"><td>8 · Debrief<span class="habit">A written record</span></td><td data-quote="MODULE-8">After a build, the team counts what the process caught, and where. That shows which steps earned their time.</td><td data-quote="MODULE-8">The count makes the case for working this way, or against it. Opinion doesn't.</td><td data-quote="MODULE-8">Trust evidence over memory, and be honest about what's real.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <aside class="speaker">A handout slide. Slide 6 shows this detail in a panel when a stage is clicked. Now the build. Module 6 builds every story the same way, tests first. We each build one story by hand, Claude builds more over lunch, and then we try the app live on our own instances. In Module 7, a grade that has never met us judges the result. In Module 8 we count what the process caught, from the file, not from memory. That count is the honest answer to this session's first slide.</aside>
+</section>
+
+<!-- 21 Handout: what each step's label means -->
+<section class="slide slide--light" data-chrome="light">
+  <div class="head">
+    <p class="eyebrow">Handout · What each step's label means</p>
     <h2>Every step uses a label</h2>
   </div>
   <div class="body">
@@ -399,82 +877,14 @@ aside.speaker{display:none}
       </div>
     </div>
   </div>
-  <aside class="speaker">Read the label before you act. A 🤖 box goes into Claude, with go typed after it. A ⌨️ box never goes into Claude: it goes into your own terminal. The ⏺ and ⎿ lines are what you just saw in the demo. Some checks have a closed 🛟 box under them. That's normal, expected help, for the moment you see something different.</aside>
+  <aside class="speaker">A handout slide: name it, don't present it. We saw the labels in the guide. Read the label before acting. A 🤖 box goes into Claude, with go typed after it. A ⌨️ box never goes into Claude: it goes into our own terminal. The ⏺ and ⎿ lines are what Claude Code shows when it runs a command. Some checks have a closed 🛟 box under them. That's normal, expected help, for the moment something looks different.</aside>
 </section>
 
-<!-- 8 Rules 1 to 3 · 0:32–0:40 -->
-<section class="slide slide--dark" data-chrome="dark">
-  <div class="head">
-    <p class="eyebrow">Lab rules · 1 to 3</p>
-    <h2>Seven rules, each with its reason</h2>
-  </div>
-  <div class="body">
-    <ol class="rules" data-rules>
-      <li><strong>Never paste this guide into Claude.</strong> Only the text in 🤖 boxes goes in. <em>Why:</em> if Claude can see the checks, it can write work that only passes them. Then they stop being real checks.</li>
-      <li><strong>Keep passwords out of Claude.</strong> Type them only into your own terminal or your browser. Claude never runs <code>now-sdk auth</code>. That's the command that asks for your instance's password. <em>Why:</em> everything you type into Claude goes to the AI model and stays in the conversation's history.</li>
-      <li><strong>Keep two terminal windows open: one for Claude Code and one for you.</strong> This guide calls yours your window. Do ⌨️ Terminal steps there. The pre-work shows you how to open it. <em>Why:</em> anything you type in Claude's window goes to Claude. Your window keeps your passwords and the checks you run yourself separate from Claude.</li>
-    </ol>
-  </div>
-  <aside class="speaker">Read each reason out: a rule people understand is one they keep under time pressure. If people keep one rule, it's the first: the checks only work if Claude can't see them. Rule 2 is about history: anything typed into Claude stays in the conversation, so passwords go only into your own terminal or your browser.</aside>
-</section>
-
-<!-- 9 Rules 4 to 7 -->
-<section class="slide slide--dark" data-chrome="dark">
-  <div class="head">
-    <p class="eyebrow">Lab rules · 4 to 6</p>
-    <h2>Seven rules, each with its reason</h2>
-  </div>
-  <div class="body">
-    <ol class="rules" start="4" data-rules>
-      <li><strong>You decide when your instance changes.</strong> You install the app yourself. The only install Claude runs is the one for your grade near the end of the day. It installs to <code>lab-pdi</code>, which is your instance's short name. Claude asks you before it runs that install. <em>Why:</em> an install changes a live system. A person decides when that happens, as they would in real work.</li>
-      <li><strong>Never use a production instance.</strong> <em>Why:</em> the agent you build moves HR cases and writes notes on them. On a production instance, those are real people's cases.</li>
-      <li><strong>Trust what a command prints, not Claude's summary of it.</strong> <em>Why:</em> Claude's summary is its best guess, and it can be wrong. The output is evidence. You can check it or run the command again.</li>
-      <li><strong>Follow what really happens.</strong> Don't send the same 🤖 box again to get a nicer answer. Keep the answer you got and carry on. If a step went wrong, ask your instructor for a checkpoint. <em>Why:</em> Claude can answer differently each time. Re-running until it looks right hides the mistakes the lab is built to catch.</li>
-    </ol>
-  </div>
-  <aside class="speaker">Rule 6 is the ⏺ and ⎿ habit from the demo. Rule 7: if a step really went wrong, don't re-run it; ask your instructor for a checkpoint. Before you move on, launch the three-question anonymous poll from the next slide, so people answer before they see the answers.</aside>
-</section>
-
-<!-- 10 Permission prompts: the anonymous quiz -->
+<!-- 22 Handout: the first words we'll meet -->
 <section class="slide slide--light" data-chrome="light">
   <div class="head">
-    <p class="eyebrow">Answering Claude's permission requests · Anonymous quiz</p>
-    <h2>Read the command, then answer</h2>
-  </div>
-  <div class="body">
-    <div class="cols cols-23">
-      <div class="col">
-        <div class="card">
-          <p class="k">Yes or No?</p>
-          <ol>
-            <li>In Module 6, Claude asks to run <code>now-sdk install --auth lab-pdi</code>.</li>
-            <li>The grade asks to run <code>now-sdk install --auth lab-pdi</code>.</li>
-            <li>Claude asks to run a command you don't recognise.</li>
-          </ol>
-        </div>
-        <p class="small" data-quote="README">In auto mode, a safety check decides whether Claude can run each command. It blocks risky commands and shows <code>Denied by auto mode classifier</code>, so Claude rarely needs to ask you.</p>
-      </div>
-      <div class="col">
-        <table class="perm" data-permissions>
-          <thead><tr><th>The request</th><th>Answer</th><th>Why</th></tr></thead>
-          <tbody>
-            <tr><td><code>now-sdk install</code>, <code>deploy</code>, <code>exec</code>, <code>execute</code>, <code>run</code>, <code>move</code> or <code>cicd</code>, in any form, or <code>npm run deploy</code></td><td>No</td><td>They change your instance, and you decide when (rule 4)</td></tr>
-            <tr><td>The grade asks to run <code>now-sdk install --auth lab-pdi</code> (near the end of the lab day and again after the workshop)</td><td>Yes, for that command only</td><td>The one install Claude runs, after asking</td></tr>
-            <tr><td>Anything else, or you're not sure</td><td>No, then ask Claude what it was for</td><td>A No costs a minute. You might not be able to undo a wrong Yes</td></tr>
-          </tbody>
-        </table>
-        <p data-quote="README"><strong>Never choose "Yes, and don't ask again".</strong> Each time Claude asks, you get to check what it's about to do. That choice stops it asking for good.</p>
-      </div>
-    </div>
-  </div>
-  <aside class="speaker">The poll is already running from the last slide. Show the spread, then the answers, and discuss the answers, never who gave them. One: No. You install yourself, in your own terminal (rule 3). Two: Yes, for that command only. The grade's install is the one exception to the install row: it's the one install Claude runs, and it asks first. Three: No, then ask Claude what it was for. A No costs a minute. These are three rows of the README's table, "Answering Claude's permission requests": on the day, when Claude does ask, find the command there.</aside>
-</section>
-
-<!-- 11 The words · 0:40–0:44 -->
-<section class="slide slide--light" data-chrome="light">
-  <div class="head">
-    <p class="eyebrow">Words you'll meet</p>
-    <h2>The first words you'll meet</h2>
+    <p class="eyebrow">Handout · Words we'll meet</p>
+    <h2>The first words we'll meet</h2>
   </div>
   <div class="body">
     <ul class="words" data-words>
@@ -487,128 +897,10 @@ aside.speaker{display:none}
       <li><strong>Design term:</strong> one numbered rule in your design record, such as <code>C3</code>. Every test names the design term it proves.</li>
       <li><strong>Catch:</strong> a real problem the process found that was fixed, or that changed a decision. A planted problem isn't a catch just because the check finds it.</li>
     </ul>
-    <p class="small">The guide explains more as you go. In the guide, <strong>Notes</strong> › <strong>Show words</strong> lists them all.</p>
+    <p class="small">The guide explains more as we go. In the guide, <strong>Notes</strong> › <strong>Show words</strong> lists them all.</p>
     <p class="small" data-quote="MODULE-0">Claude writes the code and runs git. You read and decide.</p>
   </div>
-  <aside class="speaker">You'll meet these words; nobody needs to know them today. One picture for the first four: your app's repo is a folder on your computer, and git keeps its history. Each commit is a snapshot in that history. Claude works on a branch, then opens a pull request, and the branch joins main only once the pull request is reviewed. Story, gate and design term arrive in Modules 4 to 6, and each module explains them when they do.</aside>
-</section>
-
-<!-- 12 The bar · 0:44–0:47 -->
-<section class="slide slide--dark" data-chrome="dark">
-  <div class="head">
-    <p class="eyebrow">Skills to have before the lab</p>
-    <h2>Before the lab, you should be able to:</h2>
-  </div>
-  <div class="body">
-    <div class="cols cols-32">
-      <ol data-bar>
-        <li>Log in to a ServiceNow instance as an admin. Open a list, such as the HR cases. Impersonate a user, which means acting as them, when you're given the menu path.</li>
-        <li>Open a terminal. Paste a command into it, run it, and read what it prints.</li>
-        <li>Start Claude Code and send it a message. Answer it when it asks permission to run a command.</li>
-        <li>Say in one sentence each what a repo, a commit and a pull request are.</li>
-        <li>Install software on your computer, or get it installed in time.</li>
-      </ol>
-      <div class="col">
-        <div class="card card--accent">
-          <p data-quote="MODULE-0"><strong>New to any of these?</strong> That's normal. Most people are new to at least one.</p>
-        </div>
-        <div class="card">
-          <p><strong>Unsure? Start at Explain more:</strong> click <strong>Detail level</strong>, in the guide's top bar. Help boxes open, and the guide's words are explained where you first meet them. You can change it at any time.</p>
-        </div>
-        <div class="card">
-          <p data-quote="MODULE-0">You don't need to write code or know git's commands.</p>
-        </div>
-        <div class="card">
-          <p>Some checks have a closed 🛟 box under them. Open it only if you see something different. ℹ️ boxes explain why, if you want to know.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <aside class="speaker">Items 2 and 3 are what the demo just showed. The last slide lists four ways to practise them this week. Any item still a "not yet"? That's what the week is for: the bench clinic, and a private message to your instructor. Nobody else needs to know. Now open the guide's link and show its top bar live. The Setup button, first in the top bar, holds the setup: your computer, and where you run Claude Code. Beside it, click Detail level and choose Explain more: help boxes open, and the guide's words are explained where you first meet them. Unsure? Start at Explain more. It never resets your answers or loses your place. Going the other way is fine too: Show steps only hides the newcomer help, and keeps every check and fix. Nobody needs to know you switched. Then the rest of the bar, one move each. Search: type could not resolve and choose the result: it opens that fix in Pre-work step 4. Notes: click the bookmark beside a step's title, and it's in the Notes panel; write a note on the step there, and Download my notes keeps a copy. Stuck?: it opens the fixes for the step on your screen, and a message to copy for your instructor, never for Claude. Back in Setup, Copy my setup carries your answers between the link and your downloaded copy.</aside>
-</section>
-
-<!-- 13 Your pre-work · 0:47–0:53 -->
-<section class="slide slide--light" data-chrome="light">
-  <div class="head">
-    <p class="eyebrow">Your pre-work</p>
-    <h2>About 2 hours, at least two days before</h2>
-  </div>
-  <div class="body">
-    <div class="cols cols-3">
-      <div class="card">
-        <p class="k">Six parts</p>
-        <ol data-parts>
-          <li>Your instance</li>
-          <li>Your tools</li>
-          <li>The kit and a clean bench</li>
-          <li>Your app's repo</li>
-          <li>Your repo's rules, and GitHub</li>
-          <li>Before the day</li>
-        </ol>
-      </div>
-      <div class="col">
-        <div class="card">
-          <p class="k">Your instructor gives you</p>
-          <p>Your instance, with admin on it.</p>
-        </div>
-        <div class="card">
-          <p class="k">You bring</p>
-          <ul>
-            <li data-quote="MODULE-0">A Claude plan that includes Claude Code</li>
-            <li data-quote="MODULE-0">A GitHub account</li>
-          </ul>
-        </div>
-        <div class="card card--accent">
-          <p class="k">Send your instructor</p>
-          <p>Your GitHub user name.</p>
-        </div>
-      </div>
-      <div class="card">
-        <p class="k">When you're done, you have</p>
-        <ul data-ready>
-          <li>An instance set up for the lab, and <code>hr.demo</code> to impersonate.</li>
-          <li>Your tools, signed in. Claude Code has the lab's settings, the kit <code>v0.1.4</code> and the SDK plugin.</li>
-          <li><code>~/projects/hr-case-router</code>, holding only <code>app/</code>, an empty <code>brief/</code> and an empty <code>catches.md</code>.</li>
-          <li>In <code>app/</code>: the allow list, the guard, an SDK project that builds, and its <code>CLAUDE.md</code>. The allow list is the hidden file <code>.gitignore</code>: <code>ls -a</code> shows it. Your two commits are pushed to your private <code>hr-case-router</code> repo on GitHub.</li>
-          <li>The customer's inputs, read, and your guess at what the PRD needs.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="speaker">Open the hosted guide and show where it starts: the README, then the pre-work. Walk the six parts in order, at a glance; don't do them now. Your instructor gives you your instance. You bring a Claude plan that includes Claude Code, and a GitHub account: the README's "What you need" has the details. Send your instructor your GitHub user name, and accept their invite to the guide. The 🛟 boxes are normal, expected help. "Tell your instructor" is the right move, not a failure. When you're done, check the "You now have" list at the end of the pre-work, at least two days before the workshop.</aside>
-</section>
-
-<!-- 14 Questions, and this week · 0:53–1:00 -->
-<section class="slide slide--dark" data-chrome="dark">
-  <div class="head">
-    <p class="eyebrow">Questions · Then this week</p>
-    <h2>Questions first. <span class="hl">Then try it this week.</span></h2>
-  </div>
-  <div class="body">
-    <div class="cols cols-2 stretch">
-      <div class="card card--accent">
-        <p class="k">Try it this week</p>
-        <ol>
-          <li>Open a terminal and run <code>git --version</code>.</li>
-          <li>Open a second one.</li>
-          <li>Start <code>claude</code> in an empty practice folder. Ask it to run <code>mkdir notes</code>. Answer one prompt No and one Yes. Try it before Pre-work step 5. After that, Claude starts in auto mode and rarely asks: that's expected.</li>
-          <li>Type <code>/exit</code>.</li>
-        </ol>
-      </div>
-      <div class="card">
-        <p class="k">Yours to keep</p>
-        <ul>
-          <li>The guide: <span class="todo" data-todo>TO FILL: hosted guide link</span></li>
-          <li>This deck: <code>PRESESSION.html</code>, in the guide's folder</li>
-          <li>The recording, with chapters: <span class="todo" data-todo>TO FILL: recording link</span></li>
-          <li>Anonymous questions, until two days before the workshop: <span class="todo" data-todo>TO FILL: anonymous form link</span></li>
-          <li>Bench clinic, 30 minutes, drop in: <span class="todo" data-todo>TO FILL: bench clinic date and link</span></li>
-          <li>The pre-work done: at least two days before the workshop</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <aside class="speaker">Anonymous questions first. The presenter who isn't answering reads them out, as "Someone asked…", or "Three of you asked…" when several came in. Then the open floor. Close with the help that stays open all week: the anonymous form, the bench clinic, and a private message to your instructor. Everything here is also in the follow-up email, within the hour. Thank everyone, then stop the recording.</aside>
+  <aside class="speaker">A handout slide: name it, don't present it. We'll meet these words; nobody needs to know them today. One picture for the first four: the app's repo is a folder on each computer, and git keeps its history. Each commit is a snapshot in that history. Claude works on a branch, then opens a pull request, and the branch joins main only once the pull request is reviewed. Story, gate and design term arrive in Modules 4 to 6, and each module explains them when they do.</aside>
 </section>
 
 </template>
@@ -617,6 +909,14 @@ aside.speaker{display:none}
 <div class="progress" id="progress"></div>
 <div class="help" id="help">← → navigate · N notes · P print</div>
 <div class="notes" id="notes" role="region" aria-label="Presenter notes"><span class="k">Presenter notes</span><div id="notesBody"></div></div>
+<div class="more-panel" id="more" role="dialog" aria-modal="true" aria-labelledby="moreTitle" hidden>
+  <div class="more-card">
+    <p class="more-title" id="moreTitle"></p>
+    <div id="moreBody"></div>
+    <p class="small">The guide's own words, from each module's "Why are we doing this?" box.</p>
+    <button type="button" class="more-close" id="moreClose">Close (Esc)</button>
+  </div>
+</div>
 <div class="sr-only" id="status" role="status" aria-live="polite"></div>
 
 <script>
@@ -626,14 +926,33 @@ aside.speaker{display:none}
   var tpl=document.getElementById('slides');
   deck.appendChild(tpl.content.cloneNode(true));
   var chrome=document.getElementById('chrome'),progress=document.getElementById('progress'),help=document.getElementById('help'),notes=document.getElementById('notes'),notesBody=document.getElementById('notesBody'),counter=document.getElementById('counter'),status=document.getElementById('status');
-  deck.appendChild(chrome);deck.appendChild(progress);deck.appendChild(help);deck.appendChild(notes);
+  var more=document.getElementById('more'),moreTitle=document.getElementById('moreTitle'),moreBody=document.getElementById('moreBody'),moreClose=document.getElementById('moreClose'),moreFrom=null;
+  deck.appendChild(chrome);deck.appendChild(progress);deck.appendChild(help);deck.appendChild(notes);deck.appendChild(more);
   stage.appendChild(deck);
 
   var slides=Array.prototype.slice.call(deck.querySelectorAll('.slide'));
   var n=slides.length,i=0,notesOpen=false;
   var narrow=window.matchMedia('(max-width:760px)');
   function fromHash(){var m=location.hash.match(/#\/?(\d+)/);if(m){var k=parseInt(m[1],10)-1;if(k>=0&&k<n)return k;}return 0;}
+  // Stage details (#281): a stage button opens its module rows, cloned from the handout slides, in a panel.
+  function openMore(b){
+    var rows=deck.querySelectorAll('.slide tr[data-stage="'+b.dataset.more+'"]');
+    if(!rows.length)return;
+    if(narrow.matches){rows[0].closest('.slide').scrollIntoView();return;}
+    var t=document.createElement('table'),tb=document.createElement('tbody');
+    t.className='how';t.appendChild(rows[0].closest('table').tHead.cloneNode(true));
+    Array.prototype.forEach.call(rows,function(r){tb.appendChild(r.cloneNode(true));});
+    t.appendChild(tb);
+    moreTitle.textContent=b.textContent.replace(/\s+/g,' ').trim();
+    moreBody.textContent='';moreBody.appendChild(t);
+    more.hidden=false;moreFrom=b;moreClose.focus();
+  }
+  function closeMore(){
+    if(more.hidden)return;
+    more.hidden=true;if(moreFrom&&moreFrom.isConnected)moreFrom.focus();moreFrom=null;
+  }
   function show(k){
+    closeMore();
     i=Math.max(0,Math.min(n-1,k));
     slides.forEach(function(s,j){s.classList.toggle('is-active',j===i);});
     var light=slides[i].dataset.chrome==='light';
@@ -647,7 +966,15 @@ aside.speaker{display:none}
     try{history.replaceState(null,'','#/'+(i+1));}catch(e){}
   }
   document.addEventListener('keydown',function(e){
+    if(!more.hidden){
+      // The panel is open: Esc closes it, Tab stays on Close, and no key moves the slide.
+      if(e.key==='Escape'){e.preventDefault();closeMore();}
+      else if(e.key==='Tab'){e.preventDefault();moreClose.focus();}
+      return;
+    }
     if(e.metaKey||e.ctrlKey||e.altKey||narrow.matches)return;
+    // Space or Enter on a button or a link presses it; it doesn't also move the slide.
+    if((e.key===' '||e.key==='Enter')&&e.target.closest&&e.target.closest('button,a'))return;
     switch(e.key){
       case 'ArrowRight':case 'ArrowDown':case ' ':case 'PageDown':e.preventDefault();show(i+1);break;
       case 'ArrowLeft':case 'ArrowUp':case 'PageUp':e.preventDefault();show(i-1);break;
@@ -658,7 +985,10 @@ aside.speaker{display:none}
     }
   });
   deck.addEventListener('click',function(e){
-    if(narrow.matches||e.target.closest('a,button,.notes'))return;
+    var b=e.target.closest('button[data-more]');
+    if(b){openMore(b);return;}
+    if(e.target===more||e.target.closest('#moreClose')){closeMore();return;}
+    if(narrow.matches||e.target.closest('a,button,.notes,.more-panel'))return;
     var r=deck.getBoundingClientRect();
     show(e.clientX-r.left<r.width*0.25?i-1:i+1);
   });

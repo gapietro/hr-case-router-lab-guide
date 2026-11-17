@@ -83,8 +83,8 @@ computer. Claude writes the code and runs git. You read and decide.
 **New to any of these?** That's normal. Most people are new to at least
 one. Two things help:
 
-- Come to the pre-session a week before the lab. It shows items 2 and 3
-  live, and you can ask questions.
+- Come to the pre-session a week before the lab. It covers items 2 and 3,
+  and you can ask questions.
 - Set **Detail level** to **Explain more** in the top bar. The guide then
   explains more as you go. You can change it any time.
 

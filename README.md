@@ -110,14 +110,14 @@ you need and the skills you should already have.
 5.  **Never use a production instance.** *Why:* the agent you build moves HR
    cases and writes notes on them. On a production instance, those are real
    people's cases.
-6.  **Trust what a command prints, not Claude's summary of it.** *Why:*
-   Claude's summary is its best guess, and it can be wrong. The output is
-   evidence. You can check it or run the command again.
-7.  **Follow what really happens.** Don't send the same 🤖 box again to get a
-   nicer answer. Keep the answer you got and carry on. If a step went wrong,
-   ask your instructor for a checkpoint. *Why:* Claude can answer
-   differently each time. Re-running until it looks right hides the mistakes
-   the lab is built to catch.
+6.  **Read what a command printed. Don't rely on Claude's summary of it.**
+   *Why:* Claude's summary is its best guess, and it can be wrong. The
+   output is evidence. You can check it or run the command again.
+7.  **Keep the answer Claude gives you. Don't ask again to get a better
+   one.** Don't send the same 🤖 box a second time: carry on with the answer
+   you got. If a step went wrong, ask your instructor for a checkpoint.
+   *Why:* Claude can answer differently each time. Re-running until it looks
+   right hides the mistakes the lab is built to catch.
 
 ## What each step's label means
 
