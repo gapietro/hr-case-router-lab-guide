@@ -21,14 +21,86 @@ install.
 
 </details>
 
-You need the instance, the Claude plan and the GitHub account listed in the
-README, under [What you need](README.md#what-you-need).
+**Prefer to listen?** Each step has a 🔊 button beside its title that reads
+the step aloud. It picks the best voice your computer has, and Microsoft
+Edge's voices sound the most natural. To change the voice or its speed, open
+**Setup**. Edge can also read the whole page: press <kbd data-mac="Cmd+Shift+U" data-win="Ctrl+Shift+U">Cmd+Shift+U (Mac) · Ctrl+Shift+U (Windows)</kbd>.
 
 | Send your instructor | By when |
 |---|---|
 | Your GitHub user name. If you have no account yet, step 4 helps you make one | As soon as you can, and by the pre-session, the one-hour online session a week before. Your instructor needs it to invite you |
 | "Done", or what's still missing from **You now have**, the list at the end of this page | At least two days before the workshop |
 | Anything that stops an install, such as a proxy, a certificate error or no admin rights | As soon as you hit it. If you can, two weeks before the workshop |
+
+## What you need
+
+- **A ServiceNow instance.** Your instructor gives you an instance for
+  the lab where you will be an admin. It comes with HR Service Delivery, its
+  demo data and AI Agent Studio. Never use a production instance, the one
+  real people use.
+- **A computer you can install software on.** <span data-show="os:mac">**On
+  a Mac,** you need macOS 13 or later.</span> <span data-show="os:win">**On
+  Windows,** check with your instructor first: we're still testing the
+  Windows steps. You'll use WSL, which runs Linux inside Windows, or Git
+  Bash, a Linux-style terminal.</span> A Linux computer works too. If your
+  company laptop blocks installs, tell your instructor two weeks before the
+  lab.
+- **A Claude plan that includes Claude Code.** Max, Team, or Enterprise
+  plans, or a Claude Console account. A Pro plan works too,
+  but it runs one sub-agent at a time, which is slower. The free plan doesn't
+  include Claude Code. On a Pro or Max plan, turn off model training
+  first: in claude.ai, open **Settings > Privacy**.<span data-show="surface:desktop" class="vnote">**Using
+  the Code tab?** You still need a terminal for the ⌨️ steps: installing the
+  kit, the checks and every password.</span>
+- **A GitHub account.** A personal GitHub account is preferred. A company
+  account works too, as long as it can create private repos. If you only
+  have a company account, making a free personal one is usually easiest: this
+  page shows you how. Even if your company uses GitLab, you need a
+  GitHub account for the lab. Send your instructor your GitHub user name
+  by the pre-session, a week before the lab. Then accept their invite to
+  this guide.
+
+
+## Skills to have before the lab
+
+Before the lab, you should be able to:
+
+1. Log in to a ServiceNow instance as an admin. Open a list, such as the HR
+   cases. Impersonate a user, which means acting as them, when you're
+   given the menu path.
+2. Open a terminal. Paste a command into it, run it, and read what it
+   prints.
+3. Start Claude Code and send it a message. Answer it when it asks
+   permission to run a command.
+4. Say in one sentence each what a repo, a commit and a pull request are.
+5. Install software on your computer, or get it installed in time.
+
+You don't need to write code or know git's commands. Git is the tool that
+keeps a project's history. You don't need to have used the ServiceNow SDK
+either. The SDK is the toolkit for building ServiceNow apps on your own
+computer. Claude writes the code and runs git. You read and decide.
+
+**New to any of these?** That's normal. Most people are new to at least
+one. Two things help:
+
+- Come to the pre-session a week before the lab. It shows items 2 and 3
+  live, and you can ask questions.
+- Set **Detail level** to **Explain more** in the top bar. The guide then
+  explains more as you go. You can change it any time.
+
+<details data-detail="extra" data-topic="servicenow"><summary>ℹ️ New to ServiceNow? Four things you'll do on every step</summary>
+
+- **The filter navigator** is the search box at the top left. Click **All**
+  to open it, then type a table name followed by `.list`, such as
+  `sn_hr_core_case.list`. Press **Enter** to open that table as a list.
+- **To filter a list**, type in the search box at the top of a column and
+  press **Enter**.
+- **To create a record**, click **New** on a list, fill in the form and
+  click **Submit**.
+- **A reference field** has a 🔍 beside it and points to another record.
+  Click the 🔍 to pick one.
+
+</details>
 
 ## Part 1 — Your instance
 
@@ -836,6 +908,20 @@ printed anything else, rename the folder with
 `gh repo clone` line again.
 
 </details>
+
+**Now switch to your own copy of this guide.** It's in the folder you just
+downloaded, and it saves your setup, ticks and notes as you go.
+
+1. In this copy, open the **Setup** button in the top bar, then click
+   **Copy my setup**.
+2. Open your own copy. <span data-show="os:mac">**On Mac:** run this in a
+   terminal: `open ~/projects/hr-case-router-lab-guide/LAB.html`.</span>
+   <span data-show="os:win">**On Windows:** open File Explorer and click
+   its address bar. Type
+   `%USERPROFILE%\projects\hr-case-router-lab-guide\LAB.html` and press
+   **Enter**.</span>
+3. On its first screen, click **Paste your setup code** and paste. Click
+   **Check this code**, then **Use this setup**.
 
 ### 5. Add the lab's Claude Code settings
 

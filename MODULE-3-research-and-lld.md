@@ -58,8 +58,8 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 3
 
 Do the step each ❌ names. Then run the check again. If you can't fix one,
 tell your instructor before you go on. Every later step builds on it. They
-can help you fix it. Or they can give you a checkpoint, the work so far
-ready made, to start this module from.
+can help you fix it. Or they can give you a checkpoint, the finished work so far, to start
+this module from.
 
 </details>
 
