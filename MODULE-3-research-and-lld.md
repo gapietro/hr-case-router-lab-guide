@@ -1,6 +1,6 @@
 # Module 3 — Research, then the LLD
 
-*⏱ 75 min · 10:10*
+*⏱ 75 min*
 
 Claude checks its facts about the ServiceNow platform on your instance. You
 read the raw rows it gets back, the records just as your instance returns

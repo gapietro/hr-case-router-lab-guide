@@ -1,12 +1,11 @@
 # Pre-work: get your bench ready
 
-*⏱ About 2 hours · at home, at least two days before the workshop*
+*⏱ About 2 hours · at home, about a week before the lab*
 
 Your bench is everything you build with: your instance, your tools, Claude
-Code and a private repo for your app. Get it ready before the workshop. Then
-read the customer's inputs, the files where the customer says what they
-need. On the day, you start building straight away. There's nothing left to
-install.
+Code and a private repo for your app. You set it up on this page, then read
+what the customer has asked for. That way, you start building the moment
+the lab begins.
 
 <details><summary>ℹ️ Why are we doing this?</summary>
 
@@ -22,22 +21,21 @@ install.
 </details>
 
 **Prefer to listen?** Each step has a 🔊 button beside its title that reads
-the step aloud. It picks the best voice your computer has, and Microsoft
-Edge's voices sound the most natural. To change the voice or its speed, open
-**Setup**. Edge can also read the whole page: press <kbd data-mac="Cmd+Shift+U" data-win="Ctrl+Shift+U">Cmd+Shift+U (Mac) · Ctrl+Shift+U (Windows)</kbd>.
+the step aloud, using the best voice your computer has. To change the voice
+or its speed, open **Setup**.
 
 | Send your instructor | By when |
 |---|---|
 | Your GitHub user name. If you have no account yet, step 4 helps you make one | As soon as you can, and by the pre-session, the one-hour online session a week before. Your instructor needs it to invite you |
-| "Done", or what's still missing from **You now have**, the list at the end of this page | At least two days before the workshop |
+| "Done", or what's still missing from **You now have**, the list at the end of this page | About a week before the lab |
 | Anything that stops an install, such as a proxy, a certificate error or no admin rights | As soon as you hit it. If you can, two weeks before the workshop |
 
-## What you need
+## Things you need before the lab
 
 - **A ServiceNow instance.** Your instructor gives you an instance for
-  the lab where you will be an admin. It comes with HR Service Delivery, its
-  demo data and AI Agent Studio. Never use a production instance, the one
-  real people use.
+  the lab, where you're an admin. It comes with HR Service Delivery, its
+  demo data and AI Agent Studio. Never use a production instance that real
+  people work in.
 - **A computer you can install software on.** <span data-show="os:mac">**On
   a Mac,** you need macOS 13 or later.</span> <span data-show="os:win">**On
   Windows,** check with your instructor first: we're still testing the
@@ -45,62 +43,29 @@ Edge's voices sound the most natural. To change the voice or its speed, open
   Bash, a Linux-style terminal.</span> A Linux computer works too. If your
   company laptop blocks installs, tell your instructor two weeks before the
   lab.
-- **A Claude plan that includes Claude Code.** Max, Team, or Enterprise
-  plans, or a Claude Console account. A Pro plan works too,
-  but it runs one sub-agent at a time, which is slower. The free plan doesn't
-  include Claude Code. On a Pro or Max plan, turn off model training
-  first: in claude.ai, open **Settings > Privacy**.<span data-show="surface:desktop" class="vnote">**Using
-  the Code tab?** You still need a terminal for the ⌨️ steps: installing the
+- **A Claude plan that includes Claude Code.** A Max, Team or Enterprise
+  plan works, and so does a Claude Console account. A Pro plan works too,
+  but it's slower because it runs one sub-agent at a time. The free plan
+  doesn't include Claude Code. On a Pro or Max plan, turn off model training
+  first: in claude.ai, open **Settings > Privacy**.<span data-show="surface:desktop" class="vnote">*Using
+  the Code tab?* You still need a terminal for the ⌨️ steps: installing the
   kit, the checks and every password.</span>
-- **A GitHub account.** A personal GitHub account is preferred. A company
-  account works too, as long as it can create private repos. If you only
-  have a company account, making a free personal one is usually easiest: this
-  page shows you how. Even if your company uses GitLab, you need a
-  GitHub account for the lab. Send your instructor your GitHub user name
-  by the pre-session, a week before the lab. Then accept their invite to
-  this guide.
+- **A GitHub account.** You need one even if your company uses GitLab. A
+  free personal account is best, and this page shows you how to make one.
+  A company account also works if it can create private repos. Send your
+  instructor your GitHub user name by the pre-session, a week before the
+  lab. Then accept their invite to this guide.
 
-
-## Skills to have before the lab
-
-Before the lab, you should be able to:
-
-1. Log in to a ServiceNow instance as an admin. Open a list, such as the HR
-   cases. Impersonate a user, which means acting as them, when you're
-   given the menu path.
-2. Open a terminal. Paste a command into it, run it, and read what it
-   prints.
-3. Start Claude Code and send it a message. Answer it when it asks
-   permission to run a command.
-4. Say in one sentence each what a repo, a commit and a pull request are.
-5. Install software on your computer, or get it installed in time.
-
-You don't need to write code or know git's commands. Git is the tool that
-keeps a project's history. You don't need to have used the ServiceNow SDK
-either. The SDK is the toolkit for building ServiceNow apps on your own
-computer. Claude writes the code and runs git. You read and decide.
+You don't need to write code, know git's commands or have used the
+ServiceNow SDK. Claude writes the code and runs git. You read and decide.
 
 **New to any of these?** That's normal. Most people are new to at least
 one. Two things help:
 
-- Come to the pre-session a week before the lab. It covers items 2 and 3,
-  and you can ask questions.
+- Come to the pre-session a week before the lab. It walks through the
+  things you need, and you can ask questions.
 - Set **Detail level** to **Explain more** in the top bar. The guide then
   explains more as you go. You can change it any time.
-
-<details data-detail="extra" data-topic="servicenow"><summary>ℹ️ New to ServiceNow? Four things you'll do on every step</summary>
-
-- **The filter navigator** is the search box at the top left. Click **All**
-  to open it, then type a table name followed by `.list`, such as
-  `sn_hr_core_case.list`. Press **Enter** to open that table as a list.
-- **To filter a list**, type in the search box at the top of a column and
-  press **Enter**.
-- **To create a record**, click **New** on a list, fill in the form and
-  click **Submit**.
-- **A reference field** has a 🔍 beside it and points to another record.
-  Click the 🔍 to pick one.
-
-</details>
 
 ## Part 1 — Your instance
 
@@ -108,22 +73,19 @@ one. Two things help:
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-You build the app on your own instance, and install it there. You'll need
-the instance's name twice. It goes into the sign-in for the SDK,
-ServiceNow's toolkit for building apps on your computer. It also goes into
-the guard that keeps the name out of your commits. So note it now.
+You build and install the app on this instance. The guide puts its address
+into every command and link, so you paste it once, here.
 
 </details>
 
-Your instructor gives you your own instance, your own ServiceNow site. It
-comes with HR Service Delivery, ServiceNow's HR app, and its demo data. It
-also has AI Agent Studio, where AI agents are built. Save the instance's
-admin password in your password manager. Note its address, such as
-`https://dev123456.service-now.com`.
+Your instructor gives you an instance for the lab, where you're an admin.
+It comes with HR Service Delivery, its demo data and AI Agent Studio. Save
+its admin password in your password manager. Note its address there too.
 
-Note the instance's name too. It's the part of the address between
-`https://` and `.service-now.com`, such as `dev123456`. A lab instance's
-name can have a dot in it, such as `lab-0001.lab`: keep the dot.
+Paste your instance's whole address below. Copy it from Cloud Labs, or from
+your browser's address bar while your instance is open. It looks like
+`https://dev123456.service-now.com`. The guide shows your instance's name
+under the box.
 
 <div data-value="instance"></div>
 
@@ -132,27 +94,41 @@ name can have a dot in it, such as `lab-0001.lab`: keep the dot.
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 If a user, group or role is missing, checking now finds it while there's
-still time to fix it. That's better than finding it on the morning of the
-workshop.
+still time to fix it, not on the morning of the workshop.
 
 </details>
 
-Check that your instance has what the lab needs. That's the demo data, the
-lab's groups and users, and an ordinary HR fulfiller who can see HR cases.
-A fulfiller is someone who works HR cases.
+<details data-detail="extra" data-topic="servicenow"><summary>ℹ️ New to ServiceNow? Four things you'll do on every step</summary>
 
-Your instance comes with `hr.demo`, an HR fulfiller with no admin rights.
-Stay logged in as admin. When a step says so, impersonate `hr.demo`, which
-means you act as that user.
+- **The filter navigator** is the search box at the top left. Click
+  **All** to open it, then type a table name followed by `.list`, such
+  as `sn_hr_core_case.list`. Press **Enter** to open that table as a
+  list.
+- **To filter a list**, type in the search box at the top of a column
+  and press **Enter**.
+- **To create a record**, click **New** on a list, fill in the form and
+  click **Submit**.
+- **A reference field** has a 🔍 beside it and points to another
+  record. Click the 🔍 to pick one.
+
+</details>
+
+Check that your instance has what the lab needs: the demo data, the lab's
+groups and users, and an ordinary HR fulfiller who can see HR cases.
+Fulfillers are the people who work HR cases.
+
+The fulfiller on your instance is `hr.demo`, who has no admin rights. Stay
+logged in as admin. When a step says so, impersonate `hr.demo` to act as
+that user.
 
 <details><summary>ℹ️ Why an ordinary fulfiller?</summary>
 
-- **In real work:** the people who click Reroute, to have a case routed
-  again, are HR agents. They aren't admins.
-- **Why it matters:** admin passes every access check. So a check done as
+- **In real work:** the people who click Reroute to have a case routed
+  again are HR agents, not admins.
+- **Why it matters:** admin passes every access check, so a check done as
   admin proves nothing. Only an ordinary fulfiller shows whether the app's
   role, the HR access rules and the agent work for the people who'll use
-  them. Every live check in this lab is done as `hr.demo`.
+  them. That's why every live check in this lab is done as `hr.demo`.
 
 </details>
 
@@ -167,8 +143,8 @@ means you act as that user.
    `Lab Locked Out`.
 3. Open `sys_user.list`. In the **User ID** column's search box, type
    `hr.router` and press **Enter**. ✅ It's listed. The agent runs as this
-   user, so never impersonate it or change it. Do the same for
-   `hr.demo`.
+   user, so never impersonate it or change it. Then search for `hr.demo`
+   the same way.
 
    <div data-ask="m0-hr-demo" data-options="yes|no" data-labels="Yes, it's listed|No">
 
@@ -182,14 +158,14 @@ means you act as that user.
 
    ⛔ **Stop here until your instructor has prepared your instance.** Every
    check in this lab runs as `hr.demo`. Don't make the user yourself. Send
-   your instructor this message, in the room's chat or by email:
+   your instructor this message by email:
 
    ```
-   Lab: my instance has no hr.demo user. Instance: <your instance's name, such as dev123456>.
+   Lab: my instance has no hr.demo user. Instance: dev123456.service-now.com
    ```
 
-   Meanwhile, do Part 2, steps 3 to 7. It doesn't need `hr.demo`. Then come
-   back here.
+   Meanwhile, go on to Part 2 and set up your tools, which don't need
+   `hr.demo`. Then come back here.
 
    </div>
 
@@ -209,39 +185,40 @@ means you act as that user.
 
 <details><summary>🛟 It's asleep or gone, or has no HR cases</summary>
 
-- **Asleep:** Your instance is asleep. Open it in your browser. If its page
-  offers a wake-up link, click it and wait. Waking can take up to 20
-  minutes. If there's no link, or it's still asleep, ask your instructor.
+- **Asleep:** open your instance in your browser. If its page offers a
+  wake-up link, click it and wait up to 20 minutes for it to wake. If
+  there's no link, or it stays asleep, ask your instructor.
 - **Gone, or no HR cases:** tell your instructor.
 
 </details>
 
 <details><summary>🛟 hr.router, hr.demo or a group is missing, or hr.demo sees no cases</summary>
 
-Tell your instructor. The instance hasn't been prepared for the lab. Never
-make `hr.router` or a group yourself. Don't give `hr.demo` any other role,
-and nothing admin. Later, in Module 6, it gets the app's own role.
+Your instance hasn't been prepared for the lab, so tell your instructor.
+Never make `hr.router` or a group yourself. Don't give `hr.demo` any other
+role, and above all no admin role. It gets the app's own role later in the
+lab.
 
 </details>
 
 ## Part 2 — Your tools
 
-**Tools at a glance:** what step 3 checks and installs, and why the lab
-needs each one.
+**Tools at a glance:** the tools the next step checks and installs, and why
+the lab needs each one.
 
 | Tool | What it is | Why the lab needs it | Version |
 |---|---|---|---|
-| **Node.js** | Runs JavaScript programs on your computer. It comes with `npm`, which installs them. | The ServiceNow SDK runs on it, and `npm` installs the SDK. `npm` also installs your app's packages, the code your app builds on, and runs its tests. The lab's settings script runs on Node.js too. | `v22.22` or later |
-| **git** | Keeps a folder's history. Each saved snapshot is a commit. | Your app's repo, its guard, and a branch for every story all use git. Claude runs most git commands. You read what they print. <span data-show="os:win">**On Windows:** Git for Windows also brings Git Bash, a Linux-style terminal. You run every ⌨️ step in it. The lab's settings, in step 5, keep Claude in it too, where the safety rules apply.</span> | Any |
-| **GitHub CLI** (`gh`) | GitHub's own command-line tool. You type its commands in a terminal. | It signs you in to GitHub, gets this guide and makes your app's private repo. It also lets the kit, the lab's Claude Code plugin, file your stories, milestones and pull requests. | Any |
+| **Node.js** | Runs JavaScript programs on your computer. It comes with `npm`, which installs them. | The ServiceNow SDK runs on it, and `npm` installs the SDK. `npm` also installs the code your app builds on, and runs your app's tests. The lab's settings script runs on Node.js too. | `v22.22` or later |
+| **git** | Keeps a folder's history. Each saved snapshot is a commit. | Your app's repo, its guard, and a branch for every story all use git. Claude runs most git commands, and you read what they print. <span data-show="os:win">**On Windows:** Git for Windows also brings Git Bash, a Linux-style terminal, and you run every ⌨️ step in it. The lab's settings keep Claude in Git Bash too, where the safety rules apply.</span> | Any |
+| **GitHub CLI** (`gh`) | GitHub's own command-line tool. You type its commands in a terminal. | It signs you in to GitHub, gets this guide and makes your app's private repo. It also lets the kit file your stories, milestones and pull requests. The kit is the lab's Claude Code plugin. | Any |
 | **ServiceNow SDK** (`now-sdk`) | ServiceNow's tool for building an app as code, from files on your computer. | It builds the HR Case Router, reads your instance and installs the app on it. | `4.8.0` or later |
-| **Claude Code** (`claude`) | Claude, working in your folders. It reads and writes files, and runs commands. | It writes the app. You make the decisions. It has its own installer and doesn't need Node.js. | `2.1.228` or later |
-| **VS Code** | A free code editor. | You open and check the files Claude writes in it. Those are the ✏️ steps. | Any |
+| **Claude Code** (`claude`) | Claude, working in your folders. It reads and writes files, and runs commands. | It writes the app while you make the decisions. It has its own installer and doesn't need Node.js. | `2.1.228` or later |
+| **VS Code** | A free code editor. | You use it in the ✏️ steps to open and check the files Claude writes. | Any |
 
 <div data-show="surface:desktop">
 
-**Using the desktop app's Code tab?** Install the `claude` command too. The
-lab's plugins and checks run from a terminal.
+**Using the desktop app's Code tab?** Install the `claude` command too,
+because the lab's plugins and checks run from a terminal.
 
 </div>
 
@@ -249,9 +226,9 @@ lab's plugins and checks run from a terminal.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-Every later step runs one of these tools. If one is missing or too old, it
-fails in ways that are hard to read. The check comes first, so you install
-only what's missing.
+Every later step runs one of these tools. If one is missing or too old,
+those steps fail with errors that are hard to read. You check first, so you
+install only what's missing.
 
 </details>
 
@@ -264,11 +241,11 @@ only what's missing.
 
 <div data-show="os:win">
 
-**On Windows:** these Windows steps are still being tested. If a step shows
-something it doesn't describe, stop there. Tell your instructor what you
-see.
+**On Windows:** these Windows steps are still being tested. If your screen
+shows something a step doesn't describe, stop there and tell your
+instructor what you see.
 
-First, set up Git Bash, the terminal every ⌨️ step uses:
+First, set up Git Bash. It's the terminal every ⌨️ step uses.
 
 1. 🌐 **Browser:** open https://git-scm.com/downloads/win. Click
    **Git for Windows/x64 Setup**. On an ARM computer, click
@@ -282,7 +259,7 @@ First, set up Git Bash, the terminal every ⌨️ step uses:
    **Finish**.
 7. Open Windows Terminal. Press the **Windows** key, type `Terminal` and
    press **Enter**.
-8. Click **⌄**, beside the **+** at the top. Then click **Settings**.
+8. Click the **⌄** beside the **+** at the top, then click **Settings**.
 9. In **Settings > Startup**, set **Default profile** to **Git Bash**.
    Click **Save**.
 10. Close every Windows Terminal window.
@@ -293,17 +270,17 @@ Then open Windows Terminal again. It opens in Git Bash.
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Never installed tools like these? How this step goes</summary>
 
-1. Run the check below, even on a new computer. `command not found` means
-   that tool isn't installed yet. That's expected.
-2. Answer **No, one is missing or too old**. Each tool's install then shows
-   under the question, step by step. They're in the order to do them.
+1. Run the check below, even on a new computer. If a line says
+   `command not found`, that tool isn't installed yet, which is expected.
+2. Answer **No, one is missing or too old**. Step-by-step installs then
+   show under the question, in the order to do them.
 3. Install only the tools that failed, top to bottom.
-4. An installer may ask for your computer's password, or for permission to
-   make changes. That's expected. If you can't give it because your company
-   manages the computer, tell your instructor before the day.
-5. When you've installed them, close every terminal window. Then open a new
-   one, and run the check again. A window that was open before an install
-   can't see the new tool.
+4. An installer may ask for your computer's password or for permission to
+   make changes. That's expected. If your company manages the computer and
+   you can't give either, tell your instructor before the day.
+5. When you've installed them, close every terminal window. Open a new one
+   and run the check again, because a window that was open before an
+   install can't see the new tool.
 
 </details>
 
@@ -326,8 +303,8 @@ claude --version
 2. `git --version`: Prints which version of git you have. git keeps a
    history of your files, one commit at a time. Your app's repo is a git
    repo.
-3. `gh --version`: Prints the version of `gh`, GitHub's own command-line
-   tool, then a web address. Step 4 uses it to sign in to GitHub and to
+3. `gh --version`: Prints the version of `gh`, then a web address. `gh` is
+   GitHub's own command-line tool. You use it to sign in to GitHub and to
    download this guide.
 4. `now-sdk --version`: Prints the version of ServiceNow's SDK tool, such as
    `4.13.6`. It builds your app from the files on your computer and installs
@@ -339,9 +316,9 @@ claude --version
 </details>
 
 ✅ Node.js is `v22.22` or later, `now-sdk` is `4.8.0` or later, and
-Claude Code is `2.1.228` or later. The others can print any version. This
-guide was written with Claude Code `2.1.312` and `now-sdk` `4.13.6`.
-`command not found` counts as missing.
+Claude Code is `2.1.228` or later. The others can print any version, and
+`command not found` counts as missing. This guide was written with
+Claude Code `2.1.312` and `now-sdk` `4.13.6`.
 
 <div data-ask="m0-tools-ok" data-options="yes|no" data-labels="Yes, all of them|No, one is missing or too old">
 
@@ -358,8 +335,8 @@ order below. Skip the ones that passed. Then run the checks again.
 
 **On Mac:**
 
-**Node.js:** download the macOS installer, the `.pkg` file, from
-https://nodejs.org/en/download. Then run it.
+**Node.js:** download the `.pkg` installer for macOS from
+https://nodejs.org/en/download and run it.
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Node.js on Mac</summary>
 
@@ -378,9 +355,8 @@ https://nodejs.org/en/download. Then run it.
 
 </details>
 
-**git:** it comes with Apple's command line developer tools. The check may
-have opened a box offering to install them. If it did, click **Install**
-there.
+**git:** it comes with Apple's command line developer tools. If the check
+opened a box offering to install them, click **Install** in it.
 
 If no box opened, install them in ⌨️ **Terminal**:
 
@@ -398,7 +374,7 @@ xcode-select --install
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: git on Mac</summary>
 
 1. Click **Install** in the box that offers the command line developer
-   tools. It's the box the check opened, or the one the line opened.
+   tools. The check or the `xcode-select` line opened it.
 2. Click **Agree** to the licence.
 3. Wait for the download to finish. It can take 10 minutes or more.
 4. Click **Done**.
@@ -409,8 +385,8 @@ xcode-select --install
 
 **GitHub CLI:** download the file ending in `_macOS_universal.pkg` from
 https://github.com/cli/cli/releases/latest. Then run it. macOS blocks it the
-first time. To allow it, click **Open Anyway** in
-**System Settings > Privacy & Security**.
+first time, so click **Open Anyway** in
+**System Settings > Privacy & Security** to allow it.
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: the GitHub CLI on Mac</summary>
 
@@ -419,7 +395,7 @@ first time. To allow it, click **Open Anyway** in
    `_macOS_universal.pkg`, such as `gh_2.103.3_macOS_universal.pkg`. If
    it isn't listed, first click the link that shows all the assets.
 3. Open the file from your Downloads folder. macOS says it can't check the
-   file, because GitHub doesn't sign it.
+   file because GitHub doesn't sign it.
 4. Click **Done** (**OK** on older macOS). Don't delete the file.
 5. Open **System Settings** from the Apple menu, then **Privacy &
    Security**.
@@ -470,16 +446,16 @@ curl -fsSL https://claude.ai/install.sh | bash
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
 1. `curl … | bash`: Downloads Claude Code's own installer from claude.ai
-   and runs it. It needs no `sudo`, the command that runs something as an
-   administrator. Afterwards, Claude Code keeps itself up to date.
+   and runs it. It runs without `sudo`, so it needs no administrator rights.
+   Afterwards, Claude Code keeps itself up to date.
 
 </details>
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Claude Code on Mac</summary>
 
 1. Paste the line and press **Enter**. Never type `sudo` in front of it.
-2. Wait for `Claude Code successfully installed!`. While it downloads, it
-   shows nothing for up to a few minutes.
+2. Wait for `Claude Code successfully installed!`. It may show nothing for
+   a few minutes while it downloads.
 3. In a new Terminal window (**Cmd+N**), run `claude --version`. It prints
    a version, such as `2.1.312 (Claude Code)`.
 
@@ -494,8 +470,8 @@ curl -fsSL https://claude.ai/install.sh | bash
 **On Windows:** run each installer from your Downloads folder. Click
 **Yes** when Windows asks to allow changes.
 
-**Node.js:** download the Windows installer, the `.msi` file, from
-https://nodejs.org/en/download. Then run it.
+**Node.js:** download the `.msi` installer for Windows from
+https://nodejs.org/en/download and run it.
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Node.js on Windows</summary>
 
@@ -504,8 +480,8 @@ https://nodejs.org/en/download. Then run it.
 3. Under **Or get a prebuilt Node.js® for Windows**, click
    **Windows Installer (.msi)**.
 4. Open the file from your Downloads folder.
-5. Click **Next** on each screen. Tick the box that accepts the licence.
-   Keep every default. Leave any box that offers to install extra tools
+5. Click **Next** on each screen and tick the box that accepts the licence.
+   Keep every default, and leave any box that offers to install extra tools
    unticked.
 6. Click **Install**, then **Yes** when Windows asks to allow changes.
 7. Click **Finish**.
@@ -516,8 +492,8 @@ https://nodejs.org/en/download. Then run it.
 
 **git:** it comes with Git for Windows, which you installed at the start of
 this step. If `git --version` failed, close every terminal window and open
-Windows Terminal again. If it still fails, install Git for Windows as at
-the start of this step.
+Windows Terminal again. If it still fails, install Git for Windows again,
+the same way as at the start of this step.
 
 **GitHub CLI:** download the file ending in `_windows_amd64.msi` from
 https://github.com/cli/cli/releases/latest. Then run it.
@@ -539,8 +515,9 @@ https://github.com/cli/cli/releases/latest. Then run it.
 
 </details>
 
-**ServiceNow SDK:** it needs Node.js first. Close every terminal window.
-Open Windows Terminal again, in Git Bash. Then, in ⌨️ **Terminal**:
+**ServiceNow SDK:** it needs Node.js first. Close every terminal window
+and open Windows Terminal again, so you're in Git Bash. Then, in ⌨️
+**Terminal**:
 
 ```
 npm install -g @servicenow/sdk
@@ -559,8 +536,8 @@ npm install -g @servicenow/sdk
 1. Close every terminal window, so the next one can find the Node.js you
    just installed. A new tab isn't enough.
 2. Open Windows Terminal. Press the **Windows** key, type `Terminal` and
-   press **Enter**. Its prompt, the text before where you type, ends in
-   `$`. That means it's Git Bash.
+   press **Enter**. The prompt is the text just before where you type.
+   When it ends in `$`, you're in Git Bash.
 3. Paste the line with **Ctrl+V** or a right-click. Then press **Enter**.
 4. Wait for a line that starts `added`. It takes a minute or two. Lines
    that start `npm warn` are normal.
@@ -568,9 +545,9 @@ npm install -g @servicenow/sdk
 
 </details>
 
-**Claude Code:** install it in PowerShell, Windows' own terminal, not in Git
-Bash. To open PowerShell, press the **Windows** key, type `PowerShell` and
-press **Enter**. Then, in ⌨️ **Terminal**:
+**Claude Code:** install it in PowerShell, not in Git Bash. PowerShell is
+Windows' own terminal. To open it, press the **Windows** key, type
+`PowerShell` and press **Enter**. Then, in ⌨️ **Terminal**:
 
 ```
 irm https://claude.ai/install.ps1 | iex
@@ -585,11 +562,11 @@ irm https://claude.ai/install.ps1 | iex
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: Claude Code on Windows</summary>
 
-1. Open PowerShell, as above. Its prompt starts with `PS`. It needs no
-   administrator rights.
+1. Open PowerShell as above. Its prompt starts with `PS`. You don't need
+   to open it as an administrator.
 2. Paste the line with **Ctrl+V** or a right-click. Then press **Enter**.
-3. Wait for `Claude Code successfully installed!`. While it downloads, it
-   shows nothing for up to a few minutes.
+3. Wait for `Claude Code successfully installed!`. It may show nothing for
+   a few minutes while it downloads.
 4. Close PowerShell.
 5. Close every terminal window. Open Windows Terminal again and run
    `claude --version`. It prints a version, such as
@@ -597,15 +574,15 @@ irm https://claude.ai/install.ps1 | iex
 
 </details>
 
-**Then:** close every terminal window. Open Windows Terminal again, in Git
-Bash, and run the checks again.
+**Then:** close every terminal window. Open Windows Terminal again and run
+the checks again in Git Bash.
 
 </div>
 
 </div>
 
-**VS Code:** install it too, if you haven't yet. It's your editor, and the
-check doesn't cover it.
+**VS Code:** install it too if you haven't yet. The check doesn't cover
+it, but it's the editor you use in the lab.
 
 <div data-show="os:mac">
 
@@ -670,10 +647,10 @@ administrator rights.
   </details>
 
 - **EACCES or "permission denied" from npm:** run the `npm install` line
-  again with `sudo` in front. `sudo` runs a command as an administrator.
-  Type your Mac's password. Nothing shows as you type. Then run
-  `sudo chown -R $(id -u):$(id -g) ~/.npm`, so npm's cache stays yours.
-  Never put `sudo` in front of the Claude Code line.
+  again with `sudo` in front, which runs it as an administrator. When it
+  asks for your Mac's password, type it, even though nothing shows as you
+  type. Then run `sudo chown -R $(id -u):$(id -g) ~/.npm` so npm's cache
+  stays yours. Never put `sudo` in front of the Claude Code line.
 - **No Open Anyway button for the GitHub CLI:** your company manages your
   Mac. Tell your instructor before the day.
 - **An installer asks for an administrator's name and password:** your
@@ -700,12 +677,11 @@ administrator rights.
   <details data-detail="extra" data-topic="terminal"><summary>ℹ️ What each line does</summary>
 
   1. `$currentPath = [Environment]::GetEnvironmentVariable(…)`: Reads your
-     PATH, the list of folders Windows searches for tools. It keeps a copy
-     as `$currentPath` for the next line. `'User'` means your own list, not
-     the one for every account on the computer.
+     PATH and keeps a copy as `$currentPath` for the next line. `'User'`
+     means your own list, not the one for every account on the computer.
   2. `[Environment]::SetEnvironmentVariable('PATH', …, 'User')`: Saves your
-     PATH again, with one folder added at the end. That's `.local\bin` in
-     your user folder, where Claude Code's installer puts `claude`. Only
+     PATH again with `.local\bin` added at the end. That's the folder in
+     your user folder where Claude Code's installer puts `claude`. Only
      windows you open after this see the change, so you open a new one.
 
   </details>
@@ -715,8 +691,8 @@ administrator rights.
 - **Git Bash isn't in Windows Terminal's Default profile list:** run Git
   for Windows' installer again. On **Select Components**, tick
   **Add a Git Bash Profile to Windows Terminal**. If you have no Windows
-  Terminal at all, on Windows 10, install it from the Microsoft Store
-  first.
+  Terminal at all, which can happen on Windows 10, install it from the
+  Microsoft Store first.
 - **Windows asks for an administrator's password, or won't install:**
   your company manages your computer, so you can't install on it yourself.
   Tell your instructor before the day.
@@ -739,9 +715,8 @@ It's your company's network. Tell your instructor before the day.
 
 You sign in once with `gh`. After that, git uses the same sign-in each time
 it clones or pushes. Cloning copies a repo from GitHub to your computer,
-and pushing sends your commits back. The guide you download holds files you
-run or read later. These are the lab's settings script and the customer's
-inputs.
+and pushing sends your commits back. The guide you download also holds files
+you need later, such as the lab's settings script and the customer's inputs.
 
 </details>
 
@@ -752,8 +727,8 @@ inputs.
 - This guide is a private GitHub repo that you're invited to.
 - `gh`, the GitHub CLI, signs you in and makes your app's repo. It works
   only with GitHub.
-- The kit files your stories, milestones and pull requests on GitHub,
-  through `gh`.
+- The kit uses `gh` to file your stories, milestones and pull requests on
+  GitHub.
 - Claude Code installs the kit from GitHub.
 
 Nothing you build in the lab goes to your company's GitLab.
@@ -823,20 +798,20 @@ https://github.com/notifications. Click **Accept**. Then change your answer
 above to **Yes, accepted**.
 
 ⛔ **Stop here until you've accepted it.** The next lines copy this guide
-from GitHub. They fail without the invite. If you have no invite at all,
-send your instructor this message, in the room's chat or by email:
+from GitHub, and they fail without the invite. If you have no invite at all,
+send your instructor this message by email:
 
 ```
 Lab: no invite yet to the lab guide repo. My GitHub user name is <your user name>.
 ```
 
-Meanwhile, do step 7, which connects the SDK, and step 11, which looks up
-your scope. They don't need this guide's repo. Then come back here.
+Meanwhile, connect the SDK to your instance and look up your scope. Neither
+needs this guide's repo. Then come back here.
 
 </div>
 
 ⌨️ **Terminal:** the first three lines save how `gh` and git sign in to
-GitHub now. That way, Module 8 can put them back at the end of the day:
+GitHub now, so the lab can put them back at the end of the day:
 
 ```
 mkdir -p ~/projects/hr-case-router-notes
@@ -854,38 +829,40 @@ git -C ~/projects/hr-case-router-lab-guide remote get-url origin
    notes, inside `projects` in your home folder. `~` means your home
    folder. `-p` also makes `projects` if it's missing, and doesn't complain
    if the folder is already there.
-2. `[ -e … ] || gh auth status > … 2>&1`: Saves which GitHub account `gh`
-   is signed in to now, if any, in `gh-before-lab.txt`, for Module 8.
+2. `[ -e … ] || gh auth status > … 2>&1`: Saves in `gh-before-lab.txt` which
+   GitHub account `gh` is signed in to now, so the lab can switch back to it
+   at the end of the day.
    `[ -e … ] ||` means "only if that file isn't there yet", so a second run
    never overwrites your record. `>` sends what `gh auth status` prints into
    the file, and `2>&1` sends its errors there too, such as "not logged in".
 3. `[ -e … ] || git config --global --get-regexp '^credential\.' > …`: Saves
-   how git signs in to websites now, in `git-credentials-before-lab.txt`.
-   Line 4 changes it, and Module 8 uses this file to put it back. An empty
-   file means git had nothing set.
-4. `gh auth setup-git --hostname github.com --force`: Tells git, for every
-   repo on this computer, to get its GitHub sign-in from `gh`. Then clone,
-   pull and push don't ask you to sign in. It runs before line 5, so
+   how git signs in to websites now in `git-credentials-before-lab.txt`.
+   Line 4 changes that, and this file lets the lab put it back at the end of
+   the day. An empty file means git had nothing set.
+4. `gh auth setup-git --hostname github.com --force`: Tells git to get its
+   GitHub sign-in from `gh` for every repo on this computer, so clone, pull
+   and push don't ask you to sign in. It runs before line 5, so
    signing in never replaces the GitHub sign-in your computer saved before.
 5. `gh auth login --web --git-protocol https`: Signs `gh` in to your GitHub
    account through your browser, and saves the sign-in on your computer. If
-   `gh` was signed in to another account, this one becomes the active one,
-   and Module 8 switches back with line 2's file. `https` means git talks to
-   GitHub over a normal secure web connection, with no SSH keys to set up.
+   `gh` was signed in to another account, this one becomes the active one
+   until the lab switches back with line 2's file at the end of the day.
+   `https` means git talks to GitHub over a normal secure web connection,
+   with no SSH keys to set up.
 6. `gh repo clone …/hr-case-router-lab-guide
    ~/projects/hr-case-router-lab-guide`: Downloads this guide's repo from
-   GitHub into a new folder, `hr-case-router-lab-guide`, inside `projects`.
-   It works only once you've accepted your instructor's invite. You must be
-   signed in with the GitHub account that was invited.
+   GitHub into a new `hr-case-router-lab-guide` folder inside `projects`.
+   It works only once you've accepted your instructor's invite, and only
+   while you're signed in with the GitHub account that was invited.
 7. `git -C ~/projects/hr-case-router-lab-guide remote get-url origin`: Prints
-   the GitHub address that folder was downloaded from, so you can see where
-   it came from. `-C` runs git as if you were inside that folder. `origin`
-   is git's name for the place a folder was downloaded from.
+   the GitHub address that folder was downloaded from, so you can check it
+   came from this guide's repo. `-C` runs git as if you were inside that
+   folder. `origin` is git's name for the place a folder was downloaded from.
 
 </details>
 
-`gh auth login` shows a one-time code. Press **Enter**, and a GitHub page
-opens. Type the code there, and approve. Press **Enter** to answer any
+`gh auth login` shows a one-time code. Press **Enter** to open a GitHub
+page, then type the code there and approve. Press **Enter** to answer any
 other question it asks.
 
 ✅ The last line prints
@@ -894,17 +871,18 @@ other question it asks.
 <details><summary>🛟 It says "Could not resolve to a Repository"</summary>
 
 The invite isn't accepted yet, or you signed in to another GitHub account.
-`gh auth status` shows which account. A company-managed account can't
-accept the invite. Sign in with a personal one, or tell your instructor.
+`gh auth status` shows which account you're using. If it's company-managed,
+it can't accept the invite, so sign in with a personal one or tell your
+instructor.
 
 </details>
 
 <details><summary>🛟 It says the destination path already exists</summary>
 
-Did the last line print the address above? Then the folder is this guide.
-Update it with `git -C ~/projects/hr-case-router-lab-guide pull`. If it
-printed anything else, rename the folder with
-`mv ~/projects/hr-case-router-lab-guide ~/projects/old-guide`. Then run the
+If the last line printed the address above, the folder is already this
+guide. Update it with `git -C ~/projects/hr-case-router-lab-guide pull`.
+If it printed anything else, rename the folder with
+`mv ~/projects/hr-case-router-lab-guide ~/projects/old-guide` and run the
 `gh repo clone` line again.
 
 </details>
@@ -912,8 +890,7 @@ printed anything else, rename the folder with
 **Now switch to your own copy of this guide.** It's in the folder you just
 downloaded, and it saves your setup, ticks and notes as you go.
 
-1. In this copy, open the **Setup** button in the top bar, then click
-   **Copy my setup**.
+1. In this copy, click **Setup** in the top bar, then **Copy my setup**.
 2. Open your own copy. <span data-show="os:mac">**On Mac:** run this in a
    terminal: `open ~/projects/hr-case-router-lab-guide/LAB.html`.</span>
    <span data-show="os:win">**On Windows:** open File Explorer and click
@@ -927,13 +904,13 @@ downloaded, and it saves your setup, ticks and notes as you go.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-These settings fence Claude in for the lab. Claude starts in auto mode. In
-auto mode, it asks you less and blocks risky commands by itself. It still
-asks before any SDK command that writes to your instance. The settings
-block `now-sdk auth`. They turn off connectors, which link Claude to other
-apps, new memories and web search. They also keep Claude out of your notes,
-this guide and your keys, the files that hold your passwords and tokens.
-Any settings you had are backed up first, and Module 8 puts them back.
+These settings fence Claude in for the lab. Claude starts in auto mode, where
+it asks you less and blocks risky commands by itself. It still asks before
+any SDK command that writes to your instance, and it can't run `now-sdk auth`
+at all. The settings turn off web search, new memories and connectors, which
+link Claude to other apps. They also keep Claude out of your notes, this
+guide and the files that hold your passwords and tokens. Any settings you had
+are backed up first and put back at the end of the day.
 
 </details>
 
@@ -959,8 +936,8 @@ The lab's settings change how Claude works:
   `~/.aws`, `gh`'s login, `~/.npmrc` and `~/.netrc`.
 
 Your own settings are backed up and kept. Your own auto mode rules wait in
-the backup. Module 8 restores them. Cleanest of all is a separate user
-account on your computer.
+the backup until the end of the day, when the lab restores them. Cleanest of
+all is a separate user account on your computer.
 
 </div>
 
@@ -978,17 +955,17 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 
 You sign in once, and Claude can work in every session after that. A
 session is one conversation with Claude. This first start also proves the
-lab's settings reached Claude. Auto mode is on, and its limits hold. If a
+lab's settings reached Claude: auto mode is on and its limits hold. If a
 setting didn't apply, Claude would be freer than the lab expects, and
 nothing else would tell you.
 
 </details>
 
 On a Pro or Max plan? 🌐 **Browser:** first, open **Settings > Privacy** in
-claude.ai. Turn off model training, which lets Anthropic train its models
+claude.ai and turn off model training, so Anthropic doesn't train its models
 on your chats.
 
-Claude Code in the browser runs in the cloud, not on your computer. So this
+Claude Code in the browser runs in the cloud, not on your computer, so this
 lab uses the terminal or the desktop app instead.
 
 <div data-show="surface:terminal">
@@ -1010,8 +987,8 @@ claude
 
 </details>
 
-Follow the screens. Choose **Claude account with subscription**. If you pay
-per use, choose **Anthropic Console account** instead. Then sign in in the
+Follow the screens and choose **Claude account with subscription**, or
+**Anthropic Console account** if you pay per use. Then sign in in the
 browser. When it asks if you trust this folder, pick **Yes** with the arrow
 keys. If a screen asks you to approve your organisation's settings, approve
 them and tell your instructor.
@@ -1029,8 +1006,8 @@ then type `/exit`.
 <div data-show="surface:desktop">
 
 **In the Code tab:** the Code-tab steps in this guide follow Anthropic's
-docs for the desktop app. They haven't been tried in this lab yet. If one
-doesn't match what you see, tell your instructor what you see.
+docs for the desktop app, but they haven't been tried in this lab yet. If a
+step doesn't match your screen, tell your instructor what you see.
 
 1. Open the Claude desktop app, sign in, and click **Code** at the top of
    the sidebar.
@@ -1039,7 +1016,7 @@ doesn't match what you see, tell your instructor what you see.
    Click the folder control, choose **Open folder…** and pick your home
    folder. Send nothing yet.
 
-✅ The mode selector, in the row under the prompt box, shows **Auto**.
+✅ The mode selector in the row under the prompt box shows **Auto**.
 
 🤖 **Claude:** type `/status` alone.
 
@@ -1047,7 +1024,7 @@ doesn't match what you see, tell your instructor what you see.
 own copy of Claude Code, so this can differ from `claude --version`.
 
 ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps:
-`/permissions` doesn't work in the Code tab. So check the lab's settings
+`/permissions` doesn't work in the Code tab, so check the lab's settings
 file here instead:
 
 ```
@@ -1071,11 +1048,11 @@ Run now-sdk auth --list.
 
 **On Windows, in the Code tab:** the lab's rules are `Bash(…)` rules. With
 Git for Windows installed, Claude Code in a terminal runs commands in Git
-Bash. Those rules also turn its PowerShell tool off. Anthropic's docs don't
-say yet whether the Code tab's own copy does the same. The
-`now-sdk auth --list` check above tests it. In step 13, each command Claude
-runs must also be marked Bash. If either check fails, stop, and use Claude
-Code in Git Bash instead.
+Bash, and those rules also turn its PowerShell tool off. Anthropic's docs
+don't say yet whether the Code tab's own copy does the same, so the
+`now-sdk auth --list` check above tests it. Later, when Claude sets up your
+app's repo, each command it runs must also be marked Bash. If either check
+fails, stop and use Claude Code in Git Bash instead.
 <button data-set="surface:terminal">Use the terminal steps</button>
 
 </div>
@@ -1093,14 +1070,14 @@ claude
 
 1. `node …/merge-claude-settings.mjs`: Runs the lab's settings script. It
    adds the lab's settings to Claude Code's settings file and keeps your
-   own. Run again, it never overwrites the backup of your settings it made
-   the first time.
+   own. If you run it again, it never overwrites the backup it made of your
+   settings the first time.
 2. `claude`: Starts Claude Code again, so it reads the settings file afresh.
 
 </details>
 
-Still in manual mode? Then your organisation turned auto mode off. Claude
-will just ask more often. Tell your instructor.
+Still in manual mode? Then your organisation turned auto mode off, and
+Claude will just ask more often. Tell your instructor.
 
 </details>
 
@@ -1114,9 +1091,9 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 
 Then start a new session on your home folder again. If it still shows
 **Manual**, pick **Auto** in the mode selector. If there's no **Auto** in
-it, pick another model in the model picker, toward the right of that row.
-Auto mode needs a recent model. If there's still no **Auto**, your
-organisation turned auto mode off. Claude will just ask more often. Tell
+it, pick another model in the model picker toward the right of that row,
+since auto mode needs a recent model. If there's still no **Auto**, your
+organisation turned auto mode off, and Claude will just ask more often. Tell
 your instructor.
 
 </details>
@@ -1143,9 +1120,9 @@ instructor.
 
 <details data-show="surface:desktop"><summary>🛟 Claude ran now-sdk auth --list</summary>
 
-The lab's rules didn't stop it. Stop here. Don't use the Code tab for the
-lab until your instructor has looked into it. Tell them what Claude showed,
-and whether you're on Mac or Windows. Meanwhile, use Claude Code in a
+The lab's rules didn't stop it, so stop here. Don't use the Code tab for
+the lab until your instructor has looked into it. Tell them what Claude
+showed and whether you're on Mac or Windows. Meanwhile, use Claude Code in a
 terminal. <button data-set="surface:terminal">Use the terminal steps</button>
 
 </details>
@@ -1181,9 +1158,9 @@ You type the password yourself. Claude is never allowed to run
 
 Your instance must be awake. Type the password only here, never in Claude.
 
-⌨️ **Terminal:** replace `dev123456` with your instance's name, from its
-address in step 1. It's already done if the name is in **Your values**,
-under **Setup**, the first button in the top bar:
+⌨️ **Terminal:** the guide fills in your instance's address. If you still
+see `dev123456`, paste your address under **Your values**, in **Setup**,
+first:
 
 ```
 now-sdk auth --add https://dev123456.service-now.com --type basic --alias lab-pdi
@@ -1196,8 +1173,8 @@ now-sdk auth --list
    your instance on your computer, under the name `lab-pdi`. Every
    `now-sdk` command in the lab uses that name. `basic` means it signs in
    with a user name and password, which it asks you for.
-2. `now-sdk auth --list`: Lists the sign-ins the SDK has saved. You can see
-   `lab-pdi` is there, with your instance's address and the user name.
+2. `now-sdk auth --list`: Lists the sign-ins the SDK has saved, so you can
+   check that `lab-pdi` is there with your instance's address and user name.
 
 </details>
 
@@ -1210,7 +1187,7 @@ and `username = admin`.
 <details><summary>🛟 It prints a line starting [now-sdk] ERROR:</summary>
 
 The sign-in failed. Check that the instance is awake and the password is
-right. Then run the first line again. If it says "certificate" or "fetch
+right, then run the first line again. If it says "certificate" or "fetch
 failed", or times out, that's your company's network. Tell your instructor.
 
 </details>
@@ -1221,7 +1198,7 @@ failed", or times out, that's your company's network. Tell your instructor.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The kit, `prove-it`, gives Claude the lab's stages: consult, design
+The `prove-it` kit gives Claude the lab's stages: consult, design
 challenge, build plan, grade and handoff. Each stage proves itself before
 the next one starts. The kit's version is pinned, so it matches what this
 guide shows. The SDK plugin lets Claude look up facts instead of guessing
@@ -1229,11 +1206,11 @@ them.
 
 </details>
 
-You install two plugins, add-ons for Claude Code. The kit runs the lab's
-rituals, the set routines it follows, such as shipping a pull request.
-ServiceNow's SDK plugin teaches Claude the SDK from its docs, with
-`now-sdk explain`. It also reads records on your instance, with
-`now-sdk query`. It can't write to the instance.
+You install two plugins, which are add-ons for Claude Code. The kit runs
+the lab's rituals: set routines such as shipping a pull request.
+ServiceNow's SDK plugin lets Claude look things up in the SDK's docs with
+`now-sdk explain` and read records on your instance with `now-sdk query`.
+It can't write to the instance.
 
 ⌨️ **Terminal:**
 
@@ -1246,12 +1223,12 @@ claude plugin install servicenow-sdk@claude-plugins-official
 <details data-detail="extra"><summary>ℹ️ What each line does</summary>
 
 1. `claude plugin marketplace add …`: Adds the kit's GitHub repo as a
-   plugin marketplace, a list of plugins Claude Code can install. It adds
-   version `v0.1.4`, the part after `#`.
-2. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
-   `prove-it`, from the marketplace you just added. The name after `@` is
-   the marketplace's, and it's `prove-it` too. Claude Code then has the
-   plugin in every folder.
+   plugin marketplace, which is a list of plugins Claude Code can install.
+   The part after `#` picks version `v0.1.4`.
+2. `claude plugin install prove-it@prove-it`: Installs the kit's
+   `prove-it` plugin from the marketplace you just added. The name after `@`
+   is the marketplace's name, which is also `prove-it`. Claude Code then has
+   the plugin in every folder.
 3. `claude plugin install servicenow-sdk@claude-plugins-official`: Installs
    ServiceNow's SDK plugin from `claude-plugins-official`, Anthropic's own
    plugin marketplace. It teaches Claude to look things up in the SDK's docs
@@ -1298,9 +1275,9 @@ it says.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-Your workspace keeps everything for your app in one place. The app's repo
-goes in it. In Module 1, the PRD goes in `brief`. The PRD is the product
-requirements document, which says what the app must do. Claude logs each
+Your workspace keeps everything for your app in one place, including the
+app's repo. In Module 1, you put the PRD in `brief`. The PRD is the
+product requirements document, which says what the app must do. Claude logs each
 catch in `catches.md`. With `projects` open in VS Code, you can read every
 file Claude writes.
 
@@ -1315,18 +1292,18 @@ touch ~/projects/hr-case-router/catches.md
 
 <details data-detail="extra"><summary>ℹ️ What each line does</summary>
 
-1. `mkdir -p ~/projects/hr-case-router/brief`: Makes your workspace folder,
-   `hr-case-router` inside `projects`, with a `brief` folder in it. You put
-   the PRD in `brief` in Module 1. `-p` makes any folder that's missing on
-   the way, and doesn't complain if they're already there.
+1. `mkdir -p ~/projects/hr-case-router/brief`: Makes your workspace
+   folder, `hr-case-router`, inside `projects` with a `brief` folder in it.
+   You put the PRD in `brief` in Module 1. `-p` makes any missing folder
+   along the way and doesn't complain about ones already there.
 2. `touch ~/projects/hr-case-router/catches.md`: Makes an empty file,
    `catches.md`, in your workspace. Claude logs each catch in it. If the
    file is already there, `touch` leaves what's in it alone.
 
 </details>
 
-`hr-case-router` is your workspace, the folder for everything about your
-app. Claude logs catches in `catches.md`.
+Your workspace is the `hr-case-router` folder. It holds everything about
+your app, and Claude logs catches in its `catches.md`.
 
 ✏️ **Editor:** in VS Code, choose **File > Open Folder…** and open the
 `projects` folder in your home folder. Keep it open.
@@ -1336,9 +1313,9 @@ app. Claude logs catches in `catches.md`.
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 Anything else Claude loads changes how it behaves and what it can do. That
-includes another plugin, an MCP server, a hook or your own instruction
-file. The lab's steps and checks expect only the kit and the SDK plugin.
-So anything extra goes off for now, and Module 8 brings it back.
+includes another plugin, an MCP server, a hook or your own instruction file.
+The lab's steps and checks expect only the kit and the SDK plugin, so anything
+extra goes off for now. The lab turns it back on at the end of the day.
 
 </details>
 
@@ -1362,23 +1339,23 @@ git config --get core.hooksPath
 
 1. `cd ~/projects/hr-case-router`: Goes into your workspace, so the checks
    see what Claude sees when it starts there.
-2. `claude plugin list`: Lists the plugins Claude Code has installed, and
-   whether each is enabled. A plugin adds skills, commands or hooks to every
-   session. So an extra one changes how Claude behaves in the lab.
+2. `claude plugin list`: Lists the plugins Claude Code has installed and
+   whether each is enabled. A plugin adds skills, commands or hooks to
+   every session, so an extra one changes how Claude behaves in the lab.
 3. `claude mcp list`: Lists the MCP servers Claude can use. These are tools
    outside Claude Code, such as a connection to another app or service.
-4. `ls -d …`: Looks for your own instruction files and folders. These are a
+4. `ls -d …`: Looks for your own instruction files and folders: a
    `CLAUDE.md` in your home folder, in `projects` or in `~/.claude`, and
    your own skills, agents and commands. Claude reads them in every session.
-   `-d` lists each one by name, not what's inside it, and
+   `-d` lists each one by name rather than what's inside it.
    `No such file or directory` means it isn't there, which is what you want.
 5. `grep -c '"hooks"' …`: Counts how often `"hooks"` appears in Claude
    Code's settings file. Hooks are commands Claude runs by itself at set
    moments. `0` means you have none.
 6. `git config --get core.hooksPath`: Prints the folder git takes its commit
    hooks from, if one is set for every repo on your computer. Nothing
-   printed means each repo uses its own hooks. Then your repo's guard, which
-   you set up in steps 13 and 14, will run.
+   printed means each repo uses its own hooks, so the guard you set up in
+   your app's repo will run.
 
 </details>
 
@@ -1420,8 +1397,8 @@ cd ~/projects/hr-case-router-notes
 Then switch each one off by the name listed. For a plugin, run
 `claude plugin disable <name>`. For a server, run
 `claude mcp remove <name>`. A server whose name starts `plugin:` goes when
-you switch off its plugin. If one won't go, or you never added it, it's
-your organisation's. Leave it, and tell your instructor.
+you switch off its plugin. If one won't go or you never added it, your
+organisation set it up. Leave it in place and tell your instructor.
 
 </details>
 
@@ -1452,17 +1429,18 @@ claude plugin install prove-it@prove-it
 
 <details><summary>🛟 ls, grep or git config shows something</summary>
 
-Your own setup would steer the lab. Add `.off` to the end of each name `ls`
-lists, such as `mv ~/CLAUDE.md ~/CLAUDE.md.off`. Module 8 moves them back.
-If `grep` or `git config` shows hooks, tell your instructor. A separate
-user account on your computer is cleanest.
+Your own setup would steer the lab, so set it aside. Add `.off` to the end of
+each name `ls` lists, for example with `mv ~/CLAUDE.md ~/CLAUDE.md.off`. The
+lab moves them back at the end of the day. If `grep` or `git config` shows
+hooks, tell your instructor. The cleanest way round all of this is a separate
+user account on your computer.
 
 </details>
 
 ## Part 4 — Your app's repo
 
-Your app's code gets its own repo, fenced in two ways. It ignores every
-file you haven't named. A guard checks each commit for secrets, such as
+Your app's code gets its own repo with two fences. The repo ignores every
+file you haven't named, and a guard checks each commit for secrets such as
 passwords and tokens.
 
 ### 11. Look up your scope
@@ -1470,18 +1448,18 @@ passwords and tokens.
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 Your scope is your app's own name space on the instance. Every table,
-property and role the app makes starts with it. The SDK needs it to create
-the app. The vendor prefix in it is the one your instance gives its own
+property and role the app makes starts with it, and the SDK needs it to
+create the app. Its vendor prefix is the one your instance gives its own
 apps.
 
 </details>
 
 🌐 **Browser:**
 
-1. As admin, type `sys_properties.list` in the filter navigator, the box
-   under **All**, and press **Enter**. In the **Name** column's search box,
-   type `glide.appcreator.company.code` and press **Enter**. Its **Value**
-   is your vendor prefix, such as `123456`.
+1. As admin, click the filter navigator, which is the box under **All**.
+   Type `sys_properties.list` and press **Enter**. In the **Name** column's
+   search box, type `glide.appcreator.company.code` and press **Enter**. Its
+   **Value** is your vendor prefix, such as `123456`.
 2. Your scope is `x_<prefix>_hcr_<your initials, lower case>`, such as
    `x_123456_hcr_ga`.
 
@@ -1498,14 +1476,14 @@ Note your scope.
 `now-sdk init` makes your app's starting files: its project settings, its
 build setup and a `src` folder for the code. Everything Claude builds later
 goes on top of them. While it works, it reaches your instance through
-`lab-pdi`. That's why the instance must be awake.
+`lab-pdi`, so the instance must be awake.
 
 </details>
 
 Your instance must be awake.
 
-⌨️ **Terminal:** replace `<SCOPE>` with your scope from step 11. It's
-already done if you typed your scope in step 11:
+⌨️ **Terminal:** replace `<SCOPE>` with the scope you just looked up. If
+you typed your scope into the page, it's already filled in:
 
 ```
 mkdir -p ~/projects/hr-case-router/app
@@ -1533,10 +1511,10 @@ now-sdk init --appName "HR Case Router" --packageName hr-case-router --scopeName
 <details><summary>🛟 It fails, or you're not sure it worked</summary>
 
 ⌨️ Run `ls ~/projects/hr-case-router/app/now.config.json`. If it's listed,
-the app exists, so go on. If it isn't, check your scope. It must be lower
-case, with 18 characters at most, and no `<` or `>`. Then run
-`cd ~/projects/hr-case-router && rm -rf app`, and the three lines above. If
-it still fails, tell your instructor.
+the app exists and you can go on. If it isn't, check that your scope is
+lower case, has 18 characters at most and has no `<` or `>`. Then run
+`cd ~/projects/hr-case-router && rm -rf app` and the three lines above
+again. If it still fails, tell your instructor.
 
 </details>
 
@@ -1545,11 +1523,11 @@ it still fails, tell your instructor.
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
 Your app's folder becomes a repo, with its safety in place before anything
-is committed. The allow list, `.gitignore`, means git tracks only the files
-it names. The guard is a script git runs before each commit. It refuses a
-file the list doesn't name, or a line shaped like a secret. Your commits
-carry your GitHub noreply address, an address GitHub gives you so your own
-email stays private.
+is committed. The allow list in `.gitignore` means git tracks only the
+files it names. The guard is a script git runs before each commit. It
+refuses a file the list doesn't name or a line shaped like a secret. Your
+commits carry your GitHub noreply address, which GitHub gives you so your
+own email stays private.
 
 </details>
 
@@ -1616,8 +1594,8 @@ email ends in `@users.noreply.github.com`, and `describe` prints `v0.1.4`.
 
 **On Windows, in the Code tab:** ✅ in the **Verbose** view, each command
 Claude ran is marked Bash, not PowerShell. If one says PowerShell, stop
-here. The lab's safety rules don't cover it. Tell your instructor, and use
-Claude Code in Git Bash from here on.
+here, because the lab's safety rules don't cover it. Tell your instructor
+and use Claude Code in Git Bash from here on.
 <button data-set="surface:terminal">Use the terminal steps</button>
 
 </div>
@@ -1649,28 +1627,28 @@ Claude change files to make it pass.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-Every commit in the lab relies on the guard. So you test it once here,
-with a fake token, while nothing real is at stake.
+Every commit in the lab relies on the guard, so you test it once here
+with a fake token while nothing real is at stake.
 
 </details>
 
-**The idea:** a check only counts if it could have failed. Here you try to
-commit a fake token, a made-up secret key. You see the guard stop it before
-you rely on it.
+**The idea:** a check only counts if it could have failed. You try to
+commit a fake token, which is a made-up secret key, and watch the guard
+stop it before you rely on it.
 
 Guess first: will the guard stop a commit with a token in it?
 
 <details><summary>🔮 The answer, once you've guessed</summary>
 
 Yes. Before git makes the commit, the guard reads every line being added.
-It spots a line shaped like a token, and refuses with `BLOCKED:`.
+It spots a line shaped like a token and refuses with `BLOCKED:`.
 
-It does that only if it runs. git runs it only when it's in `.git/hooks`
-and marked as a program. A guard that never runs lets everything through
-without a word. So you watch it refuse a fake token now, while a miss
-costs nothing. Later in the day, your app is graded. The grade scans the
-repo's history for secrets. If one got in, the grade can't go above 49 out
-of 100.
+It does that only if it runs, and git runs it only when it's in
+`.git/hooks` and marked as a program. A guard that never runs lets
+everything through without a word. That's why you watch it refuse a fake
+token now, while a miss costs nothing. On the lab day your app is graded,
+and the grade scans the repo's history for secrets. If one got in, the
+grade can't go above 49 out of 100.
 
 </details>
 
@@ -1694,9 +1672,8 @@ git commit -m "chore: initial scaffold"
 3. `git add .gitignore README.md`: Stages the two files, which marks them to
    go into the next commit.
 4. `git commit -m "chore: initial scaffold"`: Tries to save the staged files
-   as your repo's first commit. Before git makes it, the guard, git's
-   pre-commit hook, reads every line being added. It should refuse the
-   commit because of the token.
+   as your repo's first commit. Before git makes it, the guard reads every
+   line being added. It should refuse the commit because of the token.
 
 </details>
 
@@ -1708,8 +1685,8 @@ That's the guard working, not a catch.
 
 <details><summary>🛟 The commit went through</summary>
 
-The guard didn't run. ⌨️ Undo the commit, which keeps its files, and
-install the guard:
+The guard didn't run. ⌨️ Undo the commit and install the guard. Your
+files stay as they are:
 
 ```
 git update-ref -d HEAD
@@ -1720,20 +1697,20 @@ chmod +x .git/hooks/pre-commit
 <details data-detail="extra" data-topic="git"><summary>ℹ️ What each line does</summary>
 
 1. `git update-ref -d HEAD`: Undoes the commit that went through. It's the
-   repo's only commit, so the repo goes back to having none. Your files, and
-   what's staged, stay as they are.
+   repo's only commit, so the repo goes back to having none. Your files and
+   what's staged stay as they are.
 2. `cp …/pre-commit-guard.sh .git/hooks/pre-commit`: Copies the kit's guard
    to where git looks for a pre-commit hook. That's a script git runs before
-   every commit in this repo, which can refuse the commit.
+   every commit in this repo, and it can refuse the commit.
 3. `chmod +x .git/hooks/pre-commit`: Marks the guard as a program you can
    run. git skips a hook that isn't marked that way, so the guard would
    never run.
 
 </details>
 
-Run the four lines above again. If it's blocked now, that's a real catch.
-Log it with the line below. If it still isn't blocked, push nothing, and
-tell your instructor.
+Run the four lines from the start of this step again. If it's blocked
+now, that's a real catch, so log it with the line below. If it still
+isn't blocked, push nothing and tell your instructor.
 
 ```
 echo '0 | guard | the guard was not installed; once installed, it blocked the token' >> ~/projects/hr-case-router/catches.md
@@ -1786,12 +1763,12 @@ Go on.
 
 `CLAUDE.md` is the file Claude reads at the start of every session in this
 folder. It holds the rules for how you and Claude work together. The kit's
-copy sets how a session opens and closes, and how a pull request is
-shipped. It sets how the backlog, the list of work still to do, is ranked.
-It says nothing is built without a signed design record, the design you
-agree on before building. It also says every test names the design term it
-proves. You add your app's facts and the lab's own rules. Then every
-session follows them, and you don't have to repeat them.
+copy sets how a session opens and closes, how a pull request is shipped and
+how the backlog of work still to do is ranked. It says nothing gets built
+without a signed design record, which is the design you agree on first. It
+also says every test names the design term it proves. You add your app's
+facts and the lab's own rules, so every session follows them and you never
+have to repeat them.
 
 </details>
 
@@ -1868,41 +1845,43 @@ Claude copies the kit's `CLAUDE.md` into your repo and fills in its Project
 facts: your scope, `lab-pdi`, and where the design record and the lab's
 decisions live. It makes the seven changes the prompt lists and keeps the
 kit's other rules as they are. One change matters later: Claude restates
-each story before building it but doesn't wait for you, so "never ask me a
-design question" holds. It adds three allow lines to `.gitignore`, for
+each story before building it but doesn't wait for your reply, so it keeps
+the rule never to ask you a design question. It adds three allow lines to
+`.gitignore`, for
 `CLAUDE.md`, `docs/` and `SESSION-NOTE.md`, and commits nothing, so you can
 check the file first.
 
 </details>
 
 ✅ ✏️ **Editor**, `hr-case-router/app/CLAUDE.md`: Project facts show your
-scope and `lab-pdi`. There's a Platform facts section. Learning checkpoints
-has one line under its heading. Brakes' restatement rule doesn't wait for
-you. The end of `hr-case-router/app/.gitignore` has the three allow lines.
+scope and `lab-pdi`, and there's a Platform facts section. Learning
+checkpoints has one line under its heading, and the restatement rule under
+Brakes doesn't wait for you. The end of `hr-case-router/app/.gitignore` has
+the three allow lines.
 
 ### 17. Read every name
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-You check with your own eyes which files git would commit. You also check
-that `CLAUDE.md` names no instance. You do both before the next commit
-makes them part of the repo's history. Then you give the guard your
-instance's name, so it blocks any later commit that names it.
+Before the next commit makes them part of the repo's history, you check
+with your own eyes which files git would commit and that `CLAUDE.md` names
+no instance. You also give the guard your instance's name, so it blocks any
+later commit that names it.
 
 </details>
 
 <div data-show="os:mac surface:terminal">
 
-**On Mac, in the terminal:** Claude has this window. Open a second one with
-**Cmd+N**. That's your window, the terminal you keep for ⌨️ steps.
+**On Mac, in the terminal:** Claude has this window, so open a second one
+with **Cmd+N**. The new one is your window, which you keep for ⌨️ steps.
 
 </div>
 
 <div data-show="os:win surface:terminal">
 
-**On Windows, in the terminal:** Claude has this tab. Open a second Git Bash
-tab with **Ctrl+Shift+T**. That's your window, the terminal you keep for ⌨️
-steps.
+**On Windows, in the terminal:** Claude has this tab, so open a second Git
+Bash tab with **Ctrl+Shift+T**. The new tab is your window, which you keep
+for ⌨️ steps.
 
 </div>
 
@@ -1913,11 +1892,11 @@ not the Code tab.
 
 </div>
 
-⌨️ **Terminal**, in your window. Replace `dev123456` with your instance's
-name. It's already done if the name is in **Your values**, under **Setup**,
-the first button in the top bar. The line with your instance's name teaches
-the guard to block any commit that names your instance. `-n` makes
-`git add` a dry run, which shows what it would do and does nothing:
+⌨️ **Terminal**, in your window. The guide fills in your instance's name.
+If you still see `dev123456`, paste your address under **Your values**, in
+**Setup**, first. The `echo` line teaches the guard to block any
+commit that names your instance. The `-n` makes `git add` a dry run, which
+shows what it would do and does nothing:
 
 ```
 cd ~/projects/hr-case-router/app
@@ -1939,9 +1918,9 @@ grep -n -i 'service-now' CLAUDE.md
    without staging any. It shows exactly which files the allow list lets
    in.
 4. `grep -n -i 'service-now' CLAUDE.md`: Looks for `service-now` in
-   `CLAUDE.md`, in upper or lower case. It prints each line that has it,
-   with its line number. Nothing printed means `CLAUDE.md` holds no instance
-   address.
+   `CLAUDE.md` in any mix of upper and lower case, and prints each line that
+   has it with its line number. If it prints nothing, `CLAUDE.md` holds no
+   instance address.
 
 </details>
 
@@ -1979,8 +1958,8 @@ Then run the `grep` again.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-Your repo goes on GitHub as a private repo. Only you and the people you
-invite can see it. The kit files your stories, milestones and pull requests
+Your repo goes on GitHub as a private repo, which only you and the people
+you invite can see. The kit files your stories, milestones and pull requests
 there. From now on, every change reaches `main` through a pull request.
 
 </details>
@@ -2006,10 +1985,10 @@ gh repo create hr-case-router --private --source . --remote=origin --push
 1. `cd ~/projects/hr-case-router/app`: Goes into your app's folder, the repo
    you're about to put on GitHub.
 2. `gh repo create hr-case-router --private … --push`: Makes a new private
-   repo, `hr-case-router`, on your GitHub account, from the folder you're
-   in (`.`). It saves the repo's address in your local repo as `origin`,
-   git's name for the place you push to. Then it pushes your two commits
-   there.
+   repo called `hr-case-router` on your GitHub account from the folder
+   you're in (`.`). It saves the repo's address in your local repo as
+   `origin`, which is git's name for the place you push to. Then it pushes
+   your two commits there.
 
 </details>
 
@@ -2019,7 +1998,7 @@ the last commit straight to `main`.
 <details><summary>🛟 It says the name already exists</summary>
 
 ⌨️ Run `git remote get-url origin`. If it prints your `hr-case-router`
-repo's address, an earlier try made the repo. Run
+repo's address, an earlier try already made the repo, so run
 `git push -u origin main`. If it prints an error, use another name:
 
 ```
@@ -2040,7 +2019,7 @@ Note the new name.
 
 Everything the app does traces back to what the customer asked for in these
 files. Guessing before you see the real PRD makes you read them as a
-builder would. Afterwards, it shows you what you'd have missed.
+builder would, and comparing afterwards shows you what you'd have missed.
 
 </details>
 
@@ -2048,8 +2027,8 @@ builder would. Afterwards, it shows you what you'd have missed.
 `hr-case-router-lab-guide/files/inputs/`:
 
 - `USE-CASE.md` and `WORKSHOP-NOTES.md`, the customer's own words.
-- `CHANGE-REQUEST.md`, a draft of the customer's latest request. It's still
-  to be confirmed.
+- `CHANGE-REQUEST.md`, a draft of the customer's latest request that's
+  still to be confirmed.
 
 Then guess what a PRD built from them needs. In Module 1, you compare your
 guess with the real PRD.
@@ -2059,21 +2038,21 @@ guess with the real PRD.
 It needs every request in the inputs, each traced to the sentence it comes
 from:
 
-- An agent that routes each case itself, by what the case says. It changes
-  the case's group, or transfers the case to another HR service.
+- An agent that routes each case itself, by what the case says. It either
+  changes the case's group or transfers the case to another HR service.
 - No case sent to a group that can't open it.
 - No sensitive HR service sent to AI.
 - A confidence threshold: how sure the agent must be before it routes.
-  Below it, the case stays where it is, with a note. There's no triage
-  queue, where people would sort cases by hand.
+  Below it, the case stays where it is with a note. There's no triage
+  queue for people to sort cases by hand.
 - Reroute, so fulfillers can have a case routed again.
 - A record of why each case went where it did.
 - The reporting.
 
-It also keeps the workshop's two warnings. An agent makes many AI calls: at
-least 25, where a skill, a single AI task, makes one. An agent with poor
-information guesses. Anything only the customer can decide is an open
-decision, never a guess.
+It also keeps the workshop's two warnings. First, an agent makes many AI
+calls, at least 25. A skill is a single AI task and makes just one. Second,
+an agent with poor information guesses, so anything only the customer can
+decide is an open decision, never a guess.
 
 </details>
 
@@ -2098,5 +2077,5 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 1
 
 ✅ The last line is `Ready for Module 1.` A ❌ names the step to do again.
 
-If anything is missing, tell your instructor at least two days before the
-workshop.
+If anything is missing, tell your instructor as soon as you can, and at
+least a week before the lab.

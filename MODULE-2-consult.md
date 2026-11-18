@@ -1,6 +1,6 @@
 # Module 2 — Consult
 
-*⏱ 30 min · 09:40*
+*⏱ 30 min*
 
 Nothing gets built in this module. The consult, one of the kit's skills,
 advises how to build each capability. A capability is one of the things the

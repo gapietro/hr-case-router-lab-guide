@@ -1,6 +1,6 @@
 # Module 7 — Grade: could someone else own this?
 
-*⏱ 40 min · 15:25*
+*⏱ 40 min*
 
 Run the grade from the prove-it kit. It acts like a demanding senior
 engineer who has never met you. It runs the build and the tests before it
@@ -230,9 +230,14 @@ item and any **cap**. A preview is headed `Preview: milestone not reached`.
 
 <details><summary>🛟 The install says 401, or times out</summary>
 
-Your instance is asleep. Open it in your browser. If its page offers a
-wake-up link, click it and wait. Waking can take up to 20 minutes. If
-there's no link, or it's still asleep, ask your instructor. Then 🤖
+Your instance is asleep. To wake it:
+
+1. Open it in your browser.
+2. If its page offers a wake-up link, click it and wait. Waking can take up
+   to 20 minutes.
+3. If there's no link, or it's still asleep, ask your instructor.
+
+Then 🤖
 **Claude:** type `It's awake now: run the install to lab-pdi again.` Choose
 **Yes** again, for that command only.
 

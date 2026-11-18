@@ -1,6 +1,6 @@
 # Module 6 — The build loop
 
-*⏱ 30 min · 12:55, the batch runs over lunch, then 60 min · 14:15*
+*⏱ 30 min, the batch runs over lunch, then 60 min*
 <!-- DRY RUN: time. Part 3's waits (warm-up, then about two minutes a run) are
 estimates: does 60 min from 14:15 hold? -->
 
@@ -622,10 +622,13 @@ now-sdk build && now-sdk install --auth lab-pdi
 
 <details><summary>🛟 It says 401, or times out</summary>
 
-Your instance is asleep. Open it in your browser. If its page offers a
-wake-up link, click it and wait. Waking can take up to 20 minutes. If
-there's no link, or it's still asleep, ask your instructor. Then run the
-same two lines again.
+Your instance is asleep. To wake it:
+
+1. Open it in your browser.
+2. If its page offers a wake-up link, click it and wait. Waking can take up
+   to 20 minutes.
+3. If there's no link, or it's still asleep, ask your instructor.
+4. Run the same two lines again.
 
 </details>
 
@@ -738,32 +741,45 @@ the log, the notes and the execution plan prove a run.
    to `Lab HR Team`. The other routes `Payroll Discrepancy` to
    `Lab Locked Out`. Both services come with every instance's HR demo data.
    The groups were made for the lab.
-2. Open `kb_knowledge.list`, the list of knowledge articles. In the **Short
-   description** search box, type `HR routing guidance` and press
-   **Enter**. Open the top row. Its **Number** shows **(empty)**.
+2. Open `kb_knowledge.list`, the list of knowledge articles, and find the
+   guidance article:
 
-   ✅ **Workflow** is **Published**. Scroll inside the article body. It has
-   a section for `Direct Deposit Inquiry`, handled by `Lab HR Team`. It has
-   another for `Payroll Discrepancy`, handled by `Lab Locked Out`. Each
-   ends in an "Example request:" line, which the steps below paste. If
-   there's no article, or sub-step 1 showed no rows, see the 🛟 box below.
+   - In the **Short description** search box, type `HR routing guidance`
+     and press **Enter**.
+   - Open the top row. Its **Number** shows **(empty)**.
+   - Scroll inside the article body.
 
-🌐 **Browser**, impersonate `hr.demo`, which means acting as that user.
-Click your avatar, at the top right of your instance, then **Impersonate
-user**. Type `hr.demo`, pick **HR Demo**, and click **Impersonate user**.
-Close any welcome pop-up.
+   ✅ **Workflow** is **Published**. The article has a section for
+   `Direct Deposit Inquiry`, handled by `Lab HR Team`, and another for
+   `Payroll Discrepancy`, handled by `Lab Locked Out`. Each ends in an
+   "Example request:" line, which the steps below paste.
+
+   If there's no article, or sub-step 1 showed no rows, see the 🛟 box below.
+
+🌐 **Browser**, impersonate `hr.demo`, which means acting as that user:
+
+- Click your avatar, at the top right of your instance, then
+  **Impersonate user**.
+- Type `hr.demo`, pick **HR Demo**, and click **Impersonate user**.
+- Close any welcome pop-up.
 
 3. Create two warm-up cases. Paste this into the address bar and press
    **Enter**:
    `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`.
-   A blank **HR Payroll Case** form opens. Set **Opened for** to
-   `HR Demo`. Set **HR service** to `Direct Deposit Inquiry`: click the
-   magnifier to pick it. Set **Short description** to
-   `My direct deposit didn't arrive this pay period. Can you check which bank account it went to?`.
+   A blank **HR Payroll Case** form opens. Set three fields:
+
+   - **Opened for:** `HR Demo`.
+   - **HR service:** `Direct Deposit Inquiry`. Click the magnifier to pick
+     it.
+   - **Short description:**
+     `My direct deposit didn't arrive this pay period. Can you check which bank account it went to?`.
+
    Then click **Submit**, at the top right of the form. The text must be
    there before you click Submit, because the app starts a run as the case
-   is saved. For the second case, open the same address again. Use HR
-   service `Payroll Discrepancy` and short description
+   is saved.
+
+   For the second case, open the same address again. Use HR service
+   `Payroll Discrepancy` and short description
    `My last paycheck was short by eight hours of overtime. Please correct the amount.`.
    Step 11 walks through this in more detail.
 
@@ -773,12 +789,17 @@ Close any welcome pop-up.
    **Assignment group**. `Lab Locked Out` can't open this kind of case, so
    the code stops the move. The note names the access check.
 
-   To see a note, paste
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
-   into the address bar. If the list is empty as `hr.demo`, end
-   impersonation and paste it again as admin. Click the top row's number.
-   Look at the newest entry in the activity stream below the form. For the
-   other case, use `paycheck` in place of `direct%20deposit` in that
+   To see a note:
+
+   - Paste
+     `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
+     into the address bar.
+   - If the list is empty as `hr.demo`, end impersonation and paste it
+     again as admin.
+   - Click the top row's number, and look at the newest entry in the
+     activity stream below the form.
+
+   For the other case, use `paycheck` in place of `direct%20deposit` in that
    address. No note? See step 11's 🛟 box "No note by hr.router".
 
 <details><summary>🛟 No note after three minutes</summary>
@@ -795,8 +816,9 @@ End impersonation. As admin, do these in order:
    `clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>.
    Paste it there, and click **Run script**.
 
-Then, as `hr.demo`, click **Reroute** on the case and wait two minutes. If
-Reroute says a run is already in progress, wait for the note saying the
+Then, as `hr.demo`, click **Reroute** on the case and wait two minutes.
+
+If Reroute says a run is already in progress, wait for the note saying the
 router didn't finish. It comes five minutes after the case was created.
 Then click **Reroute** again.
 
@@ -843,10 +865,14 @@ Then click **Reroute** again.
 The seed data isn't on your instance. It's a story like any other: the two
 routing rules, the knowledge base and the article, written as code in
 `src/`. Either it isn't merged yet, or it's merged but not installed.
+
 ⌨️ **Terminal**, in your window:
-`git switch main && git pull && git log --oneline -15`. If a line mentions
-seed data, routing rules or the article, do step 8 again to build and
-install. If no line does, 🤖 **Claude:** paste this, then `go`:
+`git switch main && git pull && git log --oneline -15`.
+
+If a line mentions seed data, routing rules or the article, do step 8 again
+to build and install.
+
+If no line does, 🤖 **Claude:** paste this, then `go`:
 
 ```
 Which story holds the seed data: the routing rules for the demo HR services Direct Deposit Inquiry (to Lab HR Team) and Payroll Discrepancy (to Lab Locked Out), found by name, the "Lab HR routing" knowledge base and the published article? If it isn't merged, take it next, the same way as the last story.
@@ -861,7 +887,9 @@ the usual loop.
 </details>
 
 When it's merged, do step 8 again. Then come back to sub-steps 1 and 2
-here. The article may be there while its knowledge base isn't: its
+here.
+
+The article may be there while its knowledge base isn't: its
 **Knowledge base** field is empty. That gets the same fix. The seed must
 create the knowledge base in `src/` (DECISIONS, seed data).
 
@@ -885,11 +913,14 @@ Nothing is instant. The dispatcher starts one run a minute, and a run takes
 about a minute.
 
 You create two HR cases by hand, as someone in HR would. Then you watch
-what the app does to each. Case A is on the `Direct Deposit Inquiry`
-service, which `Lab HR Team` handles. The agent should move it there. Case
-B is on the `Payroll Discrepancy` service, which `Lab Locked Out` handles.
-The agent should pick that group. The checks should then stop the move,
-because `Lab Locked Out` can't open this kind of case.
+what the app does to each:
+
+- **Case A** is on the `Direct Deposit Inquiry` service, which
+  `Lab HR Team` handles. The agent should move it there.
+- **Case B** is on the `Payroll Discrepancy` service, which
+  `Lab Locked Out` handles. The agent should pick that group. The checks
+  should then stop the move, because `Lab Locked Out` can't open this kind
+  of case.
 
 🌐 **Browser**, impersonate `hr.demo` again. Click your avatar, then
 **Impersonate user**, and pick **HR Demo**.
@@ -908,27 +939,35 @@ because `Lab Locked Out` can't open this kind of case.
      as written.
 
    Click **Submit**, at the top right of the form. The app starts a run the
-   moment a case is saved. So the text has to be there before this one
-   click. Don't create the case first and add the text after. As it saves,
-   the platform fills **Assignment group**, such as **HR Tier 1**, and
-   **Assigned to** itself. That's fine. Changing that group is the agent's
-   job, and it's what you check next.
-2. **Create case B** the same way: the same address, **Opened for**
-   `HR Demo`, **HR service** `Payroll Discrepancy`, **Short
-   description**
-   `My last paycheck was short by eight hours of overtime. Please correct the amount.`,
-   then **Submit**.
+   moment a case is saved, so the text has to be there before this one
+   click. Don't create the case first and add the text after.
+
+   As it saves, the platform fills **Assignment group**, such as
+   **HR Tier 1**, and **Assigned to** itself. That's fine. Changing that
+   group is the agent's job, and it's what you check next.
+2. **Create case B** the same way, from the same address:
+
+   - **Opened for:** `HR Demo`.
+   - **HR service:** `Payroll Discrepancy`.
+   - **Short description:**
+     `My last paycheck was short by eight hours of overtime. Please correct the amount.`.
+
+   Then click **Submit**.
 3. Wait about two minutes, then open case A. Paste this into the address bar:
    `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
    It lists the HR cases `hr.demo` opened with "direct deposit" in the
-   short description, newest first. So it shows your cases, not the build's
-   old test cases. Click the top row's number. If the list is empty, end
-   impersonation and paste the address again as admin. `hr.demo` can't see
-   a case once the platform hands it to a group it isn't in.
+   short description, newest first, so it shows your cases and not the
+   build's old test cases. Click the top row's number.
 
-   On the case, look at two things. One is the **Assignment group** field.
-   The other is the newest entry in the activity stream below the form, a
-   work note by `hr.router`. Find it in the **Notes** tab, or scroll down.
+   If the list is empty, end impersonation and paste the address again as
+   admin. `hr.demo` can't see a case once the platform hands it to a group
+   it isn't in.
+
+   On the case, look at two things:
+
+   - The **Assignment group** field.
+   - The newest entry in the activity stream below the form, a work note by
+     `hr.router`. Find it in the **Notes** tab, or scroll down.
 
    ✅ **Assignment group** is `Lab HR Team`, no longer what the form set,
    such as `HR Tier 1`. The newest work note, by `hr.router`, gives three
@@ -960,18 +999,22 @@ how far the run got. End impersonation. As admin, open
 | `routed`, `stopped` or `left`, and still no note | The note couldn't be written. The first write to an HR table can be refused (DECISIONS, P8) | Click **Reroute** |
 
 No work note to say why? The app's first write to an HR table can be
-refused, so the note may be missing too. Open `<SCOPE>_run_detail.list`,
-newest first. The run's detail row keeps what it can. Then read the system
-log. Type `syslog.list` in the filter navigator and press **Enter**. In the
-**Message** search box, type `*<SCOPE>` and press **Enter**. Sort by
-**Created**, newest first. The rows from the time of the run say what
-failed.
+refused, so the note may be missing too. Look here instead:
+
+1. Open `<SCOPE>_run_detail.list`, newest first. The run's detail row
+   keeps what it can.
+2. Read the system log. Type `syslog.list` in the filter navigator and
+   press **Enter**.
+3. In the **Message** search box, type `*<SCOPE>` and press **Enter**.
+4. Sort by **Created**, newest first. The rows from the time of the run
+   say what failed.
 
 A `start_failed` line may say
 `Illegal access to package_private script include function AIASharedDao`.
 That means the dispatcher starts the workflow from a Fluent module, a file
 of the app's code in `src/server/`. The start must be in classic script,
 the script in the job's own record (DECISIONS, How it starts the workflow).
+
 That's a defect. 🤖 **Claude:** paste this, then `go`:
 
 ```
@@ -998,7 +1041,9 @@ without submitting, and paste the address again.
 
 Is it the right form, and the service shows for admin but not for
 `hr.demo`? Then the service is turned off, or its **HR criteria**, the rules
-for who can use it, leave `HR Demo` out. End impersonation, open
+for who can use it, leave `HR Demo` out.
+
+End impersonation, open
 `sn_hr_core_service.list`, and open the service. ✅ **Active** is ticked,
 and **HR criteria** is empty or covers `HR Demo`. If not, tell your
 instructor the service's name.
@@ -1028,9 +1073,10 @@ minutes, and reload.
 
 The AI sometimes sends a word, such as `fmt_error`, where its confidence
 should go. The code stops the move and leaves the case where it was. That's
-a check doing its job, not a defect. On the case, click **Reroute**. ✅ It
-says **Routing queued**. Wait about two minutes, and reload. The new note
-gives a number.
+a check doing its job, not a defect.
+
+On the case, click **Reroute**. ✅ It says **Routing queued**. Wait about
+two minutes, and reload. The new note gives a number.
 
 In sub-step 6, that case then has one more row, with **State** `stopped`.
 That row is the run that sent the word.
@@ -1041,10 +1087,13 @@ If it happens on three runs in a row, tell your instructor.
 
 <details><summary>🛟 It moved the Lab Locked Out case, or the reason doesn't fit the case</summary>
 
-That's a real defect. Maybe the `Lab Locked Out` case moved. Or the reason
-quotes words that aren't in this case's article line. Either way, the
-checks or the agent never saw this case (DECISIONS, P6). 🤖 **Claude:**
-paste this, then `go`:
+That's a real defect. You saw one of these:
+
+- The `Lab Locked Out` case moved.
+- The reason quotes words that aren't in this case's article line.
+
+Either way, the checks or the agent never saw this case (DECISIONS, P6).
+🤖 **Claude:** paste this, then `go`:
 
 ```
 File a GitHub issue in plain words: <what you saw, such as "it moved

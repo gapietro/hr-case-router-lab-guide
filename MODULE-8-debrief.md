@@ -1,6 +1,6 @@
 # Module 8 — What the process caught
 
-*⏱ 15 min · 16:05*
+*⏱ 15 min*
 
 Count your catches from the file, not from memory. Decide what to take
 home. Then close the day's session.

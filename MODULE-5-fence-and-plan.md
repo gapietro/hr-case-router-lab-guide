@@ -1,6 +1,6 @@
 # Module 5 — Check and plan
 
-*⏱ 25 min · 12:30*
+*⏱ 25 min*
 
 Your design record, the design you signed in Module 4, comes into your repo.
 It gets one last check. Then it becomes a plan on GitHub: the stories you'll

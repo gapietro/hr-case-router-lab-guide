@@ -1,6 +1,6 @@
 # Module 4 — Design challenge
 
-*⏱ 55 min · 11:35*
+*⏱ 55 min*
 
 Claude questions your design, one question at a time. Then you confirm the
 result. Your design is already written down. The PRD says what the app must

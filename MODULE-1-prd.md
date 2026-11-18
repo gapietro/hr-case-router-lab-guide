@@ -1,6 +1,6 @@
 # Module 1 — From inputs to a PRD
 
-*⏱ 40 min · 09:00*
+*⏱ 40 min*
 
 You review a draft PRD, the product requirements document that says what
 the app must do. It was written from three inputs. Then the customer accepts

@@ -559,10 +559,13 @@ the install ends with a link to your app.
 
 <details><summary>🛟 It says 401, or times out</summary>
 
-Your instance is asleep. Open it in your browser. If its page offers a
-wake-up link, click it and wait. Waking can take up to 20 minutes. If
-there's no link, or it's still asleep, ask your instructor. Then run the
-same two lines again.
+Your instance is asleep. To wake it:
+
+1. Open it in your browser.
+2. If its page offers a wake-up link, click it and wait. Waking can take up
+   to 20 minutes.
+3. If there's no link, or it's still asleep, ask your instructor.
+4. Run the same two lines again.
 
 </details>
 
@@ -1627,9 +1630,14 @@ Production asks more: a HANDOFF grade of 75 or more, with no cap.
 
 <details><summary>🛟 The install says 401, or times out</summary>
 
-Your instance is asleep. Open it in your browser. If its page offers a
-wake-up link, click it and wait. Waking can take up to 20 minutes. If
-there's no link, or it's still asleep, ask your instructor. Then 🤖
+Your instance is asleep. To wake it:
+
+1. Open it in your browser.
+2. If its page offers a wake-up link, click it and wait. Waking can take up
+   to 20 minutes.
+3. If there's no link, or it's still asleep, ask your instructor.
+
+Then 🤖
 **Claude:** type `It's awake now: run the install to lab-pdi again.` Choose
 **Yes** again, for that command only.
 
@@ -2148,9 +2156,14 @@ one you show when the app moves on.
 
 <details><summary>🛟 The install says 401, or times out</summary>
 
-Your instance is asleep. Open it in your browser. If its page offers a
-wake-up link, click it and wait. Waking can take up to 20 minutes. If
-there's no link, or it's still asleep, ask your instructor. Then 🤖
+Your instance is asleep. To wake it:
+
+1. Open it in your browser.
+2. If its page offers a wake-up link, click it and wait. Waking can take up
+   to 20 minutes.
+3. If there's no link, or it's still asleep, ask your instructor.
+
+Then 🤖
 **Claude:** type `It's awake now: run the install to lab-pdi again.` Choose
 **Yes** again, for that command only.
 

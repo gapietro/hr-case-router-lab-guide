@@ -91,6 +91,7 @@ you need and the skills you should already have.
    You'll run that command for the first time during the pre-work. The lab's
    settings stop Claude from running `now-sdk auth`, so it can't ask for your
    password by mistake.
+
    <span data-show="os:mac">**On Mac:** if `sudo` asks for your Mac's password,
    type it in your own terminal window too.</span>
 
