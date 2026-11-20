@@ -132,7 +132,7 @@ Settle these at the kick-off. The prompts and commands below use them.
 3. ⌨️ Did you do Module 8 step 8, which removes the plugins? Then install
    the kit and the SDK plugin again, as in Pre-work step 8:
    ```
-   claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.1'
+   claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.2'
    claude plugin install prove-it@prove-it
    claude plugin install servicenow-sdk@claude-plugins-official
    ```
@@ -141,7 +141,7 @@ Settle these at the kick-off. The prompts and commands below use them.
 
    1. `claude plugin marketplace add …`: Adds the kit's GitHub repo as a
       plugin marketplace, a list of plugins Claude Code can install. It adds
-      version `v0.2.1`, the part after `#`.
+      version `v0.2.2`, the part after `#`.
    2. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
       `prove-it`, from the marketplace you just added. The name after `@` is
       the marketplace's, and it's `prove-it` too. Claude Code then has the

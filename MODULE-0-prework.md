@@ -1215,7 +1215,7 @@ It can't write to the instance.
 ⌨️ **Terminal:**
 
 ```
-claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.1'
+claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.2'
 claude plugin install prove-it@prove-it
 claude plugin install servicenow-sdk@claude-plugins-official
 ```
@@ -1224,7 +1224,7 @@ claude plugin install servicenow-sdk@claude-plugins-official
 
 1. `claude plugin marketplace add …`: Adds the kit's GitHub repo as a
    plugin marketplace, which is a list of plugins Claude Code can install.
-   The part after `#` picks version `v0.2.1`.
+   The part after `#` picks version `v0.2.2`.
 2. `claude plugin install prove-it@prove-it`: Installs the kit's
    `prove-it` plugin from the marketplace you just added. The name after `@`
    is the marketplace's name, which is also `prove-it`. Claude Code then has
@@ -1359,7 +1359,7 @@ git config --get core.hooksPath
 
 </details>
 
-✅ The only enabled plugins are `prove-it@prove-it`, with `Version: 0.2.1`,
+✅ The only enabled plugins are `prove-it@prove-it`, with `Version: 0.2.2`,
 and `servicenow-sdk@claude-plugins-official`, at any version.
 `claude mcp list` says `No MCP servers configured`. `ls` prints only
 `No such file or directory` lines. `grep` prints `0`, and `git config`
@@ -1406,7 +1406,7 @@ organisation set it up. Leave it in place and tell your instructor.
 
 ```
 claude plugin marketplace remove prove-it
-claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.1'
+claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.2'
 claude plugin install prove-it@prove-it
 ```
 
@@ -1415,9 +1415,9 @@ claude plugin install prove-it@prove-it
 1. `claude plugin marketplace remove prove-it`: Removes the kit's
    marketplace, which points at another version of the kit. The next line
    can then add the right one.
-2. `claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.1'`: Adds the
+2. `claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.2'`: Adds the
    kit's GitHub repo as a plugin marketplace, a list of plugins Claude Code
-   can install. It adds version `v0.2.1`, the part after `#`.
+   can install. It adds version `v0.2.2`, the part after `#`.
 3. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
    `prove-it`, from the marketplace you just added. The name after `@` is
    the marketplace's, and it's `prove-it` too. Claude Code then has the
@@ -1557,7 +1557,7 @@ the folder control, choose **Open folder…** and pick
 
 ```
 Set up this folder as my app's repo. Make sure ~/projects/prove-it-kit is
-gapietro/prove-it-kit at tag v0.2.1: clone it if it's missing, otherwise
+gapietro/prove-it-kit at tag v0.2.2: clone it if it's missing, otherwise
 fetch tags and switch to the tag. Run git init -b main. For this repo only,
 set user.email to my GitHub noreply address, id+login@users.noreply.github.com,
 with my id and login from gh api user. Replace .gitignore with the kit's
@@ -1572,7 +1572,7 @@ user.email and git -C ~/projects/prove-it-kit describe --tags.
 
 <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
 
-Claude gets the kit at version `v0.2.1` and starts the repo on `main`, with
+Claude gets the kit at version `v0.2.2` and starts the repo on `main`, with
 this repo's commit email and the kit's allow list and guard. It deletes the
 template's two example files, then installs the packages and builds the
 app, to prove the starting point works before anything is committed. Its
@@ -1587,7 +1587,7 @@ this read outside the working directories?", choose **Yes, and keep
 allowing any reads outside the working directories**.
 
 ✅ The `now-sdk build` output ends with `Build completed successfully`. The
-email ends in `@users.noreply.github.com`, and `describe` prints `v0.2.1`.
+email ends in `@users.noreply.github.com`, and `describe` prints `v0.2.2`.
 <span data-show="surface:terminal">**In the terminal:** then type `/exit`.</span>
 
 <div data-show="os:win surface:desktop">
@@ -2062,7 +2062,7 @@ decide is an open decision, never a guess.
 
 - An instance set up for the lab, and `hr.demo` to impersonate.
 - Your tools, signed in. Claude Code has the lab's settings, the kit
-  `v0.2.1` and the SDK plugin.
+  `v0.2.2` and the SDK plugin.
 - `~/projects/hr-case-router`, holding only `app/`, an empty `brief/` and an
   empty `catches.md`.
 - In `app/`: the allow list, the guard, an SDK project that builds, and its
