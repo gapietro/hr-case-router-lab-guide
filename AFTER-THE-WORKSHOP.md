@@ -639,7 +639,8 @@ table (P8).
    description** to its "Example request:" line. Click **Submit**.
    ✅ Within about three minutes, each has a work note by `hr.router`.
 7. End impersonation, and close any conversation left open (P14). 🌐 As
-   admin, open `sys.scripts.modern.do` and set the scope picker to
+   admin, paste `https://dev123456.service-now.com/nav_to.do?uri=sys.scripts.modern.do`
+   into the address bar, press **Enter**, and set the scope picker to
    **global**. Then ⌨️ run
    <span data-show="os:mac">**On Mac:**
    `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`.</span>
@@ -779,7 +780,8 @@ End impersonation. As admin, do these three things in this order:
 1. Set `<SCOPE>.enabled` to `true`.
 2. Is there no dispatcher row in `sys_trigger.list`? Open the job in
    `sysauto_script.list` and click **Update**.
-3. Open `sys.scripts.modern.do` and pick **global**. Then ⌨️ run
+3. Paste `https://dev123456.service-now.com/nav_to.do?uri=sys.scripts.modern.do`
+   into the address bar, press **Enter**, and pick **global**. Then ⌨️ run
    <span data-show="os:mac">**On Mac:**
    `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>
    <span data-show="os:win">**On Windows:**

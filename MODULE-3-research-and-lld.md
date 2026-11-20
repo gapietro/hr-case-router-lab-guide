@@ -303,8 +303,12 @@ before a `(`, and every word after `new`, is one of those calls. `if (`,
 script. Type `Read-only, please: use only the allowed calls.` and check
 again.
 
-🌐 **Browser**, as admin: type `sys.scripts.modern.do` in the filter
-navigator, the search box at the top left. Press **Enter**. In the Editor,
+🌐 **Browser**, as admin: paste this into the address bar and press
+**Enter**:
+
+`https://dev123456.service-now.com/nav_to.do?uri=sys.scripts.modern.do`
+
+The **Scripts - Background** page opens. In the Editor,
 copy the script with
 <kbd data-mac="Cmd+A" data-win="Ctrl+A">Cmd+A (Mac) · Ctrl+A (Windows)</kbd>
 and then

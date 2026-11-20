@@ -1,7 +1,7 @@
 # Module 6 — The build loop
 
 *⏱ 30 min, the batch runs over lunch, then 60 min*
-<!-- DRY RUN: time. Part 3's waits (warm-up, then about two minutes a run) are
+<!-- DRY RUN: time. Part 3's waits (three minutes for the two cases, then about two minutes a run) are
 estimates: does 60 min from 14:15 hold? -->
 
 You build one story by hand. Claude builds more over lunch. Then you try the
@@ -657,7 +657,9 @@ Then tell your instructor what it says.
 The install leaves the router switched off. It can also leave the
 dispatcher, the job that starts each run, without the trigger that runs it
 every minute. If either is missing, new cases sit unrouted, often with no
-message. Without the role, `hr.demo` can't use Reroute.
+message. Without the role, `hr.demo` can't use Reroute. And a new lab
+instance can come with its AI not yet switched on: until the Now Assist
+Panel is activated, no AI agent on the instance gets an answer.
 
 </details>
 
@@ -704,22 +706,53 @@ filter `sys_trigger.list` again.
 
 </details>
 
-After every install, do sub-steps 1 and 3 again. An install turns the switch
-off, and it can leave the job without a trigger. The role stays.
+4. 🌐 **Browser**, as admin, the instance's AI. You do this once:
+   - Click **All**, type `AI Agent Studio`, and open it. Click **Testing**.
+   - Look for a banner: "Now Assist Panel is not configured". No banner?
+     The AI is already on: this sub-step is done.
+   - Click **Set up** in the banner. Assistant Designer opens in a new
+     tab, with a notice that the Now Assist Panel needs to be activated.
+     Click **Activate**.
+   - Go back to the AI Agent Studio tab and reload the page. If a dialog
+     box appears, close it with its **X**.
 
-### 10. Warm it up
+   ✅ The **Testing** page shows no banner.
+
+After every install, do sub-steps 1 and 3 again. An install turns the switch
+off, and it can leave the job without a trigger. The role and the AI stay.
+
+### 10. Run two cases
+
+**Before you start: be patient here.** This is the first time your app
+meets a live AI, and an AI doesn't give the same answer twice. Your app was
+also written by an AI, so it isn't the same as your neighbour's. What you
+see may differ from what this page shows, and it may not work the first
+time. That's normal, and it isn't your mistake. When something fails, you
+use Claude to find the cause and fix it: the 🛟 boxes in this step and the
+next give you the prompts.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-The first runs after an install can fail. The warm-up keeps those failures
-out of the cases you'll judge. Closing the router's leftover conversations
-matters too. While `hr.router` has one open, the dispatcher starts no new
-run.
+Until now your app has only run in tests on your computer. Those prove the
+checks on made-up data. Only a real case on your instance proves the rest:
+that a run starts, the AI answers, the tools work as `hr.router`, and a note
+lands on the case. You make two cases the guidance article was written for:
+one the router should move, and one its checks should stop.
 
 </details>
 
+You create two HR cases by hand, as someone in HR would. Step 11 reads what
+the app did to each:
+
+- **Case A** is on the `Direct Deposit Inquiry` service, which
+  `Lab HR Team` handles. The agent should move it there.
+- **Case B** is on the `Payroll Discrepancy` service, which
+  `Lab Locked Out` handles. The agent should pick that group. The checks
+  should then stop the move, because `Lab Locked Out` can't open this kind
+  of case.
+
 The first runs after an install can each fail once per HR table (DECISIONS,
-P8). Two warm-up cases take those failures for you.
+P8). If one does, step 11 has you run the case again.
 
 <details><summary>ℹ️ What P8, P14… mean</summary>
 
@@ -763,44 +796,62 @@ the log, the notes and the execution plan prove a run.
 - Type `hr.demo`, pick **HR Demo**, and click **Impersonate user**.
 - Close any welcome pop-up.
 
-3. Create two warm-up cases. Paste this into the address bar and press
+3. **Create case A.** Paste this into the address bar and press
    **Enter**:
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`.
+
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`
+
    A blank **HR Payroll Case** form opens. Set three fields:
 
    - **Opened for:** `HR Demo`.
    - **HR service:** `Direct Deposit Inquiry`. Click the magnifier to pick
-     it.
+     it. Not in the list? See the 🛟 box below.
    - **Short description:**
-     `My direct deposit didn't arrive this pay period. Can you check which bank account it went to?`.
+     <code data-copy>My direct deposit didn't arrive this pay period. Can you check which bank account it went to?</code>
+
+   Leave every other field as the form has it. The short description is
+   the article's "Example request:" line for this service, exactly as
+   written.
 
    Then click **Submit**, at the top right of the form. The text must be
    there before you click Submit, because the app starts a run as the case
    is saved.
 
-   For the second case, open the same address again. Use HR service
-   `Payroll Discrepancy` and short description
-   `My last paycheck was short by eight hours of overtime. Please correct the amount.`.
-   Step 11 walks through this in more detail.
+   As it saves, the platform fills **Assignment group**, such as
+   **HR Tier 1**, and **Assigned to** itself. That's fine. Changing that
+   group is the agent's job.
+4. **Create case B.** Paste the same address into the address bar and
+   press **Enter**:
 
-   ✅ Within about three minutes, each case has a work note by `hr.router`,
-   the user the router runs as. What the note says doesn't matter yet. The
-   `Payroll Discrepancy` case is meant to stay where it is, with no new
-   **Assignment group**. `Lab Locked Out` can't open this kind of case, so
-   the code stops the move. The note names the access check.
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`
 
-   To see a note:
+   A blank **HR Payroll Case** form opens. Set three fields:
 
-   - Paste
-     `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
-     into the address bar.
+   - **Opened for:** `HR Demo`.
+   - **HR service:** `Payroll Discrepancy`. Click the magnifier to pick it.
+   - **Short description:**
+     <code data-copy>My last paycheck was short by eight hours of overtime. Please correct the amount.</code>
+
+   Then click **Submit**.
+5. Wait about three minutes. Nothing is instant: the dispatcher starts one
+   run a minute, and a run takes about a minute. Then paste this into the
+   address bar and press **Enter**:
+
+   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5EORshort_descriptionLIKEpaycheck%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`
+
+   It lists both cases, newest first, and not the build's old test cases.
+
    - If the list is empty as `hr.demo`, end impersonation and paste it
-     again as admin.
-   - Click the top row's number, and look at the newest entry in the
-     activity stream below the form.
+     again as admin. `hr.demo` can't see a case once the platform hands it
+     to a group it isn't in.
+   - Click a row's number, and look at the newest entry in the activity
+     stream below the form. Find it in the **Notes** tab, or scroll down.
+   - Go back to the list and do the same for the other case.
 
-   For the other case, use `paycheck` in place of `direct%20deposit` in that
-   address. No note? See step 11's 🛟 box "No note by hr.router".
+   ✅ Each case has a work note by `hr.router`, the user the router runs
+   as. What the notes say is step 11's job.
+
+   No note on a case? See the 🛟 box "No note after three minutes".
 
 <details><summary>🛟 No note after three minutes</summary>
 
@@ -809,7 +860,8 @@ End impersonation. As admin, do these in order:
 1. In `sys_properties.list`, set `<SCOPE>.enabled` to `true`.
 2. If `sys_trigger.list` has no dispatcher row, open the job in
    `sysauto_script.list` and click **Update**.
-3. Open `sys.scripts.modern.do` and pick **global**. Then ⌨️ run
+3. Paste `https://dev123456.service-now.com/nav_to.do?uri=sys.scripts.modern.do`
+   into the address bar, press **Enter**, and pick **global**. Then ⌨️ run
    <span data-show="os:mac">**On Mac:**
    `pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js`</span>
    <span data-show="os:win">**On Windows:**
@@ -817,6 +869,7 @@ End impersonation. As admin, do these in order:
    Paste it there, and click **Run script**.
 
 Then, as `hr.demo`, click **Reroute** on the case and wait two minutes.
+One case at a time: wait for its note before you reroute the other.
 
 If Reroute says a run is already in progress, wait for the note saying the
 router didn't finish. It comes five minutes after the case was created.
@@ -824,41 +877,33 @@ Then click **Reroute** again.
 
 </details>
 
-4. End impersonation. When both notes are there, close any conversation
-   the warm-up left open (DECISIONS, P14).
+<details><summary>🛟 The HR service isn't in the list</summary>
 
-   🌐 **Browser**, as admin: type `sys.scripts.modern.do` in the filter
-   navigator, the search box under **All**, and press **Enter**. Set the
-   scope picker above the script to **global**.
+The form's **HR service** list holds only the services for that form's kind
+of case. Both lab services are Payroll ones, so check the address. It must
+name `sn_hr_core_case_payroll.do`, not `sn_hr_core_case.do`. Close the form
+without submitting, and paste the address again.
 
-   Then copy the script. Do this last, so nothing else replaces it on your
-   clipboard:
+Is it the right form, and the service shows for admin but not for
+`hr.demo`? Then the service is turned off, or its **HR criteria**, the rules
+for who can use it, leave `HR Demo` out.
 
-   <div data-show="os:mac">
+End impersonation, open
+`sn_hr_core_service.list`, and open the service. ✅ **Active** is ticked,
+and **HR criteria** is empty or covers `HR Demo`. If not, tell your
+instructor the service's name.
 
-   **On Mac:** ⌨️ **Terminal**, your window:
+Don't use **HR Case Management › Create New Case** for these cases. Its
+**Create case** button saves the case before you can type a short
+description. The agent's first run would then read an empty case. You'd
+have to click **Reroute** after adding the text.
 
-   ```
-   pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js
-   ```
+Does neither routing rule have a service, or is
+`<SCOPE>_routing_rule.list` empty? Then the seed found no groups named
+`Lab HR Team` and `Lab Locked Out` on your instance. The pre-work checks
+for these groups (DECISIONS, seed data). Tell your instructor.
 
-   </div>
-
-   <div data-show="os:win">
-
-   **On Windows:** ⌨️ **Terminal**, your window:
-
-   ```
-   clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js
-   ```
-
-   </div>
-
-   🌐 **Browser**, in `sys.scripts.modern.do`: paste it into the script
-   box, and click **Run script**.
-
-   ✅ It prints `Closed <n> open conversation(s) of hr.router` and `Closed <n>
-   in-progress interaction(s) of hr.router`. Any count is fine, 0 included.
+</details>
 
 <details><summary>🛟 No routing rules, or no "HR routing guidance" article</summary>
 
@@ -895,7 +940,7 @@ create the knowledge base in `src/` (DECISIONS, seed data).
 
 </details>
 
-### 11. Watch it route, as `hr.demo`
+### 11. Read the results
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -907,80 +952,109 @@ run.
 
 </details>
 
-The agent reads the case and the article. Then `apply_route` checks its
-choice before anything moves. The checks pass one case and stop the other.
-Nothing is instant. The dispatcher starts one run a minute, and a run takes
-about a minute.
+The agent read each case and the article. Then `apply_route` checked its
+choice before anything moved. The checks should pass case A and stop
+case B.
 
-You create two HR cases by hand, as someone in HR would. Then you watch
-what the app does to each:
+🌐 **Browser**, as `hr.demo`, in the list from step 10's sub-step 5:
 
-- **Case A** is on the `Direct Deposit Inquiry` service, which
-  `Lab HR Team` handles. The agent should move it there.
-- **Case B** is on the `Payroll Discrepancy` service, which
-  `Lab Locked Out` handles. The agent should pick that group. The checks
-  should then stop the move, because `Lab Locked Out` can't open this kind
-  of case.
-
-🌐 **Browser**, impersonate `hr.demo` again. Click your avatar, then
-**Impersonate user**, and pick **HR Demo**.
-
-1. **Create case A.** Paste this into the address bar and press **Enter**:
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_payroll.do%3Fsys_id%3D-1`.
-   A blank **HR Payroll Case** form opens. Both lab services belong to this
-   kind of case. Fill in these three fields, and leave every other field as
-   the form has it:
-   - **Opened for:** `HR Demo`, if it isn't already.
-   - **HR service:** click the magnifier and pick `Direct Deposit Inquiry`.
-     Not in the list? See the 🛟 box below.
-   - **Short description:** paste
-     `My direct deposit didn't arrive this pay period. Can you check which bank account it went to?`.
-     It's the article's "Example request:" line for this service, exactly
-     as written.
-
-   Click **Submit**, at the top right of the form. The app starts a run the
-   moment a case is saved, so the text has to be there before this one
-   click. Don't create the case first and add the text after.
-
-   As it saves, the platform fills **Assignment group**, such as
-   **HR Tier 1**, and **Assigned to** itself. That's fine. Changing that
-   group is the agent's job, and it's what you check next.
-2. **Create case B** the same way, from the same address:
-
-   - **Opened for:** `HR Demo`.
-   - **HR service:** `Payroll Discrepancy`.
-   - **Short description:**
-     `My last paycheck was short by eight hours of overtime. Please correct the amount.`.
-
-   Then click **Submit**.
-3. Wait about two minutes, then open case A. Paste this into the address bar:
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEdirect%20deposit%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
-   It lists the HR cases `hr.demo` opened with "direct deposit" in the
-   short description, newest first, so it shows your cases and not the
-   build's old test cases. Click the top row's number.
-
-   If the list is empty, end impersonation and paste the address again as
-   admin. `hr.demo` can't see a case once the platform hands it to a group
-   it isn't in.
-
-   On the case, look at two things:
+1. Open case A, the one about a direct deposit. Look at two things:
 
    - The **Assignment group** field.
-   - The newest entry in the activity stream below the form, a work note by
-     `hr.router`. Find it in the **Notes** tab, or scroll down.
+   - The newest work note by `hr.router`, in the activity stream below the
+     form.
 
    ✅ **Assignment group** is `Lab HR Team`, no longer what the form set,
    such as `HR Tier 1`. The newest work note, by `hr.router`, gives three
    things: a reason that quotes this case's own "Example request:" line, a
    confidence, and the service and group before the move. That's proof the
    agent read this case.
-4. A minute or two later, open case B the same way, with this address:
-   `https://dev123456.service-now.com/nav_to.do?uri=sn_hr_core_case_list.do%3Fsysparm_query%3Dshort_descriptionLIKEpaycheck%5Eopened_by.user_name%3Dhr.demo%5EORDERBYDESCsys_created_on`.
+2. Go back to the list and open case B, the one about a paycheck.
 
    ✅ **Assignment group** is still what the form set, such as `HR Tier 1`,
    not `Lab Locked Out`. The newest work note, by `hr.router`, names the
    access check. It says `Lab Locked Out` can't open this HR table, so the
    code stopped the move.
+
+<div data-ask="m6-both-right" data-options="yes|no" data-labels="Yes, both|No, one or both didn't">
+
+**Did both cases get that result?**
+
+</div>
+
+<div data-show="choice.m6-both-right:no">
+
+**If one or both didn't:** that's common on a first try, and it isn't your
+mistake. The first run after an install can fail once (DECISIONS, P8). A
+run that fails can also leave `hr.router` a conversation open, and while
+one is open no new run starts (P14). So close the conversations, then run
+the case again.
+
+**First, close the router's conversations.**
+End impersonation. 🌐 **Browser**, as admin: paste this into the address bar and press
+**Enter**:
+
+`https://dev123456.service-now.com/nav_to.do?uri=sys.scripts.modern.do`
+
+The **Scripts - Background** page opens. Set the scope picker above the
+script to **global**.
+
+Then copy the script. Do this last, so nothing else replaces it on your
+clipboard:
+
+<div data-show="os:mac">
+
+**On Mac:** ⌨️ **Terminal**, your window:
+
+```
+pbcopy < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js
+```
+
+</div>
+
+<div data-show="os:win">
+
+**On Windows:** ⌨️ **Terminal**, your window:
+
+```
+clip < ~/projects/hr-case-router-lab-guide/files/close-router-conversations.js
+```
+
+</div>
+
+🌐 **Browser**, on the **Scripts - Background** page: paste it into the
+script box, and click **Run script**.
+
+✅ It prints `Closed <n> open conversation(s) of hr.router` and `Closed <n>
+in-progress interaction(s) of hr.router`. Any count is fine, 0 included.
+
+**Then run the case again.** 🌐 **Browser**, impersonate `hr.demo` again.
+Open one case that didn't get its result, and click **Reroute**.
+
+✅ It says **Routing queued**. Wait about two minutes, reload, and read the
+newest work note. Do one case at a time: wait for its note before you
+reroute the other.
+
+**Both right now?** Go on to sub-step 3.
+
+**Still not right?** Read the case's newest work note, and open the 🛟 box
+below that matches:
+
+- There's no note by `hr.router` at all, or it says something "wasn't
+  found": "No note by hr.router: read the run's state".
+- It "ran past its time limit", twice: "The run timed out twice: activate
+  the Now Assist Panel".
+- The case text was empty, or the confidence isn't a number: the box with
+  that name.
+- Case B moved, or case A's reason doesn't fit the case: "It moved the Lab
+  Locked Out case, or the reason doesn't fit the case".
+- Anything else: "The note says the router didn't finish, or no box here
+  fits". There, Claude finds the cause with you.
+
+After a fix, come back here. Close the conversations, and reroute, until
+both cases have their result.
+
+</div>
 
 <details><summary>🛟 No note by hr.router: read the run's state</summary>
 
@@ -990,12 +1064,14 @@ how far the run got. End impersonation. As admin, open
 
 | State | What it means | What to do |
 |---|---|---|
-| No row at all | The app never saw the case. Its insert rule, which starts a run when a case is created, didn't run | Check that the address in sub-step 1 named `sn_hr_core_case_payroll.do`. Then check in `sys_script.list` that the app's insert rule is **Active**. If it isn't, do step 8 again. Create the case again. |
+| No row at all | The app never saw the case. Its insert rule, which starts a run when a case is created, didn't run | Check that the address in step 10's sub-step 3 named `sn_hr_core_case_payroll.do`. Then check in `sys_script.list` that the app's insert rule is **Active**. If it isn't, do step 8 again. Create the case again. |
 | `skipped` | The router was off, or a run was already going on the case | Set `<SCOPE>.enabled` to `true`, or wait for the other run. Then click **Reroute** |
 | `refused` | Stopped before any AI ran. Either the service has no active routing rule, the rule's **Never send to AI** box is ticked, a cap on runs per hour or per day was reached, or the article isn't published exactly once | The case's work note says which. Fix that one as admin, then click **Reroute** |
 | `queued`, for minutes | The dispatcher isn't starting runs | Step 10's 🛟 box "No note after three minutes" |
 | `start_failed` | The dispatcher couldn't start the AI agent workflow | Read the system log, below |
 | `running` or `applying` | A run is still going | Wait two minutes, and reload |
+| `timed_out`, and the note says it ran past its time limit | The run started, but the AI didn't answer in time. It also left `hr.router` a conversation open | Close the router's conversations again, with the script above. Then click **Reroute**, once. If that run times out too, the AI on your instance may not be switched on yet: see the 🛟 box "The run timed out twice: activate the Now Assist Panel" |
+| `timed_out`, and the note says it waited in the queue | Another run was in the way, or `hr.router` had a conversation open | Close the router's conversations again, with the script above. Then click **Reroute** |
 | `routed`, `stopped` or `left`, and still no note | The note couldn't be written. The first write to an HR table can be refused (DECISIONS, P8) | Click **Reroute** |
 
 No work note to say why? The app's first write to an HR table can be
@@ -1030,33 +1106,33 @@ story. After that you build, install and come back to sub-step 1.
 
 </details>
 
-</details>
+Or the case's work note may say that something wasn't found: the
+"AI Agent Background" channel, or the workflow "HR case router". As admin,
+open the list for the one it names, and look for that name:
 
-<details><summary>🛟 The HR service isn't in the list</summary>
+- The channel: `sys_cs_channel.list`.
+- The workflow: `sn_aia_usecase.list`.
 
-The form's **HR service** list holds only the services for that form's kind
-of case. Both lab services are Payroll ones, so check the address. It must
-name `sn_hr_core_case_payroll.do`, not `sn_hr_core_case.do`. Close the form
-without submitting, and paste the address again.
+Then:
 
-Is it the right form, and the service shows for admin but not for
-`hr.demo`? Then the service is turned off, or its **HR criteria**, the rules
-for who can use it, leave `HR Demo` out.
+- **It's in the list:** the build looks it up the wrong way. It filters on
+  `active`, a column that table doesn't have, so the lookup finds nothing
+  (DECISIONS, How it starts the workflow). That's a defect: use the prompt
+  below. Fixing one can uncover the other: the prompt covers both.
+- **The channel isn't in the list:** stop, and tell your instructor. The
+  instance needs its setup run again.
+- **The workflow isn't in the list:** the install didn't finish. Do step 8
+  again.
 
-End impersonation, open
-`sn_hr_core_service.list`, and open the service. ✅ **Active** is ticked,
-and **HR criteria** is empty or covers `HR Demo`. If not, tell your
-instructor the service's name.
+🤖 **Claude:** paste this, then `go`:
 
-Don't use **HR Case Management › Create New Case** for these cases. Its
-**Create case** button saves the case before you can type a short
-description. The agent's first run would then read an empty case. You'd
-have to click **Reroute** after adding the text.
+```
+File a GitHub issue in plain words: every run is start_failed because the dispatcher says the "AI Agent Background" channel or the workflow "HR case router" wasn't found, but the instance has both. DECISIONS says the dispatcher finds each by name alone, never with a filter on active: neither sys_cs_channel nor sn_aia_usecase has that column, and a filter on a column a table lacks matches no rows. Check every other column the server code filters on against the instance too, with now-sdk query, read-only. The tests' stand-ins for those tables must have no field the real table lacks. Show me first; file after I say yes. No code.
+```
 
-Does neither routing rule have a service, or is
-`<SCOPE>_routing_rule.list` empty? Then the seed found no groups named
-`Lab HR Team` and `Lab Locked Out` on your instance. The pre-work checks
-for these groups (DECISIONS, seed data). Tell your instructor.
+Take that issue through the loop like any other story. Then build and
+install (step 8), switch the router on again (step 9), and click
+**Reroute** on each case.
 
 </details>
 
@@ -1078,7 +1154,7 @@ a check doing its job, not a defect.
 On the case, click **Reroute**. ✅ It says **Routing queued**. Wait about
 two minutes, and reload. The new note gives a number.
 
-In sub-step 6, that case then has one more row, with **State** `stopped`.
+In sub-step 4, that case then has one more row, with **State** `stopped`.
 That row is the run that sent the word.
 
 If it happens on three runs in a row, tell your instructor.
@@ -1153,27 +1229,90 @@ now-sdk build && now-sdk install --auth lab-pdi
 
 </details>
 
-🌐 **Browser**, as admin, do step 9's sub-steps 1 and 3 again, then step 10
-again. Then create the two cases again, as `hr.demo`.
+🌐 **Browser**, as admin, do step 9's sub-steps 1 and 3 again. Close the
+router's conversations again, with the script above. Then, as `hr.demo`,
+click **Reroute** on each case, one at a time.
 
 </details>
 
-5. On the first case, click **Reroute**.
+<details><summary>🛟 The run timed out twice: activate the Now Assist Panel</summary>
+
+Until the Now Assist Panel is activated, no AI agent on the instance gets
+an answer, and every run ends `timed_out`. As admin:
+
+1. Do step 9's sub-step 4 again, and check its ✅: the **Testing** page in
+   AI Agent Studio shows no banner.
+2. Prove the AI answers. On that page, under **Name of the AI agent or
+   agentic workflow**, choose `HR case router`. In **Task**, type
+   `Route the HR case of run test: use test as run_id in every tool call.`
+   and click **Continue to test chat response**. The agent replies within
+   a minute. There's no run called "test", so expect it to say it can't
+   route anything: that's fine. Any reply shows the AI is on.
+3. Close the router's conversations again, with the script above. Each timed-out run left one open, and it holds every
+   later run.
+4. Open one case and click **Reroute**. Wait for its note before you
+   reroute the next case.
+
+No reply in 2, or the run times out again? Tell your instructor.
+
+</details>
+
+<details><summary>🛟 The note says the router didn't finish, or no box here fits</summary>
+
+The agent didn't route the case, and none of the boxes above names what
+you see. Have Claude find the cause before anything is changed.
+
+Copy the case's newest work note by `hr.router`, if it has one.
+
+🤖 **Claude:** paste the note, then this, then `go`:
+
+```
+The HR case router didn't work on my instance. Troubleshoot it and find the root cause. Change nothing and install nothing. Read the newest rows of the run log and the run detail table, and the system log rows that name the app's scope, with now-sdk query, read-only. Quote the rows. Check that each table and column the failing code reads is really on the instance. Compare what you find with the code and with docs/DECISIONS.md. Then tell me in plain words: the cause, the evidence for it, what you couldn't check, and the smallest fix. Draft a GitHub issue for that fix, labelled for the gate it holds up. Show me first; file after I say yes. No code.
+```
+
+<details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+Claude reads what the failed run left behind on your instance: its log
+row, its detail row and the system log. It only reads. It checks the
+instance against the code, because a table or a column the code expects
+may not be there. Then it names the cause, shows the rows that prove it,
+and says what it couldn't check. It drafts an issue for the fix and shows
+you before filing. It writes no code yet.
+
+</details>
+
+Read the cause and the evidence. If the evidence doesn't show the cause,
+say so, and ask for the row that would.
+
+Then reply `yes`, and fix it the way the box above does, "It moved the Lab
+Locked Out case, or the reason doesn't fit the case", from its "Take
+issue" prompt on: build it tests first, install, switch the router on
+again, close the router's conversations, and **Reroute**.
+
+Still stuck after one fix? Tell your instructor, and show them Claude's
+answer.
+
+</details>
+
+3. On case A, as `hr.demo`, click **Reroute**. A fulfiller uses it to ask
+   the router to look again.
 
    ✅ It says **Routing queued**. Wait about two minutes, and reload.
-   There's a new work note by `hr.router`.
+   There's a new work note by `hr.router`, and the case is still in
+   `Lab HR Team`.
 
 🌐 **Browser**, end impersonation. Click your avatar, then **End
 impersonation**. Then, as admin:
 
-6. Open `<SCOPE>_run_log.list`, newest first.
+4. Open `<SCOPE>_run_log.list`, newest first.
 
-   ✅ Look at the three newest rows. Two are the first case's, both with
-   **State** `routed`. The newer of those came from Reroute. The third is
-   the second case's, with **State** `stopped`.
-7. Open the **Execution plan** field of the first case's older `routed`
-   row. The execution plan is the platform's record of what the agent did
-   in the run. Only look. Never start a test run in AI Agent Studio.
+   ✅ Case A's two newest rows both have **State** `routed`. The newer one
+   came from Reroute. Case B's newest row has **State** `stopped`. If you
+   ran a case again above, its earlier tries are older rows, with other
+   states.
+5. Open the **Execution plan** field of one of case A's `routed` rows. The
+   execution plan is the platform's record of what the agent did in the
+   run. Only look: change nothing there.
 
    ✅ **State** is `completed`, created by `hr.router`. The plan, the log
    row and the note prove a run. The agent's own word never does
