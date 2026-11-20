@@ -186,12 +186,14 @@ cd ~/projects/hr-case-router/app && claude
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router/app`.
-Then press **Ctrl+O** until the view is **Verbose**.
+**In the Code tab:** 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router/app`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -201,10 +203,13 @@ Then press **Ctrl+O** until the view is **Verbose**.
 /prove-it:grade merge
 ```
 
-Don't explain the app to it. It reads the repo cold, with no help from
-you. It may say `This milestone is not reached` and ask whether to grade
-anyway. If it does, reply `yes`. That makes it a preview, a grade of work
-that isn't finished yet.
+Don't explain the app to it. It reads the repo by itself, with no help
+from you.
+
+It may say `This milestone is not reached` and ask whether to grade
+anyway. If it does, reply `yes`.
+
+That makes it a preview, a grade of work that isn't finished yet.
 
 ### 4. Answer its questions
 
@@ -218,10 +223,10 @@ unverified.
 
 </details>
 
-- **"Which alias should I install to?"** Reply `lab-pdi`. Have you used
-  your instructor's finished build in Module 6? Then reply `no alias`
-  instead, so your instance keeps only one app. The install is then
-  **unverified**.
+- **"Which alias should I install to?"** Reply `lab-pdi`.
+  - Have you used your instructor's finished build in Module 6? Then
+    reply `no alias` instead, so your instance keeps only one app. The
+    install is then **unverified**.
 - When it asks permission to run `now-sdk install --auth lab-pdi`, choose
   **Yes**, for that command only.
 
@@ -260,25 +265,34 @@ what's left to do before someone else could own this app.
 
 </details>
 
-✏️ **Editor:** in `GRADE.md`, compare the score and the main weakness with
-your guess. Then read each **unverified** row under **Rubric**. Read each
-row under **Caps applied** too. There, one serious problem limits the whole
-score. Today's preview is likely to show:
+✏️ **Editor:** open `GRADE.md`, and read three things:
+
+- Compare the score and the main weakness with your guess.
+- Read each **unverified** row under **Rubric**.
+- Read each row under **Caps applied**. There, one serious problem limits
+  the whole score.
+
+Today's preview is likely to show:
 
 - **Caps applied:** 74, for `design.terms-tested` and
-  `design.gates-evidenced`. Open MERGE stories, such as the weekly numbers
-  (9), hold design terms that no test names yet. `design.gates-evidenced`
-  also names any pull request with no review posted on it.
-- **Unverified:** `code.lint`, because there's no lint script. Lint, a tool
-  that checks how code is written, isn't one of the MERGE gate's criteria.
-  `ready.real-user` is unverified too, until an issue or pull request
-  records a check you did as `hr.demo`.
-- **Fail:** `ready.gate-clear`, because of those open stories. That's what
-  makes it a preview. `ready.config-documented` fails because `README.md`
-  lists nothing until its MERGE story is built. `code.logic-off-instance`
-  fails because your server code calls the platform. The design doesn't
-  ask for that, so the grade puts it on the register. The register is a
-  watch list that blocks no gate.
+  `design.gates-evidenced`.
+  - Open MERGE stories, such as the weekly numbers (9), hold design terms
+    that no test names yet.
+  - `design.gates-evidenced` also names any pull request with no review
+    posted on it.
+- **Unverified:**
+  - `code.lint`, because there's no lint script. Lint, a tool that checks
+    how code is written, isn't one of the MERGE gate's criteria.
+  - `ready.real-user`, until an issue or pull request records a check you
+    did as `hr.demo`.
+- **Fail:**
+  - `ready.gate-clear`, because of those open stories. That's what makes
+    it a preview.
+  - `ready.config-documented`, because `README.md` lists nothing until its
+    MERGE story is built.
+  - `code.logic-off-instance`, because your server code calls the
+    platform. The design doesn't ask for that, so the grade puts it on the
+    register. The register is a watch list that blocks no gate.
 - **Pass:** `ready.ai-bounded`, citing `<SCOPE>.runs_per_hour`,
   `<SCOPE>.runs_per_day` and `<SCOPE>.enabled`. `<SCOPE>` is your app's
   scope, the prefix its names start with, such as `x_123456_hcr_ga`.
@@ -333,8 +347,10 @@ to match. The dry run shows what would be written before anything is.
    their keys.
    ```
 2. When it shows them again, type `approve`.
-3. When it asks "Dry run first (recommended), or apply now?", type
-   `Dry run first.`. Read the count of writes. Then type `apply`.
+3. When it asks "Dry run first (recommended), or apply now?":
+   - Type `Dry run first.`.
+   - Read the count of writes.
+   - Type `apply`.
 4. ⌨️ **Terminal**, in your window: `git diff .gitignore`
 
    ✅ Below the header, the only line starting with `+` is `+!/GRADE.md`.
@@ -377,8 +393,13 @@ limits it.
 
    </details>
 
-🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
-⌨️ **Terminal**, in your window: `git status --short` ✅ prints nothing.
+🌐 **Browser:** open the pull request link.
+
+✅ It shows **Merged**.
+
+⌨️ **Terminal**, in your window: run `git status --short`.
+
+✅ `git status --short` prints nothing.
 
 <details><summary>🛟 It stops and asks you something anyway</summary>
 

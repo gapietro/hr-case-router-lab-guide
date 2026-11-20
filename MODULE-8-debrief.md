@@ -172,15 +172,30 @@ find it there.
 
 </details>
 
-Claude closed? <span data-show="surface:terminal">**In the terminal:** ⌨️
-in the Claude window: `cd ~/projects/hr-case-router/app && claude`</span>
-<span data-show="surface:desktop">**In the Code tab:** 🤖 start a new
-session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router/app`. Then press **Ctrl+O** until the view is
-**Verbose**.</span>
+Claude closed? Open it again first.
+
+<div data-show="surface:terminal">
+
+**In the terminal:** ⌨️ in the Claude window:
+
+```
+cd ~/projects/hr-case-router/app && claude
+```
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router/app`.
+- Press **Ctrl+O** until the view is **Verbose**.
+
+</div>
 
 1. 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
 
@@ -219,7 +234,9 @@ the folder control, choose **Open folder…** and pick
 
    </details>
 
-🌐 **Browser:** open the pull request link. ✅ It shows **Merged**.
+🌐 **Browser:** open the pull request link.
+
+✅ It shows **Merged**.
 
 <details><summary>🛟 It stops and asks you something anyway</summary>
 
@@ -335,8 +352,9 @@ left alone.
    </details>
 
 2. Turn back on each plugin that `plugins-before-lab.txt` shows as
-   `✔ enabled`. Run `claude plugin enable <name>` for each one. For
-   `<name>`, use what follows `❯` on that plugin's line.
+   `✔ enabled`:
+   - Run `claude plugin enable <name>` for each one.
+   - For `<name>`, use what follows `❯` on that plugin's line.
 3. Only if `mcp-before-lab.json` is there, add its MCP servers back:
 
    ```
@@ -373,11 +391,13 @@ left alone.
    </details>
 
    ✅ It lists your servers again.
-4. Run `cat ~/projects/hr-case-router-notes/gh-before-lab.txt`. Is the
-   account above `Active account: true` someone other than your lab
-   account? Switch back to it with `gh auth switch --user <that account>`.
-   Does it say you weren't logged in to any GitHub hosts? Then sign the lab
-   account out with `gh auth logout`.
+4. Run `cat ~/projects/hr-case-router-notes/gh-before-lab.txt`. Then do
+   the one that fits:
+   - Is the account above `Active account: true` someone other than your
+     lab account? Switch back to it with
+     `gh auth switch --user <that account>`.
+   - Does it say you weren't logged in to any GitHub hosts? Then sign the
+     lab account out with `gh auth logout`.
 5. Put back how git signed in to GitHub. The pre-work's `gh auth setup-git`
    changed it for every repo on this computer:
 

@@ -54,13 +54,28 @@ page is a **checklist**, not a script.
   way to stop the app is to back it all out, removing the whole app.
 
 **What can be accepted:** an open story, but only for a check that doesn't
-cap the grade, such as `code.lint` or `ready.config-documented`. The real
-owner must accept it in writing. Record it in `docs/PROMOTION.md`, the file
-you start in section 2. Write who accepted it, when, and the date it will
-be closed. These checks cap the grade, so they're never accepted:
-`code.build`, `code.tests`, `code.secrets`, `design.signed`,
-`design.terms-tested`, `design.gates-evidenced`, `code.oob`,
-`ready.ai-bounded` and `ready.install`.
+cap the grade, such as `code.lint` or `ready.config-documented`. A check
+caps the grade when failing it limits the score. The real owner must
+accept the open story in writing.
+
+Record it in `docs/PROMOTION.md`, the file you start in section 2. Write
+these three things:
+
+- who accepted it;
+- when they accepted it;
+- the date it will be closed.
+
+These checks cap the grade, so they're never accepted:
+
+- `code.build`
+- `code.tests`
+- `code.secrets`
+- `design.signed`
+- `design.terms-tested`
+- `design.gates-evidenced`
+- `code.oob`
+- `ready.ai-bounded`
+- `ready.install`
 
 ---
 
@@ -80,14 +95,17 @@ already admitted: the project's `.gitignore` lets git track it.
    the low-level design, lists them in §2–§3. They usually need their own
    approval.
 4. **Cross-scope access.** This is the app reading or changing records that
-   belong to another scope. On dev, the platform may record cross-scope
-   access for you as the app runs. On test and production it may not, and
-   logic that worked on dev fails. Make sure every cross-scope privilege the
-   app needs is **declared in source**, written into the app's code. Your
-   LLD §4 lists them. Confirm them with your platform team. One isn't the
-   app's to declare. The lab setup made HR's two security-policy tables
-   readable from other app scopes, so the access check can read them. Your
-   instances need the same setting, made by their admin.
+   belong to another scope.
+   - On dev, the platform may record cross-scope access for you as the app
+     runs. On test and production it may not, and logic that worked on dev
+     fails.
+   - Make sure every cross-scope privilege the app needs is **declared in
+     source**, written into the app's code. Your LLD §4 lists them.
+     Confirm them with your platform team.
+   - One isn't the app's to declare. The lab setup made HR's two
+     security-policy tables readable from other app scopes, so the access
+     check can read them. Your instances need the same setting, made by
+     their admin.
 5. **Demo data stays out of production.** Your seed records, the demo
    records the app installs, are part of the app's source. So they'd
    install everywhere. Agree how they're left out of the production
@@ -101,10 +119,12 @@ already admitted: the project's `.gitignore` lets git track it.
 
 </details>
 6. **Per-instance configuration.** Some things differ on each instance:
-   role-to-group assignments, settings, the agent's run-as user, and any
-   integration's endpoint and credential. The run-as user is the account
-   the agent works as. An admin sets each of them by hand, from the
-   runbook. List them.
+   - role-to-group assignments;
+   - settings;
+   - the agent's run-as user, the account the agent works as;
+   - any integration's endpoint and credential.
+
+   An admin sets each of them by hand, from the runbook. List them.
 7. **Back-out.** This is how to remove the app if switching it off isn't
    enough, and what that costs. Uninstalling a scoped app may delete its
    tables and the data in them, such as log or audit rows. Confirm with your
@@ -143,9 +163,12 @@ tests pass. You get the pull request link and one line per finding.
 
 </details>
 
-🌐 **Browser:** ✅ the pull request link shows **Merged**. If Claude asks you
-something, or the pull request isn't merged, use the two 🛟 boxes under
-Module 7, step 7.
+🌐 **Browser:** open the pull request link.
+
+✅ It shows **Merged**.
+
+If Claude asks you something, or the pull request isn't merged, use the
+two 🛟 boxes under Module 7, step 7.
 
 **Then version, grade and tag it.** That way test and production get
 exactly what was graded:
@@ -215,30 +238,40 @@ steps again.
 
 ## 3. Test, with the runbook only
 
-1. **Your platform team installs the tag on test.** They follow
-   `RUNBOOK.md` and nothing else. Then they do the per-instance
-   configuration from section 2, item 6. If they need to ask you anything,
-   that's a gap in the runbook. Fix it through the build loop on
-   development, as in Module 6. Then version, grade and tag it again, as at
-   the end of section 2, and start this step again.
+1. **Your platform team installs the tag on test.**
+   - They follow `RUNBOOK.md` and nothing else.
+   - Then they do the per-instance configuration from section 2, item 6.
+
+   If they need to ask you anything, that's a gap in the runbook:
+   - Fix it through the build loop on development, as in Module 6.
+   - Then version, grade and tag it again, as at the end of section 2.
+   - Start this step again.
 2. **First contact with real data.** Test usually holds copies of real
-   records. Re-run your live check **as ordinary users**. Do the same with
-   After the workshop Part 2's attacks on your central rule, the one rule
-   that must never break. Check that the cross-scope access works here. If
-   your app has an agent, run it on a copied real record. Then confirm with
-   your platform team that what its tools returned was masked. Anything
-   that fails goes back through the build loop on development. Never fix it
-   on test.
-3. **Rehearse Recovery on test.** Switch the app off with its on switch.
-   Check that it really stops. Then switch it back on. If the platform team
-   allows it, rehearse the agreed back-out too.
+   records.
+   - Re-run your live check **as ordinary users**.
+   - Do the same with After the workshop Part 2's attacks on your central
+     rule, the one rule that must never break.
+   - Check that the cross-scope access works here.
+   - If your app has an agent, run it on a copied real record. Then
+     confirm with your platform team that what its tools returned was
+     masked.
+
+   Anything that fails goes back through the build loop on development.
+   Never fix it on test.
+3. **Rehearse Recovery on test.**
+   - Switch the app off with its on switch.
+   - Check that it really stops.
+   - Switch it back on.
+   - If the platform team allows it, rehearse the agreed back-out too.
 4. **Re-run the handoff drill on test**, if the platform team allows a
    planted failure there. A planted failure is a fault someone causes on
    purpose, for you to find from the runbook.
 
 ✅ **Check:** every result is in `docs/PROMOTION.md`, with dates and who ran
-it. Nothing was fixed on test by hand. Commit and ship it as in section 2,
-on a new branch `docs/promotion-test`.
+it. Nothing was fixed on test by hand.
+
+Then commit and ship it as in section 2, on a new branch
+`docs/promotion-test`.
 
 ---
 
@@ -275,13 +308,17 @@ after go-live.
 4. **Watch the first day.** Use the checks the runbook gives an on-call
    person, the one who answers when something goes wrong. Those are the
    platform's own screens and the app's own lists and logs.
-5. **If it misbehaves:** switch it off first. Then diagnose the problem from
-   the runbook. Back out only if switching it off isn't enough, and only as
-   agreed in `docs/PROMOTION.md`.
+5. **If it misbehaves:**
+   - Switch it off first.
+   - Then diagnose the problem from the runbook.
+   - Back out only if switching it off isn't enough, and only as agreed in
+     `docs/PROMOTION.md`.
 
 ✅ **Check:** it's on in production. The first day's checks are clean and
 written in `docs/PROMOTION.md`. The owner has signed off in the change
-request. Commit and ship it as in section 2, on a new branch
+request.
+
+Then commit and ship it as in section 2, on a new branch
 `docs/promotion-live`.
 
 ---

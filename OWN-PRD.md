@@ -154,9 +154,12 @@ Settle these at the kick-off. The prompts and commands below use them.
 
    </details>
 
-   ✅ None of the three prints an error. If you skipped Module 8 step 8,
-   remove the workshop's login, so nothing reaches the lab instance by
-   mistake: `now-sdk auth --delete lab-pdi`
+   ✅ None of the three prints an error.
+
+   Did you skip Module 8 step 8? Then remove the workshop's login, so
+   nothing reaches the lab instance by mistake. Run this:
+
+   `now-sdk auth --delete lab-pdi`
 4. ⌨️ Add the SDK login for your development instance, your platform
    team's way, as in Pre-work step 7. With basic sign-in, run this, with
    your instance's name for `<instance>`:
@@ -179,31 +182,56 @@ Settle these at the kick-off. The prompts and commands below use them.
    </details>
 
    ✅ The list shows `[<alias>]`, and no `[lab-pdi]`.
-5. ⌨️ Run `gh auth status`. ✅ The active account can create repos in
-   `<org>`. If it can't, switch to one that can:
-   `gh auth switch --user <that account>`.
-6. In `LAB.html`, open **Setup**, the first button in the top bar, and
-   open **Your values** in it. Click **Clear my values** under its boxes,
-   and confirm. The steps you reuse then show placeholders, ready for
-   section 7's swaps.
-7. Run Pre-work step 10, from `~/projects/<app>`. Then run Pre-work steps
-   12 to 18, with section 7's swaps. Skip step 11, because your scope is
-   `<SCOPE>`. In step 17, if your instances use your company's own domain,
-   add it: `echo '<domain>' >> .prove-it/patterns`
-8. 🌐 **Browser**, as admin, on your development instance: create
-   `<test user>` in `sys_user.list`. Give it your real users' roles.
-   ✅ Its **Roles** tab lists only those, never `admin`. Wherever the lab
-   says to impersonate `hr.demo`, impersonate `<test user>` instead.
-   Module 6 step 9 adds your app's own role, after the first install.
+5. ⌨️ Run `gh auth status`.
+
+   ✅ The active account can create repos in `<org>`.
+
+   If it can't, switch to an account that can:
+
+   `gh auth switch --user <that account>`
+6. In `LAB.html`, clear the values you saved in the workshop:
+   - Open **Setup**, the first button in the top bar.
+   - Open **Your values** in it.
+   - Click **Clear my values** under its boxes, and confirm.
+
+   The steps you reuse then show placeholders, ready for section 7's
+   swaps.
+7. Run the pre-work's project steps again, for your app:
+   - Run Pre-work step 10, from `~/projects/<app>`.
+   - Skip step 11, because your scope is `<SCOPE>`.
+   - Run Pre-work steps 12 to 18, with section 7's swaps.
+
+   In step 17, do your instances use your company's own domain? Then add
+   it:
+
+   `echo '<domain>' >> .prove-it/patterns`
+8. 🌐 **Browser**, as admin, on your development instance, the test
+   user:
+   - Open `sys_user.list`.
+   - Create `<test user>`.
+   - Give it your real users' roles.
+
+   ✅ Its **Roles** tab lists only those, never `admin`.
+
+   Wherever the lab says to impersonate `hr.demo`, impersonate
+   `<test user>` instead. Module 6 step 9 adds your app's own role, after
+   the first install.
 
 ### When Claude asks permission
 
-The README's permission table still holds, with your names in it. Say
-**Yes** to files in `~/projects/<app>` and `~/projects/<app>-prd-review`,
-and to `now-sdk query --auth <alias>` on configuration tables. Say **No**
-to a query of records about people, and to `now-sdk auth`. Say **No** to
-`now-sdk install`, except the grade's install to `<alias>`. Say **No** to
-any alias but yours, `lab-pdi` included.
+The README's permission table still holds, with your names in it.
+
+Say **Yes** to:
+
+- files in `~/projects/<app>` and `~/projects/<app>-prd-review`;
+- `now-sdk query --auth <alias>` on configuration tables.
+
+Say **No** to:
+
+- a query of records about people;
+- `now-sdk auth`;
+- `now-sdk install`, except the grade's install to `<alias>`;
+- any alias but yours, `lab-pdi` included.
 
 ---
 
@@ -220,15 +248,23 @@ a group of related capabilities. List the rest under **Out of scope** as
 
 - Use **Markdown**, plain text with simple marks for headings and lists,
   in one file. Convert a Word or PDF document first.
-- Use the layout of the workshop's `files/PRD-HRCaseRouter.md`:
-  1. Problem, 2. Users, 3. Capabilities requested (numbered, each with
-  "Accepted when"), 4. Non-functional requirements, 5. Out of scope,
-  6. Success looks like, 7. Open decisions, 8. Acceptance.
+- Use the layout of the workshop's `files/PRD-HRCaseRouter.md`. It has
+  these eight sections:
+  1. Problem
+  2. Users
+  3. Capabilities requested (numbered, each with "Accepted when")
+  4. Non-functional requirements
+  5. Out of scope
+  6. Success looks like
+  7. Open decisions
+  8. Acceptance
 
 ### Review it: Module 1, on your inputs
 
-Skip step 1. Do steps 2 to 4 with section 7's swaps. Copy your input
-files and your PRD into `~/projects/<app>-prd-review` yourself.
+- Skip step 1.
+- Do steps 2 to 4, with section 7's swaps.
+- Copy your input files and your PRD into `~/projects/<app>-prd-review`
+  yourself.
 
 ### Get the owner's answers: Module 1, step 5, instead
 
@@ -273,9 +309,14 @@ choose an answer either.
 
    </details>
 
-4. ⌨️ **Terminal:** `ls ~/projects/<app>/brief`. ✅ It lists only your
-   PRD. ✏️ **Editor:** open the PRD. ✅ Its Open decisions reads `None.`,
-   and its Acceptance names the real owner.
+4. ⌨️ **Terminal:** run `ls ~/projects/<app>/brief`.
+
+   ✅ It lists only your PRD.
+
+   ✏️ **Editor:** open the PRD.
+
+   ✅ Its Open decisions reads `None.`, and its Acceptance names the real
+   owner.
 
 ---
 
@@ -294,13 +335,18 @@ Run the modules on your app, in this order:
 6. Module 8, steps 1, 3 and 5. Steps 6 to 8 put your machine back, so do
    them only once you're done with this method.
 
-**Before you paste a prompt or command**, paste it into a new VS Code tab
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-Make section 7's swaps with find and replace
-(<kbd data-mac="Cmd+Option+F" data-win="Ctrl+H">Cmd+Option+F (Mac) · Ctrl+H (Windows)</kbd>),
-and fill in each `<…>`. Then copy it out. The workshop's times, lunch and
-the instructor's finished build don't apply. If your instance is asleep,
-or not answering, ask your platform team.
+**Before you paste a prompt or command**, make it yours:
+
+- Paste it into a new VS Code tab
+  (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
+- Make section 7's swaps with find and replace
+  (<kbd data-mac="Cmd+Option+F" data-win="Ctrl+H">Cmd+Option+F (Mac) · Ctrl+H (Windows)</kbd>).
+- Fill in each `<…>`.
+- Copy it out.
+
+The workshop's times, lunch and the instructor's finished build don't
+apply. If your instance is asleep, or not answering, ask your platform
+team.
 
 ### Module 2 — Consult
 
@@ -364,10 +410,12 @@ Everything else is deferred, not dropped.
 
 2. Choose the one that **tests your riskiest assumption first**, not the
    easiest one. Keep it small. Cutting it later is costly (section 5).
-3. ✏️ **Editor:** write `~/projects/<app>/SLICE.md` by hand. List the
-   capabilities in the slice, and the ones deferred. Say the one thing a
-   real user will be able to do. Then write your **live check**, the steps
-   `<test user>` follows to see it work.
+3. ✏️ **Editor:** write `~/projects/<app>/SLICE.md` by hand. Put these in
+   it:
+   - the capabilities in the slice;
+   - the capabilities that are deferred;
+   - the one thing a real user will be able to do;
+   - your **live check**, the steps `<test user>` follows to see it work.
 4. Get the real owner's OK on what's deferred, in writing.
 
 ### Before Module 3 — Write your positions list
@@ -375,9 +423,11 @@ Everything else is deferred, not dropped.
 Your positions list is `docs/DECISIONS.md`, the decisions already
 settled for your app. Modules 3 to 5 read it. Never copy the workshop's.
 
-1. ⌨️ **Terminal:** `mkdir -p ~/projects/<app>/docs`. Then ✏️ **Editor:**
-   create `~/projects/<app>/docs/DECISIONS.md` with the text below. Keep
-   the headings. Keep the names too: Module 6 step 9 uses them.
+1. ⌨️ **Terminal:** run `mkdir -p ~/projects/<app>/docs`.
+
+   ✏️ **Editor:** create `~/projects/<app>/docs/DECISIONS.md` with the
+   text below. Keep the headings. Keep the names too: Module 6 step 9 uses
+   them.
    ```
    # Design decisions, already made
 
@@ -422,18 +472,27 @@ settled for your app. Modules 3 to 5 read it. Never copy the workshop's.
    | DEMO | The real owner sees the slice work live, as <test user>. |
    | HANDOFF | Someone else diagnoses a failure from the runbook alone. |
    ```
-2. Add a row, under its heading, for each decision that the PRD,
-   `OWNER-ANSWERS.md` or `SLICE.md` already settles. Give each deferred
-   capability a row under What's built: `Out of scope for this record:
-   deferred in SLICE.md`. If your slice has an AI call, add the workshop's
-   AI rows too. Shape them like the lab's `files/DECISIONS.md`, and fill
-   them from your written agreement: the agent and its tools, the one tool
-   that writes and its checks, how a run starts, the threshold, the caps by
-   property name, the run-as user, never admin, and masking as agreed
-   (checked live). Also add the lab's Platform rules section, as it is.
-   Those rules are facts about the platform, not the workshop. Module 5
-   brings in the test that checks them. Nothing else goes in. An open
-   question goes to the real owner, never into this file.
+2. Add your own rows to the file:
+   - Add a row, under its heading, for each decision that the PRD,
+     `OWNER-ANSWERS.md` or `SLICE.md` already settles.
+   - Give each deferred capability a row under What's built:
+     `Out of scope for this record: deferred in SLICE.md`.
+   - If your slice has an AI call, add the workshop's AI rows too. Shape
+     them like the lab's `files/DECISIONS.md`, and fill them from your
+     written agreement:
+     - the agent and its tools;
+     - the one tool that writes, and its checks;
+     - how a run starts;
+     - the threshold;
+     - the caps, by property name;
+     - the run-as user, never admin;
+     - masking as agreed (checked live).
+   - Also add the lab's Platform rules section, as it is. Those rules are
+     facts about the platform, not the workshop. Module 5 brings in the
+     test that checks them.
+
+   Nothing else goes in. An open question goes to the real owner, never
+   into this file.
 3. After Module 3, and before Module 4, take each item in your LLD's
    section 8, its open decisions, to the real owner. Add their answer as a
    row.
@@ -459,7 +518,9 @@ settled for your app. Modules 3 to 5 read it. Never copy the workshop's.
   </details>
 
   ✏️ Copy your technical documents into `~/projects/<app>/inputs/`, as
-  Markdown. Then <span data-show="surface:terminal">**In the terminal:** ⌨️
+  Markdown.
+
+  Then <span data-show="surface:terminal">**In the terminal:** ⌨️
   `claude`.</span> <span data-show="surface:desktop">**In the Code tab:**
   start a new session
   (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
@@ -491,12 +552,17 @@ settled for your app. Modules 3 to 5 read it. Never copy the workshop's.
 - Step 4: ✅ the summary covers every capability in `SLICE.md`, and lists
   each deferred one as not built.
 
-**Integrations.** Credentials go only into a **connection and credential**
-record. An admin sets one up by hand on each instance. Never put a
-credential into `src/`, into Claude or on a drill card. Keep the outbound
-call, the request to the other system, out of your plain-code logic. That
-logic can then still be tested without the instance. Note each instance's
-endpoint and credential for [PROMOTE.md](PROMOTE.md).
+**Integrations.** An integration is a connection to another system. If
+your slice has one, follow these rules:
+
+- Credentials go only into a **connection and credential** record. An
+  admin sets one up by hand on each instance.
+- Never put a credential into `src/`, into Claude or on a drill card.
+- Keep the outbound call, the request to the other system, out of your
+  plain-code logic. That logic can then still be tested without the
+  instance.
+- Note each instance's endpoint and credential for
+  [PROMOTE.md](PROMOTE.md).
 
 ### Module 4 — Challenge and confirm, with the real owner
 
@@ -531,9 +597,13 @@ type their words.
 - Steps 2 and 3: if the owner can't answer a question today, stop. Carry
   on when they can. Never answer for them. Check step 3's read-back
   against the rows of your own `docs/DECISIONS.md`.
-- Step 4: the owner reads the whole read-back. When they agree, type
-  `Confirmed.` on its own. When it asks for the name and role, type
-  theirs, such as `Sam Lee, product owner`. ✅ §9 names the owner.
+- Step 4: the owner confirms, and you type:
+  - The owner reads the whole read-back.
+  - When they agree, type `Confirmed.` on its own.
+  - When it asks for the name and role, type theirs, such as
+    `Sam Lee, product owner`.
+
+  ✅ §9 names the owner.
 
 <details><summary>ℹ️ What §9 and C1… mean</summary>
 
@@ -557,11 +627,14 @@ Run it as written, with section 7's swaps: your names, and `<alias>` for
 
 - Step 6: use the prompt from After the workshop, Part 1, step 3, instead.
   It builds every story that code alone can build.
-- Step 7: open your key story's pull request. ✅ Its bullets say when your
-  logic runs, what it writes, and that nothing in it breaks your central
-  rule. The table shows every story your live check needs as merged.
+- Step 7: open your key story's pull request.
+
+  ✅ Its bullets say when your logic runs, what it writes, and that
+  nothing in it breaks your central rule. The table shows every story your
+  live check needs as merged.
 - Step 9: do sub-steps 1 and 2, for `<test user>`. If your slice has no
-  scheduled job, skip sub-step 3, the dispatcher's trigger.
+  scheduled job, skip sub-step 3, the dispatcher's trigger. If your slice
+  calls an AI agent, do sub-step 4 too, the instance's AI.
 - Steps 10 and 11: run your live check from `SLICE.md`. Impersonate
   `<test user>`, and use demo records you seeded, never a real one.
   Step 11's defect box works as written.
@@ -576,15 +649,21 @@ Run it as written, with section 7's swaps: your names, and `<alias>` for
 
 ### After the workshop, on your app
 
-- Part 1, step 1: check your LLD for these instead. §1 has each slice
-  capability, and marks each deferred one. §3 says where your logic runs
-  and **when**. §4 covers who can do what, and access across scopes. §5
-  has a failure mode per component. §6 tests your central rule off the
-  instance, and your live check on it. §7 matches your research.
-- Part 1, step 4: always run check 1. Run check 2 only if you have a
-  scheduled job, and check 3 only if you seed an article. For checks 4 and
-  5, use a test user with your app's admin role instead of `owner.demo`.
-  Run checks 6 and 7 only if you have an AI call.
+- Part 1, step 1: check your LLD for these instead:
+  - §1 has each slice capability, and marks each deferred one.
+  - §3 says where your logic runs and **when**.
+  - §4 covers who can do what, and access across scopes.
+  - §5 has a failure mode per component.
+  - §6 tests your central rule off the instance, and your live check on
+    it.
+  - §7 matches your research.
+- Part 1, step 4: run only the checks that fit your app:
+  - Always run check 1.
+  - Run check 2 only if you have a scheduled job.
+  - Run check 3 only if you seed an article.
+  - For checks 4 and 5, use a test user with your app's admin role
+    instead of `owner.demo`.
+  - Run checks 6 and 7 only if you have an AI call.
 - Part 1, step 5: instead of its checks, run your live check, and one
   check for each term only the platform can prove. Run them as
   `<test user>`. The real owner watches your live check. That's the DEMO.
@@ -675,11 +754,15 @@ story went, so this shows which cuts are safe.
 
 </details>
 
-If a term has neither, keep the story. Or first withdraw the term with the
-real owner, in After the workshop, Part 3. The term is changed to say it's
-withdrawn, then named in an `it.todo`, a test entry with no code yet. Then
-cut the stories in After the workshop, Part 3, step 2, with this in place
-of its first paste:
+If a term has neither, do one of these:
+
+- Keep the story.
+- Or first withdraw the term with the real owner, in After the workshop,
+  Part 3. The term is changed to say it's withdrawn, then named in an
+  `it.todo`, a test entry with no code yet.
+
+Then cut the stories in After the workshop, Part 3, step 2, with this in
+place of its first paste:
 
 ```
 This record already has a filed plan: reuse every existing story's key
@@ -694,16 +777,22 @@ Extend the same design record. A second record in the same repo changes
 how tests must be named. Slice 1's tests could then stop counting.
 
 1. ✏️ **Editor:** write `~/projects/<app>/SLICE-2.md` for the next slice,
-   the same way as `SLICE.md`. Get the real owner's OK in writing. Put AI
-   in it only once your company has agreed its cost, the approval for your
-   data, masking and production limits. Then design it as the workshop
-   did. If the PRD changed, first save the consult:
-   `cp ~/projects/<app>/CONSULT.md ~/projects/<app>/CONSULT-1.md`. Then run
-   section 3 and Module 2 again.
+   the same way as `SLICE.md`.
+   - Get the real owner's OK in writing.
+   - Put AI in it only once your company has agreed its cost, the approval
+     for your data, masking and production limits. Then design it as the
+     workshop did.
+
+   Did the PRD change? Then first save the consult. ⌨️ Run this:
+
+   `cp ~/projects/<app>/CONSULT.md ~/projects/<app>/CONSULT-1.md`
+
+   Then run section 3 and Module 2 again.
 2. Write a new positions list for the new capabilities, as section 4 says.
-   Then run Module 3, steps 1 to 4, with `SLICE-2.md` for `SLICE.md`. Use
-   `docs/LLD-<Feature>-2.md` for `docs/LLD-<Feature>.md`. It's a new file,
-   so slice 1's LLD stays as it was.
+   Then run Module 3, steps 1 to 4, with these two swaps:
+   - `SLICE-2.md` for `SLICE.md`;
+   - `docs/LLD-<Feature>-2.md` for `docs/LLD-<Feature>.md`. It's a new
+     file, so slice 1's LLD stays as it was.
 3. 🤖 **Claude:** amend the design with After the workshop, Part 3, step 1,
    with the real owner there. Paste this as what changed:
    ```
