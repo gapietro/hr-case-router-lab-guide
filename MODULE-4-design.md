@@ -197,7 +197,8 @@ Names: rows that decide the same thing share one term. Include the seed
 data, the run states and the build order; each row that's out of scope
 for this record, as a boundary term; capability 4's checks, each run by
 apply_route itself on the route it applies, as consecutive terms; only
-apply_route changes a case's service, group or Assigned to; each table the
+apply_route changes a case's service, group or Assigned to; what each tool
+returns to the agent, and what none ever returns; each table the
 app writes, with its writers as docs/DECISIONS.md names them.
 Replace any weaker term that says the same. Nothing in the record says
 OPEN or VERIFY. Read the terms back again.
@@ -210,7 +211,8 @@ for each decision in `DECISIONS.md`: the starting records the app installs,
 the stages a run goes through, the build order, each thing this release
 leaves out, each check on a move the agent wants to make (one term per
 check), that only the `apply_route` tool changes a case's service, group or
-assignee, and which parts of the app write each table. Where two terms say
+assignee, what each tool hands back to the agent, and which parts of the
+app write each table. Where two terms say
 the same thing, Claude keeps the more exact one, and no term may stay
 undecided (OPEN) or unchecked (VERIFY). Then Claude reads the whole list
 back, so you can check it before anything is written.
@@ -228,6 +230,8 @@ back, so you can check it before anything is written.
   the app leaves out.
 - Capability 4's checks sit together, one per term. Each is run by
   `apply_route` on the route it applies.
+- **What a tool returns to the agent** is a term. It says a tool never
+  returns the work note, the threshold, a case's fields or a person.
 - Each table's writers are the ones **Who writes each table** names. There's
   no new module, such as a shared writer.
 - A row that lists things keeps every item in its term. For example, the

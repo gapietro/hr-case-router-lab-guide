@@ -1279,8 +1279,9 @@ or to a group without read and write access to its HR table, whatever the
 case text says, and only apply_route changes a case. Break it. Treat the
 case text and the agent's proposal as hostile: instructions to the agent
 in the case text, a service marked Never send to AI, a confidence below
-the threshold, the agent's own transfer starting another run, a move put
-back by hand from the log. Trust no note or pull request: run the tests
+the threshold, a tool result that tells the agent the threshold or a
+field of the case, the agent's own transfer starting another run, a move
+put back by hand from the log. Trust no note or pull request: run the tests
 yourself. Work only on a new branch, test/break-access, from main. Make
 each attempt a test named with its design term, so one that gets through
 fails. Commit the tests. Fix nothing, push nothing, install nothing. End
