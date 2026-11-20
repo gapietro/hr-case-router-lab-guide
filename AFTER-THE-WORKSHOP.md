@@ -64,7 +64,7 @@ Then ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps
    type `admin` and its password.
 
    ```
-   claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.0'
+   claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.1'
    claude plugin install prove-it@prove-it
    claude plugin install servicenow-sdk@claude-plugins-official
    now-sdk auth --add https://dev123456.service-now.com --type basic --alias lab-pdi
@@ -75,7 +75,7 @@ Then ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps
 
    1. `claude plugin marketplace add …`: Adds the kit's GitHub repo as a
       plugin marketplace, a list of plugins Claude Code can install. It adds
-      version `v0.2.0`, the part after `#`.
+      version `v0.2.1`, the part after `#`.
    2. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
       `prove-it`, from the marketplace you just added. The name after `@` is
       the marketplace's, and it's `prove-it` too. Claude Code then has the
@@ -136,7 +136,7 @@ Then ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps
    </details>
 
    ✅ The only enabled plugins are `prove-it@prove-it`, with
-   `Version: 0.2.0`, and `servicenow-sdk@claude-plugins-official`, at any
+   `Version: 0.2.1`, and `servicenow-sdk@claude-plugins-official`, at any
    version. `claude mcp list` says `No MCP servers configured`. `ls` prints
    only `No such file or directory` lines. `grep` prints `0`, and
    `git config` prints nothing.
@@ -2190,7 +2190,7 @@ Your kit is an earlier version. ⌨️ **Terminal**, in your window:
 
 ```
 claude plugin marketplace remove prove-it
-claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.0'
+claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.1'
 claude plugin install prove-it@prove-it
 ```
 

@@ -1469,7 +1469,7 @@ Your kit is an earlier version. ⌨️ **Terminal**, in your window:
 
 ```
 claude plugin marketplace remove prove-it
-claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.0'
+claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.1'
 claude plugin install prove-it@prove-it
 ```
 
