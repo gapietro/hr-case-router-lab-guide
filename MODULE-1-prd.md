@@ -391,7 +391,9 @@ against my request, fix them, then copy the PRD again.`
 
 </details>
 
-## You now have
+## Results
+
+**You now have**
 
 - The accepted PRD, in
   `~/projects/hr-case-router/brief/PRD-HRCaseRouter.md`.

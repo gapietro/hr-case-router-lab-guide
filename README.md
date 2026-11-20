@@ -60,8 +60,8 @@ steps for running and fixing the app.
 | 11:35 · 55 min | [4 · Design challenge](MODULE-4-design.md) | A design record |
 | 12:30 · 25 min | [5 · Check and plan](MODULE-5-fence-and-plan.md) | A plan on GitHub |
 | 12:55 · 30 min | [6 · Build loop](MODULE-6-build-loop.md) | Your first story, merged |
-| 13:25 · lunch | [6, continued](MODULE-6-build-loop.md#part-2--the-batch-over-lunch-start-at-1325) | Claude builds the next stories while you eat |
-| 14:15 · 60 min | [6, continued](MODULE-6-build-loop.md#7-read-the-evidence-from-1415) | The app installed, and the AI agent working live |
+| 13:25 · lunch | [6, continued](MODULE-6-build-loop.md#part-2--the-batch-over-lunch) | Claude builds the next stories while you eat |
+| 14:15 · 60 min | [6, continued](MODULE-6-build-loop.md#7-read-the-evidence-after-lunch) | The app installed, and the AI agent working live |
 | 15:15 · 10 min | Break | |
 | 15:25 · 40 min | [7 · Grade](MODULE-7-grade-and-handoff.md) | `GRADE.md`, a preview |
 | 16:05 · 15 min | [8 · Debrief](MODULE-8-debrief.md) | Your count of catches |

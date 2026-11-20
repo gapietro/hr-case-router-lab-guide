@@ -2506,7 +2506,9 @@ too:
 claude plugin uninstall servicenow-sdk@claude-plugins-official
 ```
 
-## You now have
+## Results
+
+**You now have**
 
 - A finished app, handed over, with its catches in `catches.md`.
 - Claude Code, git and GitHub as they were before the lab.

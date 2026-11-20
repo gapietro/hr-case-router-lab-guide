@@ -27,7 +27,7 @@ or its speed, open **Setup**.
 | Send your instructor | By when |
 |---|---|
 | Your GitHub user name. If you have no account yet, step 4 helps you make one | As soon as you can, and by the pre-session, the one-hour online session a week before. Your instructor needs it to invite you |
-| "Done", or what's still missing from **You now have**, the list at the end of this page | About a week before the lab |
+| "Done", or what's still missing from **Results**, the list at the end of this page | About a week before the lab |
 | Anything that stops an install, such as a proxy, a certificate error or no admin rights | As soon as you hit it. If you can, two weeks before the workshop |
 
 ## Things you need before the lab
@@ -2056,7 +2056,9 @@ decide is an open decision, never a guess.
 
 </details>
 
-## You now have
+## Results
+
+**You now have**
 
 - An instance set up for the lab, and `hr.demo` to impersonate.
 - Your tools, signed in. Claude Code has the lab's settings, the kit

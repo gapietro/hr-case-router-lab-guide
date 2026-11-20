@@ -502,7 +502,9 @@ against its rows in step 3. Then reply `keep`.
 kept. <span data-show="surface:terminal">**In the terminal:** then type
 `/exit` in Claude.</span>
 
-## You now have
+## Results
+
+**You now have**
 
 - `research-facts.md` and `docs/LLD-HRCaseRouter.md`. Their facts are
   backed by queries you read. This module's catches are in `catches.md`.

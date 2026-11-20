@@ -378,7 +378,9 @@ tail -n 5 ~/projects/hr-case-router/catches.md
 
 ✅ It shows the lines you kept.
 
-## You now have
+## Results
+
+**You now have**
 
 - `docs/DESIGN-HRCaseRouter.md` in your workspace, with your name in §9.
 - This module's catches in `catches.md`.

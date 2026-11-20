@@ -383,7 +383,7 @@ Close issue #<n>, citing the pull request that built it.
 
 🤖 **Claude:** type `/clear`.
 
-## Part 2 — The batch, over lunch (start at 13:25)
+## Part 2 — The batch, over lunch
 
 ### 6. Start the batch
 
@@ -396,7 +396,7 @@ way you did. The laptop must stay awake. If it sleeps, the batch stops.
 
 </details>
 
-If you're still on step 4 or 5 at 13:25, finish ship it first. Then type
+If you're still on step 4 or 5 when lunch starts, finish ship it first. Then type
 `/clear`.
 
 Leave the laptop open and plugged in. Then stop it from sleeping:
@@ -480,7 +480,7 @@ Then lock the screen
 (<kbd data-mac="Ctrl+Cmd+Q" data-win="Win+L">Ctrl+Cmd+Q (Mac) · Win+L (Windows)</kbd>).
 The batch keeps running.
 
-### 7. Read the evidence, from 14:15
+### 7. Read the evidence, after lunch
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -511,7 +511,7 @@ run or no findings.
 
 </details>
 
-By 14:30 the batch ends with its table. ✅ It shows these three merged:
+About 15 minutes after lunch, the batch ends with its table. ✅ It shows these three merged:
 `apply_route` with its checks and the group move, Reroute, and the seed
 data. The seed data is the records the app brings with it: two routing
 rules, and a knowledge article the agent reads. Skipped stories and register
@@ -553,7 +553,7 @@ gate. Both get their turn after the workshop.
 
 </details>
 
-<details><summary>🛟 At 14:30, one of those three isn't merged</summary>
+<details><summary>🛟 The batch has ended, and one of those three isn't merged</summary>
 
 Tell your instructor. They give you their finished build and its scope, the
 app's own name prefix on the instance. At step 8, install it **instead of**
@@ -584,7 +584,7 @@ git switch main && git pull && npm install && npm test
 
 ✅ Vitest's `Tests` line shows `passed`, and no `failed`.
 
-## Part 3 — Install and try it live (by 14:30)
+## Part 3 — Install and try it live
 
 ### 8. Build and install
 
@@ -1223,7 +1223,9 @@ tail -n 5 ~/projects/hr-case-router/catches.md
 
 ✅ It shows the lines you kept.
 
-## You now have
+## Results
+
+**You now have**
 
 - The thin path, `apply_route` with its checks and the group move, Reroute
   and the seed data. All of it is merged, installed and switched on.

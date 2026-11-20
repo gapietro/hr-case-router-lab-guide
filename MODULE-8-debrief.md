@@ -248,8 +248,8 @@ tell your instructor.
 ## After the lab: put your machine back
 
 Used a separate user account for the lab? Skip this part. Going straight on
-to [After the workshop](AFTER-THE-WORKSHOP.md) in the catch-up time, 16:20
-to 17:00? Skip steps 6 to 8 until you've finished it.
+to [After the workshop](AFTER-THE-WORKSHOP.md) in the 40 minutes of catch-up
+time? Skip steps 6 to 8 until you've finished it.
 
 ### 6. Put your settings back
 
@@ -485,7 +485,9 @@ too:
 claude plugin uninstall servicenow-sdk@claude-plugins-official
 ```
 
-## You now have
+## Results
+
+**You now have**
 
 - Your catches counted, the day's session note merged, and your settings
   put back.

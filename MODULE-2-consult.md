@@ -335,7 +335,9 @@ or after it. Your own answers and corrections aren't catches. Then reply
 kept. <span data-show="surface:terminal">**In the terminal:** then type
 `/exit` in Claude.</span>
 
-## You now have
+## Results
+
+**You now have**
 
 - `CONSULT.md` in `~/projects/hr-case-router`, and this module's catches in
   `catches.md`.

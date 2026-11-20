@@ -584,7 +584,9 @@ tail -n 5 ~/projects/hr-case-router/catches.md
 
 ✅ It shows the lines you kept.
 
-## You now have
+## Results
+
+**You now have**
 
 - On a clean `main`: the design record, the LLD and `DECISIONS.md` in your
   repo's `docs/`, the lab's `src/platform-rules.test.ts`, `BACKLOG.md` and

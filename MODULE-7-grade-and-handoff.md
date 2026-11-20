@@ -219,7 +219,7 @@ unverified.
 </details>
 
 - **"Which alias should I install to?"** Reply `lab-pdi`. Have you used
-  your instructor's finished build since 14:30? Then reply `no alias`
+  your instructor's finished build in Module 6? Then reply `no alias`
   instead, so your instance keeps only one app. The install is then
   **unverified**.
 - When it asks permission to run `now-sdk install --auth lab-pdi`, choose
@@ -398,7 +398,9 @@ tell your instructor.
 
 </details>
 
-## You now have
+## Results
+
+**You now have**
 
 - `GRADE.md` on `main`: the MERGE grade, or its preview.
 - Its findings filed as stories, and listed in `BACKLOG.md`.
