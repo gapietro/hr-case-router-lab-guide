@@ -132,7 +132,7 @@ Settle these at the kick-off. The prompts and commands below use them.
 3. ⌨️ Did you do Module 8 step 8, which removes the plugins? Then install
    the kit and the SDK plugin again, as in Pre-work step 8:
    ```
-   claude plugin marketplace add 'gapietro/prove-it-kit#v0.1.4'
+   claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.0'
    claude plugin install prove-it@prove-it
    claude plugin install servicenow-sdk@claude-plugins-official
    ```
@@ -141,7 +141,7 @@ Settle these at the kick-off. The prompts and commands below use them.
 
    1. `claude plugin marketplace add …`: Adds the kit's GitHub repo as a
       plugin marketplace, a list of plugins Claude Code can install. It adds
-      version `v0.1.4`, the part after `#`.
+      version `v0.2.0`, the part after `#`.
    2. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
       `prove-it`, from the marketplace you just added. The name after `@` is
       the marketplace's, and it's `prove-it` too. Claude Code then has the
@@ -667,7 +667,7 @@ Run it as written, with section 7's swaps: your names, and `<alias>` for
 - Part 1, step 5: instead of its checks, run your live check, and one
   check for each term only the platform can prove. Run them as
   `<test user>`. The real owner watches your live check. That's the DEMO.
-- Part 4, step 3: the colleague plants a failure that's realistic for
+- Part 4, step 4: the colleague plants a failure that's realistic for
   your app. Its symptom names your own records. Step 5's live check is
   yours too.
 
@@ -865,13 +865,16 @@ Module 8 steps 6 to 8 as written, with no swaps.
 | Module 5, step 2 | `Every check apply_route runs itself` | `Every check of your central rule, which Module 4 step 3 added,` |
 | Module 6, step 2 | `C<n>: a run's target is its log row, never the case` | `C<n>: ` and one rule of your central rule |
 | Module 6, step 6 | `Run the build loop with sub-agents through the open stories, until a new HR case is moved to a group by apply_route` | After the workshop, Part 1, step 3's prompt, instead |
+| Module 6, step 12 | `the tool that makes the move` and `the table whose name ends` | The piece that writes for your central rule, and your app's own main table |
 | After the workshop, Part 1, step 3 | `now-sdk query --auth lab-pdi and now-sdk build are fine` | `now-sdk query --auth <alias> on configuration tables only, and now-sdk build are fine` |
 | After the workshop, Part 1, step 3 | `docs/DECISIONS.md overrides the now-sdk plugin's guide: don't ask its questions, and skip its install step and the steps after it.` | Keep it if your slice has an AI call. Otherwise, delete it |
 | After the workshop, Part 1, step 6 | `Watched by <partner, or builder as PM>` | `Watched by <the real owner's name and role>`, for DEMO stories |
 | After the workshop, Part 2, step 2 | `no case is ever moved to a group outside the routing rules for its service, … only apply_route changes a case.` | Your central rule, in one sentence |
 | After the workshop, Part 2, step 2 | `Treat the case text and the agent's proposal as hostile: … put back by hand from the log.` | Keep it if your slice has an AI call, with your inputs' names. Otherwise: `Treat every input as hostile: a change to the record after your logic has run, a change to related records, saving twice, an edit from the list view.` |
 | After the workshop, Part 2, step 5 | `One rule must hold: no case is ever moved to a group outside the routing rules` | Your central rule, in one sentence |
-| After the workshop, Part 4, step 7 | `File the code.lint and ready.gate-clear stories as register, keeping their keys.` | `File the code.lint and ready.gate-clear stories, and <each criterion the real owner agreed to accept>, as register, keeping their keys.` |
+| After the workshop, Part 4, step 3 | `The quote matches the file word for word.` | Keep it if your slice has an AI call. Otherwise **The agent** says "None in this app.": check two rows of **Configuration** against `sys_properties.list` instead |
+| After the workshop, Part 4, step 3 | `Every state in that list is in the diagram` | Keep it if a table of yours has a state field. Otherwise skip the sub-step |
+| After the workshop, Part 4, step 8 | `File the code.lint and ready.gate-clear stories as register, keeping their keys.` | `File the code.lint and ready.gate-clear stories, and <each criterion the real owner agreed to accept>, as register, keeping their keys.` |
 | After the workshop, Part 3, step 2 | `This record already has a filed plan: reuse every existing story's key for the same work; new keys only for new or changed terms.` | To cut stories, section 5's paste |
 | After the workshop, Part 3, step 3 | `Commit docs/DESIGN-HRCaseRouter.md and BACKLOG.md on a new branch docs/amend-<what it's for>.` | For the next slice, section 6's lines |
 | Every module | `PRD-HRCaseRouter.md` | Your PRD's file name |

@@ -1318,7 +1318,174 @@ impersonation**. Then, as admin:
    row and the note prove a run. The agent's own word never does
    (DECISIONS, P10).
 
-### 12. Log it
+### 12. See what you built
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+You've watched stories merge and a case get routed. Nothing so far shows
+the whole app in one picture. Here Claude draws it from your code and your
+instance. An AI can draw a convincing picture of an app that isn't quite
+the one you built. So every box in the picture names where it comes from,
+and you check three of them yourself.
+
+</details>
+
+1. 🤖 **Claude:** type this on its own:
+
+   ```
+   /prove-it:as-built lab-pdi
+   ```
+
+   It reads your code, and reads your instance through `lab-pdi` without
+   changing it. That takes about five minutes.
+
+   ✅ It says it wrote `docs/AS-BUILT.md` and `docs/AS-BUILT.html`. Then it
+   counts the pieces it found on your instance.
+2. Open the page it built.
+
+   <div data-show="os:mac">
+
+   **On Mac:** ⌨️ **Terminal**, in your window:
+
+   ```
+   open ~/projects/hr-case-router/app/docs/AS-BUILT.html
+   ```
+
+   </div>
+
+   <div data-show="os:win">
+
+   **On Windows:** ⌨️ **Terminal**, in your window:
+
+   ```
+   start ~/projects/hr-case-router/app/docs/AS-BUILT.html
+   ```
+
+   </div>
+
+   ✅ Your browser shows two diagrams. **The pieces** is everything your app
+   is made of. **One record's path** follows one HR case from the moment
+   it's created to its work note, with the branch where a move is stopped.
+3. Check the picture against the real thing. Under **The pieces** is a
+   table with a row for every box. One row can cover several pieces of a
+   kind. Find the rows that name these three:
+
+   - the AI agent;
+   - `apply_route`, the tool that makes the move;
+   - the run log, the table whose name ends `_run_log`.
+
+   For each one, look in the two places its row names:
+
+   - ✏️ **Editor:** open the file in the **Where it comes from** column,
+     and find the piece's name in it.
+   - 🌐 **Browser**, as admin: the **On the instance** column names a
+     table, such as `sn_aia_agent`. Type that name with `.list` after it in
+     the filter navigator, press **Enter**, and find the piece in the list.
+
+   ✅ All three are in both places, under the names the diagram gives them.
+4. Read the last two sections of the page.
+
+   - **As built against as designed** lists places where your app differs
+     from your design record.
+   - **Not verified** lists what Claude couldn't confirm. It read how the
+     app is wired, and it didn't watch a case go through.
+
+   Change nothing now. Each difference is a decision for after the
+   workshop: change the build, or change the design.
+5. 🤖 **Claude:**
+
+   ```
+   Commit docs/AS-BUILT.md and docs/AS-BUILT.html together on a new branch
+   docs/as-built.
+   ```
+6. 🤖 **Claude:** paste this, type `go` after it, and press **Enter**:
+
+   ```
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
+   ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude pushes your branch and opens a pull request. It reviews its own
+   diff without checking it out, and posts the review on the pull request.
+   It fixes real findings once, files the rest, and merges when the build
+   and tests pass. You get the pull request link and one line per finding.
+
+   </details>
+
+   ✅ It gives you the pull request link, and the pull request shows
+   **Merged**.
+
+<details><summary>🛟 A box in the diagram isn't in the file or on the instance</summary>
+
+Then the picture is wrong, and that's this step's catch. A wrong diagram
+looks like a right one. Only the check finds it.
+
+🤖 **Claude:** type this. Put the box's name in place of `<box>`:
+
+```
+The box <box> in docs/AS-BUILT.md isn't where its row says. Read the file and query the instance again, read-only. Tell me what you find. Then correct docs/AS-BUILT.md, and build the page again.
+```
+
+Then do sub-step 3 again for that box.
+
+</details>
+
+<details><summary>🛟 A diagram shows as text, or the page says it could not be drawn</summary>
+
+The page keeps every diagram as text, so nothing is lost. Have Claude
+draw it again.
+
+🤖 **Claude:** type this:
+
+```
+A diagram in docs/AS-BUILT.html didn't draw. Simplify that diagram in docs/AS-BUILT.md, keep its sources table, and build the page again.
+```
+
+Then reload the page in your browser.
+
+</details>
+
+<details><summary>🛟 It says "Not checked" for every row</summary>
+
+Claude couldn't read your instance, so it drew the picture from the code
+alone. Your instance may be asleep. 🌐 **Browser:** open your instance, and
+wake it if its page offers to.
+
+Then 🤖 **Claude:** type `/prove-it:as-built lab-pdi` again.
+
+</details>
+
+<details><summary>🛟 It says it doesn't know /prove-it:as-built</summary>
+
+Your kit is an earlier version. ⌨️ **Terminal**, in your window:
+
+```
+claude plugin marketplace remove prove-it
+claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.0'
+claude plugin install prove-it@prove-it
+```
+
+Then close Claude and open it again in `~/projects/hr-case-router/app`,
+and type `/prove-it:as-built lab-pdi`.
+
+</details>
+
+<details><summary>🛟 It isn't merged: a test or the build failed</summary>
+
+🤖 **Claude:** type `Fix it once, then finish ship it.` If it fails again,
+tell your instructor.
+
+</details>
+
+### 13. Log it
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -1370,4 +1537,6 @@ tail -n 5 ~/projects/hr-case-router/catches.md
   and the seed data. All of it is merged, installed and switched on.
 - The agent routing a new case live, as `hr.demo`. Its note, its log row and
   its execution plan prove it.
+- `docs/AS-BUILT.md` and `docs/AS-BUILT.html` on `main`: two diagrams of what
+  you built, each box with where it comes from.
 - This module's catches in `catches.md`.

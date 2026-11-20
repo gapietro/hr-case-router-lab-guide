@@ -77,6 +77,13 @@ These checks cap the grade, so they're never accepted:
 - `ready.ai-bounded`
 - `ready.install`
 
+**Send the as-built document with your request.** It's
+`docs/AS-BUILT.html`, from After the workshop, Part 4, step 3. Your
+platform team can read what the app is made of, what its agent can do and
+which tables it touches, without opening the repo. If the app has changed
+since you built the page, build it again first: type
+`/prove-it:as-built full <alias>`.
+
 ---
 
 ## 2. Agree how it moves
@@ -190,7 +197,7 @@ exactly what was graded:
    </details>
 
 2. Grade at HANDOFF again, on `main` as it is now. Follow After the
-   workshop, Part 4, step 7, with these changes:
+   workshop, Part 4, step 8, with these changes:
    - type `<alias>` for the alias;
    - type OWN-PRD section 7's register reply;
    - use the branch `chore/grade-v1.0.0` in place of

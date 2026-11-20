@@ -64,7 +64,7 @@ Then ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps
    type `admin` and its password.
 
    ```
-   claude plugin marketplace add 'gapietro/prove-it-kit#v0.1.4'
+   claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.0'
    claude plugin install prove-it@prove-it
    claude plugin install servicenow-sdk@claude-plugins-official
    now-sdk auth --add https://dev123456.service-now.com --type basic --alias lab-pdi
@@ -75,7 +75,7 @@ Then ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps
 
    1. `claude plugin marketplace add …`: Adds the kit's GitHub repo as a
       plugin marketplace, a list of plugins Claude Code can install. It adds
-      version `v0.1.4`, the part after `#`.
+      version `v0.2.0`, the part after `#`.
    2. `claude plugin install prove-it@prove-it`: Installs the kit's plugin,
       `prove-it`, from the marketplace you just added. The name after `@` is
       the marketplace's, and it's `prove-it` too. Claude Code then has the
@@ -136,7 +136,7 @@ Then ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps
    </details>
 
    ✅ The only enabled plugins are `prove-it@prove-it`, with
-   `Version: 0.1.4`, and `servicenow-sdk@claude-plugins-official`, at any
+   `Version: 0.2.0`, and `servicenow-sdk@claude-plugins-official`, at any
    version. `claude mcp list` says `No MCP servers configured`. `ls` prints
    only `No such file or directory` lines. `grep` prints `0`, and
    `git config` prints nothing.
@@ -2018,7 +2018,7 @@ watch.
    ✅ It shows **Merged**.
 
    From now on the runbook is **frozen**. Don't change it until the drill
-   ends, except with the fix in step 4.
+   ends, except with the fix in step 5.
 
 <details><summary>🛟 It stops and asks you something anyway</summary>
 
@@ -2038,7 +2038,175 @@ tell your instructor.
 
 </details>
 
-### 3. Your partner plants
+### 3. Write the as-built document
+
+<details data-detail="extra"><summary>ℹ️ Why this step</summary>
+
+The runbook says how to run the app. The as-built document shows what the
+app is: every piece, the agent with its instructions and its tools, and
+each path a case can take. Whoever takes the app over reads it first. On
+the day you drew two diagrams. Your app has changed since then, so Claude
+reads the code and the instance again, and trusts no earlier picture.
+
+</details>
+
+1. 🤖 **Claude:** type `/clear`. Then type this, alone:
+
+   ```
+   /prove-it:as-built full lab-pdi
+   ```
+
+   It reads your code, and reads your instance through `lab-pdi` without
+   changing it. That takes about ten minutes.
+
+   ✅ It says it wrote `docs/AS-BUILT.md` and `docs/AS-BUILT.html` (full).
+2. Open the page it built.
+
+   <div data-show="os:mac">
+
+   **On Mac:** ⌨️ **Terminal**, in your window:
+
+   ```
+   open ~/projects/hr-case-router/app/docs/AS-BUILT.html
+   ```
+
+   </div>
+
+   <div data-show="os:win">
+
+   **On Windows:** ⌨️ **Terminal**, in your window:
+
+   ```
+   start ~/projects/hr-case-router/app/docs/AS-BUILT.html
+   ```
+
+   </div>
+
+   ✅ **Contents** lists nine sections, from **Summary** to **Where next**.
+3. Check **The agent**. Under **Role and instructions**, the page quotes
+   the agent's instructions and names the file they come from.
+
+   ✏️ **Editor:** open that file and compare.
+
+   ✅ The quote matches the file word for word. Under **Tools**, every tool
+   has a row that says what it reads, what it writes, and when it refuses.
+4. Check **Data flows**. Under **A run's life** is a diagram of the states a
+   run moves through. The table under it names the file that declares
+   those states.
+
+   ✏️ **Editor:** open that file and find the list of state choices.
+
+   ✅ Every state in that list is in the diagram, and the diagram has no
+   state the list lacks. Each way a run can end has its own diagram under
+   **One record's path** or **Other paths**.
+5. Read **As built against as designed**. Each row is a place where your
+   app differs from your design record. 🤖 **Claude:** paste this, then
+   `go`:
+
+   ```
+   For each row under "As built against as designed" in docs/AS-BUILT.md,
+   check the open issues. Draft a register issue for each row that no open
+   issue covers, quoting the row. Show me the list first; file after I say
+   yes. No code.
+   ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude turns each difference between your app and your design into a
+   register issue, unless an open issue already covers it. A register issue
+   is one that waits for your ruling: change the build, or amend the
+   design. It shows you the list before filing, and writes no code.
+
+   </details>
+
+   Read the list. Type `yes`, or say what to correct.
+
+   ✅ Each difference has an issue, or the page says there are none.
+6. 🤖 **Claude:** paste this, then `go`:
+
+   ```
+   Commit docs/AS-BUILT.md and docs/AS-BUILT.html on a new branch
+   docs/as-built-full.
+   ship it. Review the diff without checking it out, and post the review's
+   findings on the pull request as a comment, even if there are none. Fix
+   real findings in the code once. Never edit docs/, GRADE.md, RUNBOOK.md,
+   HANDOFF.md or BACKLOG.md to answer a finding, and don't stop to ask me:
+   file it as a register issue instead. There's no CI: merge once now-sdk
+   build passes, and npm test too once there's a test script. Then switch to
+   main and pull, and give me the pull request link and one line per
+   finding: fixed, filed, or not a problem and why.
+   ```
+
+   <details data-detail="extra"><summary>ℹ️ What this prompt does</summary>
+
+   Claude commits the as-built document and its page on a new branch, and
+   opens a pull request. It reviews its own diff without checking it out,
+   and posts the review on the pull request. It fixes real findings once,
+   files the rest, and merges when the build and tests pass. You get the
+   pull request link and one line per finding.
+
+   </details>
+
+   🌐 **Browser:** open the pull request link.
+
+   ✅ It shows **Merged**.
+
+The page stands alone. You can send `docs/AS-BUILT.html` to someone who
+never opens the repo, and it opens with no network.
+
+<details><summary>🛟 A box or a quote isn't where the page says</summary>
+
+Then the document is wrong, and you caught it. A wrong diagram looks like a
+right one. Only a check finds it.
+
+🤖 **Claude:** type this. Put what's wrong in place of `<what>`:
+
+```
+In docs/AS-BUILT.md, <what> isn't where its row says. Read the file and query the instance again, read-only. Tell me what you find. Then correct docs/AS-BUILT.md, and build the page again.
+```
+
+Then do that check again.
+
+</details>
+
+<details><summary>🛟 A diagram shows as text, or the page says it could not be drawn</summary>
+
+The page keeps every diagram as text, so nothing is lost. Have Claude
+draw it again.
+
+🤖 **Claude:** type this:
+
+```
+A diagram in docs/AS-BUILT.html didn't draw. Simplify that diagram in docs/AS-BUILT.md, keep its sources table, and build the page again.
+```
+
+Then reload the page in your browser.
+
+</details>
+
+<details><summary>🛟 It says it doesn't know /prove-it:as-built</summary>
+
+Your kit is an earlier version. ⌨️ **Terminal**, in your window:
+
+```
+claude plugin marketplace remove prove-it
+claude plugin marketplace add 'gapietro/prove-it-kit#v0.2.0'
+claude plugin install prove-it@prove-it
+```
+
+Then close Claude and open it again in `~/projects/hr-case-router/app`,
+and type `/prove-it:as-built full lab-pdi`.
+
+</details>
+
+<details><summary>🛟 It isn't merged: a test or the build failed</summary>
+
+🤖 **Claude:** type `Fix it once, then finish ship it.` If it fails again,
+tell your instructor.
+
+</details>
+
+### 4. Your partner plants
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -2088,7 +2256,7 @@ Then leave the room. Your partner, at your computer, does these steps:
 
 No partner? Plant it yourself, and write `builder`. It's a weaker drill.
 
-### 4. Diagnose from the runbook
+### 5. Diagnose from the runbook
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -2193,7 +2361,7 @@ The runbook has a gap. Leave the failure planted.
 
 </details>
 
-### 5. Restore, then verdict
+### 6. Restore, then verdict
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -2281,7 +2449,7 @@ tell your instructor.
 
 <details><summary>🛟 The verdict is NOT READY</summary>
 
-Close nothing in step 6. `HANDOFF.md` names each blocking item:
+Close nothing in step 7. `HANDOFF.md` names each blocking item:
 
 - **A record with no reason in the design** (check 1): Part 3 adds the
   reason.
@@ -2301,14 +2469,14 @@ Close nothing in step 6. `HANDOFF.md` names each blocking item:
 - **A card with no Restored on** (check 3): restore the failure as the
   card says, and fill that line in.
 - **No planted cause found** (check 3): your partner plants again
-  (step 3), and you diagnose (step 4).
+  (step 4), and you diagnose (step 5).
 
 Then do this step again. After a new plant, start from sub-step 1.
 Otherwise start from sub-step 3.
 
 </details>
 
-### 6. Close HANDOFF stories
+### 7. Close HANDOFF stories
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -2353,7 +2521,7 @@ meet yet.
 
 If any are left, build them with Part 1, from step 2. Then come back.
 
-### 7. Grade at HANDOFF
+### 8. Grade at HANDOFF
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -2395,7 +2563,7 @@ one you show when the app moves on.
    - **"Which alias should I install to?"**: type `lab-pdi`.
    - **Permission for `now-sdk install --auth lab-pdi`**, if it asks:
      choose **Yes**, for that command only.
-   - **"This milestone is not reached"**: type `no`, and go back to step 6.
+   - **"This milestone is not reached"**: type `no`, and go back to step 7.
    - **It wants to replace `../plan-grade.json`**: type
      `yes, replace ../plan-grade.json`
    - **Its findings, as proposed stories**: type this. When it shows them
@@ -2488,7 +2656,7 @@ tell your instructor.
 
 6. Its findings are your next work. Start them with Part 1, from step 2.
 
-### 8. Log it
+### 9. Log it
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
@@ -2776,6 +2944,8 @@ claude plugin uninstall servicenow-sdk@claude-plugins-official
 **You now have**
 
 - A finished app, handed over, with its catches in `catches.md`.
+- `docs/AS-BUILT.html`: the as-built document, with the agent broken down
+  and every data flow. It opens on its own, with no network.
 - Claude Code, git and GitHub as they were before the lab.
 
 You're done when the HANDOFF grade isn't a preview. Its findings are your
