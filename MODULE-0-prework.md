@@ -79,13 +79,16 @@ into every command and link, so you paste it once, here.
 </details>
 
 Your instructor gives you an instance for the lab, where you're an admin.
-It comes with HR Service Delivery, its demo data and AI Agent Studio. Save
-its admin password in your password manager. Note its address there too.
+It comes with HR Service Delivery, its demo data and AI Agent Studio.
+
+Save its admin password in your password manager. Note its address there
+too.
 
 Paste your instance's whole address below. Copy it from Cloud Labs, or from
 your browser's address bar while your instance is open. It looks like
-`https://dev123456.service-now.com`. The guide shows your instance's name
-under the box.
+`https://dev123456.service-now.com`.
+
+The guide shows your instance's name under the box.
 
 <div data-value="instance"></div>
 
@@ -136,15 +139,21 @@ that user.
 
 1. Click **All** at the top left. Type `sn_hr_core_case.list` in the
    box under it, and press **Enter**. Then do the same with
-   `sn_hr_core_service.list`. ✅ Both lists have rows: demo HR cases and HR
-   services.
+   `sn_hr_core_service.list`.
+
+   ✅ Both lists have rows: demo HR cases and HR services.
 2. Open `sys_user_group.list` the same way. In the **Name** column's search
-   box, type `Lab` and press **Enter**. ✅ It lists `Lab HR Team` and
-   `Lab Locked Out`.
+   box, type `Lab` and press **Enter**.
+
+   ✅ It lists `Lab HR Team` and `Lab Locked Out`.
 3. Open `sys_user.list`. In the **User ID** column's search box, type
-   `hr.router` and press **Enter**. ✅ It's listed. The agent runs as this
-   user, so never impersonate it or change it. Then search for `hr.demo`
-   the same way.
+   `hr.router` and press **Enter**.
+
+   ✅ It's listed.
+
+   The agent runs as this user, so never impersonate it or change it.
+
+   Then search for `hr.demo` the same way.
 
    <div data-ask="m0-hr-demo" data-options="yes|no" data-labels="Yes, it's listed|No">
 
@@ -171,23 +180,31 @@ that user.
 
    Open `hr.demo`.
 4. In its **Roles** tab: ✅ it lists `sn_hr_core.case_writer` and
-   `sn_hr_le.case_writer`. If one is missing, click **Edit...**. Move it
-   from the left list to the right, and click **Save**.
-5. In its **Groups** tab: ✅ it lists `Lab HR Team`. If it doesn't, click
-   **Edit...**. Move `Lab HR Team` from the left list to the right, and
-   click **Save**.
+   `sn_hr_le.case_writer`.
+
+   If one is missing, click **Edit...**. Move it from the left list to the
+   right, and click **Save**.
+5. In its **Groups** tab: ✅ it lists `Lab HR Team`.
+
+   If it doesn't, click **Edit...**. Move `Lab HR Team` from the left list
+   to the right, and click **Save**.
 6. Impersonate `hr.demo`. Click your avatar at the top right of the
-   instance, then **Impersonate user**. In the dialog, type `hr.demo`, pick
-   **HR Demo**, and click **Impersonate user**. Close any welcome pop-up.
-7. Open `sn_hr_core_case.list`. ✅ It lists HR cases.
+   instance, then **Impersonate user**.
+
+   In the dialog, type `hr.demo`, pick **HR Demo**, and click
+   **Impersonate user**. Close any welcome pop-up.
+7. Open `sn_hr_core_case.list`.
+
+   ✅ It lists HR cases.
 8. End impersonation. Click your avatar, then **End impersonation**. You're
    admin again.
 
 <details><summary>🛟 It's asleep or gone, or has no HR cases</summary>
 
-- **Asleep:** open your instance in your browser. If its page offers a
-  wake-up link, click it and wait up to 20 minutes for it to wake. If
-  there's no link, or it stays asleep, ask your instructor.
+- **Asleep:** open your instance in your browser.
+  - If its page offers a wake-up link, click it and wait up to 20 minutes
+    for it to wake.
+  - If there's no link, or it stays asleep, ask your instructor.
 - **Gone, or no HR cases:** tell your instructor.
 
 </details>
@@ -195,9 +212,10 @@ that user.
 <details><summary>🛟 hr.router, hr.demo or a group is missing, or hr.demo sees no cases</summary>
 
 Your instance hasn't been prepared for the lab, so tell your instructor.
-Never make `hr.router` or a group yourself. Don't give `hr.demo` any other
-role, and above all no admin role. It gets the app's own role later in the
-lab.
+
+- Never make `hr.router` or a group yourself.
+- Don't give `hr.demo` any other role, and above all no admin role. It
+  gets the app's own role later in the lab.
 
 </details>
 
@@ -316,9 +334,12 @@ claude --version
 </details>
 
 ✅ Node.js is `v22.22` or later, `now-sdk` is `4.8.0` or later, and
-Claude Code is `2.1.228` or later. The others can print any version, and
-`command not found` counts as missing. This guide was written with
-Claude Code `2.1.312` and `now-sdk` `4.13.6`.
+Claude Code is `2.1.228` or later.
+
+The others can print any version, and `command not found` counts as
+missing.
+
+This guide was written with Claude Code `2.1.312` and `now-sdk` `4.13.6`.
 
 <div data-ask="m0-tools-ok" data-options="yes|no" data-labels="Yes, all of them|No, one is missing or too old">
 
@@ -383,10 +404,13 @@ xcode-select --install
 
 </details>
 
-**GitHub CLI:** download the file ending in `_macOS_universal.pkg` from
-https://github.com/cli/cli/releases/latest. Then run it. macOS blocks it the
-first time, so click **Open Anyway** in
-**System Settings > Privacy & Security** to allow it.
+**GitHub CLI:**
+
+- Download the file ending in `_macOS_universal.pkg` from
+  https://github.com/cli/cli/releases/latest.
+- Run it.
+- macOS blocks it the first time, so click **Open Anyway** in
+  **System Settings > Privacy & Security** to allow it.
 
 <details data-detail="extra" data-topic="terminal"><summary>ℹ️ Step by step: the GitHub CLI on Mac</summary>
 
@@ -491,9 +515,12 @@ https://nodejs.org/en/download and run it.
 </details>
 
 **git:** it comes with Git for Windows, which you installed at the start of
-this step. If `git --version` failed, close every terminal window and open
-Windows Terminal again. If it still fails, install Git for Windows again,
-the same way as at the start of this step.
+this step.
+
+- If `git --version` failed, close every terminal window and open Windows
+  Terminal again.
+- If it still fails, install Git for Windows again, the same way as at the
+  start of this step.
 
 **GitHub CLI:** download the file ending in `_windows_amd64.msi` from
 https://github.com/cli/cli/releases/latest. Then run it.
@@ -546,8 +573,10 @@ npm install -g @servicenow/sdk
 </details>
 
 **Claude Code:** install it in PowerShell, not in Git Bash. PowerShell is
-Windows' own terminal. To open it, press the **Windows** key, type
-`PowerShell` and press **Enter**. Then, in ⌨️ **Terminal**:
+Windows' own terminal.
+
+To open it, press the **Windows** key, type `PowerShell` and press
+**Enter**. Then, in ⌨️ **Terminal**:
 
 ```
 irm https://claude.ai/install.ps1 | iex
@@ -626,9 +655,11 @@ administrator rights.
 <details data-show="os:mac"><summary>🛟 An install or a check doesn't work on Mac</summary>
 
 - **"command not found" just after installing:** open a new Terminal window
-  and check again. If `claude` is still not found, its folder isn't on your
-  PATH yet. Your PATH is the list of folders your computer looks in for
-  tools. In ⌨️ **Terminal**, run these two lines, then open a new window:
+  and check again.
+
+  If `claude` is still not found, its folder isn't on your PATH yet. Your
+  PATH is the list of folders your computer looks in for tools. In ⌨️
+  **Terminal**, run these two lines, then open a new window:
 
   ```
   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
@@ -646,11 +677,14 @@ administrator rights.
 
   </details>
 
-- **EACCES or "permission denied" from npm:** run the `npm install` line
-  again with `sudo` in front, which runs it as an administrator. When it
-  asks for your Mac's password, type it, even though nothing shows as you
-  type. Then run `sudo chown -R $(id -u):$(id -g) ~/.npm` so npm's cache
-  stays yours. Never put `sudo` in front of the Claude Code line.
+- **EACCES or "permission denied" from npm:**
+  - Run the `npm install` line again with `sudo` in front, which runs it
+    as an administrator.
+  - When it asks for your Mac's password, type it, even though nothing
+    shows as you type.
+  - Then run `sudo chown -R $(id -u):$(id -g) ~/.npm` so npm's cache stays
+    yours.
+  - Never put `sudo` in front of the Claude Code line.
 - **No Open Anyway button for the GitHub CLI:** your company manages your
   Mac. Tell your instructor before the day.
 - **An installer asks for an administrator's name and password:** your
@@ -665,6 +699,7 @@ administrator rights.
 
 - **"command not found" or "is not recognized" just after installing:**
   close every terminal window, then open a new one. A new tab isn't enough.
+
   If `claude` is still not found, its folder isn't on your PATH yet. Your
   PATH is the list of folders Windows searches for tools. In ⌨️
   **Terminal**, in PowerShell, run these two lines, then open a new window:
@@ -688,11 +723,12 @@ administrator rights.
 
 - **irm: command not found:** you're in Git Bash. Open PowerShell, as
   above, and paste the line again.
-- **Git Bash isn't in Windows Terminal's Default profile list:** run Git
-  for Windows' installer again. On **Select Components**, tick
-  **Add a Git Bash Profile to Windows Terminal**. If you have no Windows
-  Terminal at all, which can happen on Windows 10, install it from the
-  Microsoft Store first.
+- **Git Bash isn't in Windows Terminal's Default profile list:**
+  - Run Git for Windows' installer again.
+  - On **Select Components**, tick
+    **Add a Git Bash Profile to Windows Terminal**.
+  - If you have no Windows Terminal at all, which can happen on Windows
+    10, install it from the Microsoft Store first.
 - **Windows asks for an administrator's password, or won't install:**
   your company manages your computer, so you can't install on it yourself.
   Tell your instructor before the day.
@@ -861,9 +897,11 @@ git -C ~/projects/hr-case-router-lab-guide remote get-url origin
 
 </details>
 
-`gh auth login` shows a one-time code. Press **Enter** to open a GitHub
-page, then type the code there and approve. Press **Enter** to answer any
-other question it asks.
+`gh auth login` shows a one-time code:
+
+- Press **Enter** to open a GitHub page.
+- Type the code there and approve.
+- Press **Enter** to answer any other question it asks.
 
 ✅ The last line prints
 `https://github.com/gapietro/hr-case-router-lab-guide.git`.
@@ -871,19 +909,20 @@ other question it asks.
 <details><summary>🛟 It says "Could not resolve to a Repository"</summary>
 
 The invite isn't accepted yet, or you signed in to another GitHub account.
-`gh auth status` shows which account you're using. If it's company-managed,
-it can't accept the invite, so sign in with a personal one or tell your
-instructor.
+`gh auth status` shows which account you're using.
+
+If it's company-managed, it can't accept the invite, so sign in with a
+personal one or tell your instructor.
 
 </details>
 
 <details><summary>🛟 It says the destination path already exists</summary>
 
-If the last line printed the address above, the folder is already this
-guide. Update it with `git -C ~/projects/hr-case-router-lab-guide pull`.
-If it printed anything else, rename the folder with
-`mv ~/projects/hr-case-router-lab-guide ~/projects/old-guide` and run the
-`gh repo clone` line again.
+- If the last line printed the address above, the folder is already this
+  guide. Update it with `git -C ~/projects/hr-case-router-lab-guide pull`.
+- If it printed anything else, rename the folder with
+  `mv ~/projects/hr-case-router-lab-guide ~/projects/old-guide` and run the
+  `gh repo clone` line again.
 
 </details>
 
@@ -987,19 +1026,23 @@ claude
 
 </details>
 
-Follow the screens and choose **Claude account with subscription**, or
-**Anthropic Console account** if you pay per use. Then sign in in the
-browser. When it asks if you trust this folder, pick **Yes** with the arrow
-keys. If a screen asks you to approve your organisation's settings, approve
-them and tell your instructor.
+Follow the screens:
+
+- Choose **Claude account with subscription**, or
+  **Anthropic Console account** if you pay per use.
+- Sign in in the browser.
+- When it asks if you trust this folder, pick **Yes** with the arrow keys.
+- If a screen asks you to approve your organisation's settings, approve
+  them and tell your instructor.
 
 ✅ Under the input box it says `⏵⏵ auto mode on`.
 
 🤖 **Claude:** type `/permissions`, then press **→** until its **Deny** tab
 shows.
 
-✅ It lists `Read(~/projects/hr-case-router-lab-guide/**)`. Press **Esc**,
-then type `/exit`.
+✅ It lists `Read(~/projects/hr-case-router-lab-guide/**)`.
+
+Press **Esc**, then type `/exit`.
 
 </div>
 
@@ -1011,17 +1054,22 @@ step doesn't match your screen, tell your instructor what you see.
 
 1. Open the Claude desktop app, sign in, and click **Code** at the top of
    the sidebar.
-2. Start a new session (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-   In the row under the prompt box, pick the top entry under **Local**.
-   Click the folder control, choose **Open folder…** and pick your home
-   folder. Send nothing yet.
+2. Start a new session:
+   - Press
+     <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+   - In the row under the prompt box, pick the top entry under **Local**.
+   - Click the folder control, choose **Open folder…** and pick your home
+     folder.
+   - Send nothing yet.
 
 ✅ The mode selector in the row under the prompt box shows **Auto**.
 
 🤖 **Claude:** type `/status` alone.
 
-✅ Its **Claude Code** row shows `2.1.228` or later. The Code tab has its
-own copy of Claude Code, so this can differ from `claude --version`.
+✅ Its **Claude Code** row shows `2.1.228` or later.
+
+The Code tab has its own copy of Claude Code, so this can differ from
+`claude --version`.
 
 ⌨️ **Terminal**, in your window, the terminal you keep for ⌨️ steps:
 `/permissions` doesn't work in the Code tab, so check the lab's settings
@@ -1048,11 +1096,13 @@ Run now-sdk auth --list.
 
 **On Windows, in the Code tab:** the lab's rules are `Bash(…)` rules. With
 Git for Windows installed, Claude Code in a terminal runs commands in Git
-Bash, and those rules also turn its PowerShell tool off. Anthropic's docs
-don't say yet whether the Code tab's own copy does the same, so the
-`now-sdk auth --list` check above tests it. Later, when Claude sets up your
-app's repo, each command it runs must also be marked Bash. If either check
-fails, stop and use Claude Code in Git Bash instead.
+Bash, and those rules also turn its PowerShell tool off.
+
+Anthropic's docs don't say yet whether the Code tab's own copy does the
+same, so the `now-sdk auth --list` check above tests it. Later, when Claude
+sets up your app's repo, each command it runs must also be marked Bash.
+
+If either check fails, stop and use Claude Code in Git Bash instead.
 <button data-set="surface:terminal">Use the terminal steps</button>
 
 </div>
@@ -1089,12 +1139,13 @@ Claude will just ask more often. Tell your instructor.
 node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 ```
 
-Then start a new session on your home folder again. If it still shows
-**Manual**, pick **Auto** in the mode selector. If there's no **Auto** in
-it, pick another model in the model picker toward the right of that row,
-since auto mode needs a recent model. If there's still no **Auto**, your
-organisation turned auto mode off, and Claude will just ask more often. Tell
-your instructor.
+Then start a new session on your home folder again.
+
+- If it still shows **Manual**, pick **Auto** in the mode selector.
+- If there's no **Auto** in it, pick another model in the model picker
+  toward the right of that row, since auto mode needs a recent model.
+- If there's still no **Auto**, your organisation turned auto mode off, and
+  Claude will just ask more often. Tell your instructor.
 
 </details>
 
@@ -1113,17 +1164,21 @@ tell your instructor.
 node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 ```
 
-✅ It prints `Lab settings in place.` If it still doesn't, tell your
-instructor.
+✅ It prints `Lab settings in place.`
+
+If it still doesn't, tell your instructor.
 
 </details>
 
 <details data-show="surface:desktop"><summary>🛟 Claude ran now-sdk auth --list</summary>
 
 The lab's rules didn't stop it, so stop here. Don't use the Code tab for
-the lab until your instructor has looked into it. Tell them what Claude
-showed and whether you're on Mac or Windows. Meanwhile, use Claude Code in a
-terminal. <button data-set="surface:terminal">Use the terminal steps</button>
+the lab until your instructor has looked into it.
+
+Tell them what Claude showed and whether you're on Mac or Windows.
+
+Meanwhile, use Claude Code in a terminal.
+<button data-set="surface:terminal">Use the terminal steps</button>
 
 </details>
 
@@ -1181,14 +1236,19 @@ now-sdk auth --list
 When asked, type the user name `admin`, then your admin password. Nothing
 shows while you type it.
 
-✅ The list shows `[lab-pdi]`, then `host =` with your instance's address,
-and `username = admin`.
+✅ The list shows all of these:
+
+- `[lab-pdi]`;
+- `host =` with your instance's address;
+- `username = admin`.
 
 <details><summary>🛟 It prints a line starting [now-sdk] ERROR:</summary>
 
 The sign-in failed. Check that the instance is awake and the password is
-right, then run the first line again. If it says "certificate" or "fetch
-failed", or times out, that's your company's network. Tell your instructor.
+right, then run the first line again.
+
+If it says "certificate" or "fetch failed", or times out, that's your
+company's network. Tell your instructor.
 
 </details>
 
@@ -1206,11 +1266,13 @@ them.
 
 </details>
 
-You install two plugins, which are add-ons for Claude Code. The kit runs
-the lab's rituals: set routines such as shipping a pull request.
-ServiceNow's SDK plugin lets Claude look things up in the SDK's docs with
-`now-sdk explain` and read records on your instance with `now-sdk query`.
-It can't write to the instance.
+You install two plugins, which are add-ons for Claude Code:
+
+- The kit runs the lab's rituals: set routines such as shipping a pull
+  request.
+- ServiceNow's SDK plugin lets Claude look things up in the SDK's docs with
+  `now-sdk explain` and read records on your instance with `now-sdk query`.
+  It can't write to the instance.
 
 ⌨️ **Terminal:**
 
@@ -1321,8 +1383,9 @@ extra goes off for now. The lab turns it back on at the end of the day.
 
 Claude loads every plugin, MCP server, hook and instruction file you have.
 An MCP server connects Claude to another app or service. A hook is a
-command that runs by itself at set moments. For the lab, Claude should load
-only the kit and the SDK plugin.
+command that runs by itself at set moments.
+
+For the lab, Claude should load only the kit and the SDK plugin.
 
 ⌨️ **Terminal:**
 
@@ -1359,11 +1422,15 @@ git config --get core.hooksPath
 
 </details>
 
-✅ The only enabled plugins are `prove-it@prove-it`, with `Version: 0.2.2`,
-and `servicenow-sdk@claude-plugins-official`, at any version.
-`claude mcp list` says `No MCP servers configured`. `ls` prints only
-`No such file or directory` lines. `grep` prints `0`, and `git config`
-prints nothing.
+✅ The lines print all of these:
+
+- The only enabled plugins are `prove-it@prove-it`, with
+  `Version: 0.2.2`, and `servicenow-sdk@claude-plugins-official`, at any
+  version.
+- `claude mcp list` says `No MCP servers configured`.
+- `ls` prints only `No such file or directory` lines.
+- `grep` prints `0`.
+- `git config` prints nothing.
 
 <details><summary>🛟 Other plugins or MCP servers are listed</summary>
 
@@ -1394,11 +1461,14 @@ cd ~/projects/hr-case-router-notes
 
 </details>
 
-Then switch each one off by the name listed. For a plugin, run
-`claude plugin disable <name>`. For a server, run
-`claude mcp remove <name>`. A server whose name starts `plugin:` goes when
-you switch off its plugin. If one won't go or you never added it, your
-organisation set it up. Leave it in place and tell your instructor.
+Then switch each one off by the name listed:
+
+- For a plugin, run `claude plugin disable <name>`.
+- For a server, run `claude mcp remove <name>`.
+- A server whose name starts `plugin:` goes when you switch off its plugin.
+
+If one won't go or you never added it, your organisation set it up. Leave
+it in place and tell your instructor.
 
 </details>
 
@@ -1429,11 +1499,15 @@ claude plugin install prove-it@prove-it
 
 <details><summary>🛟 ls, grep or git config shows something</summary>
 
-Your own setup would steer the lab, so set it aside. Add `.off` to the end of
-each name `ls` lists, for example with `mv ~/CLAUDE.md ~/CLAUDE.md.off`. The
-lab moves them back at the end of the day. If `grep` or `git config` shows
-hooks, tell your instructor. The cleanest way round all of this is a separate
-user account on your computer.
+Your own setup would steer the lab, so set it aside.
+
+- Add `.off` to the end of each name `ls` lists, for example with
+  `mv ~/CLAUDE.md ~/CLAUDE.md.off`. The lab moves them back at the end of
+  the day.
+- If `grep` or `git config` shows hooks, tell your instructor.
+
+The cleanest way round all of this is a separate user account on your
+computer.
 
 </details>
 
@@ -1456,10 +1530,13 @@ apps.
 
 🌐 **Browser:**
 
-1. As admin, click the filter navigator, which is the box under **All**.
-   Type `sys_properties.list` and press **Enter**. In the **Name** column's
-   search box, type `glide.appcreator.company.code` and press **Enter**. Its
-   **Value** is your vendor prefix, such as `123456`.
+1. As admin, look up your vendor prefix:
+   - Click the filter navigator, which is the box under **All**.
+   - Type `sys_properties.list` and press **Enter**.
+   - In the **Name** column's search box, type
+     `glide.appcreator.company.code` and press **Enter**.
+
+   Its **Value** is your vendor prefix, such as `123456`.
 2. Your scope is `x_<prefix>_hcr_<your initials, lower case>`, such as
    `x_123456_hcr_ga`.
 
@@ -1510,11 +1587,15 @@ now-sdk init --appName "HR Case Router" --packageName hr-case-router --scopeName
 
 <details><summary>🛟 It fails, or you're not sure it worked</summary>
 
-⌨️ Run `ls ~/projects/hr-case-router/app/now.config.json`. If it's listed,
-the app exists and you can go on. If it isn't, check that your scope is
-lower case, has 18 characters at most and has no `<` or `>`. Then run
-`cd ~/projects/hr-case-router && rm -rf app` and the three lines above
-again. If it still fails, tell your instructor.
+⌨️ Run `ls ~/projects/hr-case-router/app/now.config.json`.
+
+- If it's listed, the app exists and you can go on.
+- If it isn't, check that your scope is lower case, has 18 characters at
+  most and has no `<` or `>`. Then run
+  `cd ~/projects/hr-case-router && rm -rf app` and the three lines above
+  again.
+
+If it still fails, tell your instructor.
 
 </details>
 
@@ -1544,12 +1625,14 @@ cd ~/projects/hr-case-router/app && claude
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router/app`. Then press **Ctrl+O** until the view is
-**Verbose**.
+**In the Code tab:** 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router/app`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -1586,16 +1669,25 @@ Claude may read the SDK's docs for a few minutes first. If it asks "Allow
 this read outside the working directories?", choose **Yes, and keep
 allowing any reads outside the working directories**.
 
-✅ The `now-sdk build` output ends with `Build completed successfully`. The
-email ends in `@users.noreply.github.com`, and `describe` prints `v0.2.2`.
-<span data-show="surface:terminal">**In the terminal:** then type `/exit`.</span>
+✅ Claude's output shows all of these:
+
+- The `now-sdk build` output ends with `Build completed successfully`.
+- The email ends in `@users.noreply.github.com`.
+- `describe` prints `v0.2.2`.
+
+<div data-show="surface:terminal">
+
+**In the terminal:** then type `/exit`.
+
+</div>
 
 <div data-show="os:win surface:desktop">
 
 **On Windows, in the Code tab:** ✅ in the **Verbose** view, each command
-Claude ran is marked Bash, not PowerShell. If one says PowerShell, stop
-here, because the lab's safety rules don't cover it. Tell your instructor
-and use Claude Code in Git Bash from here on.
+Claude ran is marked Bash, not PowerShell.
+
+If one says PowerShell, stop here, because the lab's safety rules don't
+cover it. Tell your instructor and use Claude Code in Git Bash from here on.
 <button data-set="surface:terminal">Use the terminal steps</button>
 
 </div>
@@ -1604,10 +1696,12 @@ and use Claude Code in Git Bash from here on.
 
 <div data-show="os:mac">
 
-**On Mac:** if npm says its cache is broken, or owned by root, open a
-second Terminal window (**Cmd+N**). ⌨️ In it, run
-`sudo chown -R $(id -u):$(id -g) ~/.npm` and type your Mac's password.
-Then paste the prompt again.
+**On Mac:** if npm says its cache is broken, or owned by root:
+
+- Open a second Terminal window (**Cmd+N**).
+- ⌨️ In it, run `sudo chown -R $(id -u):$(id -g) ~/.npm` and type your
+  Mac's password.
+- Paste the prompt again.
 
 </div>
 
@@ -1677,9 +1771,12 @@ git commit -m "chore: initial scaffold"
 
 </details>
 
-✅ The first line printed is `# Allowlist .gitignore (prove-it). Nothing is tracked unless admitted below.` The commit is **blocked**, with a line
-starting `BLOCKED: README.md has`. The REVOKE lines under it are expected,
-because the token is fake.
+✅ The first line printed is `# Allowlist .gitignore (prove-it). Nothing is tracked unless admitted below.`
+
+✅ The commit is **blocked**, with a line starting
+`BLOCKED: README.md has`.
+
+The REVOKE lines under it are expected, because the token is fake.
 
 That's the guard working, not a catch.
 
@@ -1708,9 +1805,11 @@ chmod +x .git/hooks/pre-commit
 
 </details>
 
-Run the four lines from the start of this step again. If it's blocked
-now, that's a real catch, so log it with the line below. If it still
-isn't blocked, push nothing and tell your instructor.
+Run the four lines from the start of this step again.
+
+If it still isn't blocked, push nothing and tell your instructor.
+
+If it's blocked now, that's a real catch, so log it with the line below:
 
 ```
 echo '0 | guard | the guard was not installed; once installed, it blocked the token' >> ~/projects/hr-case-router/catches.md
@@ -1751,9 +1850,10 @@ git commit -m "chore: initial scaffold"
 
 </details>
 
-✅ Git prints `[main (root-commit) …] chore: initial scaffold`. If you've
-done this step before, `git log --oneline` shows that one commit instead.
-Go on.
+✅ Git prints `[main (root-commit) …] chore: initial scaffold`.
+
+If you've done this step before, `git log --oneline` shows that one commit
+instead. Go on.
 
 ## Part 5 — Your repo's rules, and GitHub
 
@@ -1784,12 +1884,14 @@ cd ~/projects/hr-case-router/app && claude
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router/app`. Then press **Ctrl+O** until the view is
-**Verbose**.
+**In the Code tab:** 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router/app`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -1853,11 +1955,14 @@ check the file first.
 
 </details>
 
-✅ ✏️ **Editor**, `hr-case-router/app/CLAUDE.md`: Project facts show your
-scope and `lab-pdi`, and there's a Platform facts section. Learning
-checkpoints has one line under its heading, and the restatement rule under
-Brakes doesn't wait for you. The end of `hr-case-router/app/.gitignore` has
-the three allow lines.
+✅ ✏️ **Editor**, `hr-case-router/app/CLAUDE.md`:
+
+- Project facts show your scope and `lab-pdi`.
+- There's a Platform facts section.
+- Learning checkpoints has one line under its heading.
+- The restatement rule under Brakes doesn't wait for you.
+
+✅ The end of `hr-case-router/app/.gitignore` has the three allow lines.
 
 ### 17. Read every name
 
@@ -1892,11 +1997,12 @@ not the Code tab.
 
 </div>
 
-⌨️ **Terminal**, in your window. The guide fills in your instance's name.
-If you still see `dev123456`, paste your address under **Your values**, in
-**Setup**, first. The `echo` line teaches the guard to block any
-commit that names your instance. The `-n` makes `git add` a dry run, which
-shows what it would do and does nothing:
+The guide fills in your instance's name. If you still see `dev123456`,
+paste your address under **Your values**, in **Setup**, first.
+
+⌨️ **Terminal**, in your window. The `echo` line teaches the guard to block
+any commit that names your instance. The `-n` makes `git add` a dry run,
+which shows what it would do and does nothing:
 
 ```
 cd ~/projects/hr-case-router/app
@@ -1924,10 +2030,20 @@ grep -n -i 'service-now' CLAUDE.md
 
 </details>
 
-✅ `git add` lists nothing but `.gitignore`, `CLAUDE.md`, `now.config.json`,
-`package.json`, `package-lock.json`, `tsconfig.json`, `now.dev.mjs`,
-`now.prebuild.mjs`, `.eslintrc` and files under `src/`. `grep` prints
-nothing.
+✅ `git add` lists nothing but these:
+
+- `.gitignore`
+- `CLAUDE.md`
+- `now.config.json`
+- `package.json`
+- `package-lock.json`
+- `tsconfig.json`
+- `now.dev.mjs`
+- `now.prebuild.mjs`
+- `.eslintrc`
+- files under `src/`
+
+✅ `grep` prints nothing.
 
 <details><summary>🛟 Any other name is listed</summary>
 
@@ -1971,7 +2087,12 @@ Run git add . and commit on main as "chore: SDK project and CLAUDE.md".
 ```
 
 ✅ Git prints `[main …] chore: SDK project and CLAUDE.md`.
-<span data-show="surface:terminal">**In the terminal:** type `/exit`.</span>
+
+<div data-show="surface:terminal">
+
+**In the terminal:** type `/exit`.
+
+</div>
 
 ⌨️ **Terminal**, in the same window:
 
@@ -1992,14 +2113,18 @@ gh repo create hr-case-router --private --source . --remote=origin --push
 
 </details>
 
-✅ 🌐 The address `gh` prints opens your repo, marked **Private**. That was
-the last commit straight to `main`.
+✅ 🌐 The address `gh` prints opens your repo, marked **Private**.
+
+That was the last commit straight to `main`.
 
 <details><summary>🛟 It says the name already exists</summary>
 
-⌨️ Run `git remote get-url origin`. If it prints your `hr-case-router`
-repo's address, an earlier try already made the repo, so run
-`git push -u origin main`. If it prints an error, use another name:
+⌨️ Run `git remote get-url origin`.
+
+If it prints your `hr-case-router` repo's address, an earlier try already
+made the repo, so run `git push -u origin main`.
+
+If it prints an error, ⌨️ use another name:
 
 ```
 gh repo create hr-case-router-2 --private --source . --remote=origin --push

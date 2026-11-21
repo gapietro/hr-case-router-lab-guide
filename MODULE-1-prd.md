@@ -49,7 +49,9 @@ git -C ~/projects/hr-case-router-lab-guide log -1 --format='%cd %s' --date=short
 </details>
 
 ✅ The last line shows a date and a subject. They match what your
-instructor shows on the screen. If `LAB.html` is open, reload it.
+instructor shows on the screen.
+
+If `LAB.html` is open, reload it.
 
 <details><summary>🛟 It prints an error, or another date or subject</summary>
 
@@ -67,10 +69,14 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 1
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names. Then run the check again. If you can't fix one,
-tell your instructor before you go on. Every later step builds on it. They
-can help you fix it. Or they can give you a checkpoint, the finished work so far, to start
-this module from.
+Do the step each ❌ names. Then run the check again.
+
+If you can't fix one, tell your instructor before you go on. Every later
+step builds on it.
+
+- They can help you fix it.
+- Or they can give you a checkpoint, the finished work so far, to start
+  this module from.
 
 </details>
 
@@ -143,12 +149,14 @@ cp -n inputs/USE-CASE.md inputs/WORKSHOP-NOTES.md inputs/CHANGE-REQUEST.md PRD-H
 
 </details>
 
-Then 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router-prd-review`.
-Then press **Ctrl+O** until the view is **Verbose**.
+Then 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router-prd-review`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -226,10 +234,11 @@ you reply "Make the changes."
 ✅ Claude shows one numbered table, usually 10 to 40 rows. Most rows say
 Leave.
 
-Read each row's two quotes. Does the input really say that? If you want to
-change rows, do it in one reply. Give each row's number and what to do
-instead, such as `4: Leave. 9: Open decision.` Then type
-`Make the changes.` alone.
+Read each row's two quotes. Does the input really say that?
+
+- If you want to change rows, do it in one reply. Give each row's number
+  and what to do instead, such as `4: Leave. 9: Open decision.`
+- Then type `Make the changes.` alone.
 
 ✅ Claude reports the lines it added under 7. Open decisions, after the nine
 already there. It reports no other change.
@@ -298,10 +307,12 @@ caught.
 Check that there's a line for each gap that changed the PRD in step 3.
 Then reply `keep`.
 
-✅ ⌨️ In your window, the terminal you keep for ⌨️ steps, run
-`tail -n 5 ~/projects/hr-case-router/catches.md`. It shows the lines you
-kept. Each one starts with `1 | `. The 1 is this module's number, never a
-count.
+⌨️ In your window, the terminal you keep for ⌨️ steps, run
+`tail -n 5 ~/projects/hr-case-router/catches.md`.
+
+✅ It shows the lines you kept. Each one starts with `1 | `.
+
+The 1 is this module's number, never a count.
 
 ### 5. Get the customer's acceptance
 
@@ -369,10 +380,14 @@ grep -c -e 'is an open decision' -e 'Draft 2' ~/projects/hr-case-router/brief/PR
 ✅ It prints `PRD-HRCaseRouter.md`, then `0`.
 
 ✏️ **Editor:** open `hr-case-router/brief/PRD-HRCaseRouter.md`.
-✅ The line that said Draft 2 now says Accepted. Section 4 still warns that
-a run makes many AI calls, and that an agent with poor information guesses.
-Section 7 reads `None.` Section 8 names the product manager, with today's
-date.
+
+✅ You see four things:
+
+- The line that said Draft 2 now says Accepted.
+- Section 4 still warns that a run makes many AI calls, and that an agent
+  with poor information guesses.
+- Section 7 reads `None.`
+- Section 8 names the product manager, with today's date.
 
 <details><summary>🛟 Claude asks you a business question</summary>
 
@@ -386,8 +401,10 @@ date.
 <span data-show="surface:terminal">**In the terminal:** ⌨️ run
 `cd ~/projects/hr-case-router-prd-review && claude --continue`.</span>
 <span data-show="surface:desktop">**In the Code tab:** click the review
-session in the sidebar.</span> Then 🤖 **Claude:** type `Recheck sections 4, 6, 7 and 8 and the Draft 2 line
-against my request, fix them, then copy the PRD again.`
+session in the sidebar.</span>
+
+Then 🤖 **Claude:** type
+`Recheck sections 4, 6, 7 and 8 and the Draft 2 line against my request, fix them, then copy the PRD again.`
 
 </details>
 

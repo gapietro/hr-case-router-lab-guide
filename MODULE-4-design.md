@@ -58,10 +58,14 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 4
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names. Then run the check again. If you can't fix one,
-tell your instructor before you go on. Every later step builds on it. They
-can help you fix it. Or they can give you a checkpoint, the finished work so far, to start
-this module from.
+Do the step each ❌ names. Then run the check again.
+
+If you can't fix one, tell your instructor before you go on. Every later
+step builds on it.
+
+- They can help you fix it.
+- Or they can give you a checkpoint, the finished work so far, to start
+  this module from.
 
 </details>
 
@@ -88,12 +92,14 @@ claude
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router`.
-Then press **Ctrl+O** until the view is **Verbose**.
+**In the Code tab:** 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -146,14 +152,19 @@ the design record and the LLD say the same thing.
 It's in the PRD, my LLD and docs/DECISIONS.md.
 ```
 
-Then check each question's options against those files. Reply with a
-number, usually `1`. Sometimes none of the files answers a question, or
-your LLD and `docs/DECISIONS.md` disagree. That's a catch: pick the answer
-you'd defend. The override rule records when a person changes a case's
-group or service after the agent moved it. For the override rule, pick
-built after the workshop, as `docs/DECISIONS.md` says. Never press **Tab**
-or **Right arrow**. Grey text in the box is only a guess, and those keys
-would accept it.
+Then, for each question:
+
+- Check its options against those files.
+- Reply with a number, usually `1`.
+- If none of the files answers the question, or your LLD and
+  `docs/DECISIONS.md` disagree, that's a catch: pick the answer you'd
+  defend.
+- For the override rule, pick built after the workshop, as
+  `docs/DECISIONS.md` says. The override rule records when a person changes
+  a case's group or service after the agent moved it.
+
+Never press **Tab** or **Right arrow**. Grey text in the box is only a
+guess, and those keys would accept it.
 
 🤖 For gates, paste this instead of a number:
 
@@ -163,9 +174,11 @@ Use the gates in docs/DECISIONS.md, word for word.
 
 ✅ Before the read-back, it has asked about failure, security, cost,
 boundaries and gates (milestones). The read-back is the list of terms
-Claude shows you before it writes anything. It may not ask what stops the
-agent checking one route and applying another. `docs/DECISIONS.md` already
-answers that, and step 3 makes it terms.
+Claude shows you before it writes anything.
+
+It may not ask what stops the agent checking one route and applying
+another. `docs/DECISIONS.md` already answers that, and step 3 makes it
+terms.
 
 <details><summary>🛟 It skipped one</summary>
 
@@ -271,9 +284,10 @@ signed amendment, a written change to the record.
 
 </details>
 
-✅ No row is MISSING, and it answers yes six times. If it answers no,
-Claude fixes the terms and reads them back. Paste the check again until it
-answers six yeses.
+✅ No row is MISSING, and it answers yes six times.
+
+If it answers no, Claude fixes the terms and reads them back. Paste the
+check again until it answers six yeses.
 
 <details><summary>ℹ️ What C1, §7… mean</summary>
 
@@ -320,11 +334,16 @@ changing a term needs a written, signed amendment.
 
 </details>
 
-🤖 **Claude:** At the read-back, type `Confirmed.` alone. When it asks your
-name and role, type them, such as `Sam Lee, developer`.
+🤖 **Claude:**
 
-✅ In VS Code, `hr-case-router/docs/DESIGN-HRCaseRouter.md` exists. §3 has
-as many terms as the last read-back listed, and §9 has your name.
+- At the read-back, type `Confirmed.` alone.
+- When it asks your name and role, type them, such as `Sam Lee, developer`.
+
+✅ In VS Code:
+
+- `hr-case-router/docs/DESIGN-HRCaseRouter.md` exists.
+- §3 has as many terms as the last read-back listed.
+- §9 has your name.
 
 Claude may then offer to run `/prove-it:build-plan`, or to move the record
 into the repo. Not yet: you'll do both in
@@ -361,10 +380,15 @@ process caught.
 
 </details>
 
-Check that there's a `design` line for each question none of your files
-answered, and for each place your LLD and `DECISIONS.md` disagreed. Each
-line names the term it added. Terms added at the read-back aren't catches.
-If a line is about one, 🤖 reply:
+Check that there's a `design` line for:
+
+- each question none of your files answered;
+- each place your LLD and `DECISIONS.md` disagreed.
+
+Each line names the term it added.
+
+Terms added at the read-back aren't catches. If a line is about one,
+🤖 reply:
 
 ```
 Drop the lines about terms added at the read-back, then append the rest.

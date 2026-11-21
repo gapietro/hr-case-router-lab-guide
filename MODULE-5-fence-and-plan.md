@@ -54,16 +54,21 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 5
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names. Then run the check again. If you can't fix one,
-tell your instructor before you go on. Every later step builds on it. They
-can help you fix it. Or they can give you a checkpoint, the work so far ready
-made, to start this module from.
+Do the step each ❌ names. Then run the check again.
+
+If you can't fix one, tell your instructor before you go on. Every later
+step builds on it.
+
+- They can help you fix it.
+- Or they can give you a checkpoint, the finished work so far, to start
+  this module from.
 
 </details>
 
 
-1. Bring in the lab's platform-rules test, and start Claude in your app. The
-   test checks platform rules P1 to P5, P12 and P13. Platform rules are
+1. Bring in the lab's platform-rules test, and start Claude in your app.
+
+   The test checks platform rules P1 to P5, P12 and P13. Platform rules are
    things your instance really does that the build must allow for. The
    second line below copies the test in.
 
@@ -112,12 +117,14 @@ made, to start this module from.
 
    </details>
 
-   Then 🤖 start a new session
-   (<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-   In the row under the prompt box, pick the top entry under **Local**. Click
-   the folder control, choose **Open folder…** and pick
-   `~/projects/hr-case-router/app`.
-   Then press **Ctrl+O** until the view is **Verbose**.
+   Then 🤖 start a new session:
+
+   - Press
+     <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+   - In the row under the prompt box, pick the top entry under **Local**.
+   - Click the folder control, choose **Open folder…** and pick
+     `~/projects/hr-case-router/app`.
+   - Press **Ctrl+O** until the view is **Verbose**.
 
    </div>
 
@@ -226,18 +233,24 @@ made, to start this module from.
 
    </details>
 
-✅ Claude answers four yeses. The last line of `git diff` starts
-`4 files changed`. Both `grep` lines print nothing. The last command prints
-your `hr-case-router` repo's address.
+✅ You see:
+
+- Claude answers four yeses.
+- The last line of `git diff` starts `4 files changed`.
+- Both `grep` lines print nothing.
+- The last command prints your `hr-case-router` repo's address.
 
 ⛔ **Any no, a line from a `grep`, or an error from `git remote`? Don't start
-step 2.** Fix it first with its 🛟 below. The plan is built from the record as
-it stands. A gap left here becomes a guess in the plan.
+step 2.** Fix it first with its 🛟 below.
+
+The plan is built from the record as it stands. A gap left here becomes a
+guess in the plan.
 
 <details><summary>🛟 git remote prints an error</summary>
 
-Your repo isn't on GitHub yet. Pre-work step 18 didn't run. ⌨️ **Terminal**,
-in your window:
+Your repo isn't on GitHub yet. Pre-work step 18 didn't run.
+
+⌨️ **Terminal**, in your window:
 
 ```
 git switch main
@@ -286,7 +299,9 @@ Then run sub-step 4 again.
 
 Your LLD numbered the capabilities `C1`, `C2`…, the same way as the design
 record's terms. A capability is one of the nine things the PRD asks the app
-to do. Only the labels change, not what the LLD says. 🤖 **Claude:**
+to do. Only the labels change, not what the LLD says.
+
+🤖 **Claude:**
 
 ```
 In docs/LLD-HRCaseRouter.md, write each capability labelled C1 to C9 as
@@ -327,11 +342,13 @@ to the signed record, just as it signed the record.
 
 </details>
 
-Reply with a number, usually `1`. When Claude reads the changes back, type
-`Confirmed.` alone. When it asks your name and role, type them, such as
-`Sam Lee, developer`. Then type
-`Commit only docs/DESIGN-HRCaseRouter.md on docs/plan.` Run sub-steps 3
-and 4 again.
+Then:
+
+- Reply with a number, usually `1`.
+- When Claude reads the changes back, type `Confirmed.` alone.
+- When it asks your name and role, type them, such as `Sam Lee, developer`.
+- Type `Commit only docs/DESIGN-HRCaseRouter.md on docs/plan.`
+- Run sub-steps 3 and 4 again.
 
 </details>
 
@@ -352,9 +369,11 @@ here, before it becomes work.
 /prove-it:build-plan docs/DESIGN-HRCaseRouter.md
 ```
 
-It shows a **preview** and files nothing. If it asks to write `plan.json`
-one folder up, allow it. Then 🤖 paste this. Question 4 below needs its
-answer:
+It shows a **preview** and files nothing.
+
+If it asks to write `plan.json` one folder up, allow it.
+
+Then 🤖 paste this. Question 4 below needs its answer:
 
 ```
 Show each story's honest limit, one line each.
@@ -377,11 +396,16 @@ it's finished. Answer each question yes or no:
 If any answer is no, tell Claude in one line, such as `Story 4's done-when
 can't be checked.` Then answer the questions again for the new preview.
 
-Some things are a no too. A term marked "pending ruling — no test yet", or a
-story titled "Ruling: …", means the record still needs a ruling, a decision
-not made yet. A list of where the plan departs from the record is a no as
-well. For any of these, open the 🛟 below. **Never approve a preview you
-answered no to.**
+Some things are a no too:
+
+- A term marked "pending ruling — no test yet", or a story titled
+  "Ruling: …". It means the record still needs a ruling, a decision not
+  made yet.
+- A list of where the plan departs from the record.
+
+For any of these, open the 🛟 below.
+
+**Never approve a preview you answered no to.**
 
 <details><summary>ℹ️ What M1 · merge and p0… mean</summary>
 
@@ -405,11 +429,13 @@ sign what's unsigned. For each ruling, give me 3 or 4 numbered answers,
 your recommended one first.
 ```
 
-Reply with a number, usually `1`. When Claude reads the changes back, type
-`Confirmed.` alone. When it asks your name and role, type them, such as
-`Sam Lee, developer`. Then type
-`Commit only docs/DESIGN-HRCaseRouter.md on docs/plan.` Run
-`/prove-it:build-plan docs/DESIGN-HRCaseRouter.md` again.
+Then:
+
+- Reply with a number, usually `1`.
+- When Claude reads the changes back, type `Confirmed.` alone.
+- When it asks your name and role, type them, such as `Sam Lee, developer`.
+- Type `Commit only docs/DESIGN-HRCaseRouter.md on docs/plan.`
+- Run `/prove-it:build-plan docs/DESIGN-HRCaseRouter.md` again.
 
 </details>
 
@@ -426,9 +452,12 @@ before you rely on it.
 
 </details>
 
-🤖 **Claude:** type `approve`. It asks "Dry run first (recommended), or
-apply now?" Type `Dry run first.`, which files nothing. Read the count of
-writes. Then type `apply`.
+🤖 **Claude:** type `approve`. When it asks "Dry run first (recommended), or
+apply now?":
+
+- Type `Dry run first.`, which files nothing.
+- Read the count of writes.
+- Type `apply`.
 
 ✅ 🌐 GitHub's **Issues** tab lists your stories, with milestones and labels.
 
@@ -455,9 +484,14 @@ head -5 BACKLOG.md
 
 </details>
 
-✅ The diff adds just `+!/BACKLOG.md`. The number `gh` prints matches the
-one after **Blockers:** in the last line. That's your first honest count,
-checked against GitHub. It's the lab's only progress number.
+✅ You see:
+
+- The diff adds just `+!/BACKLOG.md`.
+- The number `gh` prints matches the one after **Blockers:** in the last
+  line.
+
+That's your first honest count, checked against GitHub. It's the lab's only
+progress number.
 
 ### 4. Close the session, and ship the plan
 
@@ -519,9 +553,14 @@ review and merge, with a note of where you stopped.
    git status --short --branch
    ```
 
-✅ Read every finding line. A real finding marked **fixed** is this module's
-catch. 🌐 The pull request link shows **Merged**. No issue is closed, because
-the plan isn't a story. `git status` prints only `## main...origin/main`.
+Read every finding line. A real finding marked **fixed** is this module's
+catch.
+
+✅ You see:
+
+- 🌐 The pull request link shows **Merged**. No issue is closed, because the
+  plan isn't a story.
+- `git status` prints only `## main...origin/main`.
 
 <details><summary>🛟 It stops and asks you something anyway</summary>
 

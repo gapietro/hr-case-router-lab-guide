@@ -79,10 +79,14 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 6
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names. Then run the check again. If you can't fix one,
-tell your instructor before you go on. Every later step builds on it. They
-can help you fix it. Or they can give you a checkpoint, the finished work so far, to start
-this module from.
+Do the step each ❌ names. Then run the check again.
+
+If you can't fix one, tell your instructor before you go on. Every later
+step builds on it.
+
+- They can help you fix it.
+- Or they can give you a checkpoint, the finished work so far, to start
+  this module from.
 
 </details>
 
@@ -100,12 +104,14 @@ cd ~/projects/hr-case-router/app && claude
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router/app`. Then press **Ctrl+O** until the view is
-**Verbose**.
+**In the Code tab:** 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router/app`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -153,18 +159,26 @@ compare them with Claude's tests in step 3.
 <details><summary>🔮 The answer, once you've guessed</summary>
 
 They depend on your story. It's usually the thin path, where the agent only
-leaves a note. Typical ones: with routing switched off, a new case gets a
-`skipped` row and no note. A service ticked "Never send to AI" is refused
-with a note. A run's target, the record the platform starts the run on, is
-its log row, never the case. The run log is the app's table with one row
-per run.
+leaves a note.
 
-Unusual ones: a case whose text comes back empty is an error, not empty
-text. A case with `transferred_from` set starts no run. If the agent calls
-`leave_note`, its tool for writing the note, twice in one run, the second
-call is refused. Bugs hide in unusual cases, because builders test the path
-they pictured. Each test must fail before the code exists. A test you never
-saw fail proves nothing.
+Typical ones:
+
+- With routing switched off, a new case gets a `skipped` row and no note.
+- A service ticked "Never send to AI" is refused with a note.
+- A run's target, the record the platform starts the run on, is its log
+  row, never the case. The run log is the app's table with one row per run.
+
+Unusual ones:
+
+- A case whose text comes back empty is an error, not empty text.
+- A case with `transferred_from` set starts no run.
+- If the agent calls `leave_note`, its tool for writing the note, twice in
+  one run, the second call is refused.
+
+Bugs hide in unusual cases, because builders test the path they pictured.
+
+Each test must fail before the code exists. A test you never saw fail
+proves nothing.
 
 </details>
 
@@ -207,19 +221,27 @@ grade counts a term as tested only when a test names it.
 <details><summary>🛟 It says the top story is a ruling, not code</summary>
 
 A ruling story asks for a decision, not for code. `<n>` is the story's
-number, from step 1. 🤖 **Claude:** type `/clear`. Then type
-`/prove-it:design-challenge amend docs/DESIGN-HRCaseRouter.md`. When it
-asks what changed, paste this:
+number, from step 1.
+
+🤖 **Claude:**
+
+- Type `/clear`.
+- Type `/prove-it:design-challenge amend docs/DESIGN-HRCaseRouter.md`.
+
+🤖 **Claude:** when it asks what changed, paste this:
 
 ```
 Story #<n> is a ruling. Rule its term. For each question, give me 3 or 4
 numbered answers, your recommended one first.
 ```
 
-Reply with a number, usually `1`. At the read-back, where Claude reads the
-change back to you, type `Confirmed.` alone. When it asks your name and
-role, type them, such as `Sam Lee, developer`. Then paste this, then the
-ship-it prompt from [step 5](#5-ship-it), then `go`:
+- Reply with a number, usually `1`.
+- At the read-back, where Claude reads the change back to you, type
+  `Confirmed.` alone.
+- When it asks your name and role, type them, such as `Sam Lee, developer`.
+
+🤖 **Claude:** then paste this, then the ship-it prompt from
+[step 5](#5-ship-it), then `go`:
 
 ```
 Commit only docs/DESIGN-HRCaseRouter.md, on a new branch docs/ruling,
@@ -259,8 +281,10 @@ Never work on main. Create a new branch for this story first.
 
 </details>
 
-✅ The tests ran and **failed**. Read the five bullets and check them
-against your design. Then compare the tests with your three guesses.
+✅ The tests ran and **failed**.
+
+Read the five bullets and check them against your design. Then compare the
+tests with your three guesses.
 
 <details><summary>🛟 A bullet or a test is wrong</summary>
 
@@ -307,9 +331,13 @@ errors.
 
 </details>
 
-✏️ **Editor:** if it names a file, open it. ✅ No check function in it uses
-`GlideRecord`, `gs.` or `current.`. If it says "none in this story", the
-checks come in a later story. Move on.
+Read Claude's one line about the plain-code check:
+
+- **It names a file:** ✏️ **Editor:** open the file.
+
+  ✅ No check function in it uses `GlideRecord`, `gs.` or `current.`.
+- **It says "none in this story":** the checks come in a later story. Move
+  on.
 
 ### 5. Ship it
 
@@ -349,9 +377,13 @@ and merges. That takes a few minutes.
 ✅ Read every finding line. The ones marked **fixed** are this step's catch.
 Claude was sure of that code, and the review found it wrong.
 
-🌐 **Browser:** open the pull request link. ✅ It shows **Merged**. In its
-description, click the issue number after **Closes**. ✅ The issue shows
-**Closed**.
+🌐 **Browser:** open the pull request link.
+
+✅ It shows **Merged**.
+
+In its description, click the issue number after **Closes**.
+
+✅ The issue shows **Closed**.
 
 <details><summary>🛟 It stops and asks you something anyway</summary>
 
@@ -413,17 +445,25 @@ caffeinate -i
 
 <div data-show="os:win">
 
-**On Windows:** open **Settings > System > Power & battery**, then
-**Screen, sleep, & hibernate timeouts**. Note what **When plugged in, put
-my device to sleep after** says. Then set it to **Never**. If your company
-locks this setting, tell your instructor.
+**On Windows:**
+
+- Open **Settings > System > Power & battery**, then **Screen, sleep, &
+  hibernate timeouts**.
+- Note what **When plugged in, put my device to sleep after** says.
+- Set it to **Never**.
+
+If your company locks this setting, tell your instructor.
 
 </div>
 
-🤖 **Claude:** paste this, type `go` after it, and press **Enter**. A
-sub-agent is a helper Claude starts for part of the work. A git worktree is
-a separate working copy of your repo, in its own folder. On a Pro plan,
-type `Use one sub-agent at a time.` at the end, before `go`.
+The prompt uses two words you may not know:
+
+- A sub-agent is a helper Claude starts for part of the work.
+- A git worktree is a separate working copy of your repo, in its own
+  folder.
+
+🤖 **Claude:** paste this, type `go` after it, and press **Enter**. On a
+Pro plan, type `Use one sub-agent at a time.` at the end, before `go`.
 
 ```
 Run the build loop with sub-agents through the open stories, until a new
@@ -493,12 +533,23 @@ what was merged.
 </details>
 
 🌐 **Browser:** in your repo's **Pull requests** tab, click **Closed**. Open
-two merged ones: `apply_route`'s and Reroute's. `apply_route` is the
-agent's tool that moves a case. Reroute is the button that routes a case
-again. ✅ Each has five bullets, a failing run then a passing run, and its
-review findings. Each finding is marked fixed, filed or not a problem.
-Between them, the bullets say three things. Only `apply_route` changes a
-case. It runs every check itself. Reroute only queues a run.
+two merged ones:
+
+- `apply_route`'s. `apply_route` is the agent's tool that moves a case.
+- Reroute's. Reroute is the button that routes a case again.
+
+✅ Each has:
+
+- five bullets;
+- a failing run, then a passing run;
+- its review findings. Each finding is marked fixed, filed or not a
+  problem.
+
+Between them, the bullets say three things:
+
+- Only `apply_route` changes a case.
+- It runs every check itself.
+- Reroute only queues a run.
 
 <details><summary>🛟 One has no failing run, or no findings</summary>
 
@@ -511,12 +562,18 @@ run or no findings.
 
 </details>
 
-About 15 minutes after lunch, the batch ends with its table. ✅ It shows these three merged:
-`apply_route` with its checks and the group move, Reroute, and the seed
-data. The seed data is the records the app brings with it: two routing
-rules, and a knowledge article the agent reads. Skipped stories and register
-issues are expected. A register issue is a watch-list issue that blocks no
-gate. Both get their turn after the workshop.
+About 15 minutes after lunch, the batch ends with its table.
+
+✅ It shows these three merged:
+
+- `apply_route` with its checks and the group move;
+- Reroute;
+- the seed data. The seed data is the records the app brings with it: two
+  routing rules, and a knowledge article the agent reads.
+
+Skipped stories and register issues are expected. A register issue is a
+watch-list issue that blocks no gate. Both get their turn after the
+workshop.
 
 <details><summary>🛟 No table yet</summary>
 
@@ -556,10 +613,11 @@ gate. Both get their turn after the workshop.
 <details><summary>🛟 The batch has ended, and one of those three isn't merged</summary>
 
 Tell your instructor. They give you their finished build and its scope, the
-app's own name prefix on the instance. At step 8, install it **instead of**
-your own app, with the commands they give you. Never install both, or two
-routers run on every case. In steps 9 to 11, use that scope wherever the
-steps say `<SCOPE>`.
+app's own name prefix on the instance.
+
+- At step 8, install it **instead of** your own app, with the commands they
+  give you. Never install both, or two routers run on every case.
+- In steps 9 to 11, use that scope wherever the steps say `<SCOPE>`.
 
 </details>
 
@@ -1242,12 +1300,16 @@ an answer, and every run ends `timed_out`. As admin:
 
 1. Do step 9's sub-step 4 again, and check its ✅: the **Testing** page in
    AI Agent Studio shows no banner.
-2. Prove the AI answers. On that page, under **Name of the AI agent or
-   agentic workflow**, choose `HR case router`. In **Task**, type
-   `Route the HR case of run test: use test as run_id in every tool call.`
-   and click **Continue to test chat response**. The agent replies within
-   a minute. There's no run called "test", so expect it to say it can't
-   route anything: that's fine. Any reply shows the AI is on.
+2. Prove the AI answers. On that page:
+   - Under **Name of the AI agent or agentic workflow**, choose
+     `HR case router`.
+   - In **Task**, type
+     `Route the HR case of run test: use test as run_id in every tool call.`
+   - Click **Continue to test chat response**.
+
+   The agent replies within a minute. There's no run called "test", so
+   expect it to say it can't route anything: that's fine. Any reply shows
+   the AI is on.
 3. Close the router's conversations again, with the script above. Each timed-out run left one open, and it holds every
    later run.
 4. Open one case and click **Reroute**. Wait for its note before you
@@ -1517,9 +1579,13 @@ caught.
 
 </details>
 
-Look for a `review` line for each fixed review finding, step 5's included.
-Look for a `test` line for each defect step 11 found. Then reply `keep`, or
-say what to change.
+Read the lines Claude shows:
+
+- Look for a `review` line for each fixed review finding, step 5's
+  included.
+- Look for a `test` line for each defect step 11 found.
+
+Then reply `keep`, or say what to change.
 
 ⌨️ **Terminal**, in your window:
 

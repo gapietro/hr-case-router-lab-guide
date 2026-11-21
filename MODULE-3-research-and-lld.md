@@ -56,10 +56,14 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 3
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names. Then run the check again. If you can't fix one,
-tell your instructor before you go on. Every later step builds on it. They
-can help you fix it. Or they can give you a checkpoint, the finished work so far, to start
-this module from.
+Do the step each ❌ names. Then run the check again.
+
+If you can't fix one, tell your instructor before you go on. Every later
+step builds on it.
+
+- They can help you fix it.
+- Or they can give you a checkpoint, the finished work so far, to start
+  this module from.
 
 </details>
 
@@ -156,12 +160,14 @@ cp ../hr-case-router-lab-guide/files/DECISIONS.md docs/
 
 </details>
 
-Then 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**.
-Click the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router`.
-Then press **Ctrl+O** until the view is **Verbose**.
+Then 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -186,14 +192,21 @@ because your instance checks this list next.
 </details>
 
 ✅ Claude lists eight rows of `DECISIONS.md`. It may split them into 20 or
-more numbered facts. Among them are Transfer Case
-(`ReclassifyCaseTransfer`) and the start in the background
-(`AiAgentRuntimeUtil`). Others are the tools running as `hr.router`, its
-roles, and P12. Two are about the assignment group: the assignment rules
-for an empty group, and the `list_edit` rule, the app's rule that stops
-lists changing the group. The last is ServiceNow's "Predict service and
-transfer HR Cases" workflow. Its triggers are off, so it never starts, and
-the app doesn't use it. The design record you write in Module 4 says why.
+more numbered facts. Among them are:
+
+- Transfer Case (`ReclassifyCaseTransfer`);
+- the start in the background (`AiAgentRuntimeUtil`);
+- the tools running as `hr.router`;
+- the roles of `hr.router`;
+- P12;
+- the assignment rules for an empty group;
+- the `list_edit` rule, the app's rule that stops lists changing the
+  group;
+- ServiceNow's "Predict service and transfer HR Cases" workflow.
+
+That workflow's triggers are off, so it never starts, and the app doesn't
+use it. The design record you write in Module 4 says why.
+
 Compare the list with your guess.
 
 <details><summary>ℹ️ What P12 means</summary>
@@ -251,25 +264,37 @@ honest gap isn't reported as a contradiction.
 
 </details>
 
-If it asks permission for `now-sdk query --auth lab-pdi`, choose **Yes**.
-Don't choose "Yes, and don't ask again". An alias is the short name of an
-instance login. For any other alias, or for `now-sdk auth`, choose **No**.
+Claude may ask permission:
+
+- For `now-sdk query --auth lab-pdi`, choose **Yes**. Don't choose "Yes,
+  and don't ask again".
+- For any other alias, or for `now-sdk auth`, choose **No**. An alias is
+  the short name of an instance login.
 
 <div data-show="surface:terminal">
 
-**In the terminal:** ✅ Under each fact, a ⏺ line runs `query` with
-`--auth lab-pdi` on the table the fact is about. The rows it returned are
-under it, on ⎿ lines. If it says `… +N lines`, press **Ctrl+O** to see them
-all. The rows are the evidence. The mark is only Claude's reading of them.
+**In the terminal:** ✅ Under each fact:
+
+- A ⏺ line runs `query` with `--auth lab-pdi` on the table the fact is
+  about.
+- The rows it returned are under it, on ⎿ lines.
+
+If it says `… +N lines`, press **Ctrl+O** to see them all.
+
+The rows are the evidence. The mark is only Claude's reading of them.
 
 </div>
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** ✅ In the **Verbose** view, each fact has a `query`
-call with `--auth lab-pdi` on the table it's about. The rows it printed are
-under it. To get that view, press **Ctrl+O** until it shows. The rows are
-the evidence. The mark is only Claude's reading of them.
+**In the Code tab:** ✅ In the **Verbose** view, under each fact:
+
+- A `query` call has `--auth lab-pdi`, on the table the fact is about.
+- The rows it printed are under it.
+
+To get that view, press **Ctrl+O** until it shows.
+
+The rows are the evidence. The mark is only Claude's reading of them.
 
 </div>
 
@@ -297,25 +322,30 @@ instance.
 
 </details>
 
-✏️ **Editor:** open `hr-case-router/research-script.js`. ✅ Every word just
-before a `(`, and every word after `new`, is one of those calls. `if (`,
-`while (` and `for (` are fine too. If you find another word, don't run the
-script. Type `Read-only, please: use only the allowed calls.` and check
-again.
+✏️ **Editor:** open `hr-case-router/research-script.js`.
+
+✅ Every word just before a `(`, and every word after `new`, is one of
+those calls. `if (`, `while (` and `for (` are fine too.
+
+If you find another word, don't run the script. Type
+`Read-only, please: use only the allowed calls.` and check again.
 
 🌐 **Browser**, as admin: paste this into the address bar and press
 **Enter**:
 
 `https://dev123456.service-now.com/nav_to.do?uri=sys.scripts.modern.do`
 
-The **Scripts - Background** page opens. In the Editor,
-copy the script with
-<kbd data-mac="Cmd+A" data-win="Ctrl+A">Cmd+A (Mac) · Ctrl+A (Windows)</kbd>
-and then
-<kbd data-mac="Cmd+C" data-win="Ctrl+C">Cmd+C (Mac) · Ctrl+C (Windows)</kbd>.
-Paste it into the page and click **Run script**. Copy the output lines, but
-leave out any URL or instance name. 🤖 **Claude:** paste this, then the
-lines:
+The **Scripts - Background** page opens.
+
+- In the Editor, copy the script with
+  <kbd data-mac="Cmd+A" data-win="Ctrl+A">Cmd+A (Mac) · Ctrl+A (Windows)</kbd>
+  and then
+  <kbd data-mac="Cmd+C" data-win="Ctrl+C">Cmd+C (Mac) · Ctrl+C (Windows)</kbd>.
+- Paste it into the page.
+- Click **Run script**.
+- Copy the output lines, but leave out any URL or instance name.
+
+🤖 **Claude:** paste this, then the lines:
 
 ```
 Mark each fact from the script output below only: confirmed,
@@ -336,25 +366,21 @@ look up stays unchecked, so no mark rests on Claude's memory.
 <details><summary>🛟 One fact can't be queried</summary>
 
 Look it up by hand, then tell Claude what you found. For example:
-`Fact 3: contradicted. My instance shows …`. Each line below names a fact,
-then the list to open for it.
+`Fact 3: contradicted. My instance shows …`.
 
-- `AiAgentRuntimeUtil`: `sys_script_include.list`. Its **Accessible from**
-  reads "All application scopes".
-- The "AI Agent Background" channel: `sys_cs_channel.list`.
-- `hr.router`: `sys_user.list`. Open the user and read its **Roles** and
-  **Groups** tabs.
-- HR services and their groups: `sn_hr_core_service.list`.
-- Assignment rules: `sysrule_assignment.list`, where **Table** starts with
-  `sn_hr`.
-- List-edit rules: `sys_security_acl.list`, where **Name** starts with
-  `sn_hr_core_case` and **Operation** is `list_edit`.
-- The Predict workflow: `sn_aia_usecase.list`, where **Name** is "Predict
-  service and transfer HR Cases". Its triggers:
-  `sn_aia_trigger_configuration.list`, where **Usecase** is that name. Each
-  shows **Active** false.
-- Transfer methods, `ReclassifyCaseTransfer` among them:
-  `sn_hr_core_transfer_case_config.list`.
+Each row names a fact, the list to open for it, and what to read there.
+
+| Fact | List to open | What to read |
+|---|---|---|
+| `AiAgentRuntimeUtil` | `sys_script_include.list` | Its **Accessible from** reads "All application scopes" |
+| The "AI Agent Background" channel | `sys_cs_channel.list` | The channel is listed |
+| `hr.router` | `sys_user.list` | Open the user and read its **Roles** and **Groups** tabs |
+| HR services and their groups | `sn_hr_core_service.list` | Each service and its group |
+| Assignment rules | `sysrule_assignment.list` | The rows where **Table** starts with `sn_hr` |
+| List-edit rules | `sys_security_acl.list` | The rows where **Name** starts with `sn_hr_core_case` and **Operation** is `list_edit` |
+| The Predict workflow | `sn_aia_usecase.list` | The row where **Name** is "Predict service and transfer HR Cases" |
+| The Predict workflow's triggers | `sn_aia_trigger_configuration.list` | The rows where **Usecase** is that name. Each shows **Active** false |
+| Transfer methods | `sn_hr_core_transfer_case_config.list` | `ReclassifyCaseTransfer` is among them |
 
 </details>
 
@@ -370,14 +396,21 @@ way the design rests only on what you've checked.
 </details>
 
 For each fact, read the rows first, then the mark. Correct the mark if you
-find a query in the wrong table, no rows marked `confirmed`, or a row that
-says the opposite. Write each correction in one line, such as
-`Fact 2: contradicted. The rows show no "AI Agent Background" channel.` or
-`Fact 6: couldn't check. The query read sys_script; the fact is about a
-workflow.`
+find:
+
+- a query in the wrong table;
+- no rows marked `confirmed`;
+- a row that says the opposite.
+
+Write each correction in one line, such as:
+
+- `Fact 2: contradicted. The rows show no "AI Agent Background" channel.`
+- `Fact 6: couldn't check. The query read sys_script; the fact is about a workflow.`
 
 🤖 **Claude:** send all your corrections in one message. If every mark held,
-skip this. When Claude has answered, paste:
+skip this.
+
+When Claude has answered, paste:
 
 ```
 Write every fact you checked to research-facts.md in this folder: its
@@ -397,11 +430,17 @@ design relies on.
 
 </details>
 
-✏️ **Editor:** open `hr-case-router/research-facts.md`. ✅ Every fact you
-checked is there, and each mark matches its rows. Each `production only`
-fact cites TECH-NOTES.md, not a query. A `production only` fact is true in
-the customer's notes but not on your instance. Compare the facts with your
-guess in step 1.
+✏️ **Editor:** open `hr-case-router/research-facts.md`.
+
+✅ You see:
+
+- Every fact you checked is there.
+- Each mark matches its rows.
+- Each `production only` fact cites TECH-NOTES.md, not a query. A
+  `production only` fact is true in the customer's notes but not on your
+  instance.
+
+Compare the facts with your guess in step 1.
 
 ### 4. Draft the LLD
 
@@ -445,14 +484,21 @@ so.
 </details>
 
 ✅ The summary covers capabilities 1 to 9, the numbered things the PRD says
-the app must do. Capability 3 is the agent and its three tools. Only
-`apply_route` moves a case, after capability 4's checks. Capability 7's
-override rule comes after the workshop. Section 7 is `research-facts.md`.
+the app must do. In it:
+
+- Capability 3 is the agent and its three tools.
+- Only `apply_route` moves a case, after capability 4's checks.
+- Capability 7's override rule comes after the workshop.
+- Section 7 is `research-facts.md`.
+
 Fix the summary if it needs it. Then type `Looks right. Write the file.`
 
-✏️ **Editor:** open `hr-case-router/docs/LLD-HRCaseRouter.md`. ✅ Its
-tools table has `read_case`, `apply_route` and `leave_note`. Section 7
-matches `research-facts.md`, fact for fact.
+✏️ **Editor:** open `hr-case-router/docs/LLD-HRCaseRouter.md`.
+
+✅ You see:
+
+- Its tools table has `read_case`, `apply_route` and `leave_note`.
+- Section 7 matches `research-facts.md`, fact for fact.
 
 <details><summary>ℹ️ What D1, §7 and C3 mean</summary>
 
@@ -498,9 +544,13 @@ caught.
 
 </details>
 
-Keep a `research` line for each claim your instance contradicted or didn't
-support, if it changed your LLD. Keep one too for each mark you corrected
-against its rows in step 3. Then reply `keep`.
+Keep a `research` line for:
+
+- each claim your instance contradicted or didn't support, if it changed
+  your LLD;
+- each mark you corrected against its rows in step 3.
+
+Then reply `keep`.
 
 ✅ ⌨️ `tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you
 kept. <span data-show="surface:terminal">**In the terminal:** then type

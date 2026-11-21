@@ -143,9 +143,14 @@ To see them all, click **Show words**. The same button is at the top of
 **Notes**.
 
 **Short labels:** Claude writes short labels to point at things. For
-example, `C3` is the third rule in your design record. `P8` is platform rule
-8, and `§7` is section 7 of a document. The [appendix](APPENDIX.md) explains
-each kind. Every step that uses one also has an ℹ️ box.
+example:
+
+- `C3` is the third rule in your design record.
+- `P8` is platform rule 8.
+- `§7` is section 7 of a document.
+
+The [appendix](APPENDIX.md) explains each kind. Every step that uses one
+also has an ℹ️ box.
 
 To see more or less help at any time, change **Detail level** in the top bar.
 
@@ -164,10 +169,16 @@ You'll type three kinds of things there:
 
 - **A line starting with `/`.** This runs a ready-made command instead of
   asking Claude a question. For example, `/status` shows which version of
-  Claude Code you have. The lab's own commands start with `/prove-it:`.
-  Each one runs a skill. A skill is a set of step-by-step instructions that
-  Claude follows. Type `/` to see the list. Keep typing to narrow it, then
-  press **Enter**.
+  Claude Code you have.
+
+  The lab's own commands start with `/prove-it:`. Each one runs a skill. A
+  skill is a set of step-by-step instructions that Claude follows.
+
+  To pick a command:
+
+  - Type `/` to see the list.
+  - Keep typing to narrow it.
+  - Press **Enter**.
 
 - **An answer to Claude's question.** Sometimes Claude stops to ask you
   something, such as whether to keep a line. Reply with the word the step
@@ -184,18 +195,25 @@ must be typed exactly. For example, type `Confirmed.` with its period.
 **In the terminal:** When Claude runs a command, Claude Code shows the
 command on a line that starts with ⏺. What the command printed appears
 under it on lines that start with ⎿. Trust that output, not Claude's
-summary of it. If you see `… +N lines`, press **Ctrl+O** to see everything.
+summary of it.
+
+If you see `… +N lines`, press **Ctrl+O** to see everything.
 
 </div>
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** In each new session, switch the view to **Verbose**.
-Open the session menu with the arrow beside the session title. Choose
-**Transcript view**, then choose **Verbose**. You can also press **Ctrl+O**
-until it appears. The normal view folds each command into a summary.
-**Verbose** shows everything Claude runs and what each command printed.
-Trust that output, not Claude's summary of it.
+**In the Code tab:** In each new session, switch the view to **Verbose**:
+
+- Open the session menu with the arrow beside the session title.
+- Choose **Transcript view**.
+- Choose **Verbose**.
+
+You can also press **Ctrl+O** until it appears.
+
+The normal view folds each command into a summary. **Verbose** shows
+everything Claude runs and what each command printed. Trust that output,
+not Claude's summary of it.
 
 </div>
 
@@ -234,10 +252,14 @@ else, reply `no, stop`.
 
 </div>
 
-When Claude does ask, read the request. Then find it in the table below or
-type the command into **Search the guide** at the top of the page. If two
-rows match, **No** wins. The one exception is the grade's own install to
-`lab-pdi`. It has its own row.
+When Claude does ask:
+
+- Read the request.
+- Find it in the table below, or type the command into **Search the guide**
+  at the top of the page.
+
+If two rows match, **No** wins. The one exception is the grade's own install
+to `lab-pdi`. It has its own row.
 
 | The request | Answer | Why |
 |---|---|---|

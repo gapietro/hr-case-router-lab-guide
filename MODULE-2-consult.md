@@ -57,10 +57,14 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 2
 
 <details><summary>🛟 It prints a ❌</summary>
 
-Do the step each ❌ names. Then run the check again. If you can't fix one,
-tell your instructor before you go on. Every later step builds on it. They
-can help you fix it. Or they can give you a checkpoint, the finished work so far, to start
-this module from.
+Do the step each ❌ names. Then run the check again.
+
+If you can't fix one, tell your instructor before you go on. Every later
+step builds on it.
+
+- They can help you fix it.
+- Or they can give you a checkpoint, the finished work so far, to start
+  this module from.
 
 </details>
 
@@ -70,18 +74,28 @@ in your head. You'll check it in step 5.
 
 <details><summary>🔮 The answer, once you've guessed</summary>
 
-Only routing needs AI. That's capability 3's agent. Reroute, capability 5,
-runs the same agent again on a case. The Reroute button itself is plain
-code. The agent may change nothing. It proposes a service and a group, and
-its tools do the writing.
+**Which capabilities need AI?** Only routing. That's capability 3's agent.
+Reroute, capability 5, runs the same agent again on a case. The Reroute
+button itself is plain code.
+
+**What may the agent change?** Nothing. It proposes a service and a group,
+and its tools do the writing.
 
 AI is good at reading case text that people wrote in their own words. A
-write must be predictable and testable, so it belongs to plain code. The
-`apply_route` tool runs every check itself, and only then moves the case.
-It checks the routing rules, the group's access, restricted services and
-the 0.7 confidence threshold. The rules, the caps, the log and the weekly
-numbers are plain code too. The caps are the limits on runs per hour and
-per day. AI proposes. Plain code decides.
+write must be predictable and testable, so it belongs to plain code.
+
+The `apply_route` tool runs every check itself, and only then moves the
+case. It checks:
+
+- the routing rules;
+- the group's access;
+- restricted services;
+- the 0.7 confidence threshold.
+
+The rules, the caps, the log and the weekly numbers are plain code too. The
+caps are the limits on runs per hour and per day.
+
+AI proposes. Plain code decides.
 
 </details>
 
@@ -110,12 +124,14 @@ cd ~/projects/hr-case-router && claude
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** 🤖 start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>).
-In the row under the prompt box, pick the top entry under **Local**. Click
-the folder control, choose **Open folder…** and pick
-`~/projects/hr-case-router`.
-Then press **Ctrl+O** until the view is **Verbose**.
+**In the Code tab:** 🤖 start a new session:
+
+- Press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router`.
+- Press **Ctrl+O** until the view is **Verbose**.
 
 </div>
 
@@ -135,19 +151,27 @@ instructor. Then:
 
 <div data-show="surface:terminal">
 
-**In the terminal:** type `/exit`. Run `rm CONSULT.md`, then `claude`.
-Type `/prove-it:consult` again.
+**In the terminal:**
+
+- Type `/exit`.
+- Run `rm CONSULT.md`.
+- Run `claude`.
+- Type `/prove-it:consult` again.
 
 </div>
 
 <div data-show="surface:desktop">
 
-**In the Code tab:** ⌨️ in your window, run
-`rm ~/projects/hr-case-router/CONSULT.md`. Start a new session
-(<kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>)
-on `~/projects/hr-case-router`. Use the top **Local** entry and **Open
-folder…**, under the prompt box. Press **Ctrl+O** until the view is
-**Verbose**. Then type `/prove-it:consult` again.
+**In the Code tab:**
+
+- ⌨️ In your window, run `rm ~/projects/hr-case-router/CONSULT.md`.
+- Start a new session: press
+  <kbd data-mac="Cmd+N" data-win="Ctrl+N">Cmd+N (Mac) · Ctrl+N (Windows)</kbd>.
+- In the row under the prompt box, pick the top entry under **Local**.
+- Click the folder control, choose **Open folder…** and pick
+  `~/projects/hr-case-router`.
+- Press **Ctrl+O** until the view is **Verbose**.
+- Type `/prove-it:consult` again.
 
 </div>
 
@@ -186,8 +210,11 @@ brief, for you to check against the PRD.
 
 </details>
 
-It restates the brief. Read each bullet against the PRD. If one is wrong,
-tell it which one and why. Then type `confirmed` on its own.
+It restates the brief.
+
+- Read each bullet against the PRD.
+- If one is wrong, tell it which one and why.
+- Then type `confirmed` on its own.
 
 ### 4. Let it run
 
@@ -199,8 +226,11 @@ to its job: advice only, no code and no design.
 
 </details>
 
-It runs for several minutes and writes only `CONSULT.md`. At the end it
-suggests `/prove-it:design-challenge`. Don't run it: research comes first.
+It runs for several minutes and writes only `CONSULT.md`.
+
+At the end it suggests `/prove-it:design-challenge`. Don't run it: research
+comes first.
+
 If the suggestion shows as grey text, ignore it. **Tab** or **Right arrow**
 would accept it.
 
@@ -211,7 +241,9 @@ ls -A ~/projects/hr-case-router
 ```
 
 ✅ It lists `app`, `brief`, `catches.md` and `CONSULT.md`, and nothing
-else. It may also list `.claude`.
+else.
+
+It may also list `.claude`.
 
 <details><summary>🛟 It lists something else</summary>
 
@@ -223,9 +255,12 @@ the name the list shows. For example:
 
 <details><summary>🛟 It shows an error, or stalls</summary>
 
-Press **Esc**, then type `/prove-it:consult` on its own. Paste step 3's
-answers again. When it restates the brief, type `confirmed`. If it fails a
-third time, stop and ask your instructor.
+- Press **Esc**.
+- Type `/prove-it:consult` on its own.
+- Paste step 3's answers again.
+- When it restates the brief, type `confirmed`.
+
+If it fails a third time, stop and ask your instructor.
 
 </details>
 
@@ -242,22 +277,30 @@ checked. They become your research list in the next module.
 
 ✏️ **Editor:** open `hr-case-router/CONSULT.md`. Don't change it.
 
-✅ It has a row for each capability. Each row says agent, tool or plain
-code, with a reason. An agent is AI that plans its own steps. After the
-rows come **Data and ownership**, **Cost** and **Readiness**. **VERIFY**
-marks what you'll check on your instance in Module 3.
+✅ You see three things:
 
-Look for capability 3's choice and any requirement that isn't **ready**.
-Look too for each write's owner, the part of the app that makes that
-change. Compare what you find with your guess.
+- A row for each capability. Each row says agent, tool or plain code, with
+  a reason. An agent is AI that plans its own steps.
+- After the rows, **Data and ownership**, **Cost** and **Readiness**.
+- **VERIFY** marks. They show what you'll check on your instance in
+  Module 3.
+
+Look for:
+
+- capability 3's choice;
+- any requirement that isn't **ready**;
+- each write's owner, the part of the app that makes that change.
+
+Compare what you find with your guess.
 
 <details><summary>ℹ️ What the row numbers mean</summary>
 
 Each row of `CONSULT.md` is one of the PRD's nine capabilities. They're
 numbered as in section 3 of the PRD, so row 3 is capability 3, routing a
-new case. If Claude writes `C3` here, it means capability 3. From Module 4
-on, `C3` means rule 3 of the design record you write there, never a
-capability.
+new case.
+
+If Claude writes `C3` here, it means capability 3. From Module 4 on, `C3`
+means rule 3 of the design record you write there, never a capability.
 [All the labels](APPENDIX.md#capabilities-1-to-9-no-letter).
 
 </details>
@@ -328,12 +371,15 @@ caught.
 </details>
 
 Keep a line for each gap in the PRD that the consult found, before step 6
-or after it. Your own answers and corrections aren't catches. Then reply
-`keep`.
+or after it. Your own answers and corrections aren't catches.
+
+Then reply `keep`.
 
 ✅ ⌨️ `tail -n 5 ~/projects/hr-case-router/catches.md` shows the lines you
-kept. <span data-show="surface:terminal">**In the terminal:** then type
-`/exit` in Claude.</span>
+kept.
+
+<span data-show="surface:terminal">**In the terminal:** then type `/exit`
+in Claude.</span>
 
 ## Results
 
