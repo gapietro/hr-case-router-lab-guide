@@ -10,6 +10,9 @@ working on plain data. ServiceNow is a thin layer around them, so their tests
 need no instance. **The catch:** a work note can look right and still come
 from the wrong case. Does the live check prove the agent read this one?
 
+One story is one pull request. Working in small batches like this keeps
+each change quick to test and review.
+
 <details><summary>ℹ️ Why are we doing this?</summary>
 
 - **In real work:** every story is built the same way. The tests come first,
@@ -327,6 +330,9 @@ passing run and the build's result before anything is merged.
 
 ✅ In Claude's output, `npm test` passes and `now-sdk build` ends with no
 errors.
+
+`npm test` runs every test, not only this story's. Something that worked
+before and is broken by a later change is a regression.
 
 <details><summary>🛟 A test fails or the build has errors</summary>
 
@@ -740,6 +746,10 @@ instance. It's the `scope` line in `app/now.config.json`, such as
 
    ✅ The list shows `<SCOPE>.enabled` with **Value** `true`.
 
+   The on switch is a system property, one named setting kept on your
+   instance. A setting that switches a feature on or off without changing
+   the code is a feature flag.
+
 <details><summary>🛟 It's read-only, with a banner about another application</summary>
 
 Click the banner's link to switch to your app. Set **Value** and click
@@ -762,6 +772,10 @@ globe icon in your instance's header.
    `sys_trigger.list`. Filter **Name** by `HR case router dispatcher`.
 
    ✅ One row. The job runs every minute.
+
+   The dispatcher is a scheduled job, a script your instance runs by
+   itself. For each new case it starts your app's agentic workflow, the
+   record that names the task and its AI agent.
 
 <details><summary>🛟 No row</summary>
 

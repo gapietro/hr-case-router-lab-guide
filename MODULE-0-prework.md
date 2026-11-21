@@ -151,7 +151,8 @@ that user.
 
    ✅ It's listed.
 
-   The agent runs as this user, so never impersonate it or change it.
+   The agent runs as this user, so never impersonate it or change it. It
+   has the roles an AI user needs and no more. That's least privilege.
 
    Then search for `hr.demo` the same way.
 
@@ -988,6 +989,9 @@ node ~/projects/hr-case-router-lab-guide/files/merge-claude-settings.mjs
 
 ✅ It prints `Lab settings in place.`
 
+Claude Code keeps its settings in JSON files. JSON is a plain-text way to
+write data, as names and their values.
+
 ### 6. Sign in to Claude Code
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
@@ -1675,6 +1679,9 @@ allowing any reads outside the working directories**.
 - The email ends in `@users.noreply.github.com`.
 - `describe` prints `v0.2.2`.
 
+`v0.2.2` is a tag, a name fixed to one commit. Everyone in the room uses the
+kit at that tag.
+
 <div data-show="surface:terminal">
 
 **In the terminal:** then type `/exit`.
@@ -1861,7 +1868,7 @@ instead. Go on.
 
 <details data-detail="extra"><summary>ℹ️ Why this step</summary>
 
-`CLAUDE.md` is the file Claude reads at the start of every session in this
+<span data-term="claude.md">`CLAUDE.md`</span> is the file Claude reads at the start of every session in this
 folder. It holds the rules for how you and Claude work together. The kit's
 copy sets how a session opens and closes, how a pull request is shipped and
 how the backlog of work still to do is ranked. It says nothing gets built

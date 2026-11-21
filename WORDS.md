@@ -1,8 +1,9 @@
 # Words
 
 The words this guide explains, and what each one means in this lab. Each
-word also says why the lab uses it. The guide explains many of them where
-you first meet them. To see them all, open **Notes**, then **Show words**.
+word also says why the lab uses it. In the guide, a word with a dotted line
+under it shows its meaning when you point at it. To see them all, open
+**Notes**, then **Show words**.
 
 ## Start here
 

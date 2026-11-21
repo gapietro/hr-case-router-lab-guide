@@ -13,7 +13,8 @@ In one day you'll build a ServiceNow app called the **HR Case Router**.
 When a new HR case comes in, an AI agent moves it to the assignment group or
 HR service that should work it. It adds a work note that says why it chose
 that one. If it can't route a case or a safety check stops the move, the
-case stays where it is. The work note says why.
+case stays where it is. The work note says why. That's called fail safe:
+when something goes wrong, the result is the harmless one.
 
 All of this happens on its own as soon as the case is created. A fulfiller
 is someone who works HR cases. If a fulfiller thinks a case is in the wrong
@@ -105,6 +106,7 @@ you need and the skills you should already have.
 4.  **You decide when your instance changes.** You install the app yourself.
    The only install Claude runs is the one for your grade near the end of
    the day. It installs to `lab-pdi`, which is your instance's short name.
+   PDI is short for personal developer instance.
    Claude asks you before it runs that install. *Why:* an install changes a
    live system. A person decides when that happens, as they would in real
    work.
@@ -197,7 +199,8 @@ command on a line that starts with ⏺. What the command printed appears
 under it on lines that start with ⎿. Trust that output, not Claude's
 summary of it.
 
-If you see `… +N lines`, press **Ctrl+O** to see everything.
+If you see `… +N lines`, press **Ctrl+O** to see everything. That's the
+verbose view.
 
 </div>
 
@@ -211,7 +214,7 @@ If you see `… +N lines`, press **Ctrl+O** to see everything.
 
 You can also press **Ctrl+O** until it appears.
 
-The normal view folds each command into a summary. **Verbose** shows
+The normal view folds each command into a summary. The Verbose view shows
 everything Claude runs and what each command printed. Trust that output,
 not Claude's summary of it.
 
@@ -290,13 +293,17 @@ Claude remembers nothing from one session to the next, so the lab uses
 memory in files. Each module ends with a file, and the next one starts by
 reading it:
 
-- `CLAUDE.md` holds the rules. Claude reads it at the start of every
+- <span data-term="claude.md">`CLAUDE.md`</span> holds the rules. Claude reads it at the start of every
   session.
 - The PRD, `CONSULT.md` and the design record hold what was decided.
 - `BACKLOG.md` holds the plan.
 - `SESSION-NOTE.md` says where you stopped.
 
 You can read every one of these files, and correct it.
+
+When two places disagree, one of them is the source of truth.
+`docs/DECISIONS.md` overrides the SDK plugin's guide, and the design record
+is the contract for the build.
 
 ## Answering Claude's permission requests
 
@@ -336,6 +343,9 @@ to `lab-pdi`. It has its own row.
 | Anything in this guide's folder | **No** | Claude never reads this guide (rule 1) |
 | "Allow this read outside the working directories?" It comes once | **Yes**: choose **Yes, and keep allowing any reads outside the working directories** | It's the one "keep allowing" choice that's safe: the lab's settings still keep Claude out of this guide, your notes and your keys |
 | Anything else, or you're not sure | **No**, then ask Claude what it was for | A No costs a minute. You might not be able to undo a wrong Yes |
+
+That last row is about reversibility, how easily a step can be undone. It
+decides how careful to be.
 
 ## Your folders, and logging your catches
 

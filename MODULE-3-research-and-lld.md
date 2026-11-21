@@ -7,7 +7,8 @@ read the raw rows it gets back, the records just as your instance returns
 them. Then you write the LLD, the low-level design. It says how the app will
 be built, part by part. **The catch:** Claude's research will be confident
 and mostly right. Which of its claims does your instance contradict? Does
-Claude's reading of each answer match the rows it got back?
+Claude's reading of each answer match the rows it got back? When an AI
+states something false as if it were a fact, that's a hallucination.
 
 <details><summary>ℹ️ Why are we doing this?</summary>
 

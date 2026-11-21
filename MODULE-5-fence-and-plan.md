@@ -380,7 +380,7 @@ Show each story's honest limit, one line each.
 ```
 
 Read the preview and that list. A story's "done when" is the check that says
-it's finished. Answer each question yes or no:
+it's finished. The usual name for those checks is acceptance criteria. Answer each question yes or no:
 
 1. Every pass criterion in §7, each thing a gate must pass, has a story
    whose "done when" checks it.
@@ -388,7 +388,8 @@ it's finished. Answer each question yes or no:
    path, built thin. After it, priority comes only from closeness to the
    next gate.
 3. Every "done when" can be checked. A run is checked from its log row, work
-   notes and execution plan, never from what the agent said.
+   notes and execution plan, never from what the agent said. Being able to
+   see from outside what a system did is called observability.
 4. Every story's honest limit says what passing it doesn't prove.
 5. Every check `apply_route` runs itself is in a "done when". The preview's
    coverage line, which names what no story checks, names none of them.
@@ -521,7 +522,9 @@ review and merge, with a note of where you stopped.
    </details>
 
 2. 🤖 **Claude:** paste this, type `go` after it, and press **Enter**. A
-   register issue is a watch-list issue that blocks no gate.
+   register issue is a watch-list issue that blocks no gate. CI is a
+   service that runs a repo's checks on every pull request. This lab has
+   none, so the build and the tests run on your computer.
 
    ```
    ship it. Review the diff without checking it out, and post the review's
