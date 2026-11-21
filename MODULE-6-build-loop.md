@@ -283,6 +283,9 @@ Never work on main. Create a new branch for this story first.
 
 ✅ The tests ran and **failed**.
 
+This is test-driven development: the tests come first and fail, then the
+code makes them pass.
+
 Read the five bullets and check them against your design. Then compare the
 tests with your three guesses.
 
@@ -455,6 +458,10 @@ caffeinate -i
 If your company locks this setting, tell your instructor.
 
 </div>
+
+Writing a prompt like the next one is called loop engineering. It gives
+Claude a goal, a stop condition, the rules it must never break, and what to
+report at the end.
 
 The prompt uses two words you may not know:
 

@@ -277,6 +277,27 @@ into a second session, because both would change the same files.
 
 </details>
 
+#### Starting each module fresh
+
+Each module starts Claude in a new session. Some steps also tell you to
+type `/exit` or `/clear`.
+
+*Why:* Claude works from its context, which is the conversation so far and
+the files it has read. A long conversation fills the context with old
+detail, and Claude's answers get worse. A new session starts clean.
+
+Claude remembers nothing from one session to the next, so the lab uses
+memory in files. Each module ends with a file, and the next one starts by
+reading it:
+
+- `CLAUDE.md` holds the rules. Claude reads it at the start of every
+  session.
+- The PRD, `CONSULT.md` and the design record hold what was decided.
+- `BACKLOG.md` holds the plan.
+- `SESSION-NOTE.md` says where you stopped.
+
+You can read every one of these files, and correct it.
+
 ## Answering Claude's permission requests
 
 In **auto mode**, a safety check decides whether Claude can run each
