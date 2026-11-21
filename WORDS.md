@@ -4,6 +4,8 @@ The words this guide explains, and what each one means in this lab. Each
 word also says why the lab uses it. The guide explains many of them where
 you first meet them. To see them all, open **Notes**, then **Show words**.
 
+## Start here
+
 - **Repo:** a folder with a saved history of its changes.
 
   Your app's repo is `~/projects/hr-case-router/app`.

@@ -741,6 +741,12 @@ did.
 
 </details>
 
+These checks are also a small evaluation: a fixed set of cases, each with
+the result it should have. Tests can't show whether the AI still chooses
+well. So in real work, a team keeps a set like this one and runs it again
+after every change to the agent's instructions, its tools or the article it
+reads.
+
 You act as `hr.demo` unless a line says otherwise. Do checks 1 to 3 with
 your partner watching. That's the DEMO gate's demo. If you're working
 alone, you watch, as the product manager.
