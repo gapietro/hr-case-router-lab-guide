@@ -236,6 +236,47 @@ the sidebar. The conversation is still there.
 
 </details>
 
+<details data-help="general"><summary>🛟 Has Claude stopped answering, or does it show a limit or an error?</summary>
+
+It isn't your mistake. Your conversation and your files stay as they are.
+
+Find what Claude shows:
+
+- `Retrying in …` or `Waiting for API response`: Claude is trying again by
+  itself. Wait two minutes, and type nothing.
+- `API Error`, with `Overloaded`, `500` or `timed out`: Claude's service is
+  busy. Wait a minute, then type `try again`.
+- `Unable to connect to API`, or `check your network`: your computer can't
+  reach Claude. Check your Wi-Fi and your VPN, then type `try again`.
+- `Please run /login`: your sign-in has run out. Type `/login` and sign in
+  again.
+- `You've hit your session limit`, or `your weekly limit`: your plan's
+  usage has run out for now. The message says when it comes back. Tell your
+  instructor straight away.
+
+Has `try again` failed twice? Close Claude and reopen the conversation.
+
+<div data-show="surface:terminal">
+
+**In the terminal:** type `/exit`. Then run `claude --continue` in the same
+folder.
+
+</div>
+
+<div data-show="surface:desktop">
+
+**In the Code tab:** quit the desktop app. Open it again and click the
+session in the sidebar.
+
+</div>
+
+If Claude still doesn't answer, tell your instructor which message you saw.
+
+While you wait, read the next step and its ✅. Don't paste the same prompt
+into a second session, because both would change the same files.
+
+</details>
+
 ## Answering Claude's permission requests
 
 In **auto mode**, a safety check decides whether Claude can run each

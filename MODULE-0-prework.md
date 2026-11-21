@@ -2204,5 +2204,31 @@ bash ~/projects/hr-case-router-lab-guide/files/check-progress.sh 1
 
 ✅ The last line is `Ready for Module 1.` A ❌ names the step to do again.
 
+Then test your network. The lab needs to reach Claude, GitHub, npm and your
+instance from the network you'll use on the day. If that's another network,
+such as the office or a VPN, run this again there before the day.
+
+⌨️ **Terminal:** paste the three lines together:
+
+```
+for h in claude.ai api.anthropic.com platform.claude.com github.com api.github.com registry.npmjs.org dev123456.service-now.com
+do curl -s -o /dev/null -m 15 "https://$h" && echo "ok $h" || echo "BLOCKED $h"
+done
+```
+
+✅ It prints seven lines, and each starts with `ok`.
+
+<details><summary>🛟 A line says BLOCKED</summary>
+
+Run the three lines once more, because a slow network can fail one try.
+
+- If only your instance's line says `BLOCKED`, open your instance in your
+  browser. If it doesn't open there either, tell your instructor.
+- If another line still says `BLOCKED`, that network stops the lab from
+  reaching that address. Tell your instructor which lines, and which
+  network you're on.
+
+</details>
+
 If anything is missing, tell your instructor as soon as you can, and at
 least a week before the lab.
