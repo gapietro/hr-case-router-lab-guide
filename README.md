@@ -16,8 +16,7 @@ that one. If it can't route a case or a safety check stops the move, the
 case stays where it is. The work note says why. That's called fail safe:
 when something goes wrong, the result is the harmless one.
 
-All of this happens on its own as soon as the case is created. A fulfiller
-is someone who works HR cases. If a fulfiller thinks a case is in the wrong
+The agent does all of this autonomously, as soon as the case is created. A fulfiller is someone who works HR cases. If a fulfiller thinks a case is in the wrong
 place, they can click **Reroute**. The agent then routes it again in the
 same way.
 
@@ -283,11 +282,10 @@ into a second session, because both would change the same files.
 #### Starting each module fresh
 
 Each module starts Claude in a new session. Some steps also tell you to
-type `/exit` or `/clear`.
-
-*Why:* Claude works from its context, which is the conversation so far and
-the files it has read. A long conversation fills the context with old
-detail, and Claude's answers get worse. A new session starts clean.
+type `/exit` or `/clear`. *Why:* Claude works from its context, which is the
+conversation so far and the files it has read. A long conversation fills the
+context with old detail, and Claude's answers get worse. A new session starts
+clean.
 
 Claude remembers nothing from one session to the next, so the lab uses
 memory in files. Each module ends with a file, and the next one starts by

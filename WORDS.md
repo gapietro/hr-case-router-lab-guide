@@ -225,6 +225,31 @@ under it shows its meaning when you point at it. To see them all, open
 
   Why it's in this lab: your app adds its own tables, for its routing rules
   and its run log. The design says who may write to each one.
+- **Filter navigator:** the search box at the top left of your instance. You
+  click **All** to open it, and type where you want to go.
+
+  Typing a table's name followed by `.list`, such as `sn_hr_core_case.list`,
+  opens that table as a list view.
+
+  Why it's in this lab: it's the quickest way around an instance, and every
+  check on it starts there. You see for yourself what is on your instance.
+- **List view:** a table shown as rows and columns, one row per record.
+
+  Each column has a search box at the top. Click the magnifying glass to the
+  left of a column's name to open it, type a word and press **Enter** to
+  show only the rows that match.
+
+  Why it's in this lab: you read the instance through lists, to check that
+  what the lab needs is there and to see what the router did.
+- **Related list:** a list of records linked to the record you have open. It
+  sits in tabs at the bottom of the form.
+
+  A user's **Roles** and **Groups** are related lists. **Edit...** at the top
+  right of a related list adds or removes records.
+
+  Why it's in this lab: this is where you see, and when needed fix, the
+  roles and groups that `hr.demo` has. A check done with the wrong rights
+  proves nothing.
 - **Record:** one row in a table, such as one HR case.
 
   Why it's in this lab: the router changes real records. Every write it makes
@@ -312,6 +337,13 @@ under it shows its meaning when you point at it. To see them all, open
 
   Why it's in this lab: it's what a run starts. Your app's dispatcher starts
   it once for each new case.
+- **Autonomous:** working on its own, without a person approving each move.
+
+  The agent routes each new case autonomously. Nobody has to start it or sign
+  off on the move.
+
+  Why it's in this lab: an agent that acts on its own can't be watched every
+  second, so Check and Trust have to be built in before it runs.
 - **Tool:** a script that an AI agent calls to read or change something.
 
   Your agent has three: `read_case`, `apply_route` and `leave_note`.
@@ -642,8 +674,7 @@ under it shows its meaning when you point at it. To see them all, open
 
   Why it's in this lab: Claude Code and the SDK both run there. You also use
   it to run a check yourself, rather than trust a summary.
-- **Claude Code:** Anthropic's AI coding tool. It reads your files, runs
-  commands and writes code.
+- **Claude Code:** a program from Anthropic that you install on your computer, which lets Claude read your files, run commands and write code.
 
   Why it's in this lab: it's the AI that builds your app. The whole method is
   about getting work you can trust out of it.
@@ -673,11 +704,15 @@ under it shows its meaning when you point at it. To see them all, open
 
   Why it's in this lab: a hook is a check nobody has to remember to run. It's
   the habit "a check that can fail".
-- **GitHub CLI:** GitHub's own command-line tool. Its command is `gh`.
+- **GitHub CLI:** a free program you install on your computer, for using GitHub by typing its commands, which start with `gh`.
+
+  GitHub is the website that keeps your app's code online.
 
   Why it's in this lab: it signs you in to GitHub, and it's how Claude files
   stories and opens pull requests.
-- **Node.js:** a program that runs JavaScript on your computer.
+- **Node.js:** a free program you install on your computer, which runs programs written in JavaScript.
+
+  It comes with `npm`, which downloads and installs more programs.
 
   Why it's in this lab: the ServiceNow SDK and your app's tests run on it.
 - **npm:** the tool that comes with Node.js and installs JavaScript
@@ -706,3 +741,20 @@ under it shows its meaning when you point at it. To see them all, open
 
   Why it's in this lab: Claude uses the alias, so it never sees your password.
   And it may use that one alias only, so it can't reach another instance.
+- **Visual Studio Code (VS Code):** a free program on your computer that opens and edits the files in your folders.
+
+  Why it's in this lab: you open the files Claude writes and read them yourself, rather than trust a summary of them.
+- **Git:** a free program on your computer that saves a history of every change in a folder.
+
+  On Mac, Git comes with Apple's developer tools. On Windows, it comes with Git for Windows.
+
+  Why it's in this lab: your app's repo, its guard and each story's branch all use Git. Claude runs most of its commands, and you read what they print.
+- **Git Bash:** a Linux-style terminal on Windows that comes with Git for Windows.
+
+  Why it's in this lab: on Windows, every ⌨️ command in this guide runs in Git Bash, and the lab's settings keep Claude in it too.
+- **PowerShell:** Windows' own terminal, built into Windows.
+
+  Why it's in this lab: on Windows, the Claude Code installer runs in PowerShell, not in Git Bash.
+- **Windows Terminal:** a Windows app that opens terminal windows, such as Git Bash and PowerShell.
+
+  Why it's in this lab: on Windows, you open Git Bash through it for every ⌨️ step.

@@ -101,28 +101,11 @@ still time to fix it, not on the morning of the workshop.
 
 </details>
 
-<details data-detail="extra" data-topic="servicenow"><summary>ℹ️ New to ServiceNow? Four things you'll do on every step</summary>
-
-- **The filter navigator** is the search box at the top left. Click
-  **All** to open it, then type a table name followed by `.list`, such
-  as `sn_hr_core_case.list`. Press **Enter** to open that table as a
-  list.
-- **To filter a list**, type in the search box at the top of a column
-  and press **Enter**.
-- **To create a record**, click **New** on a list, fill in the form and
-  click **Submit**.
-- **A reference field** has a 🔍 beside it and points to another
-  record. Click the 🔍 to pick one.
-
-</details>
-
 Check that your instance has what the lab needs: the demo data, the lab's
 groups and users, and an ordinary HR fulfiller who can see HR cases.
-Fulfillers are the people who work HR cases.
 
-The fulfiller on your instance is `hr.demo`, who has no admin rights. Stay
-logged in as admin. When a step says so, impersonate `hr.demo` to act as
-that user.
+Fulfillers are the people who work HR cases. They do not have admin rights,
+so you will impersonate them to see their experience.
 
 <details><summary>ℹ️ Why an ordinary fulfiller?</summary>
 
@@ -131,32 +114,186 @@ that user.
 - **Why it matters:** admin passes every access check, so a check done as
   admin proves nothing. Only an ordinary fulfiller shows whether the app's
   role, the HR access rules and the agent work for the people who'll use
-  them. That's why every live check in this lab is done as `hr.demo`.
+  them. That's why you impersonate a fulfiller to see what they see.
 
 </details>
 
-🌐 **Browser:** log in to your instance as `admin`.
+Each check ends with a question. Answer **Yes** when you see what it
+describes. An answer of **No** tells you what to do next.
 
-1. Click **All** at the top left. Type `sn_hr_core_case.list` in the
-   box under it, and press **Enter**. Then do the same with
-   `sn_hr_core_service.list`.
+1. 🌐 **Browser:** log in to your instance as `admin`. Use the admin password
+   your instructor sent you.
 
-   ✅ Both lists have rows: demo HR cases and HR services.
-2. Open `sys_user_group.list` the same way. In the **Name** column's search
-   box, type `Lab` and press **Enter**.
+   <div data-ask="m0-access" data-gate data-options="yes|no" data-labels="Yes, I'm logged in|No, I can't get in">
 
-   ✅ It lists `Lab HR Team` and `Lab Locked Out`.
-3. Open `sys_user.list`. In the **User ID** column's search box, type
-   `hr.router` and press **Enter**.
+   **Are you able to access your instance and log in as admin?**
 
-   ✅ It's listed.
+   </div>
 
-   The agent runs as this user, so never impersonate it or change it. It
-   has the roles an AI user needs and no more. That's least privilege.
+   <div data-show="choice.m0-access:no">
 
-   Then search for `hr.demo` the same way.
+   **If your instance is asleep:** an instance that has been idle goes to
+   sleep. Its page then offers a wake-up link. Click the link and wait up to
+   20 minutes for it to wake. Then log in and change your answer to
+   **Yes, I'm logged in**.
 
-   <div data-ask="m0-hr-demo" data-options="yes|no" data-labels="Yes, it's listed|No">
+   **If it won't open, or the password is rejected:** your instance may not be
+   ready yet.
+
+   ⛔ **Stop here until your instructor has fixed this.** Send your instructor
+   this message.
+
+   ```
+   Lab: I can't log in to my instance. Instance: dev123456.service-now.com
+   ```
+
+   [Email it](mailto:?subject=Lab%3A%20I%20can%27t%20log%20in%20to%20my%20instance&body=Lab%3A%20I%20can%27t%20log%20in%20to%20my%20instance.%0AInstance%3A%20) Type their address in the To field.
+
+   Meanwhile, you can continue to [Part 2](#part-2--your-tools) and set up your
+   tools. You will return to finish these steps once this has been fixed by
+   your instructor.
+
+   </div>
+2. Click **All** at the top left, and the filter navigator opens. It's the
+   search box you use to go to any page on your instance by name.
+
+   Type or copy this into the box under **All**, and press **Enter**:
+
+   `sn_hr_core_case.list`
+
+   A list view of HR cases should be displayed. A list view shows a table
+   as rows, one row for each record.
+
+   <div data-ask="m0-hr-cases" data-gate data-options="yes|no" data-labels="Yes, I see several|No">
+
+   **Do you see multiple HR cases? (For example, HRC0000102)**
+
+   </div>
+
+   <div data-show="choice.m0-hr-cases:no">
+
+   **If you don't see any HR cases:** your instance hasn't been prepared for
+   the lab.
+
+   ⛔ **Stop here until your instructor has fixed this.** Don't make the
+   cases yourself. Send your instructor this message.
+
+   ```
+   Lab: my instance shows no HR cases. Instance: dev123456.service-now.com
+   ```
+
+   [Email it](mailto:?subject=Lab%3A%20my%20instance%20shows%20no%20HR%20cases&body=Lab%3A%20my%20instance%20shows%20no%20HR%20cases.%0AInstance%3A%20) Type their address in the To field.
+
+   Meanwhile, you can continue to [Part 2](#part-2--your-tools) and set up
+   your tools. You will return to finish these steps once this has been
+   fixed by your instructor.
+
+   </div>
+3. Use the filter navigator again. Type or copy this into the box under
+   **All**, and press **Enter**:
+
+   `sn_hr_core_service.list`
+
+   A list view of HR services should be displayed.
+
+   <div data-ask="m0-hr-services" data-gate data-options="yes|no" data-labels="Yes, I see several|No">
+
+   **Do you see a list of HR services?**
+
+   </div>
+
+   <div data-show="choice.m0-hr-services:no">
+
+   **If you don't see any HR services:** your instance hasn't been prepared
+   for the lab.
+
+   ⛔ **Stop here until your instructor has fixed this.** Don't make the
+   services yourself. Send your instructor this message.
+
+   ```
+   Lab: my instance shows no HR services. Instance: dev123456.service-now.com
+   ```
+
+   [Email it](mailto:?subject=Lab%3A%20my%20instance%20shows%20no%20HR%20services&body=Lab%3A%20my%20instance%20shows%20no%20HR%20services.%0AInstance%3A%20) Type their address in the To field.
+
+   Meanwhile, you can continue to [Part 2](#part-2--your-tools) and set up
+   your tools. You will return to finish these steps once this has been
+   fixed by your instructor.
+
+   </div>
+4. Type or copy `sys_user_group.list` into your filter navigator the same
+   way as you did before. This is the list of user groups.
+
+   Click the 🔍 magnifying glass to the left of **Name**. Type `Lab` into the
+   column's search box, and press **Enter**. That keeps only the rows that
+   match.
+
+   <div data-ask="m0-lab-groups" data-gate data-options="yes|no" data-labels="Yes, both|No">
+
+   **Do you see both `Lab HR Team` and `Lab Locked Out`?**
+
+   </div>
+
+   <div data-show="choice.m0-lab-groups:no">
+
+   **If one is missing:** your instance hasn't been prepared for the lab.
+
+   ⛔ **Stop here until your instructor has fixed this.** Don't make the
+   group yourself. Send your instructor this message.
+
+   ```
+   Lab: my instance is missing a Lab group. Instance: dev123456.service-now.com
+   ```
+
+   [Email it](mailto:?subject=Lab%3A%20my%20instance%20is%20missing%20a%20Lab%20group&body=Lab%3A%20my%20instance%20is%20missing%20a%20Lab%20group.%0AInstance%3A%20) Type their address in the To field.
+
+   Meanwhile, you can continue to [Part 2](#part-2--your-tools) and set up
+   your tools. You will return to finish these steps once this has been
+   fixed by your instructor.
+
+   </div>
+5. Type or copy `sys_user.list` into your filter navigator. This is the list
+   of users.
+
+   Click the 🔍 magnifying glass to the left of **User ID**. Type `hr.router`
+   into the column's search box, and press **Enter**.
+
+   The `hr.router` user is the AI agent. It only has the roles an AI would
+   need to use to align with the principle of least privilege.
+
+   <div data-ask="m0-hr-router" data-gate data-options="yes|no" data-labels="Yes, it's listed|No">
+
+   **Is `hr.router` listed?**
+
+   </div>
+
+   <div data-show="choice.m0-hr-router:no">
+
+   **If it isn't listed:** your instance hasn't been prepared for the lab.
+
+   ⛔ **Stop here until your instructor has fixed this.** Don't make the
+   user yourself. Send your instructor this message.
+
+   ```
+   Lab: my instance has no hr.router user. Instance: dev123456.service-now.com
+   ```
+
+   [Email it](mailto:?subject=Lab%3A%20my%20instance%20has%20no%20hr.router%20user&body=Lab%3A%20my%20instance%20has%20no%20hr.router%20user.%0AInstance%3A%20) Type their address in the To field.
+
+   Meanwhile, you can continue to [Part 2](#part-2--your-tools) and set up
+   your tools. You will return to finish these steps once this has been
+   fixed by your instructor.
+
+   </div>
+6. Search the same list for `hr.demo`. Click the 🔍 magnifying glass to the left
+   of **User ID** again, replace the search with `hr.demo`, and press
+   **Enter**.
+
+   The `hr.demo` user is the ordinary HR fulfiller you will impersonate. It
+   has no admin rights, and it is the user the lab checks everything with.
+   It only has the roles and groups a fulfiller needs to work HR cases.
+
+   <div data-ask="m0-hr-demo" data-gate data-options="yes|no" data-labels="Yes, it's listed|No">
 
    **Is `hr.demo` listed?**
 
@@ -166,80 +303,111 @@ that user.
 
    **If it isn't listed:** your instance hasn't been prepared for the lab.
 
-   ⛔ **Stop here until your instructor has prepared your instance.** Every
-   check in this lab runs as `hr.demo`. Don't make the user yourself. Send
-   your instructor this message by email:
+   ⛔ **Stop here until your instructor has prepared your instance.** Don't
+   make the user yourself. Send your instructor this message.
 
    ```
    Lab: my instance has no hr.demo user. Instance: dev123456.service-now.com
    ```
 
-   Meanwhile, go on to Part 2 and set up your tools, which don't need
-   `hr.demo`. Then come back here.
+   [Email it](mailto:?subject=Lab%3A%20my%20instance%20has%20no%20hr.demo%20user&body=Lab%3A%20my%20instance%20has%20no%20hr.demo%20user.%0AInstance%3A%20) Type their address in the To field.
+
+   Meanwhile, you can continue to [Part 2](#part-2--your-tools) and set up
+   your tools. You will return to finish these steps once this has been
+   fixed by your instructor.
+
+   </div>
+7. Open `hr.demo` by clicking its **User ID** in the list. Then check two
+   things at the bottom of the page.
+   - **Roles:** scroll to the bottom of the page to see the related lists.
+     A related list shows the records linked to the one you have open. Click
+     the 🔍 magnifying glass to the left of **Role**. Search for
+     `sn_hr_core.case_writer`, then for `sn_hr_le.case_writer`.
+
+     <div data-ask="m0-demo-roles" data-options="yes|no" data-labels="Yes, both|No">
+
+     **Are both of these present?**
+
+     </div>
+
+     <div data-show="choice.m0-demo-roles:no">
+
+     **If one is missing:** click **Edit...** at the top right of the related
+     list. In the **Collection** section, search for the role. Move it from
+     the left list to the right, and click **Save**. Then change your answer
+     to **Yes, both**. If you can't add it, tell your instructor.
+
+     </div>
+   - **Groups:** return to the related lists, then click into the **Groups**
+     tab. Search for `Lab HR Team` the same way.
+
+     <div data-ask="m0-demo-groups" data-options="yes|no" data-labels="Yes, it's listed|No">
+
+     **Is `Lab HR Team` listed?**
+
+     </div>
+
+     <div data-show="choice.m0-demo-groups:no">
+
+     **If it isn't listed:** click **Edit...** at the top right of the
+     related list. In the **Collection** section, search for `Lab HR Team`.
+     Move it from the left list to the right, and click **Save**. Then
+     change your answer to **Yes, it's listed**. If you can't add it, tell
+     your instructor.
+
+     </div>
+8. Impersonate `hr.demo` by clicking your avatar in the top right of the
+   instance, then selecting 👁️ **Impersonate user**. In the dialog, search
+   for `hr.demo`, click on their profile, then click **Impersonate User**.
+   Close any welcome pop-up.
+9. While impersonating `hr.demo`, use the filter navigator to open
+   `sn_hr_core_case.list` again. This checks that `hr.demo`, and not only
+   admin, has access to the HR case table.
+
+   <div data-ask="m0-demo-cases" data-gate data-options="yes|no" data-labels="Yes, I see HR cases|No">
+
+   **Do you see HR cases?**
 
    </div>
 
-   Open `hr.demo`.
-4. In its **Roles** tab: ✅ it lists `sn_hr_core.case_writer` and
-   `sn_hr_le.case_writer`.
+   <div data-show="choice.m0-demo-cases:no">
 
-   If one is missing, click **Edit...**. Move it from the left list to the
-   right, and click **Save**.
-5. In its **Groups** tab: ✅ it lists `Lab HR Team`.
+   **If the list is empty or you're refused:** click your avatar in the top
+   right, then **End impersonation**. You're admin again.
 
-   If it doesn't, click **Edit...**. Move `Lab HR Team` from the left list
-   to the right, and click **Save**.
-6. Impersonate `hr.demo`. Click your avatar at the top right of the
-   instance, then **Impersonate user**.
+   ⛔ **Stop here until your instructor has fixed this.** Don't give
+   `hr.demo` any other role, and above all no admin role. It gets the app's
+   own role later in the lab. Send your instructor this message.
 
-   In the dialog, type `hr.demo`, pick **HR Demo**, and click
-   **Impersonate user**. Close any welcome pop-up.
-7. Open `sn_hr_core_case.list`.
+   ```
+   Lab: hr.demo sees no HR cases. Instance: dev123456.service-now.com
+   ```
 
-   ✅ It lists HR cases.
-8. End impersonation. Click your avatar, then **End impersonation**. You're
-   admin again.
+   [Email it](mailto:?subject=Lab%3A%20hr.demo%20sees%20no%20HR%20cases&body=Lab%3A%20hr.demo%20sees%20no%20HR%20cases.%0AInstance%3A%20) Type their address in the To field.
 
-<details><summary>🛟 It's asleep or gone, or has no HR cases</summary>
+   Meanwhile, you can continue to [Part 2](#part-2--your-tools) and set up
+   your tools. You will return to finish these steps once this has been
+   fixed by your instructor.
 
-- **Asleep:** open your instance in your browser.
-  - If its page offers a wake-up link, click it and wait up to 20 minutes
-    for it to wake.
-  - If there's no link, or it stays asleep, ask your instructor.
-- **Gone, or no HR cases:** tell your instructor.
-
-</details>
-
-<details><summary>🛟 hr.router, hr.demo or a group is missing, or hr.demo sees no cases</summary>
-
-Your instance hasn't been prepared for the lab, so tell your instructor.
-
-- Never make `hr.router` or a group yourself.
-- Don't give `hr.demo` any other role, and above all no admin role. It
-  gets the app's own role later in the lab.
-
-</details>
+   </div>
+10. End impersonation. Click your avatar in the top right, then **End
+   impersonation**. You're admin again.
 
 ## Part 2 — Your tools
 
-**Tools at a glance:** the tools the next step checks and installs, and why
-the lab needs each one.
+**Tools at a glance:** these are the tools the lab uses, and why it needs
+each one. You don't have to work out how to install any of them. The next
+step walks you through each tool, one at a time. You'll also open a terminal
+there, which is the window where you type commands.
 
 | Tool | What it is | Why the lab needs it | Version |
 |---|---|---|---|
-| **Node.js** | Runs JavaScript programs on your computer. It comes with `npm`, which installs them. | The ServiceNow SDK runs on it, and `npm` installs the SDK. `npm` also installs the code your app builds on, and runs your app's tests. The lab's settings script runs on Node.js too. | `v22.22` or later |
-| **git** | Keeps a folder's history. Each saved snapshot is a commit. | Your app's repo, its guard, and a branch for every story all use git. Claude runs most git commands, and you read what they print. <span data-show="os:win">**On Windows:** Git for Windows also brings Git Bash, a Linux-style terminal, and you run every ⌨️ step in it. The lab's settings keep Claude in Git Bash too, where the safety rules apply.</span> | Any |
-| **GitHub CLI** (`gh`) | GitHub's own command-line tool. You type its commands in a terminal. | It signs you in to GitHub, gets this guide and makes your app's private repo. It also lets the kit file your stories, milestones and pull requests. The kit is the lab's Claude Code plugin. | Any |
-| **ServiceNow SDK** (`now-sdk`) | ServiceNow's tool for building an app as code, from files on your computer. | It builds the HR Case Router, reads your instance and installs the app on it. | `4.8.0` or later |
-| **Claude Code** (`claude`) | Claude, working in your folders. It reads and writes files, and runs commands. | It writes the app while you make the decisions. It has its own installer and doesn't need Node.js. | `2.1.228` or later |
-| **VS Code** | A free code editor. | You use it in the ✏️ steps to open and check the files Claude writes. | Any |
-
-<div data-show="surface:desktop">
-
-**Using the desktop app's Code tab?** Install the `claude` command too,
-because the lab's plugins and checks run from a terminal.
-
-</div>
+| **Node.js** | Node.js is a free program you install on your computer. It runs programs written in JavaScript, and it comes with `npm`, which downloads and installs more programs. | The ServiceNow SDK runs on it, and `npm` installs the SDK. `npm` also installs the code your app builds on, and runs your app's tests. The lab's settings script runs on Node.js too. | `v22.22` or later |
+| <span data-term="git">**Git**</span> | Git is a free program you install on your computer. It saves a history of every change in a folder, one snapshot at a time. Each snapshot is a commit. | Your app's repo, its guard, and a branch for every story all use git. Claude runs most git commands, and you read what they print. <span data-show="os:win">**On Windows:** Git for Windows also brings Git Bash, a Linux-style terminal, and you run every ⌨️ step in it. The lab's settings keep Claude in Git Bash too, where the safety rules apply.</span> | Any |
+| **GitHub CLI** (`gh`) | GitHub CLI is a free program you install on your computer. You type its commands, which start with `gh`, in a terminal. GitHub is the website that keeps your app's code online. | It signs you in to GitHub, gets this guide and makes your app's private repo. It also lets the kit file your stories, milestones and pull requests. The kit is the lab's Claude Code plugin. | Any |
+| **ServiceNow SDK** (`now-sdk`) | The ServiceNow SDK is a program you install on your computer with `npm`, and it gives you the `now-sdk` command. You use that command to build your app from files in a folder, then install the app on your ServiceNow instance. | It builds the HR Case Router, reads your instance and installs the app on it. | `4.8.0` or later |
+| **Claude Code** (`claude`) | Claude Code is Claude working in your folders. You install it on your computer, then run it with the `claude` command in a terminal. It reads and writes files, and it runs commands for you. | It writes the app while you make the decisions. It has its own installer and doesn't need Node.js. | `2.1.228` or later |
+| <span data-term="visual-studio-code-(vs-code)">**Visual Studio Code (VS Code)**</span> | Visual Studio Code (VS Code) is a free program you install on your computer. It's a separate window that opens the files in your folders. | You use it in the ✏️ steps to open and check the files Claude writes. | Any |
 
 ### 3. Install the tools
 
@@ -253,8 +421,10 @@ install only what's missing.
 
 <div data-show="os:mac">
 
-**On Mac:** open Terminal. Press **Cmd+Space**, type `Terminal` and press
-**Enter**.
+**On Mac:** On your computer, open the Terminal by pressing **Cmd+Space**,
+typing `Terminal`, and pressing **Enter**. This is the Terminal app, not
+Claude Code. A window opens, and you'll type every ⌨️ command in this guide
+into it.
 
 </div>
 
@@ -266,24 +436,36 @@ instructor what you see.
 
 First, set up Git Bash. It's the terminal every ⌨️ step uses.
 
-1. 🌐 **Browser:** open https://git-scm.com/downloads/win. Click
-   **Git for Windows/x64 Setup**. On an ARM computer, click
-   **Git for Windows/ARM64 Setup** instead.
-2. Open the file from your Downloads folder.
-3. Click **Yes** when Windows asks to allow changes.
-4. Click **Next** on each screen until **Select Components**.
-5. Tick **Add a Git Bash Profile to Windows Terminal**. Keep every other
-   default.
+1. 🌐 **Browser:** open <https://git-scm.com/downloads/win>. Click
+   "Click here to download" or "Git for Windows/x64 Setup", then open the
+   file from your Downloads folder.
+
+   ![The Install page on the Git website, with the Windows tab open. A red box marks the link "Click here to download" at the top of the tab. Further down, under "Standalone Installer", the link "Git for Windows/x64 Setup" is the other way to get the same file.](images/git-win-download.png)
+
+2. If Windows asks to allow changes, click **Yes**.
+3. Click **Next** on the Information screen, then on the Select Components
+   screen, check "Add a Git Bash Profile to Windows Terminal."
+4. Keep every other default, then click **Next** until you reach the screen
+   called "Choosing the default editor used by Git".
+5. Change the dropdown to "Use Visual Studio Code as Git's default editor."
+
+   ![The installer's "Choosing the default editor used by Git" screen, with its dropdown open. The list holds Vim, Notepad++, Visual Studio Code, Visual Studio Code Insiders, Sublime Text, Atom, VSCodium and Notepad. A red arrow points at "Use Visual Studio Code as Git's default editor", which is highlighted as the choice to make.](images/git-win-editor.png)
+
 6. Click **Next** on each screen that's left, then **Install**, then
    **Finish**.
-7. Open Windows Terminal. Press the **Windows** key, type `Terminal` and
-   press **Enter**.
-8. Click the **⌄** beside the **+** at the top, then click **Settings**.
-9. In **Settings > Startup**, set **Default profile** to **Git Bash**.
-   Click **Save**.
-10. Close every Windows Terminal window.
 
-Then open Windows Terminal again. It opens in Git Bash.
+**On Windows:** On your computer, press the **Windows** key and search for
+`Terminal`, then press **Enter**. This is Windows Terminal, not Claude Code.
+A window opens, and you'll type every ⌨️ command in this guide into it.
+
+1. Click the **⌄** beside the **+** at the top, then click **Settings**.
+2. In **Settings > Startup**, set **Default profile** to **Git Bash**.
+   Click **Save**.
+3. Close every Windows Terminal window.
+
+Then open Windows Terminal again the same way: press the **Windows**
+key, type `Terminal`, and press **Enter**. This time it opens in
+Git Bash, and its prompt ends in `$`.
 
 </div>
 
@@ -563,8 +745,8 @@ npm install -g @servicenow/sdk
 
 1. Close every terminal window, so the next one can find the Node.js you
    just installed. A new tab isn't enough.
-2. Open Windows Terminal. Press the **Windows** key, type `Terminal` and
-   press **Enter**. The prompt is the text just before where you type.
+2. Open Windows Terminal. Press the **Windows** key, type
+   `Terminal` and press **Enter**. The prompt is the text just before where you type.
    When it ends in `$`, you're in Git Bash.
 3. Paste the line with **Ctrl+V** or a right-click. Then press **Enter**.
 4. Wait for a line that starts `added`. It takes a minute or two. Lines
@@ -611,8 +793,8 @@ the checks again in Git Bash.
 
 </div>
 
-**VS Code:** install it too if you haven't yet. The check doesn't cover
-it, but it's the editor you use in the lab.
+**Visual Studio Code (VS Code):** install it too if you haven't yet. The
+check above doesn't cover it, but you use it in the lab's ✏️ steps.
 
 <div data-show="os:mac">
 
@@ -822,7 +1004,7 @@ instructor before the day.
 
 </div>
 
-<div data-ask="m0-gh-invite" data-options="yes|no" data-labels="Yes, accepted|Not yet">
+<div data-ask="m0-gh-invite" data-gate data-options="yes|no" data-labels="Yes, accepted|Not yet">
 
 **Have you accepted your instructor's invite to this guide's repo?**
 
@@ -836,14 +1018,17 @@ above to **Yes, accepted**.
 
 ⛔ **Stop here until you've accepted it.** The next lines copy this guide
 from GitHub, and they fail without the invite. If you have no invite at all,
-send your instructor this message by email:
+send your instructor this message:
 
 ```
 Lab: no invite yet to the lab guide repo. My GitHub user name is <your user name>.
 ```
 
-Meanwhile, connect the SDK to your instance and look up your scope. Neither
-needs this guide's repo. Then come back here.
+[Email it](mailto:?subject=Lab%3A%20no%20invite%20yet%20to%20the%20lab%20guide%20repo&body=Lab%3A%20no%20invite%20yet%20to%20the%20lab%20guide%20repo.%0AMy%20GitHub%20user%20name%20is%20) Type their address in the To field.
+
+Meanwhile, you can connect the SDK to your instance and look up your scope.
+Neither needs this guide's repo. You will return to finish this step once you
+have accepted the invite, or once your instructor has sent you one.
 
 </div>
 
